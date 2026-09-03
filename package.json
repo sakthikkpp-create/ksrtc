@@ -2,11 +2,9 @@
   "name": "ksrtc-swift-redesign",
   "version": "1.0.0",
   "description": "KSRTC-SWIFT Redesign — 6 Interactive Concept Pages Showcase",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "serve": "node server.js",
-    "build": "echo 'Static showcase ready'"
+    "start": "node dev-server.js",
+    "serve": "node dev-server.js"
   },
   "keywords": [
     "ksrtc",

@@ -65,7 +65,7 @@ Alternatively, open `index.html` directly in any web browser.
 │   └── concept6-minimalist-transformer.html
 ├── index.html           # Master Showcase Gallery
 ├── prd.md               # Product Requirements & Design Specifications
-├── server.js            # Zero-dependency local Node.js development server
+├── dev-server.js        # Zero-dependency local Node.js development server
 ├── vercel.json          # Vercel deployment configuration
 ├── package.json
 └── README.md
