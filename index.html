@@ -1637,6 +1637,30 @@
       }
     }
 
+
+    .social-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .social-icon-btn:hover {
+      transform: translateY(-3px);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+    }
+    .social-icon-btn.fb:hover { color: #1877F2; border-color: #1877F2; }
+    .social-icon-btn.x:hover { color: var(--text); border-color: var(--text); }
+    .social-icon-btn.ig:hover { color: #E1306C; border-color: #E1306C; }
+    .social-icon-btn.yt:hover { color: #FF0000; border-color: #FF0000; }
+
 </style>
 </head>
 <body data-theme="light">
@@ -2343,6 +2367,20 @@
           📞 24/7 Onam Control Room: 0471-2463799 / 2462677<br>
           💬 WhatsApp Homecoming Desk: +91 85939 51515
         </p>
+        <div style="display: flex; gap: 10px; margin-top: 14px; align-items: center;">
+          <a href="https://www.facebook.com/KeralaStateRoadTransportCorporation/" target="_blank" rel="noopener noreferrer" class="social-icon-btn fb" title="Follow KSRTC on Facebook" aria-label="Facebook">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <a href="https://x.com/transport_state?s=08" target="_blank" rel="noopener noreferrer" class="social-icon-btn x" title="Follow KSRTC on X (Twitter)" aria-label="X (Twitter)">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+          </a>
+          <a href="https://www.instagram.com/ksrtcofficial/?utm_medium=copy_link" target="_blank" rel="noopener noreferrer" class="social-icon-btn ig" title="Follow KSRTC on Instagram" aria-label="Instagram">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://www.youtube.com/channel/UCQO70_lRhoPu__PMrnroIHg" target="_blank" rel="noopener noreferrer" class="social-icon-btn yt" title="Subscribe to KSRTC Official YouTube" aria-label="YouTube">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+          </a>
+        </div>
       </div>
 
       <div class="footer-col">
@@ -2368,13 +2406,14 @@
       </div>
 
       <div class="footer-col">
-        <h4>Portals & Legal</h4>
+        <h4>Official Portals & Social Channels</h4>
         <ul class="footer-links-list">
+          <li><a href="https://www.facebook.com/KeralaStateRoadTransportCorporation/" target="_blank" rel="noopener noreferrer"><svg class="icon-svg" style="width: 14px; height: 14px; color: #1877F2;" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg><span>Facebook Official</span></a></li>
+          <li><a href="https://x.com/transport_state?s=08" target="_blank" rel="noopener noreferrer"><svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg><span>X / Twitter (@transport_state)</span></a></li>
+          <li><a href="https://www.instagram.com/ksrtcofficial/?utm_medium=copy_link" target="_blank" rel="noopener noreferrer"><svg class="icon-svg" style="width: 14px; height: 14px; color: #E1306C;" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>Instagram (@ksrtcofficial)</span></a></li>
+          <li><a href="https://www.youtube.com/channel/UCQO70_lRhoPu__PMrnroIHg" target="_blank" rel="noopener noreferrer"><svg class="icon-svg" style="width: 14px; height: 14px; color: #FF0000;" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg><span>YouTube Channel</span></a></li>
           <li><a href="#" onclick="openAgentCRSModal(); return false;">MavenTech Counter CRS Portal</a></li>
-          <li><a href="#" onclick="openRailRollsModal(); return false;">Grand Onam Sadya (railrolls.in)</a></li>
-          <li><a href="#" onclick="openTermsModal(); return false;">Terms & Conditions</a></li>
-          <li><a href="#" onclick="openPrivacyModal(); return false;">Privacy Policy</a></li>
-          <li><a href="https://twitter.com/transport_state?s=08" target="_blank">Official KSRTC Twitter/X</a></li>
+          <li><a href="#" onclick="openTermsModal(); return false;">Terms & Cancellation Policy</a></li>
         </ul>
       </div>
     </div>
