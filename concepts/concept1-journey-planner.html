@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 1: The Journey Planner — KSRTC-SWIFT</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0A4A4A;
+      --primary-light: #136060;
+      --secondary: #C8943E;
+      --secondary-light: #dfab52;
+      --bg: #FDF8F0;
+      --bg-card: #FFFFFF;
+      --accent: #E87A5A;
+      --text: #1A2A3A;
+      --text-muted: #5C6E82;
+      --border: #E5DAC9;
+      --success: #2A7A4A;
+      --map-bg: #E8EFEA;
+      --map-land: #D1E5D8;
+      --shadow-sm: 0 2px 8px rgba(10, 74, 74, 0.06);
+      --shadow-md: 0 8px 24px rgba(10, 74, 74, 0.1);
+      --shadow-lg: 0 16px 40px rgba(10, 74, 74, 0.16);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --primary: #126363;
+      --primary-light: #1d8282;
+      --secondary: #D8A650;
+      --secondary-light: #eec068;
+      --bg: #0D161B;
+      --bg-card: #15222A;
+      --accent: #F08E70;
+      --text: #F0F4F8;
+      --text-muted: #94A6B8;
+      --border: #233542;
+      --success: #3E9B64;
+      --map-bg: #0F1A21;
+      --map-land: #1B2C36;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* CONCEPT TOP NAV BAR */
+    .concept-nav-bar {
+      background: #062828;
+      color: #E2ECE9;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(200, 148, 62, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      font-size: 13px;
+    }
+
+    .concept-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(200, 148, 62, 0.15);
+      transition: var(--transition);
+    }
+
+    .home-link:hover {
+      background: rgba(200, 148, 62, 0.3);
+      color: #FFF;
+    }
+
+    .concept-links-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+      scrollbar-width: thin;
+    }
+
+    .concept-tab {
+      color: #A0B5B0;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .concept-tab:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .concept-tab.active {
+      background: var(--secondary);
+      color: #062828;
+      font-weight: 700;
+    }
+
+    .concept-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #E2ECE9;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* MAIN HEADER */
+    .site-header {
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), #116868);
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 22px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(200, 148, 62, 0.3);
+    }
+
+    .brand-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-text .swift-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      background: var(--secondary);
+      color: #062828;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .brand-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .charter-pill-btn {
+      background: rgba(232, 122, 90, 0.12);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .charter-pill-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-login {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-login:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* CONTAINER */
+    .page-container {
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+      flex: 1;
+    }
+
+    /* HERO TITLE & METRICS */
+    .hero-banner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero-headline h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .hero-headline p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .metrics-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .metric-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-badge.highlight {
+      border-color: var(--secondary);
+      background: rgba(200, 148, 62, 0.08);
+      color: var(--secondary);
+    }
+
+    /* SEARCH WIDGET */
+    .search-widget-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .trip-type-selector {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .radio-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .radio-pill input[type="radio"] {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.5fr 1.2fr 1fr auto;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .input-field-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .custom-input {
+      width: 100%;
+      height: 48px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .custom-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(10, 74, 74, 0.15);
+    }
+
+    /* Autocomplete drop */
+    .autocomplete-list {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      z-index: 50;
+      max-height: 220px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .autocomplete-list.show {
+      display: block;
+    }
+
+    .autocomplete-item {
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s ease;
+    }
+
+    .autocomplete-item:hover, .autocomplete-item.active {
+      background: rgba(10, 74, 74, 0.08);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .passenger-counter-box {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 8px;
+      justify-content: space-between;
+    }
+
+    .cnt-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: var(--bg-card);
+      color: var(--text);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .cnt-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .cnt-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 14px;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .search-cta-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-find-bus {
+      height: 48px;
+      padding: 0 22px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-find-bus:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(10, 74, 74, 0.25);
+    }
+
+    .btn-explore-map {
+      height: 48px;
+      padding: 0 16px;
+      background: rgba(200, 148, 62, 0.15);
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-explore-map:hover {
+      background: var(--secondary);
+      color: #062828;
+    }
+
+    .return-date-wrap {
+      display: none;
+    }
+
+    .return-date-wrap.show {
+      display: flex;
+    }
+
+    /* MAIN INTERACTIVE SPLIT: MAP + POPULAR ROUTES */
+    .journey-display-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    /* SVG MAP CONTAINER */
+    .map-container-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .map-title-group h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .map-title-group p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .map-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .map-tool-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .map-tool-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .svg-map-wrapper {
+      position: relative;
+      background: var(--map-bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+    }
+
+    #keralaSvgMap {
+      width: 100%;
+      height: 440px;
+      transition: transform 0.3s ease;
+    }
+
+    /* SVG Styling */
+    .map-water {
+      fill: none;
+    }
+
+    .map-coastline {
+      fill: var(--map-land);
+      stroke: var(--primary);
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 4px 12px rgba(10, 74, 74, 0.08));
+    }
+
+    .active-route-line {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 3.5;
+      stroke-dasharray: 8 4;
+      animation: dashMove 1.5s linear infinite;
+    }
+
+    @keyframes dashMove {
+      to {
+        stroke-dashoffset: -24;
+      }
+    }
+
+    .static-route-line {
+      fill: none;
+      stroke: rgba(10, 74, 74, 0.2);
+      stroke-width: 2;
+      stroke-dasharray: 4 4;
+    }
+
+    .city-pin {
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .city-pin:hover {
+      transform: scale(1.35);
+    }
+
+    .city-circle {
+      fill: var(--primary);
+      stroke: white;
+      stroke-width: 2;
+      transition: fill 0.2s ease;
+    }
+
+    .city-pin:hover .city-circle, .city-pin.selected .city-circle {
+      fill: var(--accent);
+    }
+
+    .city-pulse {
+      fill: var(--accent);
+      opacity: 0.4;
+      animation: pulseMarker 2s infinite;
+    }
+
+    @keyframes pulseMarker {
+      0% { r: 6; opacity: 0.8; }
+      100% { r: 18; opacity: 0; }
+    }
+
+    .city-text-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      fill: var(--text);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .bus-marker-icon {
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    /* Map Tooltip */
+    .map-tooltip {
+      position: absolute;
+      background: var(--bg-card);
+      border: 1px solid var(--secondary);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--text);
+      box-shadow: var(--shadow-lg);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 100;
+      min-width: 140px;
+    }
+
+    .map-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .map-tooltip strong {
+      display: block;
+      color: var(--primary);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    /* POPULAR ROUTES COLUMN */
+    .routes-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .routes-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .routes-col-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .badge-live-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: rgba(42, 122, 74, 0.12);
+      color: var(--success);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .popular-routes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .route-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--secondary);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .route-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--secondary);
+    }
+
+    .route-card:hover::before, .route-card.active::before {
+      opacity: 1;
+    }
+
+    .route-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .route-title-line {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .route-meta-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .route-meta-line span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .route-card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .route-fare {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .btn-select-route {
+      background: rgba(10, 74, 74, 0.08);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-select-route:hover, .route-card.active .btn-select-route {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* QUICK LINKS BAR */
+    .quick-links-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 32px;
+    }
+
+    .quick-links-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .quick-links-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .quick-link-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .quick-link-btn:hover {
+      border-color: var(--secondary);
+      background: var(--bg-card);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+      color: var(--secondary);
+    }
+
+    .quick-link-icon {
+      font-size: 20px;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      margin-top: auto;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .site-footer p.tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    /* MODALS */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(6, 40, 40, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+
+    .modal-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text);
+    }
+
+    .modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: var(--bg);
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 3000;
+    }
+
+    .toast-notice.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .search-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .journey-display-grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-links-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-links-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-headline h2 {
+        font-size: 26px;
+      }
+      .concept-nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- TOP CONCEPT SWITCHER NAVIGATION -->
+  <nav class="concept-nav-bar" aria-label="Concept Navigation">
+    <div class="concept-nav-left">
+      <a href="../index.html" class="home-link" title="Return to Master Showcase Gallery">
+        <span>🏛️</span>
+        <span>Showcase Gallery</span>
+      </a>
+      <div class="concept-links-scroll">
+        <a href="concept1-journey-planner.html" class="concept-tab active">
+          <span>1. Journey Planner</span>
+        </a>
+        <a href="concept2-trusted-companion.html" class="concept-tab">
+          <span>2. Trusted Companion</span>
+        </a>
+        <a href="concept3-kerala-darshan.html" class="concept-tab">
+          <span>3. Kerala Darshan</span>
+        </a>
+        <a href="concept4-power-user.html" class="concept-tab">
+          <span>4. Power User</span>
+        </a>
+        <a href="concept5-hybrid-experience.html" class="concept-tab">
+          <span>5. Hybrid Experience</span>
+        </a>
+        <a href="concept6-minimalist-transformer.html" class="concept-tab">
+          <span>6. Minimalist Transformer</span>
+        </a>
+      </div>
+    </div>
+    <div class="concept-nav-right">
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN SITE HEADER -->
+  <header class="site-header">
+    <div class="brand-group">
+      <div class="brand-logo-badge">🚌</div>
+      <div class="brand-text">
+        <h1>KSRTC <span class="swift-pill">SWIFT</span></h1>
+        <p>Kerala State Road Transport Corporation — Super Fast Premium Fleet</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="charter-pill-btn" id="openCharterBtn" aria-haspopup="dialog">
+        <span>🚌 Need a private bus? Ask us</span>
+      </button>
+      <button class="btn-login" id="loginHeaderBtn">Sign In</button>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="page-container">
+
+    <!-- HERO TITLE & LIVE METRICS -->
+    <div class="hero-banner">
+      <div class="hero-headline">
+        <h2>Where are you heading today?</h2>
+        <p>Explore Kerala's scenic routes with live spatial tracking and swift instant bookings.</p>
+      </div>
+      <div class="metrics-row">
+        <div class="metric-badge highlight">
+          <span>⭐</span>
+          <span>78% faster search time</span>
+        </div>
+        <div class="metric-badge">
+          <span>🚌</span>
+          <span>2,500+ daily trips</span>
+        </div>
+        <div class="metric-badge">
+          <span>👥</span>
+          <span>4.8★ user rating</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH WIDGET CARD -->
+    <section class="search-widget-card" aria-label="Bus Journey Search Form">
+      <div class="trip-type-selector">
+        <label class="radio-pill">
+          <input type="radio" name="tripType" value="oneway" checked id="typeOneWay">
+          <span>One Way</span>
+        </label>
+        <label class="radio-pill">
+          <input type="radio" name="tripType" value="roundtrip" id="typeRoundTrip">
+          <span>Round Trip</span>
+        </label>
+      </div>
+
+      <form id="searchForm" class="search-grid" onsubmit="handleSearchSubmit(event)">
+        <!-- FROM CITY -->
+        <div class="input-field-group">
+          <label for="fromCityInput" class="field-label">
+            <span>📍</span> From
+          </label>
+          <input type="text" id="fromCityInput" class="custom-input" placeholder="Select origin city" autocomplete="off" value="Kochi" required>
+          <div class="autocomplete-list" id="fromAutoList"></div>
+        </div>
+
+        <!-- TO CITY -->
+        <div class="input-field-group">
+          <label for="toCityInput" class="field-label">
+            <span>🎯</span> To
+          </label>
+          <input type="text" id="toCityInput" class="custom-input" placeholder="Select destination" autocomplete="off" value="Trivandrum" required>
+          <div class="autocomplete-list" id="toAutoList"></div>
+        </div>
+
+        <!-- DATE -->
+        <div class="input-field-group">
+          <label for="journeyDateInput" class="field-label">
+            <span>📅</span> Date of Journey
+          </label>
+          <input type="date" id="journeyDateInput" class="custom-input" required>
+        </div>
+
+        <!-- RETURN DATE (conditional) -->
+        <div class="input-field-group return-date-wrap" id="returnDateWrap">
+          <label for="returnDateInput" class="field-label">
+            <span>🔄</span> Return Date
+          </label>
+          <input type="date" id="returnDateInput" class="custom-input">
+        </div>
+
+        <!-- PASSENGERS -->
+        <div class="input-field-group">
+          <span class="field-label"><span>👥</span> Passengers</span>
+          <div class="passenger-counter-box">
+            <button type="button" class="cnt-btn" id="decPassBtn" aria-label="Decrease passenger count">−</button>
+            <span class="cnt-value" id="passCountVal">2</span>
+            <button type="button" class="cnt-btn" id="incPassBtn" aria-label="Increase passenger count">+</button>
+          </div>
+        </div>
+
+        <!-- CTA BUTTONS -->
+        <div class="search-cta-btns">
+          <button type="submit" class="btn-find-bus" id="findBusBtn">
+            <span>🚌</span> Find My Bus
+          </button>
+          <button type="button" class="btn-explore-map" id="exploreRouteBtn" title="Focus and explore selected route on the map">
+            <span>🗺️</span> Explore
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- INTERACTIVE SPLIT: KERALA SVG MAP + POPULAR ROUTES -->
+    <div class="journey-display-grid">
+      <!-- MAP CARD -->
+      <section class="map-container-card" aria-label="Interactive Kerala Bus Route Map">
+        <div class="map-header">
+          <div class="map-title-group">
+            <h3><span>🗺️</span> Interactive Route Map</h3>
+            <p>Click any city or route line to instantly plan your journey</p>
+          </div>
+          <div class="map-toolbar">
+            <button class="map-tool-btn" id="zoomInBtn" title="Zoom In">+</button>
+            <button class="map-tool-btn" id="zoomOutBtn" title="Zoom Out">−</button>
+            <button class="map-tool-btn" id="resetMapBtn" title="Reset Map View">⟲</button>
+          </div>
+        </div>
+
+        <div class="svg-map-wrapper" id="svgMapContainer">
+          <svg id="keralaSvgMap" viewBox="0 0 420 540" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="landGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3A7E62" stop-opacity="0.22" />
+                <stop offset="100%" stop-color="#126363" stop-opacity="0.32" />
+              </linearGradient>
+              <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="glow" />
+                <feMerge>
+                  <feMergeNode in="glow" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Kerala Geographic Contour Outline -->
+            <path class="map-coastline" d="
+              M 115 45 
+              C 125 55, 140 75, 150 95
+              C 160 115, 175 130, 185 155
+              C 195 180, 205 195, 215 220
+              C 225 245, 230 265, 235 295
+              C 240 325, 255 350, 260 380
+              C 265 410, 280 435, 290 465
+              C 295 480, 285 495, 275 490
+              C 260 480, 250 450, 240 420
+              C 230 390, 215 365, 205 330
+              C 195 295, 180 270, 170 240
+              C 155 200, 140 165, 125 130
+              C 110 95, 95 65, 115 45 Z
+            " fill="url(#landGrad)" />
+
+            <!-- Static Network Highway Lines -->
+            <path class="static-route-line" d="M 125 75 L 148 135 L 175 200 L 195 260 L 218 315 L 235 375 L 260 430 L 280 475" />
+            <path class="static-route-line" d="M 195 260 L 255 255" /> <!-- Kochi to Munnar -->
+            <path class="static-route-line" d="M 148 135 L 190 120" /> <!-- Calicut to Wayanad -->
+
+            <!-- Active Animated Route Line (Dynamically altered in JS) -->
+            <path id="activeRoutePath" class="active-route-line" d="M 195 260 L 218 315 L 235 375 L 260 430 L 280 475" filter="url(#glowEffect)" />
+
+            <!-- Moving Bus Simulator on active route -->
+            <g id="animatedBusMarker" transform="translate(195, 260)">
+              <circle r="10" fill="#E87A5A" opacity="0.3" />
+              <circle r="6" fill="#E87A5A" />
+              <text x="-4" y="3" font-size="8" fill="white">🚌</text>
+            </g>
+
+            <!-- Interactive City Nodes -->
+            <!-- Kasaragod -->
+            <g class="city-pin" id="pin-Kasaragod" data-city="Kasaragod" data-x="125" data-y="75" transform="translate(125, 75)">
+              <circle class="city-circle" r="5" />
+              <text class="city-text-label" x="10" y="4">Kasaragod</text>
+            </g>
+
+            <!-- Wayanad -->
+            <g class="city-pin" id="pin-Wayanad" data-city="Wayanad" data-x="190" data-y="120" transform="translate(190, 120)">
+              <circle class="city-circle" r="5" />
+              <text class="city-text-label" x="10" y="4">Wayanad</text>
+            </g>
+
+            <!-- Calicut -->
+            <g class="city-pin" id="pin-Calicut" data-city="Calicut" data-x="148" data-y="135" transform="translate(148, 135)">
+              <circle class="city-circle" r="6" />
+              <text class="city-text-label" x="10" y="4">Calicut</text>
+            </g>
+
+            <!-- Thrissur -->
+            <g class="city-pin" id="pin-Thrissur" data-city="Thrissur" data-x="175" data-y="200" transform="translate(175, 200)">
+              <circle class="city-circle" r="6" />
+              <text class="city-text-label" x="10" y="4">Thrissur</text>
+            </g>
+
+            <!-- Munnar -->
+            <g class="city-pin" id="pin-Munnar" data-city="Munnar" data-x="255" data-y="255" transform="translate(255, 255)">
+              <circle class="city-circle" r="6" />
+              <text class="city-text-label" x="10" y="4">Munnar</text>
+            </g>
+
+            <!-- Kochi -->
+            <g class="city-pin selected" id="pin-Kochi" data-city="Kochi" data-x="195" data-y="260" transform="translate(195, 260)">
+              <circle class="city-pulse" r="6" />
+              <circle class="city-circle" r="7" />
+              <text class="city-text-label" x="12" y="4">Kochi</text>
+            </g>
+
+            <!-- Alleppey -->
+            <g class="city-pin" id="pin-Alleppey" data-city="Alleppey" data-x="218" data-y="315" transform="translate(218, 315)">
+              <circle class="city-circle" r="6" />
+              <text class="city-text-label" x="10" y="4">Alleppey</text>
+            </g>
+
+            <!-- Kollam -->
+            <g class="city-pin" id="pin-Kollam" data-city="Kollam" data-x="248" data-y="395" transform="translate(248, 395)">
+              <circle class="city-circle" r="6" />
+              <text class="city-text-label" x="10" y="4">Kollam</text>
+            </g>
+
+            <!-- Trivandrum -->
+            <g class="city-pin selected" id="pin-Trivandrum" data-city="Trivandrum" data-x="280" data-y="475" transform="translate(280, 475)">
+              <circle class="city-pulse" r="6" />
+              <circle class="city-circle" r="8" />
+              <text class="city-text-label" x="12" y="4">Trivandrum</text>
+            </g>
+          </svg>
+
+          <!-- Floating Map Tooltip -->
+          <div class="map-tooltip" id="mapHoverTooltip">
+            <strong id="tooltipCityName">Kochi</strong>
+            <span id="tooltipBusCount">18 buses departing soon</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- POPULAR ROUTES COLUMN -->
+      <section class="routes-column" aria-label="Popular Routes from your location">
+        <div class="routes-col-header">
+          <h3>Popular Routes</h3>
+          <span class="badge-live-count">● Live Fares</span>
+        </div>
+
+        <div class="popular-routes-list" id="popularRoutesContainer">
+          <!-- Route 1 -->
+          <article class="route-card active" data-from="Kochi" data-to="Trivandrum" data-time="6:00 AM" data-fare="₹800" tabindex="0">
+            <div class="route-info-left">
+              <div class="route-title-line">
+                <span>Kochi</span>
+                <span>→</span>
+                <span>Trivandrum</span>
+              </div>
+              <div class="route-meta-line">
+                <span>⏰ 6:00 AM Departure</span>
+                <span>•</span>
+                <span>Swift AC Sleeper</span>
+              </div>
+            </div>
+            <div class="route-card-right">
+              <span class="route-fare">₹800</span>
+              <button class="btn-select-route" type="button">Select</button>
+            </div>
+          </article>
+
+          <!-- Route 2 -->
+          <article class="route-card" data-from="Kochi" data-to="Calicut" data-time="8:30 AM" data-fare="₹950" tabindex="0">
+            <div class="route-info-left">
+              <div class="route-title-line">
+                <span>Kochi</span>
+                <span>→</span>
+                <span>Calicut</span>
+              </div>
+              <div class="route-meta-line">
+                <span>⏰ 8:30 AM Departure</span>
+                <span>•</span>
+                <span>Gajaraj Multi-Axle</span>
+              </div>
+            </div>
+            <div class="route-card-right">
+              <span class="route-fare">₹950</span>
+              <button class="btn-select-route" type="button">Select</button>
+            </div>
+          </article>
+
+          <!-- Route 3 -->
+          <article class="route-card" data-from="Kochi" data-to="Munnar" data-time="10:00 AM" data-fare="₹500" tabindex="0">
+            <div class="route-info-left">
+              <div class="route-title-line">
+                <span>Kochi</span>
+                <span>→</span>
+                <span>Munnar</span>
+              </div>
+              <div class="route-meta-line">
+                <span>⏰ 10:00 AM Departure</span>
+                <span>•</span>
+                <span>Swift Deluxe Scenic</span>
+              </div>
+            </div>
+            <div class="route-card-right">
+              <span class="route-fare">₹500</span>
+              <button class="btn-select-route" type="button">Select</button>
+            </div>
+          </article>
+
+          <!-- Route 4 -->
+          <article class="route-card" data-from="Calicut" data-to="Wayanad" data-time="11:15 AM" data-fare="₹380" tabindex="0">
+            <div class="route-info-left">
+              <div class="route-title-line">
+                <span>Calicut</span>
+                <span>→</span>
+                <span>Wayanad</span>
+              </div>
+              <div class="route-meta-line">
+                <span>⏰ 11:15 AM Departure</span>
+                <span>•</span>
+                <span>Minibus Express</span>
+              </div>
+            </div>
+            <div class="route-card-right">
+              <span class="route-fare">₹380</span>
+              <button class="btn-select-route" type="button">Select</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- QUICK LINKS BAR -->
+    <section class="quick-links-section" aria-label="Essential Services Quick Links">
+      <div class="quick-links-title">Quick Services & Utilities</div>
+      <div class="quick-links-row">
+        <button class="quick-link-btn" onclick="showFeatureModal('🎫 Book Ticket', 'Instant reservation engine for 200+ Kerala and interstate luxury bus routes.')">
+          <span class="quick-link-icon">🎫</span>
+          <span>Book Ticket</span>
+        </button>
+
+        <button class="quick-link-btn" onclick="showFeatureModal('📊 Live Bus Status', 'Track your coach with GPS precision, estimated delay calculation, and conductor info.')">
+          <span class="quick-link-icon">📊</span>
+          <span>Bus Status</span>
+        </button>
+
+        <button class="quick-link-btn" onclick="showFeatureModal('🔄 Easy Cancellation', 'Instant refunds directly to your source UPI/card with zero hidden penalties.')">
+          <span class="quick-link-icon">🔄</span>
+          <span>Cancellation</span>
+        </button>
+
+        <button class="quick-link-btn" onclick="openCharterModal()">
+          <span class="quick-link-icon">🚌</span>
+          <span>Charter Swift</span>
+        </button>
+
+        <button class="quick-link-btn" onclick="showFeatureModal('📸 Fleet Gallery', 'Explore 360° interior panoramic previews of our Scania, Volvo B11R, and sleeper coaches.')">
+          <span class="quick-link-icon">📸</span>
+          <span>Fleet Gallery</span>
+        </button>
+
+        <button class="quick-link-btn" onclick="showFeatureModal('📱 Mobile App', 'Download the KSRTC-SWIFT app on iOS and Android for offline boarding passes.')">
+          <span class="quick-link-icon">📱</span>
+          <span>App Download</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="tagline">"Your journey, beautifully visualized."</p>
+    <p>© 2026 KSRTC-SWIFT • Concept 1 Prototype: The Journey Planner</p>
+  </footer>
+
+  <!-- CHARTER MODAL -->
+  <div class="modal-backdrop" id="charterModal" role="dialog" aria-modal="true" aria-labelledby="charterModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="charterModalTitle">🚌 Charter a KSRTC-SWIFT Bus</h3>
+        <button class="modal-close-btn" onclick="closeCharterModal()" aria-label="Close modal">✕</button>
+      </div>
+      <form id="charterForm" onsubmit="handleCharterSubmit(event)">
+        <div class="modal-body">
+          <p style="font-size: 13px; color: var(--text-muted);">
+            Book exclusive full-coach charters for weddings, corporate offsites, college tours, and pilgrim groups across South India.
+          </p>
+          <div class="input-field-group">
+            <label class="field-label">Pickup & Drop Cities</label>
+            <input type="text" class="custom-input" placeholder="e.g. Kochi Infopark to Munnar" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="input-field-group">
+              <label class="field-label">Charter Date</label>
+              <input type="date" class="custom-input" required>
+            </div>
+            <div class="input-field-group">
+              <label class="field-label">Departure Time</label>
+              <input type="time" class="custom-input" required value="08:00">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px;">
+            <div class="input-field-group">
+              <label class="field-label">Vehicle Type</label>
+              <select class="custom-input" style="height: 48px;">
+                <option>Scania Multi-Axle AC Sleeper (40 Seats)</option>
+                <option>Volvo B11R AC Seater (49 Seats)</option>
+                <option>Swift Super Deluxe Air-Bus (36 Seats)</option>
+                <option>Swift Electric AC Minibus (24 Seats)</option>
+              </select>
+            </div>
+            <div class="input-field-group">
+              <label class="field-label">Passengers</label>
+              <input type="number" class="custom-input" min="10" max="60" value="35" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-login" onclick="closeCharterModal()">Cancel</button>
+          <button type="submit" class="btn-find-bus">Request Instant Quote</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- GENERIC FEATURE MODAL -->
+  <div class="modal-backdrop" id="genericFeatureModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="featureModalTitle">Service Info</h3>
+        <button class="modal-close-btn" onclick="closeFeatureModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p id="featureModalBody" style="font-size: 14px; color: var(--text); line-height: 1.6;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="closeFeatureModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
+    <span id="toastIcon">✅</span>
+    <span id="toastText">Action completed</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Static cities list per PRD
+    const CITIES = [
+      'Trivandrum',
+      'Kollam',
+      'Alleppey',
+      'Kochi',
+      'Thrissur',
+      'Calicut',
+      'Wayanad',
+      'Munnar',
+      'Kasaragod'
+    ];
+
+    // City coordinates on SVG map
+    const CITY_COORDS = {
+      'Kasaragod': { x: 125, y: 75 },
+      'Wayanad': { x: 190, y: 120 },
+      'Calicut': { x: 148, y: 135 },
+      'Thrissur': { x: 175, y: 200 },
+      'Munnar': { x: 255, y: 255 },
+      'Kochi': { x: 195, y: 260 },
+      'Alleppey': { x: 218, y: 315 },
+      'Kollam': { x: 248, y: 395 },
+      'Trivandrum': { x: 280, y: 475 }
+    };
+
+    // State
+    let passengerCount = 2;
+    let mapZoomScale = 1;
+
+    // Elements
+    const body = document.body;
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    const fromCityInput = document.getElementById('fromCityInput');
+    const toCityInput = document.getElementById('toCityInput');
+    const fromAutoList = document.getElementById('fromAutoList');
+    const toAutoList = document.getElementById('toAutoList');
+    const typeOneWay = document.getElementById('typeOneWay');
+    const typeRoundTrip = document.getElementById('typeRoundTrip');
+    const returnDateWrap = document.getElementById('returnDateWrap');
+    const journeyDateInput = document.getElementById('journeyDateInput');
+    const returnDateInput = document.getElementById('returnDateInput');
+    const passCountVal = document.getElementById('passCountVal');
+    const decPassBtn = document.getElementById('decPassBtn');
+    const incPassBtn = document.getElementById('incPassBtn');
+    const activeRoutePath = document.getElementById('activeRoutePath');
+    const animatedBusMarker = document.getElementById('animatedBusMarker');
+    const keralaSvgMap = document.getElementById('keralaSvgMap');
+    const mapHoverTooltip = document.getElementById('mapHoverTooltip');
+    const tooltipCityName = document.getElementById('tooltipCityName');
+    const tooltipBusCount = document.getElementById('tooltipBusCount');
+    const charterModal = document.getElementById('charterModal');
+    const openCharterBtn = document.getElementById('openCharterBtn');
+    const genericFeatureModal = document.getElementById('genericFeatureModal');
+    const toastNotice = document.getElementById('toastNotice');
+
+    // Initialize Dates (Tomorrow as default)
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    journeyDateInput.value = tomorrow.toISOString().split('T')[0];
+    journeyDateInput.min = today.toISOString().split('T')[0];
+
+    const nextWeek = new Date(today);
+    nextWeek.setDate(nextWeek.getDate() + 4);
+    returnDateInput.value = nextWeek.toISOString().split('T')[0];
+    returnDateInput.min = tomorrow.toISOString().split('T')[0];
+
+    // Theme toggle
+    function initTheme() {
+      const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
+      setTheme(savedTheme);
+    }
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light';
+        localStorage.setItem('ksrtc_theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark';
+        localStorage.setItem('ksrtc_theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || 'light';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Roundtrip toggle
+    typeOneWay.addEventListener('change', () => returnDateWrap.classList.remove('show'));
+    typeRoundTrip.addEventListener('change', () => returnDateWrap.classList.add('show'));
+
+    // Passenger counter
+    decPassBtn.addEventListener('click', () => {
+      if (passengerCount > 1) {
+        passengerCount--;
+        passCountVal.textContent = passengerCount;
+      }
+    });
+
+    incPassBtn.addEventListener('click', () => {
+      if (passengerCount < 10) {
+        passengerCount++;
+        passCountVal.textContent = passengerCount;
+      }
+    });
+
+    // Autocomplete setup
+    function setupAutocomplete(input, list) {
+      function showList(query = '') {
+        const filtered = CITIES.filter(c => c.toLowerCase().includes(query.toLowerCase()));
+        list.innerHTML = '';
+        if (filtered.length === 0) {
+          list.classList.remove('show');
+          return;
+        }
+        filtered.forEach(city => {
+          const item = document.createElement('div');
+          item.className = 'autocomplete-item';
+          item.innerHTML = `<span>📍 ${city}</span><span style="font-size: 11px; opacity: 0.7;">Terminal Hub</span>`;
+          item.addEventListener('click', () => {
+            input.value = city;
+            list.classList.remove('show');
+            updateMapRouteFromInputs();
+          });
+          list.appendChild(item);
+        });
+        list.classList.add('show');
+      }
+
+      input.addEventListener('focus', () => showList(input.value));
+      input.addEventListener('input', () => showList(input.value));
+      document.addEventListener('click', (e) => {
+        if (!input.contains(e.target) && !list.contains(e.target)) {
+          list.classList.remove('show');
+        }
+      });
+    }
+
+    setupAutocomplete(fromCityInput, fromAutoList);
+    setupAutocomplete(toCityInput, toAutoList);
+
+    // Map Interactivity & Route Path drawing
+    function updateMapRoute(from, to) {
+      // Highlight markers
+      document.querySelectorAll('.city-pin').forEach(pin => {
+        const city = pin.getAttribute('data-city');
+        if (city === from || city === to) {
+          pin.classList.add('selected');
+        } else {
+          pin.classList.remove('selected');
+        }
+      });
+
+      const p1 = CITY_COORDS[from];
+      const p2 = CITY_COORDS[to];
+
+      if (p1 && p2) {
+        // Draw curved/segmented SVG path between coordinates
+        const midX = (p1.x + p2.x) / 2 + (p1.y > p2.y ? -10 : 10);
+        const midY = (p1.y + p2.y) / 2;
+        const d = `M ${p1.x} ${p1.y} Q ${midX} ${midY} ${p2.x} ${p2.y}`;
+        activeRoutePath.setAttribute('d', d);
+
+        // Position animated bus marker at midpoint
+        animatedBusMarker.setAttribute('transform', `translate(${midX}, ${midY})`);
+        animatedBusMarker.style.display = 'block';
+      } else {
+        animatedBusMarker.style.display = 'none';
+      }
+    }
+
+    function updateMapRouteFromInputs() {
+      const from = fromCityInput.value.trim();
+      const to = toCityInput.value.trim();
+      updateMapRoute(from, to);
+    }
+
+    // City pin click handler
+    document.querySelectorAll('.city-pin').forEach(pin => {
+      const city = pin.getAttribute('data-city');
+
+      pin.addEventListener('click', () => {
+        if (fromCityInput.value === city) {
+          toCityInput.value = (city === 'Trivandrum') ? 'Kochi' : 'Trivandrum';
+        } else {
+          toCityInput.value = city;
+        }
+        updateMapRouteFromInputs();
+        showToast(`Route destination updated to ${city}`);
+      });
+
+      // Hover tooltip
+      pin.addEventListener('mouseenter', (e) => {
+        const bbox = pin.getBoundingClientRect();
+        const containerBox = svgMapContainer.getBoundingClientRect();
+        tooltipCityName.textContent = city;
+        tooltipBusCount.textContent = `${Math.floor(Math.random() * 15 + 8)} coaches scheduled today`;
+        
+        mapHoverTooltip.style.left = `${bbox.left - containerBox.left + 20}px`;
+        mapHoverTooltip.style.top = `${bbox.top - containerBox.top - 10}px`;
+        mapHoverTooltip.classList.add('show');
+      });
+
+      pin.addEventListener('mouseleave', () => {
+        mapHoverTooltip.classList.remove('show');
+      });
+    });
+
+    // Popular Route Cards click
+    document.querySelectorAll('.route-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.route-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        const from = card.getAttribute('data-from');
+        const to = card.getAttribute('data-to');
+
+        fromCityInput.value = from;
+        toCityInput.value = to;
+        updateMapRoute(from, to);
+        showToast(`Selected route: ${from} → ${to}`);
+      });
+    });
+
+    // Map Zoom Controls
+    document.getElementById('zoomInBtn').addEventListener('click', () => {
+      if (mapZoomScale < 1.8) {
+        mapZoomScale += 0.2;
+        keralaSvgMap.style.transform = `scale(${mapZoomScale})`;
+      }
+    });
+
+    document.getElementById('zoomOutBtn').addEventListener('click', () => {
+      if (mapZoomScale > 0.8) {
+        mapZoomScale -= 0.2;
+        keralaSvgMap.style.transform = `scale(${mapZoomScale})`;
+      }
+    });
+
+    document.getElementById('resetMapBtn').addEventListener('click', () => {
+      mapZoomScale = 1;
+      keralaSvgMap.style.transform = `scale(1)`;
+      updateMapRouteFromInputs();
+    });
+
+    // Search Submit
+    function handleSearchSubmit(e) {
+      e.preventDefault();
+      const from = fromCityInput.value;
+      const to = toCityInput.value;
+      const date = journeyDateInput.value;
+      const findBtn = document.getElementById('findBusBtn');
+
+      findBtn.innerHTML = '<span>⏳</span> Searching...';
+      findBtn.disabled = true;
+
+      setTimeout(() => {
+        findBtn.innerHTML = '<span>🚌</span> Find My Bus';
+        findBtn.disabled = false;
+        showFeatureModal(`Buses for ${from} → ${to}`, `Found 14 available KSRTC-SWIFT services on ${date} for ${passengerCount} passenger(s).<br><br>• <strong>06:00 AM</strong> — AC Sleeper Multi-Axle (₹800, 18 seats)<br>• <strong>08:30 AM</strong> — Gajaraj B11R (₹950, 12 seats)<br>• <strong>02:15 PM</strong> — Swift Deluxe Air-Bus (₹620, 24 seats)<br>• <strong>09:00 PM</strong> — Super Fast Non-AC (₹450, 31 seats)`);
+      }, 700);
+    }
+
+    // Charter modal
+    function openCharterModal() {
+      charterModal.classList.add('open');
+    }
+
+    function closeCharterModal() {
+      charterModal.classList.remove('open');
+    }
+
+    openCharterBtn.addEventListener('click', openCharterModal);
+
+    function handleCharterSubmit(e) {
+      e.preventDefault();
+      closeCharterModal();
+      showToast('Charter quote request sent! Conductor hotline will call within 15 min.');
+    }
+
+    // Feature Modal
+    function showFeatureModal(title, text) {
+      document.getElementById('featureModalTitle').innerHTML = title;
+      document.getElementById('featureModalBody').innerHTML = text;
+      genericFeatureModal.classList.add('open');
+    }
+
+    function closeFeatureModal() {
+      genericFeatureModal.classList.remove('open');
+    }
+
+    // Toast
+    function showToast(msg) {
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = msg;
+      toastNotice.classList.add('show');
+      setTimeout(() => toastNotice.classList.remove('show'), 3500);
+    }
+
+    // Sign in demo
+    document.getElementById('loginHeaderBtn').addEventListener('click', () => {
+      showToast('Logged in as Guest Explorer. Ready to book!');
+    });
+
+    document.getElementById('exploreRouteBtn').addEventListener('click', () => {
+      updateMapRouteFromInputs();
+      showToast(`Map route highlighted: ${fromCityInput.value} ➔ ${toCityInput.value}`);
+    });
+
+    // Close modals on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCharterModal();
+        closeFeatureModal();
+      }
+    });
+
+    // Init
+    initTheme();
+    updateMapRoute('Kochi', 'Trivandrum');
+  </script>
+</body>
+</html>

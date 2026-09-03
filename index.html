@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KSRTC-SWIFT Redesign — 6 Interactive Concept Showcases</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F5F7FA;
+      --bg-card: #FFFFFF;
+      --text: #1A1A2A;
+      --text-muted: #6A6A7A;
+      --border: #E2E6EC;
+      --primary: #0066FF;
+      --primary-hover: #0052CC;
+      --gold: #C8943E;
+      --green: #2A8A5A;
+      --purple: #4A2A6A;
+      --teal: #1A7A7A;
+      --mint: #00C8A8;
+      --orange: #E8844A;
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.09);
+      --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.14);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0C1017;
+      --bg-card: #151B26;
+      --text: #F1F4F9;
+      --text-muted: #8E9BAE;
+      --border: #232D3F;
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 60px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* TOP BAR */
+    .showcase-topbar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-logo {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #0A4A4A, #0066FF);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
+    }
+
+    .topbar-brand strong {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .topbar-brand span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--primary);
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px 0;
+    }
+
+    /* HERO HEADER */
+    .showcase-hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .badge-hero {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(0, 102, 255, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(0, 102, 255, 0.3);
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .showcase-hero h1 {
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+    }
+
+    .showcase-hero h1 span {
+      color: var(--primary);
+    }
+
+    .showcase-hero p.sub {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 720px;
+      margin: 12px auto 0;
+    }
+
+    /* FILTER TABS */
+    .filter-tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-chip.active, .filter-chip:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
+    }
+
+    /* 6 CONCEPTS GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .card-preview {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      position: relative;
+      user-select: none;
+    }
+
+    .card-preview .number {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      color: white;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .card-title-group h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .card-philosophy {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .card-actions-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-launch-concept {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-launch-concept:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
+    }
+
+    .btn-compare-info {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+    }
+
+    .btn-compare-info:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* COMPARISON TABLE MATRIX */
+    .comparison-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+
+    .comparison-section h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .comparison-section p.sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .comparison-table th {
+      background: var(--bg);
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .comparison-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .comparison-table tr:hover td {
+      background: rgba(0, 102, 255, 0.03);
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(12, 16, 23, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 580px;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1);
+    }
+
+    /* FOOTER */
+    .master-footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .showcase-hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- TOP BAR -->
+  <nav class="showcase-topbar" aria-label="Showcase Navigation Header">
+    <div class="topbar-container">
+      <div class="topbar-brand">
+        <div class="topbar-logo">🚌</div>
+        <div>
+          <strong>KSRTC-SWIFT</strong>
+          <span>• Redesign Architecture Suite</span>
+        </div>
+      </div>
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark Mode</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container">
+
+    <!-- HERO HEADER -->
+    <header class="showcase-hero">
+      <span class="badge-hero">🚀 6 PRODUCTION-GRADE ARCHITECTURES</span>
+      <h1>KSRTC-SWIFT <span>Redesign</span></h1>
+      <p class="sub">
+        Explore 6 visionary, fully functional interactive prototypes engineered for Kerala's premier luxury bus network. Click any concept card to launch the live design.
+      </p>
+    </header>
+
+    <!-- FILTER CHIPS -->
+    <div class="filter-tabs-row" role="tablist">
+      <button class="filter-chip active" onclick="filterGrid('all', this)">All 6 Concepts</button>
+      <button class="filter-chip" onclick="filterGrid('map', this)">🗺️ Map-First</button>
+      <button class="filter-chip" onclick="filterGrid('trust', this)">🛡️ Status & Trust</button>
+      <button class="filter-chip" onclick="filterGrid('tourism', this)">🌴 Tourism & Discovery</button>
+      <button class="filter-chip" onclick="filterGrid('corporate', this)">⚡ Corporate & Power</button>
+      <button class="filter-chip" onclick="filterGrid('adaptive', this)">🧠 Adaptive Hybrid</button>
+      <button class="filter-chip" onclick="filterGrid('speed', this)">🚀 60s Speed</button>
+    </div>
+
+    <!-- 6 CONCEPTS GRID -->
+    <section class="grid" id="conceptsGrid" aria-label="Interactive Concept Pages Gallery">
+
+      <!-- Concept 1: The Journey Planner -->
+      <article class="card" data-tags="map all">
+        <div class="card-preview" style="background: linear-gradient(135deg, #0A4A4A, #1A7A7A); color: white;">
+          🗺️
+          <span class="number">1</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title-group">
+            <span class="card-philosophy">Route-First • Map-Integrated</span>
+            <h3>The Journey Planner</h3>
+            <p class="card-desc">
+              Visual route exploration before booking. Features an interactive SVG map of Kerala with live animated highway paths, city pin selection, and private coach chartering.
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag" style="color: #0A4A4A; font-weight: 800;">Deep Teal & Gold</span>
+            <span class="tag">Interactive SVG Map</span>
+            <span class="tag">78% Faster Search</span>
+          </div>
+          <div class="card-actions-row">
+            <a href="concepts/concept1-journey-planner.html" class="btn-launch-concept">
+              <span>Launch Concept</span>
+              <span>➔</span>
+            </a>
+            <button class="btn-compare-info" onclick="openOverviewModal('The Journey Planner', 'Route-first planning with Google Maps inspired spatial ergonomics.', '#0A4A4A', 'Playfair Display + Inter', 'Explorers who prioritize route awareness, district stops, and visual geography.')">
+              ℹ️
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Concept 2: The Trusted Companion -->
+      <article class="card" data-tags="trust all">
+        <div class="card-preview" style="background: linear-gradient(135deg, #1A2A4A, #1A7A7A); color: white;">
+          🛡️
+          <span class="number">2</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title-group">
+            <span class="card-philosophy">Status & Confidence-First</span>
+            <h3>The Trusted Companion</h3>
+            <p class="card-desc">
+              Engineered for passenger certainty. Instant 12-digit PNR lookup, camera QR scanner simulation, auto-refreshing weather/delay advisory stream, and full cancellation refund slider.
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag" style="color: #1A7A7A; font-weight: 800;">Navy & Teal</span>
+            <span class="tag">PNR + QR Camera</span>
+            <span class="tag">Refund Slider</span>
+          </div>
+          <div class="card-actions-row">
+            <a href="concepts/concept2-trusted-companion.html" class="btn-launch-concept">
+              <span>Launch Concept</span>
+              <span>➔</span>
+            </a>
+            <button class="btn-compare-info" onclick="openOverviewModal('The Trusted Companion', 'Truth at a glance dashboard with live conductor contacts.', '#1A2A4A', 'Lora + Open Sans', 'Anxious commuters and families seeking absolute reliability and delay certainty.')">
+              ℹ️
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Concept 3: The Kerala Darshan -->
+      <article class="card" data-tags="tourism all">
+        <div class="card-preview" style="background: linear-gradient(135deg, #E8844A, #4A8C4A); color: white;">
+          🌴
+          <span class="number">3</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title-group">
+            <span class="card-philosophy">Tourism & Discovery-First</span>
+            <h3>The Kerala Darshan</h3>
+            <p class="card-desc">
+              Immersive cultural showcase. Category filters (Hills, Backwaters, Temples), Onam & Pooram festival calendar, Meals on Wheels (Rail Rolls) ordering, and Malayalam audio pronunciation.
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag" style="color: #E8844A; font-weight: 800;">Sunset Orange & Coconut</span>
+            <span class="tag">Meals on Wheels</span>
+            <span class="tag">Audio Guide</span>
+          </div>
+          <div class="card-actions-row">
+            <a href="concepts/concept3-kerala-darshan.html" class="btn-launch-concept">
+              <span>Launch Concept</span>
+              <span>➔</span>
+            </a>
+            <button class="btn-compare-info" onclick="openOverviewModal('The Kerala Darshan', 'Cultural exploration platform bringing the soul of Kerala onto the highway.', '#E8844A', 'Cormorant Garamond + Nunito', 'Domestic and international tourists exploring hill stations, backwaters, and festivals.')">
+              ℹ️
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Concept 4: The Power User -->
+      <article class="card" data-tags="corporate all">
+        <div class="card-preview" style="background: linear-gradient(135deg, #0A0A0A, #4A2A6A); color: white; border-bottom: 2px solid #00C8A8;">
+          ⚡
+          <span class="number">4</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title-group">
+            <span class="card-philosophy">Corporate & Analytics-First</span>
+            <h3>The Power User</h3>
+            <p class="card-desc">
+              High-efficiency dark dashboard for frequent flyers and business teams. Features GST tax invoice generator, bulk group reservation engine, carbon offset tracking, and quarterly charts.
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag" style="color: #00C8A8; font-weight: 800;">Dark + Mint Green</span>
+            <span class="tag">GST Invoicing</span>
+            <span class="tag">Group Engine</span>
+          </div>
+          <div class="card-actions-row">
+            <a href="concepts/concept4-power-user.html" class="btn-launch-concept">
+              <span>Launch Concept</span>
+              <span>➔</span>
+            </a>
+            <button class="btn-compare-info" onclick="openOverviewModal('The Power User', 'Enterprise travel intelligence system optimized for speed and tax compliance.', '#00C8A8', 'Inter + JetBrains Mono', 'Corporate travel admins, IT consultants, and frequent weekly business travelers.')">
+              ℹ️
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Concept 5: The Hybrid Experience -->
+      <article class="card" data-tags="adaptive all">
+        <div class="card-preview" style="background: linear-gradient(135deg, #1A5A7A, #C8943E); color: white;">
+          🧠
+          <span class="number">5</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title-group">
+            <span class="card-philosophy">Adaptive All-in-One Engine</span>
+            <h3>The Hybrid Experience</h3>
+            <p class="card-desc">
+              Unified experience that morphs dynamically based on user journey state (Searching, Booking, Traveling, Completed). Includes split-view live GPS map and interactive 3D seat perspective selection.
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag" style="color: #1A5A7A; font-weight: 800;">Dynamic Theme Engine</span>
+            <span class="tag">3D Seat Selection</span>
+            <span class="tag">Voice Prompts</span>
+          </div>
+          <div class="card-actions-row">
+            <a href="concepts/concept5-hybrid-experience.html" class="btn-launch-concept">
+              <span>Launch Concept</span>
+              <span>➔</span>
+            </a>
+            <button class="btn-compare-info" onclick="openOverviewModal('The Hybrid Experience', 'Context-aware intelligence that surfaces the exact right tool at each journey phase.', '#1A5A7A', 'Playfair + Inter', 'All-around users desiring a unified interface with intelligent contextual adaptation.')">
+              ℹ️
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Concept 6: The Minimalist Transformer -->
+      <article class="card" data-tags="speed all">
+        <div class="card-preview" style="background: linear-gradient(135deg, #0066FF, #00C8A8); color: white;">
+          🚀
+          <span class="number">6</span>
+        </div>
+        <div class="card-content">
+          <div class="card-title-group">
+            <span class="card-philosophy">Conversion & 60s Speed</span>
+            <h3>The Minimalist Transformer</h3>
+            <p class="card-desc">
+              Extreme speed and frictionless conversion. "Book in 60 seconds or less" with 180° animated city swap button, one-click date presets, rapid 3-click booking drawer, and live checkout countdown.
+            </p>
+          </div>
+          <div class="tags">
+            <span class="tag" style="color: #0066FF; font-weight: 800;">Electric Blue & Mint</span>
+            <span class="tag">180° City Swap</span>
+            <span class="tag">45s Booking</span>
+          </div>
+          <div class="card-actions-row">
+            <a href="concepts/concept6-minimalist-transformer.html" class="btn-launch-concept">
+              <span>Launch Concept</span>
+              <span>➔</span>
+            </a>
+            <button class="btn-compare-info" onclick="openOverviewModal('The Minimalist Transformer', 'Radically stripped down conversion funnel with 0 cognitive overhead.', '#0066FF', 'Inter (Ultra Clean)', 'Time-sensitive travelers, mobile commuters, and conversion-focused users.')">
+              ℹ️
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ARCHITECTURAL MATRIX COMPARISON TABLE -->
+    <section class="comparison-section" aria-label="Architectural Concept Comparison Matrix">
+      <h2>📊 Architectural Comparison Matrix</h2>
+      <p class="sub">Compare key UX decisions, technical features, and strategic differentiation across all 6 prototypes.</p>
+
+      <div class="table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Target Persona</th>
+              <th>Hero Element</th>
+              <th>Key Innovation</th>
+              <th>Design Language</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Journey Planner</strong></td>
+              <td>Visual Planners & Explorers</td>
+              <td>Interactive Kerala SVG Map</td>
+              <td>Dynamic glowing route lines + bus animator</td>
+              <td>Deep Teal, Warm Gold, Playfair Display</td>
+            </tr>
+            <tr>
+              <td><strong>2. Trusted Companion</strong></td>
+              <td>Anxious Travelers & Commuters</td>
+              <td>Instant PNR & QR Scanner</td>
+              <td>Time-based refund slider & live delay stream</td>
+              <td>Navy Blue, Teal, Lora Serif</td>
+            </tr>
+            <tr>
+              <td><strong>3. Kerala Darshan</strong></td>
+              <td>Tourists & Cultural Visitors</td>
+              <td>Experience Categories Grid</td>
+              <td>Meals on Wheels & Malayalam audio speech</td>
+              <td>Sunset Orange, Coconut Green, Cormorant</td>
+            </tr>
+            <tr>
+              <td><strong>4. The Power User</strong></td>
+              <td>Corporate & Business Teams</td>
+              <td>Financial & Mileage Dashboard</td>
+              <td>Consolidated GST tax invoices & group booking</td>
+              <td>Default Dark, Mint, JetBrains Mono</td>
+            </tr>
+            <tr>
+              <td><strong>5. Hybrid Experience</strong></td>
+              <td>End-to-End Frequent Travelers</td>
+              <td>Split View Map + Adaptive UI</td>
+              <td>UI palette morphing per state + 3D seat map</td>
+              <td>Adaptive Cool Blues to Gold, Inter</td>
+            </tr>
+            <tr>
+              <td><strong>6. Minimalist Transformer</strong></td>
+              <td>Fast-Action Commuters</td>
+              <td>60s Conversion Search Bar</td>
+              <td>180° animated swap & rapid 3-click drawer</td>
+              <td>Electric Blue, Pure White, Inter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="master-footer">
+      <p>© 2026 KSRTC-SWIFT • State Road Transport Corporation Architectural Showcase Suite</p>
+      <p style="margin-top: 6px; font-size: 12px;">Engineered with vanilla standards: Zero external CSS/JS dependencies • Production-ready accessibility</p>
+    </footer>
+
+  </main>
+
+  <!-- OVERVIEW DETAILS MODAL -->
+  <div class="modal-backdrop" id="overviewModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 id="modalConceptTitle" style="font-size: 20px; font-weight: 800;">Concept Overview</h3>
+        <button style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-muted);" onclick="closeOverviewModal()">✕</button>
+      </div>
+      <div id="modalConceptBody" style="font-size: 14px; line-height: 1.6; color: var(--text);"></div>
+      <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+        <button class="btn-launch-concept" style="width: auto; padding: 10px 20px;" onclick="closeOverviewModal()">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const body = document.body;
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    const overviewModal = document.getElementById('overviewModal');
+
+    // Theme logic
+    function initTheme() {
+      const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
+      setTheme(savedTheme);
+    }
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light Mode';
+        localStorage.setItem('ksrtc_theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark Mode';
+        localStorage.setItem('ksrtc_theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || 'light';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Filtering
+    function filterGrid(category, btn) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags');
+        if (category === 'all' || tags.includes(category)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal
+    function openOverviewModal(title, desc, color, typography, persona) {
+      document.getElementById('modalConceptTitle').textContent = title;
+      document.getElementById('modalConceptBody').innerHTML = `
+        <p style="margin-bottom: 14px;">${desc}</p>
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 14px; border-radius: 8px; font-size: 13px;">
+          <div style="margin-bottom: 6px;"><strong>Target Persona:</strong> ${persona}</div>
+          <div style="margin-bottom: 6px;"><strong>Typography Stack:</strong> ${typography}</div>
+          <div><strong>Primary Identity Accent:</strong> <span style="display: inline-block; width: 12px; height: 12px; background: ${color}; border-radius: 2px; vertical-align: middle; margin-right: 4px;"></span> ${color}</div>
+        </div>
+      `;
+      overviewModal.classList.add('open');
+    }
+
+    function closeOverviewModal() {
+      overviewModal.classList.remove('open');
+    }
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeOverviewModal();
+    });
+
+    initTheme();
+  </script>
+</body>
+</html>

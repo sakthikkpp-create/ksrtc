@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 3: The Kerala Darshan — KSRTC-SWIFT</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #E8844A;
+      --primary-dark: #C9662E;
+      --secondary: #4A8C4A;
+      --secondary-dark: #376F37;
+      --bg: #FDF8F0;
+      --bg-card: #FFFFFF;
+      --accent: #3AA8B8;
+      --gold: #D4A84A;
+      --text: #3A2A1A;
+      --text-muted: #7A6652;
+      --border: #E8DDC0;
+      --shadow-sm: 0 4px 12px rgba(58, 42, 26, 0.06);
+      --shadow-md: 0 10px 28px rgba(58, 42, 26, 0.1);
+      --shadow-lg: 0 20px 48px rgba(58, 42, 26, 0.16);
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    [data-theme="dark"] {
+      --primary: #F0955E;
+      --primary-dark: #D47B46;
+      --secondary: #5DA85D;
+      --secondary-dark: #438043;
+      --bg: #1A1410;
+      --bg-card: #251E18;
+      --accent: #4FC0D1;
+      --gold: #E5BE64;
+      --text: #F8F3ED;
+      --text-muted: #BBA998;
+      --border: #3A2F25;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* CONCEPT TOP NAV BAR */
+    .concept-nav-bar {
+      background: #24160E;
+      color: #F8EFEA;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(232, 132, 74, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      font-size: 13px;
+    }
+
+    .concept-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(212, 168, 74, 0.2);
+      transition: var(--transition);
+    }
+
+    .home-link:hover {
+      background: rgba(212, 168, 74, 0.4);
+      color: #FFF;
+    }
+
+    .concept-links-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+      scrollbar-width: thin;
+    }
+
+    .concept-tab {
+      color: #CDBBB0;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .concept-tab:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .concept-tab.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      font-weight: 800;
+    }
+
+    .concept-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #F8EFEA;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* MAIN SITE HEADER */
+    .site-header {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon-sun {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--gold));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      font-size: 26px;
+      box-shadow: 0 6px 16px rgba(232, 132, 74, 0.25);
+    }
+
+    .brand-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1;
+    }
+
+    .brand-text .tourism-badge {
+      font-family: 'Caveat', cursive;
+      font-size: 16px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lang-selector {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* CONTAINER */
+    .page-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+      flex: 1;
+    }
+
+    /* HERO SHOWCASE */
+    .hero-darshan-banner {
+      text-align: center;
+      margin-bottom: 36px;
+      position: relative;
+    }
+
+    .hero-darshan-banner .handwritten-quote {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .hero-darshan-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .hero-darshan-banner p.subhead {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* TOURISM SUCCESS BADGES */
+    .metrics-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .metric-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-badge.highlight {
+      border-color: var(--primary);
+      background: rgba(232, 132, 74, 0.1);
+      color: var(--primary);
+    }
+
+    /* EXPERIENCE CATEGORIES GRID */
+    .experience-card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 36px;
+    }
+
+    .exp-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .exp-title-row h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-surprise-me {
+      background: linear-gradient(135deg, var(--gold), #f3c258);
+      color: #24160E;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(212, 168, 74, 0.35);
+      transition: var(--transition);
+    }
+
+    .btn-surprise-me:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(212, 168, 74, 0.5);
+    }
+
+    .categories-flex {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .cat-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(232, 132, 74, 0.15));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .cat-btn:hover, .cat-btn.active {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-sm);
+      color: var(--primary);
+    }
+
+    .cat-btn:hover::before, .cat-btn.active::before {
+      opacity: 1;
+    }
+
+    .cat-emoji {
+      font-size: 28px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .cat-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .cat-routes {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* CULTURAL CALENDAR HORIZONTAL TICKER */
+    .cultural-calendar-section {
+      margin-bottom: 36px;
+    }
+
+    .section-title-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title-line h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calendar-scroll-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .festival-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .festival-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--gold);
+    }
+
+    .fest-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .fest-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .fest-badge-special {
+      background: rgba(232, 132, 74, 0.15);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .fest-date {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .fest-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .btn-fest-book {
+      background: transparent;
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .btn-fest-book:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    /* DESTINATION CARDS & TOURIST SVG MAP */
+    .destinations-layout-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    /* DESTINATIONS GRID */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .dest-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-6px) rotate(0.3deg);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .dest-hero-visual {
+      height: 140px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+    }
+
+    .dest-badge-rating {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.65);
+      color: var(--gold);
+      backdrop-filter: blur(4px);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .dest-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(20, 10, 5, 0.8));
+    }
+
+    .dest-title-on-image {
+      position: relative;
+      z-index: 2;
+      color: white;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .dest-body-info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .dest-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .dest-footer-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+    }
+
+    .dest-fares {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .btn-view-routes {
+      background: rgba(232, 132, 74, 0.12);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-view-routes:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* TOURIST MAP CARD */
+    .tourist-map-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .tourist-map-header {
+      margin-bottom: 12px;
+    }
+
+    .tourist-map-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tourist-map-header p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .svg-tourist-wrapper {
+      background: rgba(232, 221, 192, 0.25);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .tourist-pin {
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .tourist-pin:hover {
+      transform: scale(1.3);
+    }
+
+    .tourist-pin circle.pulse {
+      fill: var(--primary);
+      opacity: 0.35;
+      animation: touristPulse 2s infinite;
+    }
+
+    @keyframes touristPulse {
+      0% { r: 6; opacity: 0.6; }
+      100% { r: 18; opacity: 0; }
+    }
+
+    .tourist-pin text {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      fill: var(--text);
+    }
+
+    /* SPLIT SECTION: MEALS ON WHEELS + CULTURAL TIPS */
+    .experience-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .meals-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .meals-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .meals-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rail-rolls-badge {
+      background: linear-gradient(135deg, #C84A4A, #E87A5A);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .meals-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .menu-item-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .menu-item-box:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .menu-item-emoji {
+      font-size: 28px;
+    }
+
+    .menu-item-info strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .menu-item-info span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .menu-item-info .price {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+
+    /* CULTURAL TIPS & PRONUNCIATION */
+    .cultural-tips-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tips-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .tips-header p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .phrases-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .phrase-row {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .phrase-text strong {
+      display: block;
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .phrase-text span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn-audio-speak {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .btn-audio-speak:hover {
+      background: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+      transform: scale(1.1);
+    }
+
+    /* FOOTER */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      margin-top: auto;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .site-footer p.tagline {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(36, 22, 14, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 540px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+
+    .modal-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--text);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text);
+    }
+
+    .modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: var(--bg);
+    }
+
+    /* TOAST */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: white;
+      padding: 14px 22px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 3000;
+    }
+
+    .toast-notice.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .categories-flex {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .calendar-scroll-track {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .destinations-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .experience-split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .categories-flex {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .calendar-scroll-track {
+        grid-template-columns: 1fr;
+      }
+      .destinations-grid {
+        grid-template-columns: 1fr;
+      }
+      .meals-menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .concept-nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- TOP CONCEPT SWITCHER NAVIGATION -->
+  <nav class="concept-nav-bar" aria-label="Concept Navigation">
+    <div class="concept-nav-left">
+      <a href="../index.html" class="home-link" title="Return to Master Showcase Gallery">
+        <span>🏛️</span>
+        <span>Showcase Gallery</span>
+      </a>
+      <div class="concept-links-scroll">
+        <a href="concept1-journey-planner.html" class="concept-tab">
+          <span>1. Journey Planner</span>
+        </a>
+        <a href="concept2-trusted-companion.html" class="concept-tab">
+          <span>2. Trusted Companion</span>
+        </a>
+        <a href="concept3-kerala-darshan.html" class="concept-tab active">
+          <span>3. Kerala Darshan</span>
+        </a>
+        <a href="concept4-power-user.html" class="concept-tab">
+          <span>4. Power User</span>
+        </a>
+        <a href="concept5-hybrid-experience.html" class="concept-tab">
+          <span>5. Hybrid Experience</span>
+        </a>
+        <a href="concept6-minimalist-transformer.html" class="concept-tab">
+          <span>6. Minimalist Transformer</span>
+        </a>
+      </div>
+    </div>
+    <div class="concept-nav-right">
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN SITE HEADER -->
+  <header class="site-header">
+    <div class="brand-group">
+      <div class="brand-icon-sun">☀️</div>
+      <div class="brand-text">
+        <h1>KSRTC SWIFT <span class="tourism-badge">Kerala Darshan</span></h1>
+        <p>Explore God's Own Country, One Bus at a Time</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="lang-selector" id="langSelector" title="Select travel language">
+        <span>🌍</span>
+        <span>English / മലയാളം</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="page-container">
+
+    <!-- HERO DARSHAN BANNER -->
+    <div class="hero-darshan-banner">
+      <div class="handwritten-quote">"Every journey tells a story..."</div>
+      <h2>Discover Kerala's Untouched Charms</h2>
+      <p class="subhead">
+        Traverse misty tea hills, palm-fringed lagoons, sacred heritage temples, and vibrant temple festivals with Kerala's state luxury bus network.
+      </p>
+
+      <div class="metrics-row">
+        <div class="metric-badge highlight">
+          <span>🌍</span>
+          <span>60% increase in tourist bookings</span>
+        </div>
+        <div class="metric-badge">
+          <span>⭐</span>
+          <span>4.6★ cultural experience rating</span>
+        </div>
+        <div class="metric-badge">
+          <span>🏝️</span>
+          <span>15+ destinations explored</span>
+        </div>
+        <div class="metric-badge">
+          <span>🎭</span>
+          <span>50+ festivals covered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE CATEGORIES -->
+    <section class="experience-card-box" aria-label="Travel Style Categories">
+      <div class="exp-title-row">
+        <h3><span>🌴</span> What do you want to experience today?</h3>
+        <button class="btn-surprise-me" id="btnSurpriseMe" title="Pick a random scenic journey with available seats">
+          <span>✨</span> Surprise Me!
+        </button>
+      </div>
+
+      <div class="categories-flex" id="categoriesGrid">
+        <button class="cat-btn active" data-category="hills" onclick="selectCategory(this, 'hills')">
+          <span class="cat-emoji">⛰️</span>
+          <span class="cat-name">Misty Hills</span>
+          <span class="cat-routes">Munnar, Wayanad</span>
+        </button>
+
+        <button class="cat-btn" data-category="beaches" onclick="selectCategory(this, 'beaches')">
+          <span class="cat-emoji">🏖️</span>
+          <span class="cat-name">Cliff Beaches</span>
+          <span class="cat-routes">Varkala, Kovalam</span>
+        </button>
+
+        <button class="cat-btn" data-category="backwaters" onclick="selectCategory(this, 'backwaters')">
+          <span class="cat-emoji">🌊</span>
+          <span class="cat-name">Backwaters</span>
+          <span class="cat-routes">Alleppey, Kumarakom</span>
+        </button>
+
+        <button class="cat-btn" data-category="temples" onclick="selectCategory(this, 'temples')">
+          <span class="cat-emoji">🛕</span>
+          <span class="cat-name">Temples & Art</span>
+          <span class="cat-routes">Guruvayur, Sabarimala</span>
+        </button>
+
+        <button class="cat-btn" data-category="cities" onclick="selectCategory(this, 'cities')">
+          <span class="cat-emoji">🏙️</span>
+          <span class="cat-name">Historic Cities</span>
+          <span class="cat-routes">Fort Kochi, Calicut</span>
+        </button>
+
+        <button class="cat-btn" data-category="festivals" onclick="selectCategory(this, 'festivals')">
+          <span class="cat-emoji">🎪</span>
+          <span class="cat-name">Festivals</span>
+          <span class="cat-routes">Pooram, Theyyam</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CULTURAL CALENDAR HORIZONTAL TICKER -->
+    <section class="cultural-calendar-section" aria-label="Upcoming Kerala Festivals and Special Fleet">
+      <div class="section-title-line">
+        <h3><span>🎉</span> Cultural Festival Calendar</h3>
+        <span style="font-size: 13px; color: var(--text-muted);">Special festival shuttle routes with reserved tourist berths</span>
+      </div>
+
+      <div class="calendar-scroll-track">
+        <!-- Fest 1 -->
+        <article class="festival-card" onclick="openFestivalModal('Onam Grand Carnival', 'State-wide harvest celebration featuring boat races, Kathakali, and floral carpets. Over 250 extra KSRTC-SWIFT special night-sleeper services operate across South India.')">
+          <div class="fest-top">
+            <span class="fest-name">Onam Harvest Carnival</span>
+            <span class="fest-badge-special">Special Buses</span>
+          </div>
+          <div class="fest-date">📅 Aug 28 – Sep 06 • Statewide</div>
+          <p class="fest-desc">Extra holiday buses connecting Chennai, Bangalore, and Kochi with floral welcome kit onboard.</p>
+          <button class="btn-fest-book">Book Festival Coach</button>
+        </article>
+
+        <!-- Fest 2 -->
+        <article class="festival-card" onclick="openFestivalModal('Thrissur Pooram', 'Known as the festival of festivals, featuring majestic caparisoned elephant pageant, traditional Kudamattam parasol exchange, and world-famous Ilanjithara Melam percussion.')">
+          <div class="fest-top">
+            <span class="fest-name">Thrissur Pooram</span>
+            <span class="fest-badge-special">24/7 Shuttles</span>
+          </div>
+          <div class="fest-date">📅 May 08 • Vadakkumnathan Ground</div>
+          <p class="fest-desc">Continuous hop-on shuttles between Kochi Airport, Railway Station, and Swaraj Round.</p>
+          <button class="btn-fest-book">Book Festival Coach</button>
+        </article>
+
+        <!-- Fest 3 -->
+        <article class="festival-card" onclick="openFestivalModal('Theyyam Mystical Rituals', 'Sacred ancient dance-worship performed in sacred groves (Kavus) across Kannur and Kasaragod districts. Night-time fire dances and divine blessings.')">
+          <div class="fest-top">
+            <span class="fest-name">Theyyam Fire Dance Season</span>
+            <span class="fest-badge-special">North Circuit</span>
+          </div>
+          <div class="fest-date">📅 Nov to Mar • Kannur & Kasaragod</div>
+          <p class="fest-desc">Heritage coastal circuit buses linking shrines with expert English-speaking cultural guides.</p>
+          <button class="btn-fest-book">Book Festival Coach</button>
+        </article>
+
+        <!-- Fest 4 -->
+        <article class="festival-card" onclick="openFestivalModal('Nehru Trophy Snake Boat Race', 'The water Olympics of Kerala on Punnamada Lake, Alappuzha. 100-foot Chundan Vallams rowed by 100 synchronized oarsmen singing Vanchipattu boat songs.')">
+          <div class="fest-top">
+            <span class="fest-name">Nehru Trophy Boat Race</span>
+            <span class="fest-badge-special">Lakeside Pass</span>
+          </div>
+          <div class="fest-date">📅 2nd Saturday of August • Alappuzha</div>
+          <p class="fest-desc">Combined ticket including KSRTC AC bus travel and VIP pavilion viewing passes.</p>
+          <button class="btn-fest-book">Book Festival Coach</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- DESTINATIONS & TOURIST SVG MAP SPLIT -->
+    <div class="destinations-layout-grid">
+      <!-- DESTINATIONS CARDS -->
+      <section class="destinations-grid" id="destinationsContainer" aria-label="Featured Travel Destinations">
+        <!-- Munnar -->
+        <article class="dest-card" data-cat="hills">
+          <div class="dest-hero-visual" style="background: linear-gradient(135deg, #1d4d38, #3b8a61);">
+            <div class="dest-hero-overlay"></div>
+            <span class="dest-badge-rating">★ 4.9 (1.8k reviews)</span>
+            <div class="dest-title-on-image">🏞️ Munnar Hill Station</div>
+          </div>
+          <div class="dest-body-info">
+            <p class="dest-tagline">Misty tea gardens, Anamudi peak hiking, and cool mountain clouds at 1,600m elevation.</p>
+            <div class="dest-footer-action">
+              <span class="dest-fares">From ₹480 • 12 Buses/Day</span>
+              <button class="btn-view-routes" onclick="openRouteModal('Munnar', 'Kochi ➔ Munnar (Dep: 06:00, 08:30, 11:00 AM | ₹480)<br>Trivandrum ➔ Munnar Super Deluxe (Dep: 07:15 PM | ₹650)<br>Calicut ➔ Munnar Scenic Highway (Dep: 09:30 AM | ₹580)')">View Routes</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Alleppey -->
+        <article class="dest-card" data-cat="backwaters">
+          <div class="dest-hero-visual" style="background: linear-gradient(135deg, #1b5268, #2a8a8a);">
+            <div class="dest-hero-overlay"></div>
+            <span class="dest-badge-rating">★ 4.8 (2.4k reviews)</span>
+            <div class="dest-title-on-image">🌊 Alleppey Backwaters</div>
+          </div>
+          <div class="dest-body-info">
+            <p class="dest-tagline">Houseboat cruises through Vembanad lake, coconut palm waterways, and fresh Karimeen fish.</p>
+            <div class="dest-footer-action">
+              <span class="dest-fares">From ₹320 • 28 Buses/Day</span>
+              <button class="btn-view-routes" onclick="openRouteModal('Alleppey', 'Kochi ➔ Alleppey Express (Dep: Every 30 mins | ₹140)<br>Trivandrum ➔ Alleppey Swift Sleeper (Dep: 04:30 AM, 06:00 PM | ₹360)<br>Bangalore ➔ Alleppey Volvo B11R (Dep: 08:00 PM | ₹1,250)')">View Routes</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Varkala -->
+        <article class="dest-card" data-cat="beaches">
+          <div class="dest-hero-visual" style="background: linear-gradient(135deg, #a85428, #d47b46);">
+            <div class="dest-hero-overlay"></div>
+            <span class="dest-badge-rating">★ 4.7 (1.2k reviews)</span>
+            <div class="dest-title-on-image">🏖️ Varkala Red Cliff</div>
+          </div>
+          <div class="dest-body-info">
+            <p class="dest-tagline">Dramatic red laterite cliffs towering over the Arabian Sea, sunset cafes, and Papanasam beach.</p>
+            <div class="dest-footer-action">
+              <span class="dest-fares">From ₹210 • 16 Buses/Day</span>
+              <button class="btn-view-routes" onclick="openRouteModal('Varkala', 'Trivandrum ➔ Varkala Beach (Dep: Hourly | ₹110)<br>Kochi ➔ Varkala Swift Deluxe (Dep: 07:00 AM, 01:30 PM | ₹340)')">View Routes</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Wayanad -->
+        <article class="dest-card" data-cat="hills">
+          <div class="dest-hero-visual" style="background: linear-gradient(135deg, #2b6140, #4f8f63);">
+            <div class="dest-hero-overlay"></div>
+            <span class="dest-badge-rating">★ 4.8 (1.5k reviews)</span>
+            <div class="dest-title-on-image">🌿 Wayanad Wildlife</div>
+          </div>
+          <div class="dest-body-info">
+            <p class="dest-tagline">Edakkal caves, Chembra heart-shaped lake, spice plantations, and elephant corridor safari.</p>
+            <div class="dest-footer-action">
+              <span class="dest-fares">From ₹380 • 18 Buses/Day</span>
+              <button class="btn-view-routes" onclick="openRouteModal('Wayanad', 'Calicut ➔ Wayanad Ghat Pass (Dep: Hourly | ₹160)<br>Bangalore ➔ Wayanad AC Sleeper (Dep: 10:15 PM | ₹920)<br>Kochi ➔ Wayanad Night Express (Dep: 09:00 PM | ₹560)')">View Routes</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- TOURIST SVG MAP -->
+      <section class="tourist-map-card" aria-label="Interactive Kerala Scenic Spot Map">
+        <div class="tourist-map-header">
+          <h3><span>🗺️</span> Kerala Tourism Circuit</h3>
+          <p>Interactive hot-spots connected by KSRTC-SWIFT scenic routes</p>
+        </div>
+
+        <div class="svg-tourist-wrapper">
+          <svg viewBox="0 0 380 480" style="width: 100%; height: 380px;" xmlns="http://www.w3.org/2000/svg">
+            <!-- Kerala Coast Silhouette -->
+            <path d="
+              M 95 35
+              C 115 50, 130 75, 140 100
+              C 150 120, 165 145, 175 180
+              C 185 210, 195 240, 205 270
+              C 215 300, 230 340, 240 380
+              C 250 420, 260 445, 255 460
+              C 245 450, 230 420, 215 380
+              C 200 340, 180 300, 160 250
+              C 140 200, 120 150, 105 100
+              C 90 60, 80 40, 95 35 Z
+            " fill="rgba(74, 140, 74, 0.22)" stroke="#4A8C4A" stroke-width="2" />
+
+            <!-- Scenic Route Links -->
+            <path d="M 135 70 L 175 100 L 155 160 L 195 240 L 235 235 L 210 320 L 230 380 L 248 430" fill="none" stroke="#D4A84A" stroke-width="2.5" stroke-dasharray="6 4" />
+
+            <!-- Tourist Pins -->
+            <!-- Wayanad -->
+            <g class="tourist-pin" onclick="filterDestination('Wayanad')" transform="translate(175, 100)">
+              <circle class="pulse" r="6" />
+              <circle r="7" fill="#4A8C4A" stroke="white" stroke-width="1.5" />
+              <text x="12" y="4">Wayanad (Hills)</text>
+            </g>
+
+            <!-- Munnar -->
+            <g class="tourist-pin" onclick="filterDestination('Munnar')" transform="translate(235, 235)">
+              <circle class="pulse" r="6" />
+              <circle r="8" fill="#E8844A" stroke="white" stroke-width="1.5" />
+              <text x="12" y="4">Munnar (Tea Estates)</text>
+            </g>
+
+            <!-- Alleppey -->
+            <g class="tourist-pin" onclick="filterDestination('Alleppey')" transform="translate(195, 305)">
+              <circle class="pulse" r="6" />
+              <circle r="8" fill="#3AA8B8" stroke="white" stroke-width="1.5" />
+              <text x="12" y="4">Alleppey (Backwaters)</text>
+            </g>
+
+            <!-- Varkala -->
+            <g class="tourist-pin" onclick="filterDestination('Varkala')" transform="translate(225, 380)">
+              <circle class="pulse" r="6" />
+              <circle r="7" fill="#E8844A" stroke="white" stroke-width="1.5" />
+              <text x="12" y="4">Varkala (Cliff Beach)</text>
+            </g>
+
+            <!-- Trivandrum / Kovalam -->
+            <g class="tourist-pin" onclick="filterDestination('Trivandrum')" transform="translate(248, 430)">
+              <circle class="pulse" r="6" />
+              <circle r="8" fill="#D4A84A" stroke="white" stroke-width="1.5" />
+              <text x="12" y="4">Trivandrum (Heritage)</text>
+            </g>
+          </svg>
+        </div>
+      </section>
+    </div>
+
+    <!-- MEALS ON WHEELS & CULTURAL GUIDE SPLIT -->
+    <div class="experience-split-grid">
+      <!-- MEALS ON WHEELS (RAIL ROLLS) -->
+      <section class="meals-card" aria-label="Meals on Wheels Catering Integration">
+        <div class="meals-header">
+          <h3><span>🍽️</span> Meals on Wheels</h3>
+          <span class="rail-rolls-badge">Rail Rolls Partner</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Hot, hygienic traditional Kerala meals delivered directly to your Swift seat at designated highway restaurant halts.
+        </p>
+
+        <div class="meals-menu-grid">
+          <div class="menu-item-box" onclick="orderFood('Traditional Kerala Sadya Pack', 160)">
+            <span class="menu-item-emoji">🍱</span>
+            <div class="menu-item-info">
+              <strong>Kerala Sadya Box</strong>
+              <span>Rice, Sambar, Aviyal, Payasam</span>
+              <div class="price">₹160 • Pure Veg</div>
+            </div>
+          </div>
+
+          <div class="menu-item-box" onclick="orderFood('Malabar Thalassery Biryani', 210)">
+            <span class="menu-item-emoji">🍗</span>
+            <div class="menu-item-info">
+              <strong>Malabar Dum Biryani</strong>
+              <span>Khyma rice with pickle & raita</span>
+              <div class="price">₹210 • Non-Veg</div>
+            </div>
+          </div>
+
+          <div class="menu-item-box" onclick="orderFood('Kappa & Karimeen Fry', 280)">
+            <span class="menu-item-emoji">🐟</span>
+            <div class="menu-item-info">
+              <strong>Kappa & Pearl Spot</strong>
+              <span>Steamed tapioca & spicy fry</span>
+              <div class="price">₹280 • Special</div>
+            </div>
+          </div>
+
+          <div class="menu-item-box" onclick="orderFood('Steamed Ela Ada & Kerala Chai', 70)">
+            <span class="menu-item-emoji">☕</span>
+            <div class="menu-item-info">
+              <strong>Ela Ada & Spiced Chai</strong>
+              <span>Jaggery rice pouch in banana leaf</span>
+              <div class="price">₹70 • Snack</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CULTURAL TIPS & PRONUNCIATION -->
+      <section class="cultural-tips-card" aria-label="Local Language and Cultural Tips">
+        <div class="tips-header">
+          <h3><span>🗣️</span> Speak Like a Local</h3>
+          <p>Essential Malayalam phrases with instant audio pronunciation</p>
+        </div>
+
+        <div class="phrases-list">
+          <div class="phrase-row">
+            <div class="phrase-text">
+              <strong>"Namaskaram" (നമസ്കാരം)</strong>
+              <span>Hello / Greetings of respect</span>
+            </div>
+            <button class="btn-audio-speak" onclick="speakPhrase('Namaskaram')" title="Listen to pronunciation">🔊</button>
+          </div>
+
+          <div class="phrase-row">
+            <div class="phrase-text">
+              <strong>"Evideyanu bus?" (എവിടെയാണ് ബസ്?)</strong>
+              <span>Where is the bus parked / arriving?</span>
+            </div>
+            <button class="btn-audio-speak" onclick="speakPhrase('Evideyanu bus?')" title="Listen to pronunciation">🔊</button>
+          </div>
+
+          <div class="phrase-row">
+            <div class="phrase-text">
+              <strong>"Ethra roopa aanu?" (എത്ര രൂപയാണ്?)</strong>
+              <span>How much is the fare?</span>
+            </div>
+            <button class="btn-audio-speak" onclick="speakPhrase('Ethra roopa aanu?')" title="Listen to pronunciation">🔊</button>
+          </div>
+
+          <div class="phrase-row">
+            <div class="phrase-text">
+              <strong>"Nanni!" (നന്ദി!)</strong>
+              <span>Thank you very much!</span>
+            </div>
+            <button class="btn-audio-speak" onclick="speakPhrase('Nanni')" title="Listen to pronunciation">🔊</button>
+          </div>
+
+          <div class="phrase-row">
+            <div class="phrase-text">
+              <strong>"Vazhi paranjutharumo?" (വഴി പറഞ്ഞുതരുമോ?)</strong>
+              <span>Could you please guide my way?</span>
+            </div>
+            <button class="btn-audio-speak" onclick="speakPhrase('Vazhi paranjutharumo?')" title="Listen to pronunciation">🔊</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="tagline">"Discover Kerala, one bus at a time."</p>
+    <p>© 2026 KSRTC-SWIFT • Concept 3 Prototype: The Kerala Darshan</p>
+  </footer>
+
+  <!-- MODAL FOR ROUTES / DETAILS -->
+  <div class="modal-backdrop" id="darshanModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="darshanModalTitle">Destination Information</h3>
+        <button class="modal-close-btn" onclick="closeDarshanModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="darshanModalBody" style="font-size: 14px; line-height: 1.6;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-surprise-me" onclick="closeDarshanModal()">Book Journey</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
+    <span id="toastIcon">🌴</span>
+    <span id="toastText">Welcome to Kerala Darshan!</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // State
+    const body = document.body;
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    const darshanModal = document.getElementById('darshanModal');
+    const toastNotice = document.getElementById('toastNotice');
+
+    // Theme logic
+    function initTheme() {
+      const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
+      setTheme(savedTheme);
+    }
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light';
+        localStorage.setItem('ksrtc_theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark';
+        localStorage.setItem('ksrtc_theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || 'light';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Category Filter Selection
+    function selectCategory(btn, category) {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.dest-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-cat');
+        if (category === 'all' || cat === category || category === 'festivals' || category === 'cities') {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      showToast(`Showing destinations for: ${btn.querySelector('.cat-name').textContent}`, '🌴');
+    }
+
+    // Surprise Me Randomizer
+    const SURPRISES = [
+      {
+        dest: 'Munnar Tea Trails',
+        from: 'Kochi',
+        bus: 'Swift Deluxe Scenic • Dep: 06:00 AM',
+        seats: '62% empty seats available today',
+        fare: '₹480'
+      },
+      {
+        dest: 'Wayanad Chembra Peak',
+        from: 'Calicut',
+        bus: 'Swift Minibus Explorer • Dep: 08:30 AM',
+        seats: '54% empty seats available today',
+        fare: '₹380'
+      },
+      {
+        dest: 'Alleppey Backwater Pier',
+        from: 'Trivandrum',
+        bus: 'Swift AC Air-Bus • Dep: 09:15 AM',
+        seats: '50% empty seats available today',
+        fare: '₹320'
+      },
+      {
+        dest: 'Varkala Cliff Sunset',
+        from: 'Kochi',
+        bus: 'Swift Super Fast • Dep: 01:00 PM',
+        seats: '58% empty seats available today',
+        fare: '₹340'
+      }
+    ];
+
+    document.getElementById('btnSurpriseMe').addEventListener('click', () => {
+      const randomItem = SURPRISES[Math.floor(Math.random() * SURPRISES.length)];
+      openRouteModal(
+        `✨ Surprise Journey: ${randomItem.dest}`,
+        `We've picked an uncrowded scenic route for you:<br><br>
+        • <strong>Origin:</strong> ${randomItem.from}<br>
+        • <strong>Service:</strong> ${randomItem.bus}<br>
+        • <strong>Crowd Status:</strong> <span style="color: var(--secondary); font-weight: 700;">${randomItem.seats}</span><br>
+        • <strong>Special Tourist Fare:</strong> <strong style="color: var(--primary);">${randomItem.fare}</strong><br><br>
+        Enjoy complimentary Kerala tourism maps and window seat preference!`
+      );
+    });
+
+    // Destination Route Modal
+    function openRouteModal(destName, routesHtml) {
+      document.getElementById('darshanModalTitle').textContent = `🌴 Routes to ${destName}`;
+      document.getElementById('darshanModalBody').innerHTML = routesHtml;
+      darshanModal.classList.add('open');
+    }
+
+    function openFestivalModal(festName, desc) {
+      document.getElementById('darshanModalTitle').textContent = `🎪 ${festName}`;
+      document.getElementById('darshanModalBody').innerHTML = `
+        <p>${desc}</p>
+        <div style="margin-top: 14px; background: rgba(232, 132, 74, 0.1); border-left: 4px solid var(--primary); padding: 10px 14px; border-radius: 6px;">
+          <strong>KSRTC-SWIFT Festival Fleet:</strong> Dedicated multi-axle coaches running continuously during festival peak days with onboard cultural guide audio.
+        </div>
+      `;
+      darshanModal.classList.add('open');
+    }
+
+    function filterDestination(name) {
+      openRouteModal(name, `Explore all daily direct KSRTC-SWIFT services connecting ${name} to major Kerala airport and railway hubs.`);
+    }
+
+    function closeDarshanModal() {
+      darshanModal.classList.remove('open');
+    }
+
+    // Food Order simulation
+    function orderFood(item, price) {
+      openRouteModal(
+        `🍽️ Order ${item}`,
+        `You are adding <strong>${item}</strong> (₹${price}) to your trip reservation.<br><br>
+        This hot meal pack will be loaded on-board at the highway halt station (Calicut / Alappuzha) directly to your seat by the Swift hospitality runner.<br><br>
+        <em>Payment accepted via UPI upon delivery or during ticket checkout.</em>`
+      );
+    }
+
+    // Audio speech guide
+    function speakPhrase(phrase) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(phrase);
+        utterance.lang = 'ml-IN'; // Malayalam if supported, fallback to generic
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+        showToast(`Pronouncing: "${phrase}"`, '🔊');
+      } else {
+        showToast(`Audio tone: "${phrase}"`, '🔊');
+      }
+    }
+
+    // Language selector
+    document.getElementById('langSelector').addEventListener('click', () => {
+      showToast('Switched language preference: Malayalam & English bilingual guide enabled.', '🌍');
+    });
+
+    // Toast
+    function showToast(msg, icon = '🌴') {
+      const toastText = document.getElementById('toastText');
+      const toastIcon = document.getElementById('toastIcon');
+      toastText.textContent = msg;
+      toastIcon.textContent = icon;
+      toastNotice.classList.add('show');
+      setTimeout(() => toastNotice.classList.remove('show'), 3500);
+    }
+
+    // Keyboard escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDarshanModal();
+    });
+
+    // Init
+    initTheme();
+  </script>
+</body>
+</html>

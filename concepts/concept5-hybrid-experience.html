@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 5: The Hybrid Experience — KSRTC-SWIFT</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ADAPTIVE THEME VARIABLES */
+    :root {
+      /* Default State: Searching (Cool Blues) */
+      --state-primary: #1A5A7A;
+      --state-primary-light: #257fa8;
+      --state-accent: #3AA8B8;
+      --bg: #F4F7FB;
+      --bg-card: #FFFFFF;
+      --text: #16222E;
+      --text-muted: #5C6E80;
+      --border: #D8E2EC;
+      --shadow-sm: 0 4px 12px rgba(26, 90, 122, 0.08);
+      --shadow-md: 0 10px 30px rgba(26, 90, 122, 0.12);
+      --shadow-lg: 0 20px 50px rgba(26, 90, 122, 0.18);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* State: Booking (Warm Golds) */
+    body[data-user-state="booking"] {
+      --state-primary: #C8943E;
+      --state-primary-light: #dfab52;
+      --state-accent: #E87A5A;
+      --bg: #FDFBF6;
+      --border: #E8DCBF;
+    }
+
+    /* State: Traveling (Motion Greens) */
+    body[data-user-state="traveling"] {
+      --state-primary: #2A8A5A;
+      --state-primary-light: #3ab076;
+      --state-accent: #00C8A8;
+      --bg: #F3F9F6;
+      --border: #C8E2D5;
+    }
+
+    /* State: Completed (Slate Greys) */
+    body[data-user-state="completed"] {
+      --state-primary: #687282;
+      --state-primary-light: #838e9f;
+      --state-accent: #4A5A6A;
+      --bg: #F5F6F8;
+      --border: #D6D9E0;
+    }
+
+    /* Dark Mode Layer */
+    [data-theme="dark"] {
+      --bg: #0E141B;
+      --bg-card: #151F2A;
+      --text: #F0F4F8;
+      --text-muted: #8E9EAF;
+      --border: #243242;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.65);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+      overflow-x: hidden;
+    }
+
+    /* CONCEPT TOP NAV BAR */
+    .concept-nav-bar {
+      background: #091219;
+      color: #E2ECE9;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      font-size: 13px;
+    }
+
+    .concept-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--state-primary-light);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+
+    .home-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFF;
+    }
+
+    .concept-links-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+      scrollbar-width: thin;
+    }
+
+    .concept-tab {
+      color: #8E9BAE;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .concept-tab:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .concept-tab.active {
+      background: var(--state-primary);
+      color: #FFFFFF;
+      font-weight: 800;
+    }
+
+    .concept-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #E2ECE9;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    /* USER JOURNEY STATE SWITCHER BAR */
+    .state-switcher-bar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .state-switcher-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    .state-pill-buttons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-state-pill {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-state-pill.active {
+      background: var(--state-primary);
+      color: white;
+      border-color: var(--state-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* MAIN SITE HEADER */
+    .site-header {
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon-hybrid {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--state-primary), #0d2938);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 22px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: background 0.3s ease;
+    }
+
+    .brand-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-text .adaptive-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      background: var(--state-primary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: background 0.3s ease;
+    }
+
+    .brand-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-user-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .user-profile-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 6px 14px 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .user-avatar-initials {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--state-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      transition: background 0.3s ease;
+    }
+
+    /* CONTAINER */
+    .page-container {
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+      flex: 1;
+    }
+
+    /* DYNAMIC CONTEXT-AWARE PROMPT BANNER */
+    .context-prompt-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--state-primary);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+      gap: 14px;
+      transition: var(--transition);
+    }
+
+    .prompt-text-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .prompt-icon {
+      font-size: 24px;
+    }
+
+    .prompt-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .prompt-content p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .prompt-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-voice-assist {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .btn-voice-assist:hover {
+      background: var(--state-primary);
+      color: white;
+      border-color: var(--state-primary);
+    }
+
+    .btn-prompt-action {
+      background: var(--state-primary);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-prompt-action:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* ALL-IN-ONE PERSISTENT NAVIGATION BAR */
+    .all-in-one-navbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+
+    .nav-buttons-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-unified-nav {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-unified-nav:hover, .btn-unified-nav.active {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--state-primary);
+    }
+
+    .key-shortcut-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* METRICS BADGES */
+    .metrics-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .metric-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-badge.highlight {
+      border-color: var(--state-primary);
+      color: var(--state-primary);
+      background: rgba(26, 90, 122, 0.08);
+    }
+
+    /* UNIFIED SPLIT VIEW: MAP + SEARCH & RESULTS */
+    .hybrid-split-view {
+      display: grid;
+      grid-template-columns: 1.15fr 1.35fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    /* LEFT PANE: INTERACTIVE LIVE TRACKING MAP */
+    .map-pane-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .map-pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .map-pane-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-gps-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: rgba(42, 138, 90, 0.15);
+      color: var(--state-primary);
+      border: 1px solid var(--state-primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .svg-hybrid-wrapper {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .recent-chips-box {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .recent-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .recent-chip:hover {
+      border-color: var(--state-primary);
+      color: var(--state-primary);
+    }
+
+    /* RIGHT PANE: SEARCH WIDGET + SMART RESULTS */
+    .search-results-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* UNIFIED SEARCH CARD */
+    .unified-search-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-row-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .search-field-unit {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .search-field-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .search-input-box {
+      height: 44px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 12px;
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .search-input-box:focus {
+      border-color: var(--state-primary);
+      box-shadow: 0 0 0 3px rgba(26, 90, 122, 0.2);
+    }
+
+    .filter-options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filters-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--state-primary);
+      color: white;
+      border-color: var(--state-primary);
+    }
+
+    .flexible-toggle-label {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* SMART RESULTS LIST */
+    .smart-results-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .result-bus-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .result-bus-card:hover, .result-bus-card.highlighted {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--state-primary);
+    }
+
+    .bus-info-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .bus-departure-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bus-service-tags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .upgrade-pill {
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(200, 148, 62, 0.15);
+      color: #C8943E;
+      border: 1px solid #C8943E;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Crowd Ratio Bar */
+    .crowd-ratio-wrap {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .crowd-progress-track {
+      width: 90px;
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .crowd-progress-bar {
+      height: 100%;
+      background: var(--state-primary);
+      border-radius: 3px;
+    }
+
+    .bus-card-action-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .bus-fare-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--state-primary);
+    }
+
+    .btn-select-seat {
+      background: var(--state-primary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-select-seat:hover {
+      opacity: 0.9;
+      transform: scale(1.03);
+    }
+
+    /* FOOTER */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      margin-top: auto;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .site-footer p.tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    /* 3D SEAT MAP MODAL */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(14, 20, 27, 0.75);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 620px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+
+    .modal-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      color: var(--text);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text);
+    }
+
+    .modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+    }
+
+    /* 3D SEAT PERSPECTIVE CONTAINER */
+    .seat-perspective-box {
+      perspective: 800px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bus-interior-chassis {
+      transform: rotateX(15deg);
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 22px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .deck-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .deck-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .berth-seat {
+      height: 36px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--text);
+    }
+
+    .berth-seat:hover {
+      border-color: var(--state-primary);
+    }
+
+    .berth-seat.occupied {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      border-color: transparent;
+      opacity: 0.5;
+    }
+
+    .berth-seat.selected {
+      background: var(--state-primary);
+      color: white;
+      border-color: var(--state-primary);
+      box-shadow: 0 0 10px var(--state-primary);
+    }
+
+    /* TOAST */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--state-primary);
+      color: white;
+      padding: 14px 22px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 3000;
+    }
+
+    .toast-notice.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hybrid-split-view {
+        grid-template-columns: 1fr;
+      }
+      .search-row-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .search-row-grid {
+        grid-template-columns: 1fr;
+      }
+      .state-switcher-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .concept-nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body data-user-state="searching" data-theme="light">
+
+  <!-- TOP CONCEPT SWITCHER NAVIGATION -->
+  <nav class="concept-nav-bar" aria-label="Concept Navigation">
+    <div class="concept-nav-left">
+      <a href="../index.html" class="home-link" title="Return to Master Showcase Gallery">
+        <span>🏛️</span>
+        <span>Showcase Gallery</span>
+      </a>
+      <div class="concept-links-scroll">
+        <a href="concept1-journey-planner.html" class="concept-tab">
+          <span>1. Journey Planner</span>
+        </a>
+        <a href="concept2-trusted-companion.html" class="concept-tab">
+          <span>2. Trusted Companion</span>
+        </a>
+        <a href="concept3-kerala-darshan.html" class="concept-tab">
+          <span>3. Kerala Darshan</span>
+        </a>
+        <a href="concept4-power-user.html" class="concept-tab">
+          <span>4. Power User</span>
+        </a>
+        <a href="concept5-hybrid-experience.html" class="concept-tab active">
+          <span>5. Hybrid Experience</span>
+        </a>
+        <a href="concept6-minimalist-transformer.html" class="concept-tab">
+          <span>6. Minimalist Transformer</span>
+        </a>
+      </div>
+    </div>
+    <div class="concept-nav-right">
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- INTERACTIVE USER JOURNEY STATE SWITCHER BAR -->
+  <div class="state-switcher-bar">
+    <div class="state-switcher-left">
+      <span>🔄 <strong>Simulate User State:</strong></span>
+      <div class="state-pill-buttons">
+        <button class="btn-state-pill active" onclick="setUserState('searching')">
+          <span>🔍 Searching (Cool Blue)</span>
+        </button>
+        <button class="btn-state-pill" onclick="setUserState('booking')">
+          <span>🎫 Booking (Warm Gold)</span>
+        </button>
+        <button class="btn-state-pill" onclick="setUserState('traveling')">
+          <span>🚌 In-Motion (Green)</span>
+        </button>
+        <button class="btn-state-pill" onclick="setUserState('completed')">
+          <span>⭐ Post-Trip (Slate)</span>
+        </button>
+      </div>
+    </div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);">
+      Adaptive Context Engine Active
+    </div>
+  </div>
+
+  <!-- MAIN SITE HEADER -->
+  <header class="site-header">
+    <div class="brand-group">
+      <div class="brand-icon-hybrid">🧠</div>
+      <div class="brand-text">
+        <h1>KSRTC SWIFT <span class="adaptive-badge" id="adaptiveStateBadge">SEARCHING</span></h1>
+        <p>Unified Context-Aware Transportation Experience</p>
+      </div>
+    </div>
+    <div class="header-user-actions">
+      <div class="user-profile-badge" id="profileBadge" onclick="showStateInfo()">
+        <div class="user-avatar-initials">R</div>
+        <span id="userGreetingName">Rajesh Nair</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PAGE CONTAINER -->
+  <main class="page-container">
+
+    <!-- DYNAMIC CONTEXT-AWARE PROMPT BANNER -->
+    <section class="context-prompt-card" id="contextPromptCard">
+      <div class="prompt-text-group">
+        <span class="prompt-icon" id="promptIcon">💡</span>
+        <div class="prompt-content">
+          <h4 id="promptTitle">Return Trip Smart Recommendation</h4>
+          <p id="promptBody">You have traveled Kochi ➔ Trivandrum 5 times this month. Book your return ticket now to lock in an extra 10% round-trip rebate.</p>
+        </div>
+      </div>
+      <div class="prompt-actions">
+        <button class="btn-voice-assist" onclick="speakContextPrompt()" title="Listen to context prompt (Text-to-Speech)">🔊</button>
+        <button class="btn-prompt-action" id="promptActionBtn" onclick="handlePromptAction()">Book Return (-10%)</button>
+      </div>
+    </section>
+
+    <!-- ALL-IN-ONE PERSISTENT NAVIGATION BAR -->
+    <nav class="all-in-one-navbar" aria-label="Persistent Service Utilities">
+      <div class="nav-buttons-list">
+        <button class="btn-unified-nav active" onclick="focusSearch()">
+          <span>🎫 Book Ticket</span>
+          <span class="key-shortcut-tag">Alt+1</span>
+        </button>
+        <button class="btn-unified-nav" onclick="showUnifiedSection('Live Bus GPS Status', 'Tracking 4 active coaches across NH-66 and MC Road corridors.')">
+          <span>📊 Live Status</span>
+          <span class="key-shortcut-tag">Alt+2</span>
+        </button>
+        <button class="btn-unified-nav" onclick="showUnifiedSection('Instant Cancellation', 'Instant refund calculator with 0 penalty for early cancellations.')">
+          <span>🔄 Quick Cancel</span>
+          <span class="key-shortcut-tag">Alt+3</span>
+        </button>
+        <button class="btn-unified-nav" onclick="showUnifiedSection('Fleet Charter', 'Reserve full coach Scania and Volvo buses for private journeys.')">
+          <span>🚌 Charter Swift</span>
+          <span class="key-shortcut-tag">Alt+4</span>
+        </button>
+        <button class="btn-unified-nav" onclick="showUnifiedSection('Fleet Panoramic Gallery', 'Virtual 3D tour of our luxury sleeper cabins and air suspensions.')">
+          <span>📸 360° Gallery</span>
+          <span class="key-shortcut-tag">Alt+5</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- SUCCESS METRICS ROW -->
+    <div class="metrics-row">
+      <div class="metric-badge highlight">
+        <span>⭐</span>
+        <span>4.9★ overall platform rating</span>
+      </div>
+      <div class="metric-badge">
+        <span>⏱️</span>
+        <span>30% faster than competitors</span>
+      </div>
+      <div class="metric-badge">
+        <span>🚌</span>
+        <span>2,500+ daily trips</span>
+      </div>
+      <div class="metric-badge">
+        <span>🏆</span>
+        <span>Kerala's #1 bus platform</span>
+      </div>
+    </div>
+
+    <!-- UNIFIED SPLIT VIEW: MAP + SEARCH & SMART RESULTS -->
+    <div class="hybrid-split-view">
+      <!-- LEFT: INTERACTIVE LIVE TRACKING MAP -->
+      <section class="map-pane-card" aria-label="Integrated Spatial Route and Live Bus Tracking Map">
+        <div class="map-pane-header">
+          <h3><span>🗺️</span> Spatial Tracking Map</h3>
+          <span class="live-gps-pill">● 4 Live Buses</span>
+        </div>
+
+        <div class="svg-hybrid-wrapper">
+          <svg viewBox="0 0 380 480" style="width: 100%; height: 480px;" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hybridGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--state-primary)" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#0a2a3a" stop-opacity="0.35" />
+              </linearGradient>
+            </defs>
+
+            <!-- Kerala Geographic Path -->
+            <path d="
+              M 100 40
+              C 120 55, 135 80, 145 105
+              C 155 125, 170 150, 180 185
+              C 190 215, 200 245, 210 275
+              C 220 305, 235 345, 245 385
+              C 255 425, 265 450, 260 465
+              C 250 455, 235 425, 220 385
+              C 205 345, 185 305, 165 255
+              C 145 205, 125 155, 110 105
+              C 95 65, 85 45, 100 40 Z
+            " fill="url(#hybridGrad)" stroke="var(--state-primary)" stroke-width="1.8" />
+
+            <!-- Corridors -->
+            <path d="M 140 80 L 160 145 L 185 210 L 205 270 L 225 330 L 245 390 L 260 450" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 4" />
+            
+            <!-- Animated Route Path -->
+            <path id="hybridRoutePath" d="M 205 270 L 225 330 L 245 390 L 260 450" fill="none" stroke="var(--state-primary)" stroke-width="3.5" stroke-dasharray="8 4" />
+
+            <!-- Bus 1 (Moving on route) -->
+            <g class="hybrid-bus-marker" transform="translate(205, 270)" onclick="highlightBus('bus1')" style="cursor: pointer;">
+              <circle r="10" fill="var(--state-primary)" opacity="0.3" />
+              <circle r="6" fill="var(--state-primary)" />
+              <text x="10" y="4" font-size="10" font-family="'JetBrains Mono'" font-weight="700" fill="var(--text)">KL-15-8821 (6:00 AM)</text>
+            </g>
+
+            <!-- Bus 2 (Calicut) -->
+            <g class="hybrid-bus-marker" transform="translate(160, 145)" onclick="highlightBus('bus2')" style="cursor: pointer;">
+              <circle r="6" fill="#00C8A8" />
+              <text x="10" y="4" font-size="10" font-family="'JetBrains Mono'" font-weight="700" fill="var(--text)">KL-15-4402 (8:30 AM)</text>
+            </g>
+
+            <!-- Stops -->
+            <circle cx="205" cy="270" r="5" fill="#FFFFFF" stroke="var(--state-primary)" stroke-width="2" />
+            <circle cx="260" cy="450" r="5" fill="#FFFFFF" stroke="var(--state-primary)" stroke-width="2" />
+          </svg>
+        </div>
+
+        <div class="recent-chips-box">
+          <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">RECENT:</span>
+          <button class="recent-chip" onclick="prefillSearch('Trivandrum', 'Kochi')">Tvm ➔ Kochi</button>
+          <button class="recent-chip" onclick="prefillSearch('Kochi', 'Calicut')">Kochi ➔ Calicut</button>
+          <button class="recent-chip" onclick="prefillSearch('Kochi', 'Munnar')">Kochi ➔ Munnar</button>
+        </div>
+      </section>
+
+      <!-- RIGHT: UNIFIED SEARCH & SMART RESULTS -->
+      <section class="search-results-pane">
+        <!-- SEARCH WIDGET -->
+        <div class="unified-search-card">
+          <div class="search-row-grid">
+            <div class="search-field-unit">
+              <label class="search-field-label">From</label>
+              <input type="text" id="hybridFromInput" class="search-input-box" value="Trivandrum">
+            </div>
+            <div class="search-field-unit">
+              <label class="search-field-label">To</label>
+              <input type="text" id="hybridToInput" class="search-input-box" value="Kochi">
+            </div>
+            <div class="search-field-unit">
+              <label class="search-field-label">Date</label>
+              <input type="date" id="hybridDateInput" class="search-input-box">
+            </div>
+            <div style="display: flex; align-items: flex-end;">
+              <button class="btn-prompt-action" style="height: 44px; padding: 0 18px; border-radius: var(--radius-sm);" onclick="performSearch()">
+                <span>🔍 Search</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-options-row">
+            <div class="filters-group">
+              <button class="filter-btn active" onclick="toggleFilter(this)">All Fleet</button>
+              <button class="filter-btn" onclick="toggleFilter(this)">AC Sleeper</button>
+              <button class="filter-btn" onclick="toggleFilter(this)">Volvo B11R</button>
+              <button class="filter-btn" onclick="toggleFilter(this)">Budget Tourism</button>
+            </div>
+            <label class="flexible-toggle-label">
+              <input type="checkbox" id="flexCalendarToggle" onchange="toggleFlexibleCalendar(this)">
+              <span>📅 I'm flexible (Show lowest fare days)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- RESULTS LIST -->
+        <div class="smart-results-container" id="resultsContainer">
+          <!-- Result Card 1 -->
+          <article class="result-bus-card" id="busCard1" onclick="selectResultCard(this)">
+            <div class="bus-info-left">
+              <div class="bus-departure-title">
+                <span>06:00 AM</span>
+                <span style="font-size: 13px; font-weight: normal; color: var(--text-muted);">➔ 10:15 AM (4h 15m)</span>
+                <span class="upgrade-pill">Volvo B11R Multi-Axle</span>
+              </div>
+              <div class="bus-service-tags">
+                <span>⭐ 4.9 (420 reviews)</span>
+                <span>•</span>
+                <span>Live GPS Tracking</span>
+                <span>•</span>
+                <span>18 Seats Available</span>
+              </div>
+              <div class="crowd-ratio-wrap">
+                <div class="crowd-progress-track">
+                  <div class="crowd-progress-bar" style="width: 70%;"></div>
+                </div>
+                <span>70% booked (High Demand)</span>
+              </div>
+            </div>
+            <div class="bus-card-action-col">
+              <span class="bus-fare-tag">₹800</span>
+              <button class="btn-select-seat" onclick="openSeatModal('06:00 AM Volvo B11R', 800)">
+                <span>💺 Select Seat</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Result Card 2 -->
+          <article class="result-bus-card" id="busCard2" onclick="selectResultCard(this)">
+            <div class="bus-info-left">
+              <div class="bus-departure-title">
+                <span>08:30 AM</span>
+                <span style="font-size: 13px; font-weight: normal; color: var(--text-muted);">➔ 12:45 PM (4h 15m)</span>
+                <span class="upgrade-pill" style="border-color: var(--state-primary); color: var(--state-primary);">Swift AC Sleeper</span>
+              </div>
+              <div class="bus-service-tags">
+                <span>⭐ 4.8 (310 reviews)</span>
+                <span>•</span>
+                <span>Upper & Lower Berths</span>
+                <span>•</span>
+                <span>12 Berths Left</span>
+              </div>
+              <div class="crowd-ratio-wrap">
+                <div class="crowd-progress-track">
+                  <div class="crowd-progress-bar" style="width: 82%;"></div>
+                </div>
+                <span>82% booked</span>
+              </div>
+            </div>
+            <div class="bus-card-action-col">
+              <span class="bus-fare-tag">₹950</span>
+              <button class="btn-select-seat" onclick="openSeatModal('08:30 AM AC Sleeper', 950)">
+                <span>💺 Select Seat</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Result Card 3 -->
+          <article class="result-bus-card" id="busCard3" onclick="selectResultCard(this)">
+            <div class="bus-info-left">
+              <div class="bus-departure-title">
+                <span>02:15 PM</span>
+                <span style="font-size: 13px; font-weight: normal; color: var(--text-muted);">➔ 06:45 PM (4h 30m)</span>
+                <span class="upgrade-pill">Swift Deluxe Air-Bus</span>
+              </div>
+              <div class="bus-service-tags">
+                <span>⭐ 4.7 (190 reviews)</span>
+                <span>•</span>
+                <span>Push-back 2x2</span>
+                <span>•</span>
+                <span>24 Seats Available</span>
+              </div>
+              <div class="crowd-ratio-wrap">
+                <div class="crowd-progress-track">
+                  <div class="crowd-progress-bar" style="width: 45%;"></div>
+                </div>
+                <span>45% booked (Spacious)</span>
+              </div>
+            </div>
+            <div class="bus-card-action-col">
+              <span class="bus-fare-tag">₹620</span>
+              <button class="btn-select-seat" onclick="openSeatModal('02:15 PM Swift Deluxe', 620)">
+                <span>💺 Select Seat</span>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="tagline">"Everything you need, exactly when you need it."</p>
+    <p>© 2026 KSRTC-SWIFT • Concept 5 Prototype: The Hybrid Experience</p>
+  </footer>
+
+  <!-- 3D PERSPECTIVE SEAT SELECTION MODAL -->
+  <div class="modal-backdrop" id="seatModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="seatModalBusTitle">💺 Select Your Berths & Seats</h3>
+        <button class="modal-close-btn" onclick="closeSeatModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Interactive 3D view of luxury coach interior. Click any available green/open berth to reserve.
+        </p>
+
+        <div class="seat-perspective-box">
+          <div class="bus-interior-chassis">
+            <div class="deck-title">--- LOWER DECK BERTHS ---</div>
+            <div class="deck-grid" id="lowerDeckGrid">
+              <!-- Grid items generated in JS -->
+            </div>
+
+            <div class="deck-title">--- UPPER DECK SLEEPERS ---</div>
+            <div class="deck-grid" id="upperDeckGrid">
+              <!-- Grid items generated in JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div>
+          <span style="font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono';">TOTAL AMOUNT:</span>
+          <strong style="display: block; font-size: 18px; color: var(--state-primary);" id="seatModalTotal">₹800</strong>
+        </div>
+        <button class="btn-select-seat" onclick="confirmSeatBooking()">Proceed to Pay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERIC DETAILS MODAL -->
+  <div class="modal-backdrop" id="genericInfoModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="genericModalTitle">Section Title</h3>
+        <button class="modal-close-btn" onclick="closeGenericModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="genericModalBody" style="font-size: 14px; line-height: 1.6;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-select-seat" onclick="closeGenericModal()">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
+    <span id="toastIcon">💡</span>
+    <span id="toastText">Action completed</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // State
+    const body = document.body;
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    const seatModal = document.getElementById('seatModal');
+    const genericInfoModal = document.getElementById('genericInfoModal');
+    const toastNotice = document.getElementById('toastNotice');
+    let currentSelectedBusPrice = 800;
+    let selectedSeatCount = 1;
+
+    // Set Default Date (Tomorrow)
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('hybridDateInput').value = tomorrow.toISOString().split('T')[0];
+
+    // Theme logic
+    function initTheme() {
+      const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
+      setTheme(savedTheme);
+    }
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light';
+        localStorage.setItem('ksrtc_theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark';
+        localStorage.setItem('ksrtc_theme', 'light');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || 'light';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // STATE SWITCHER ENGINE (Context-Aware Morphing)
+    const STATE_CONFIGS = {
+      'searching': {
+        badge: 'SEARCHING',
+        greeting: 'Rajesh Nair',
+        icon: '🔍',
+        title: 'Smart Route Recommendation',
+        body: 'You frequently travel Kochi ➔ Trivandrum. Book early to secure lower berths and lock in 10% round-trip savings.',
+        btnText: 'Book Return (-10%)'
+      },
+      'booking': {
+        badge: 'BOOKING READY',
+        greeting: 'Rajesh (Booking Step 2)',
+        icon: '🎫',
+        title: 'Hold Reservation Active (14:59 left)',
+        body: 'Seat A12 held for checkout. Link-ticket option available if you wish to connect from Kochi to Calicut.',
+        btnText: 'Confirm & Pay'
+      },
+      'traveling': {
+        badge: 'IN-MOTION GPS',
+        greeting: 'Rajesh (On-board Coach #KL-15-8821)',
+        icon: '🚌',
+        title: 'Live Journey Progress: 68 km/h',
+        body: 'Estimated arrival at Kochi Vytilla Hub: 10:15 PM (On Time). Conductor: M. Suresh (+91 98470 23114).',
+        btnText: 'Call Conductor'
+      },
+      'completed': {
+        badge: 'TRIP COMPLETED',
+        greeting: 'Rajesh Nair',
+        icon: '⭐',
+        title: 'How was your journey to Kochi?',
+        body: 'Rate your ride to earn 50 bonus Swift reward points toward your next Volvo sleeper upgrade.',
+        btnText: 'Leave 5★ Feedback'
+      }
+    };
+
+    function setUserState(state) {
+      body.setAttribute('data-user-state', state);
+      document.querySelectorAll('.btn-state-pill').forEach(btn => btn.classList.remove('active'));
+      event.target.closest('.btn-state-pill').classList.add('active');
+
+      const config = STATE_CONFIGS[state];
+      document.getElementById('adaptiveStateBadge').textContent = config.badge;
+      document.getElementById('userGreetingName').textContent = config.greeting;
+      document.getElementById('promptIcon').textContent = config.icon;
+      document.getElementById('promptTitle').textContent = config.title;
+      document.getElementById('promptBody').textContent = config.body;
+      document.getElementById('promptActionBtn').textContent = config.btnText;
+
+      showToast(`Context-Aware UI adapted to: ${state.toUpperCase()} state`, '🧠');
+    }
+
+    // Voice assist
+    function speakContextPrompt() {
+      const text = document.getElementById('promptTitle').textContent + '. ' + document.getElementById('promptBody').textContent;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+        showToast('Reading context prompt aloud...', '🔊');
+      } else {
+        showToast(text, '🔊');
+      }
+    }
+
+    function handlePromptAction() {
+      const state = body.getAttribute('data-user-state');
+      if (state === 'traveling') {
+        showToast('Connecting to Conductor Hotline: +91 98470 23114', '📞');
+      } else if (state === 'completed') {
+        showToast('Thank you! 5★ rating submitted. 50 Swift Points added to wallet.', '⭐');
+      } else {
+        openSeatModal('06:00 AM Volvo Return', 720);
+      }
+    }
+
+    // Prefill search
+    function prefillSearch(from, to) {
+      document.getElementById('hybridFromInput').value = from;
+      document.getElementById('hybridToInput').value = to;
+      showToast(`Selected route: ${from} ➔ ${to}`, '📍');
+    }
+
+    function focusSearch() {
+      document.getElementById('hybridFromInput').focus();
+      showToast('Shortcut: Focused booking search', '🎫');
+    }
+
+    function toggleFilter(btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showToast(`Filter applied: ${btn.textContent}`, '⚡');
+    }
+
+    function toggleFlexibleCalendar(checkbox) {
+      if (checkbox.checked) {
+        showToast('Flexible calendar mode: Showing lowest fare dates highlighted in green', '📅');
+      }
+    }
+
+    function performSearch() {
+      showToast('Searching live telematics across all 600 KSRTC-SWIFT services...', '🔍');
+    }
+
+    // 3D Seat Modal
+    function openSeatModal(busName, price) {
+      currentSelectedBusPrice = price;
+      document.getElementById('seatModalBusTitle').textContent = `💺 ${busName} • Select Seats`;
+      init3DSeatGrid();
+      updateSeatTotal();
+      seatModal.classList.add('open');
+    }
+
+    function closeSeatModal() {
+      seatModal.classList.remove('open');
+    }
+
+    function init3DSeatGrid() {
+      const lower = document.getElementById('lowerDeckGrid');
+      const upper = document.getElementById('upperDeckGrid');
+      lower.innerHTML = '';
+      upper.innerHTML = '';
+
+      for (let i = 1; i <= 8; i++) {
+        const s = document.createElement('div');
+        s.className = 'berth-seat' + (i === 1 ? ' selected' : (i === 4 ? ' occupied' : ''));
+        s.textContent = 'L' + i;
+        if (i !== 4) {
+          s.addEventListener('click', () => {
+            s.classList.toggle('selected');
+            updateSeatTotal();
+          });
+        }
+        lower.appendChild(s);
+      }
+
+      for (let i = 1; i <= 8; i++) {
+        const s = document.createElement('div');
+        s.className = 'berth-seat' + (i === 3 ? ' occupied' : '');
+        s.textContent = 'U' + i;
+        if (i !== 3) {
+          s.addEventListener('click', () => {
+            s.classList.toggle('selected');
+            updateSeatTotal();
+          });
+        }
+        upper.appendChild(s);
+      }
+    }
+
+    function updateSeatTotal() {
+      const count = document.querySelectorAll('.berth-seat.selected').length || 1;
+      selectedSeatCount = count;
+      document.getElementById('seatModalTotal').textContent = `₹${count * currentSelectedBusPrice}`;
+    }
+
+    function confirmSeatBooking() {
+      closeSeatModal();
+      setUserState('booking');
+      showToast(`Reserved ${selectedSeatCount} seat(s). Proceeding to secure checkout!`, '✅');
+    }
+
+    function selectResultCard(card) {
+      document.querySelectorAll('.result-bus-card').forEach(c => c.classList.remove('highlighted'));
+      card.classList.add('highlighted');
+    }
+
+    function highlightBus(busId) {
+      const card = document.getElementById('busCard1');
+      selectResultCard(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      showToast('Highlighted corresponding bus card in results', '🗺️');
+    }
+
+    function showUnifiedSection(title, info) {
+      document.getElementById('genericModalTitle').textContent = title;
+      document.getElementById('genericModalBody').innerHTML = info;
+      genericInfoModal.classList.add('open');
+    }
+
+    function closeGenericModal() {
+      genericInfoModal.classList.remove('open');
+    }
+
+    function showStateInfo() {
+      showUnifiedSection('User Profile: Rajesh Nair', 'KSRTC-SWIFT Member since 2022.<br>Tier: Gold Adaptive Traveler.<br>Current State: ' + body.getAttribute('data-user-state'));
+    }
+
+    // Keyboard Shortcuts (Alt+1 to Alt+5)
+    document.addEventListener('keydown', (e) => {
+      if (e.altKey && e.key === '1') {
+        e.preventDefault();
+        focusSearch();
+      } else if (e.altKey && e.key === '2') {
+        e.preventDefault();
+        showUnifiedSection('Live Bus Status', 'Tracking current bus on map.');
+      } else if (e.altKey && e.key === '3') {
+        e.preventDefault();
+        showUnifiedSection('Quick Cancel', 'Cancellation engine.');
+      } else if (e.altKey && e.key === '4') {
+        e.preventDefault();
+        showUnifiedSection('Charter Swift', 'Charter booking.');
+      } else if (e.altKey && e.key === '5') {
+        e.preventDefault();
+        showUnifiedSection('360° Gallery', 'Viewing fleet panorama.');
+      } else if (e.key === 'Escape') {
+        closeSeatModal();
+        closeGenericModal();
+      }
+    });
+
+    // Toast
+    function showToast(msg, icon = '💡') {
+      const toastText = document.getElementById('toastText');
+      const toastIcon = document.getElementById('toastIcon');
+      toastText.textContent = msg;
+      toastIcon.textContent = icon;
+      toastNotice.classList.add('show');
+      setTimeout(() => toastNotice.classList.remove('show'), 3800);
+    }
+
+    // Init
+    initTheme();
+  </script>
+</body>
+</html>
