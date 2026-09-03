@@ -1861,6 +1861,216 @@
       color: #041616;
     }
 
+
+    /* ===================================================================
+       AUTOCOMPLETE, DYNAMIC BUS LIST & SEAT MAP STYLES
+       =================================================================== */
+
+    /* Autocomplete Dropdown */
+    .autocomplete-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border: 1.5px solid var(--secondary);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      max-height: 280px;
+      overflow-y: auto;
+      z-index: 1200;
+      display: none;
+    }
+    .autocomplete-dropdown.show { display: block; }
+
+    .autocomplete-item {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s ease;
+    }
+    .autocomplete-item:last-child { border-bottom: none; }
+    .autocomplete-item:hover, .autocomplete-item.highlighted {
+      background: rgba(10, 74, 74, 0.08);
+      color: var(--primary);
+    }
+    .ac-main-name { font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+    .ac-hub-sub { font-size: 11px; color: var(--text-muted); }
+
+    /* Search Results Dynamic Bus List */
+    .search-results-section {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .search-results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .search-results-title {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .bus-result-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 2fr 2fr 1.2fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .bus-result-card:hover {
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .bus-class-badge {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .badge-gajaraj { background: rgba(10, 74, 74, 0.12); color: var(--primary); }
+    .badge-sleeper { background: rgba(212, 175, 55, 0.18); color: #B38600; }
+    .badge-electric { background: rgba(30, 135, 86, 0.14); color: var(--success); }
+
+    .schedule-times {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .time-point { font-size: 20px; font-weight: 800; font-family: 'JetBrains Mono'; line-height: 1; }
+    .time-city { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .duration-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 65px;
+    }
+    .duration-line {
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      position: relative;
+      margin: 4px 0;
+    }
+    .duration-line::after {
+      content: '➔';
+      position: absolute;
+      right: -4px;
+      top: -9px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .amenities-icons-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Interactive Seat Map Modal */
+    .seat-map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .seat-item {
+      height: 44px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono';
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .seat-item.aisle-gap { margin-right: 20px; }
+    .seat-item.available:hover {
+      border-color: var(--primary);
+      background: rgba(10, 74, 74, 0.08);
+      transform: scale(1.06);
+    }
+    .seat-item.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(10, 74, 74, 0.35);
+    }
+    .seat-item.booked {
+      background: rgba(0,0,0,0.06);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      border-color: transparent;
+      text-decoration: line-through;
+    }
+    .seat-item.ladies {
+      border-color: #E86A3E;
+      background: rgba(232, 106, 62, 0.08);
+    }
+    .seat-item.ladies::after {
+      content: '🎀';
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      font-size: 10px;
+    }
+
+    /* Radar Telemetry Card */
+    .radar-telemetry-box {
+      background: #041616;
+      border: 1px solid var(--secondary);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      color: #FFF;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .telemetry-val { font-size: 24px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--secondary); }
+    .telemetry-lbl { font-size: 11px; opacity: 0.8; text-transform: uppercase; margin-top: 4px; }
+
+    @media (max-width: 768px) {
+      .bus-result-card { grid-template-columns: 1fr; gap: 14px; }
+      .seat-map-grid { max-width: 100%; }
+      .radar-telemetry-box { grid-template-columns: 1fr; gap: 10px; }
+    }
+
 </style>
 </head>
 <body data-theme="light">
@@ -2188,7 +2398,7 @@
             <span>Leaving From</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchFromCity" value="ബെംഗളൂരു" placeholder="പുറപ്പെടുന്ന സ്ഥലം..." required>
+            <input type="text" class="custom-input" id="searchFromCity" value="ബെംഗളൂരു" placeholder="പുറപ്പെടുന്ന സ്ഥലം..." autocomplete="off" oninput="handleCityInput('searchFromCity', 'fromCityDropdown', event)" onfocus="handleCityInput('searchFromCity', 'fromCityDropdown', event)" required>
             <button type="button" class="btn-voice-mic" onclick="startVoiceSearch('searchFromCity')" title="മൈക്കിലൂടെ സ്ഥലം പറയൂ / Speak City" aria-label="Voice search">
               <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
             </button>
@@ -2198,6 +2408,8 @@
             <button type="button" class="btn-swap-cities" id="swapCityBtn" onclick="swapCities()" title="Swap Departure and Destination" aria-label="Swap cities">
               <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
             </button>
+            <!-- From City Autocomplete Dropdown -->
+            <div class="autocomplete-dropdown" id="fromCityDropdown"></div>
           </div>
         </div>
 
@@ -2208,13 +2420,15 @@
             <span>Going To (Kerala)</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchToCity" value="കൊച്ചി" placeholder="എത്തിച്ചേരേണ്ട സ്ഥലം..." required>
+            <input type="text" class="custom-input" id="searchToCity" value="കൊച്ചി" placeholder="എത്തിച്ചേരേണ്ട സ്ഥലം..." autocomplete="off" oninput="handleCityInput('searchToCity', 'toCityDropdown', event)" onfocus="handleCityInput('searchToCity', 'toCityDropdown', event)" required>
             <button type="button" class="btn-voice-mic" onclick="startVoiceSearch('searchToCity')" title="മൈക്കിലൂടെ സ്ഥലം പറയൂ / Speak City" aria-label="Voice search">
               <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
             </button>
             <button type="button" class="clear-input-btn" onclick="clearInput('searchToCity')" aria-label="Clear city">
               <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
+            <!-- To City Autocomplete Dropdown -->
+            <div class="autocomplete-dropdown" id="toCityDropdown"></div>
           </div>
         </div>
 
@@ -2261,6 +2475,26 @@
           </button>
         </div>
       </form>
+
+      <!-- DYNAMIC SEARCH RESULTS LIST (FEW BUSES FOR EVERY ROUTE) -->
+      <div class="search-results-section" id="busSearchResultsBox">
+        <div class="search-results-header">
+          <div>
+            <div class="search-results-title" id="searchResultsHeading">ലഭ്യമായ ബസുകൾ (Available Buses)</div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-top: 2px;" id="searchResultsSubHeading">
+              ബെംഗളൂരു ➔ കൊച്ചി റൂട്ടിലെ സ്ഥിരീകരിച്ച സർവീസുകൾ
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span class="onam-special-badge-tag">🌸 ZERO SURGE GUARANTEE</span>
+          </div>
+        </div>
+
+        <!-- Bus Cards Dynamic Container -->
+        <div id="busCardsContainer" style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Dynamically generated -->
+        </div>
+      </div>
     </section>
 
     
@@ -3216,6 +3450,131 @@
   </div>
 
 
+  
+  <!-- INTERACTIVE BUS SEAT SELECTION MODAL -->
+  <div class="modal-backdrop" id="seatSelectionModal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width: 640px;">
+      <div class="mobile-sheet-handle"></div>
+      <div class="modal-header">
+        <div>
+          <h3 id="seatModalBusName">Gajaraj Volvo Multi-Axle (ബസ് സീറ്റ് തിരഞ്ഞെടുക്കുക)</h3>
+          <div style="font-size: 12px; color: var(--text-muted);" id="seatModalRouteInfo">ബെംഗളൂരു ➔ കൊച്ചി • 20:30 PM</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('seatSelectionModal')">
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" style="padding: 20px;">
+        <!-- Seat Legend -->
+        <div style="display: flex; justify-content: space-around; font-size: 11px; font-weight: 700; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--border); background: var(--bg-card);"></div><span>ലഭ്യമായവ (Available)</span></div>
+          <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 14px; height: 14px; border-radius: 3px; background: var(--primary);"></div><span>തിരഞ്ഞെടുത്തത് (Selected)</span></div>
+          <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 14px; height: 14px; border-radius: 3px; background: rgba(0,0,0,0.12);"></div><span>ബുക്ക് ചെയ്തവ (Booked)</span></div>
+          <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid #E86A3E; background: rgba(232,106,62,0.12);"></div><span>വനിതകൾ (Ladies 🎀)</span></div>
+        </div>
+
+        <!-- Coach Deck Selector (for Sleeper coaches) -->
+        <div id="deckSwitcherRow" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 14px;">
+          <button type="button" class="tab-btn active" id="btnLowerDeck" onclick="switchDeck('lower')">ലോവർ ബെർത്ത് (Lower Deck)</button>
+          <button type="button" class="tab-btn" id="btnUpperDeck" onclick="switchDeck('upper')">അപ്പർ ബെർത്ത് (Upper Deck)</button>
+        </div>
+
+        <!-- Driver Cabin Indicator -->
+        <div style="display: flex; justify-content: space-between; max-width: 380px; margin: 0 auto 10px; font-size: 11px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-muted);">
+          <span>🚪 FRONT ENTRANCE</span>
+          <span>👨‍✈️ STEERING</span>
+        </div>
+
+        <!-- Seat Grid Layout -->
+        <div class="seat-map-grid" id="seatMapGrid">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Smart Value Addons (Wake-Up Alarm & WhatsApp QR) -->
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-top: 18px; display: flex; flex-direction: column; gap: 8px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" id="chkDestAlarm" checked style="accent-color: var(--primary);">
+            <span>⏰ ഇറങ്ങേണ്ട സ്റ്റോപ്പ് വേക്ക്-അപ്പ് അലാം (Destination Wake-Up Alarm 15 mins before drop)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" id="chkWhatsAppPass" checked style="accent-color: var(--primary);">
+            <span>📲 വാട്സാപ്പിൽ സ്മാർട്ട് ക്യു.ആർ ബോർഡിംഗ് പാസ് അയക്കൂ (Send WhatsApp Smart QR Pass)</span>
+          </label>
+        </div>
+
+        <!-- Selection Summary -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 14px; font-weight: 800;">
+          <div>
+            <div>സീറ്റുകൾ: <span style="color: var(--primary); font-family: 'JetBrains Mono';" id="selectedSeatsLabel">None</span></div>
+            <div style="font-size: 11px; color: var(--text-muted);">യാത്രക്കാരുടെ എണ്ണം: <span id="selectedSeatsCountDisplay">0</span></div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 18px; color: var(--primary); font-family: 'JetBrains Mono';" id="selectedSeatsTotalAmount">₹0</div>
+            <div style="font-size: 10px; color: var(--success);">Zero Surge Pricing Applied</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="nav-item-btn" onclick="closeModal('seatSelectionModal')">Cancel</button>
+        <button type="button" class="btn-find-bus" onclick="confirmSeatBooking()">Confirm & Proceed to Book</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE BUS RADAR & TELEMETRY TRACKER MODAL -->
+  <div class="modal-backdrop" id="radarModal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width: 600px;">
+      <div class="mobile-sheet-handle"></div>
+      <div class="modal-header">
+        <div>
+          <h3>📡 ലൈവ് ബസ് റഡാർ & ജി.പി.എസ് (Live Coach Radar)</h3>
+          <div style="font-size: 12px; color: var(--text-muted);" id="radarCoachHeader">KL-15-A-8921 • Gajaraj Volvo Multi-Axle</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('radarModal')">
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" style="padding: 20px;">
+        <div class="radar-telemetry-box">
+          <div>
+            <div class="telemetry-val" id="radarSpeedVal">74 km/h</div>
+            <div class="telemetry-lbl">വേഗത (Speed)</div>
+          </div>
+          <div>
+            <div class="telemetry-val" id="radarEtaVal">18 Mins</div>
+            <div class="telemetry-lbl">അടുത്ത സ്റ്റോപ്പ് (Next Bay)</div>
+          </div>
+          <div>
+            <div class="telemetry-val" id="radarDistVal">42 Km</div>
+            <div class="telemetry-lbl">ദൂരം (Distance)</div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; font-size: 13px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <span style="font-size: 18px;">👨‍✈️</span>
+            <div>
+              <strong>ഡ്രൈവർ: വി. മോഹൻദാസ് (Badge #4829)</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">24/7 ഇൻ-ബസ് ക്രൂ ഹോട്ട്‌ലൈൻ: 0471-2463799</div>
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px;">
+            <strong>നിലവിലെ ലൊക്കേഷൻ: സേലം ടോൾ പ്ലാസ ബൈപാസ്</strong><br>
+            <span style="color: var(--success); font-weight: 700;">കൃത്യസമയത്ത് ഓടുന്നു (Running On Time)</span> • പ്രതീക്ഷിക്കുന്ന സമയം: 05:30 AM (വൈറ്റില ഹബ്ബ്).
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="showToast('ഡെസ്റ്റിനേഷൻ അലാം ഫോണിൽ ആക്റ്റീവ് ചെയ്തു! 15 മിനിറ്റ് മുൻപ് റിംഗ് ചെയ്യും.', '⏰')">⏰ Set 15-Min Wake-Up Alarm</button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
   <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
     <span id="toastIcon">
@@ -3675,10 +4034,374 @@
     });
 
     
+    
+    // ===================================================================
+    // KERALA PLACES AUTOCOMPLETE ENGINE
+    // ===================================================================
+    const KERALA_PLACES = [
+      { en: 'Bengaluru', ml: 'ബെംഗളൂരു', hub: 'Inter-State Hub (Majestic / Madiwala)' },
+      { en: 'Chennai', ml: 'ചെന്നൈ', hub: 'Inter-State Hub (Koyambedu)' },
+      { en: 'Coimbatore', ml: 'കോയമ്പത്തൂർ', hub: 'Inter-State Hub (Gandhipuram)' },
+      { en: 'Mysuru', ml: 'മൈസൂരു', hub: 'Inter-State Stand' },
+      { en: 'Thiruvananthapuram', ml: 'തിരുവനന്തപുരം', hub: 'Central Depot (Thampanoor)' },
+      { en: 'Kochi', ml: 'കൊച്ചി', hub: 'Vytilla Mobility Hub Depot' },
+      { en: 'Kozhikode', ml: 'കോഴിക്കോട്', hub: 'KSRTC Terminal Stand' },
+      { en: 'Thrissur', ml: 'തൃശ്ശൂർ', hub: 'Swaraj Round Central Stand' },
+      { en: 'Kannur', ml: 'കണ്ണൂർ', hub: 'KSRTC Bus Terminal' },
+      { en: 'Kollam', ml: 'കൊല്ലം', hub: 'Main KSRTC Depot' },
+      { en: 'Alappuzha', ml: 'ആലപ്പുഴ', hub: 'Boat Jetty Stand' },
+      { en: 'Palakkad', ml: 'പാലക്കാട്', hub: 'KSRTC Stand Stadium Bypass' },
+      { en: 'Kottayam', ml: 'കോട്ടയം', hub: 'KSRTC Central Stand' },
+      { en: 'Malappuram', ml: 'മലപ്പുറം', hub: 'KSRTC Stand' },
+      { en: 'Wayanad (Sulthan Bathery)', ml: 'വയനാട് (സുൽത്താൻ ബത്തേരി)', hub: 'Bathery Terminal Depot' },
+      { en: 'Munnar', ml: 'മൂന്നാർ', hub: 'Highland Bus Terminal' },
+      { en: 'Kasaragod', ml: 'കാസർഗോഡ്', hub: 'New KSRTC Bus Stand' },
+      { en: 'Pathanamthitta', ml: 'പത്തനംതിട്ട', hub: 'Ring Road Stand' },
+      { en: 'Aranmula', ml: 'ആറന്മുള', hub: 'Boat Race Cultural Stop' },
+      { en: 'Guruvayur', ml: 'ഗുരുവായൂർ', hub: 'Temple Stand' }
+    ];
+
+    function handleCityInput(inputId, dropdownId, event) {
+      const input = document.getElementById(inputId);
+      const dropdown = document.getElementById(dropdownId);
+      const query = input.value.trim().toLowerCase();
+
+      if (!query) {
+        dropdown.classList.remove('show');
+        return;
+      }
+
+      const matches = KERALA_PLACES.filter(p => 
+        p.en.toLowerCase().includes(query) || 
+        p.ml.includes(query) ||
+        p.hub.toLowerCase().includes(query)
+      );
+
+      if (matches.length === 0) {
+        dropdown.classList.remove('show');
+        return;
+      }
+
+      dropdown.innerHTML = matches.slice(0, 6).map(p => {
+        const displayName = currentLang === 'ml' ? p.ml : p.en;
+        const altName = currentLang === 'ml' ? p.en : p.ml;
+        return `
+          <div class="autocomplete-item" onclick="selectAutocompleteCity('${inputId}', '${dropdownId}', '${displayName}')">
+            <div class="ac-main-name">
+              <span>📍</span>
+              <span>${displayName}</span>
+              <span style="font-size: 11px; opacity: 0.6;">(${altName})</span>
+            </div>
+            <div class="ac-hub-sub">${p.hub}</div>
+          </div>
+        `;
+      }).join('');
+
+      dropdown.classList.add('show');
+    }
+
+    function selectAutocompleteCity(inputId, dropdownId, cityName) {
+      document.getElementById(inputId).value = cityName;
+      document.getElementById(dropdownId).classList.remove('show');
+      updateMapRoute(searchFromCity.value, searchToCity.value);
+      generateBusSchedules(searchFromCity.value, searchToCity.value);
+      showToast((currentLang === 'ml' ? 'സ്ഥലം തിരഞ്ഞെടുത്തു: ' : 'City selected: ') + cityName, '📍');
+    }
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.input-with-tools')) {
+        document.querySelectorAll('.autocomplete-dropdown').forEach(d => d.classList.remove('show'));
+      }
+    });
+
+    // ===================================================================
+    // DYNAMIC BUS SCHEDULE ENGINE (FEW BUSES FOR EVERY ROUTE)
+    // ===================================================================
+    let activeSelectedBus = null;
+    let selectedSeats = [];
+
+    function generateBusSchedules(from, to) {
+      const container = document.getElementById('busCardsContainer');
+      const heading = document.getElementById('searchResultsHeading');
+      const subHeading = document.getElementById('searchResultsSubHeading');
+      if (!container) return;
+
+      heading.textContent = currentLang === 'ml' 
+        ? `ലഭ്യമായ ബസുകൾ (${from} ➔ ${to})`
+        : `Available Buses (${from} ➔ ${to})`;
+
+      subHeading.textContent = currentLang === 'ml'
+        ? `${from} മുതൽ ${to} വരെയുള്ള കെ.എസ്.ആർ.ടി.സി സ്വിഫ്റ്റ് സർവീസുകൾ (അമിത നിരക്കില്ല)`
+        : `Official KSRTC-SWIFT confirmed schedules with zero surge pricing guaranteed.`;
+
+      const buses = [
+        {
+          id: 'B01',
+          name: 'Gajaraj Volvo Multi-Axle Luxury Seater',
+          nameMl: 'ഗജരാജ് വോൾവോ മൾട്ടി-ആക്‌സിൽ ലക്ഷ്വറി',
+          classTag: 'badge-gajaraj',
+          type: 'Gajaraj AC Seater',
+          dep: '06:30 AM',
+          arr: '12:15 PM',
+          duration: '5h 45m',
+          fare: 540,
+          seatsLeft: 26,
+          isSleeper: false,
+          amenities: ['📶 Free WiFi', '🔌 USB Port', '🚨 SOS Beacon', '🌸 Onam Special']
+        },
+        {
+          id: 'B02',
+          name: 'Swift Electric Super Fast AC Coach',
+          nameMl: 'സ്വിഫ്റ്റ് ഇലക്ട്രിക് സൂപ്പർ ഫാസ്റ്റ് എ.സി',
+          classTag: 'badge-electric',
+          type: 'Electric Zero-Emission',
+          dep: '13:00 PM',
+          arr: '18:30 PM',
+          duration: '5h 30m',
+          fare: 480,
+          seatsLeft: 31,
+          isSleeper: false,
+          amenities: ['🌱 Silent Cabin', '❄️ Rapid AC', '🔌 USB Port', '📱 GPS Telematics']
+        },
+        {
+          id: 'B03',
+          name: 'Gajaraj Volvo Multi-Axle Prime Sleeper',
+          nameMl: 'ഗജരാജ് വോൾവോ പ്രൈം സ്ലീപ്പർ',
+          classTag: 'badge-sleeper',
+          type: 'Volvo AC Sleeper',
+          dep: '20:30 PM',
+          arr: '05:15 AM (+1)',
+          duration: '8h 45m',
+          fare: 1250,
+          seatsLeft: 14,
+          isSleeper: true,
+          amenities: ['🛏️ Sanitized Blanket', '💡 Reading Lamp', '⏰ Wake-Up Alarm', '🌸 Onam Special']
+        },
+        {
+          id: 'B04',
+          name: 'Scania Multi-Axle Emerald Sleeper',
+          nameMl: 'സ്കാനിയ മൾട്ടി-ആക്‌സിൽ എമറാൾഡ് സ്ലീപ്പർ',
+          classTag: 'badge-sleeper',
+          type: 'Scania AC Sleeper',
+          dep: '22:15 PM',
+          arr: '06:45 AM (+1)',
+          duration: '8h 30m',
+          fare: 1380,
+          seatsLeft: 9,
+          isSleeper: true,
+          amenities: ['🛏️ Luxury Berth', '🍱 Sadya Halt Delivery', '📶 5G WiFi', '🌸 Onam Special']
+        }
+      ];
+
+      container.innerHTML = buses.map(bus => {
+        const busTitle = currentLang === 'ml' ? bus.nameMl : bus.name;
+        return `
+          <div class="bus-result-card">
+            <div>
+              <span class="bus-class-badge ${bus.classTag}">${bus.type}</span>
+              <h4 style="font-size: 17px; font-weight: 800; margin: 4px 0;">${busTitle}</h4>
+              <div class="amenities-icons-row">
+                ${bus.amenities.map(a => `<span style="font-size: 11px; background: var(--bg); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px;">${a}</span>`).join('')}
+              </div>
+            </div>
+
+            <div>
+              <div class="schedule-times">
+                <div>
+                  <div class="time-point">${bus.dep}</div>
+                  <div class="time-city">${from}</div>
+                </div>
+                <div class="duration-indicator">
+                  <span>${bus.duration}</span>
+                  <div class="duration-line"></div>
+                  <span style="color: var(--success); font-weight: 700;">Direct</span>
+                </div>
+                <div>
+                  <div class="time-point">${bus.arr}</div>
+                  <div class="time-city">${to}</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              <div style="font-family: 'JetBrains Mono'; font-size: 24px; font-weight: 800; color: var(--primary);">₹${bus.fare}</div>
+              <div style="font-size: 11px; color: var(--success); font-weight: 700;">${bus.seatsLeft} ${currentLang === 'ml' ? 'സീറ്റുകൾ ബാക്കി' : 'Seats Left'}</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="btn-find-bus" style="height: 40px; padding: 0 18px; font-size: 13px;" onclick="openSeatSelectionModal('${bus.id}', '${busTitle}', '${bus.fare}', ${bus.isSleeper})">
+                <span>${currentLang === 'ml' ? 'സീറ്റ് തിരഞ്ഞെടുക്കൂ' : 'Select Seats'}</span>
+                <span>➔</span>
+              </button>
+              <button class="nav-item-btn" style="border: 1px solid var(--border); font-size: 11px; padding: 4px 10px; justify-content: center;" onclick="openLiveRadarModal('${bus.name}')">
+                <span>📡 Live Radar</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ===================================================================
+    // INTERACTIVE BUS SEAT MAP SELECTION ENGINE
+    // ===================================================================
+    let currentDeck = 'lower';
+
+    function openSeatSelectionModal(busId, busName, fare, isSleeper) {
+      activeSelectedBus = { id: busId, name: busName, fare: parseInt(fare), isSleeper };
+      selectedSeats = [];
+      document.getElementById('seatModalBusName').textContent = busName;
+      document.getElementById('seatModalRouteInfo').textContent = `${searchFromCity.value} ➔ ${searchToCity.value} • ₹${fare} per seat`;
+      
+      const deckSwitcher = document.getElementById('deckSwitcherRow');
+      if (deckSwitcher) deckSwitcher.style.display = isSleeper ? 'flex' : 'none';
+
+      renderSeatGrid();
+      updateSelectedSeatsUI();
+      openModal('seatSelectionModal');
+    }
+
+    function switchDeck(deck) {
+      currentDeck = deck;
+      document.getElementById('btnLowerDeck').classList.toggle('active', deck === 'lower');
+      document.getElementById('btnUpperDeck').classList.toggle('active', deck === 'upper');
+      renderSeatGrid();
+    }
+
+    function renderSeatGrid() {
+      const grid = document.getElementById('seatMapGrid');
+      if (!grid) return;
+
+      const prefix = activeSelectedBus && activeSelectedBus.isSleeper 
+        ? (currentDeck === 'lower' ? 'L' : 'U')
+        : 'S';
+
+      let seatItemsHTML = '';
+      for (let i = 1; i <= 24; i++) {
+        const seatCode = prefix + i;
+        const isBooked = (i === 3 || i === 7 || i === 15 || i === 18);
+        const isLadies = (i === 1 || i === 2 || i === 5 || i === 6);
+        const isSelected = selectedSeats.includes(seatCode);
+
+        let statusClass = 'available';
+        if (isBooked) statusClass = 'booked';
+        else if (isSelected) statusClass = 'selected';
+        else if (isLadies) statusClass = 'available ladies';
+
+        const isAisle = (i % 4 === 2);
+
+        seatItemsHTML += `
+          <div class="seat-item ${statusClass} ${isAisle ? 'aisle-gap' : ''}" onclick="toggleSeat('${seatCode}', ${isBooked})">
+            ${seatCode}
+          </div>
+        `;
+      }
+      grid.innerHTML = seatItemsHTML;
+    }
+
+    function toggleSeat(seatCode, isBooked) {
+      if (isBooked) {
+        showToast(currentLang === 'ml' ? 'ഈ സീറ്റ് മുൻപ് ബുക്ക് ചെയ്തതാണ്.' : 'This seat is already booked.', '⚠️');
+        return;
+      }
+      if (selectedSeats.includes(seatCode)) {
+        selectedSeats = selectedSeats.filter(s => s !== seatCode);
+      } else {
+        if (selectedSeats.length >= 6) {
+          showToast(currentLang === 'ml' ? 'പരമാവധി 6 സീറ്റുകൾ മാത്രമേ തിരഞ്ഞെടുക്കാനാകൂ.' : 'Maximum 6 seats permitted per booking.', '⚠️');
+          return;
+        }
+        selectedSeats.push(seatCode);
+      }
+      renderSeatGrid();
+      updateSelectedSeatsUI();
+    }
+
+    function updateSelectedSeatsUI() {
+      const label = document.getElementById('selectedSeatsLabel');
+      const countEl = document.getElementById('selectedSeatsCountDisplay');
+      const amountEl = document.getElementById('selectedSeatsTotalAmount');
+
+      if (label) label.textContent = selectedSeats.length > 0 ? selectedSeats.join(', ') : 'None';
+      if (countEl) countEl.textContent = selectedSeats.length;
+
+      const total = selectedSeats.length * (activeSelectedBus ? activeSelectedBus.fare : 540);
+      if (amountEl) amountEl.textContent = '₹' + total;
+    }
+
+    function confirmSeatBooking() {
+      if (selectedSeats.length === 0) {
+        showToast(currentLang === 'ml' ? 'ദയവായി കുറഞ്ഞത് ഒരു സീറ്റെങ്കിലും തിരഞ്ഞെടുക്കൂ.' : 'Please select at least 1 seat.', '⚠️');
+        return;
+      }
+
+      const hasAlarm = document.getElementById('chkDestAlarm').checked;
+      const hasWhatsApp = document.getElementById('chkWhatsAppPass').checked;
+      const seatsStr = selectedSeats.join(', ');
+
+      closeModal('seatSelectionModal');
+      
+      let msg = currentLang === 'ml'
+        ? `${seatsStr} സീറ്റുകൾ വിജയകരമായി ബുക്ക് ചെയ്തു! PNR: KSRTC${Math.floor(10000000 + Math.random() * 90000000)}`
+        : `Seats ${seatsStr} confirmed! PNR: KSRTC${Math.floor(10000000 + Math.random() * 90000000)}`;
+
+      if (hasWhatsApp) msg += ' • Smart QR sent to WhatsApp!';
+      if (hasAlarm) msg += ' • 15-min Wake-Up Alarm active!';
+
+      showToast(msg, '🎟️');
+    }
+
+    function openLiveRadarModal(busName) {
+      document.getElementById('radarCoachHeader').textContent = `KL-15-A-${Math.floor(1000 + Math.random() * 8999)} • ${busName}`;
+      openModal('radarModal');
+    }
+
+    // Connect search form submit to dynamic generator
+    const origSearchSubmit = window.handleSearchSubmit;
+    window.handleSearchSubmit = function(e) {
+      e.preventDefault();
+      const from = searchFromCity.value;
+      const to = searchToCity.value;
+      generateBusSchedules(from, to);
+      document.getElementById('busSearchResultsBox').scrollIntoView({ behavior: 'smooth' });
+      showToast((currentLang === 'ml' ? 'സ്ഥിരീകരിച്ച ബസുകൾ കണ്ടെത്തി: ' : 'Found verified buses for ') + `${from} ➔ ${to}`, '🌸');
+    };
+
+    // Initialize initial schedules
+    generateBusSchedules('ബെംഗളൂരു', 'കൊച്ചി');
+
     // ===================================================================
     // RAIL ROLLS FOOD ORDER TO SEAT DATA & CART ENGINE
     // ===================================================================
     const FOOD_MENU = [
+      {
+        id: 'halwa',
+        name: 'Kozhikodan Black Halwa Gift Box (500g)',
+        category: 'onam',
+        price: 150,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80',
+        desc: 'Authentic pure ghee Kozhikodan dark halwa with roasted cashews. Perfect festive homecoming gift.'
+      },
+      {
+        id: 'chips',
+        name: 'Kerala Nendran Banana Chips (250g)',
+        category: 'snacks',
+        price: 80,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281691?auto=format&fit=crop&w=600&q=80',
+        desc: 'Crispy raw plantain chips fried in pure coconut oil with sea salt and turmeric.'
+      },
+      {
+        id: 'pookkalamkit',
+        name: 'Fresh Onam Pookkalam Flower Kit',
+        category: 'onam',
+        price: 120,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80',
+        desc: 'Box of freshly plucked marigold, orange chethi, jasmine and lotus petals for doorstep floral carpet.'
+      },
       {
         id: 'sadya',
         name: 'Grand Onam Sadya Feast',
