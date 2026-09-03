@@ -2265,15 +2265,15 @@
       <div class="search-tab-switcher">
         <button class="tab-btn active" id="tabBusBooking" onclick="switchSearchTab('bus')">
           <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-          <span>Standard Bus Booking</span>
+          <span>ബസ് ബുക്കിംഗ് / Bus Booking</span>
         </button>
         <button class="tab-btn" id="tabLinkBus" onclick="switchSearchTab('link')">
           <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-          <span>Link-Ticket (Connecting Bus)</span>
+          <span>ലിങ്ക്-ടിക്കറ്റ് / Link-Ticket</span>
         </button>
         <button class="tab-btn" id="tabOnamFilter" onclick="filterOnamServices()" style="color: var(--onam-saffron); font-weight: 800;">
           <span>🌸</span>
-          <span>Onam Special Expresses Only</span>
+          <span>🌸 ഓണം സ്പെഷ്യൽ / Onam Specials</span>
         </button>
       </div>
 
@@ -2282,11 +2282,11 @@
         <div class="radio-pill-group">
           <label class="radio-pill">
             <input type="radio" name="bookingTripMode" value="oneway" checked onchange="handleTripModeChange('oneway')">
-            <span>One Way</span>
+            <span>ഒരു വശത്തേക്ക് / One Way</span>
           </label>
           <label class="radio-pill">
             <input type="radio" name="bookingTripMode" value="roundtrip" onchange="handleTripModeChange('roundtrip')">
-            <span>Round Trip <strong style="color: var(--secondary);">(10% Off Return Leg)</strong></span>
+            <span>പോയി വരാൻ / Round Trip <strong style="color: var(--secondary);">(10% Off Return Leg)</strong></span>
           </label>
         </div>
 
@@ -2319,74 +2319,81 @@
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 16px;">🏛️</span>
-            <span style="font-size: 13px; font-weight: 800;" data-i18n="landmarkTitle">ചിത്രങ്ങളിൽ തൊട്ട് സ്ഥലം തിരഞ്ഞെടുക്കൂ (എഴുതേണ്ടതില്ല):</span>
+            <span style="font-size: 13px; font-weight: 800;" id="landmarkHeadingText">ചിത്രങ്ങളിൽ തൊട്ട് തിരഞ്ഞെടുക്കാം • Tap Icons to Pick Cities (No Typing Needed):</span>
           </div>
           <button type="button" class="btn-audio-guide" onclick="readSearchOutLoud()">
             <span>🔊</span>
-            <span data-i18n="btnReadSearch">യാത്രാ വിവരങ്ങൾ കേൾക്കാം</span>
+            <span id="audioGuideBtnText">🔊 കേൾക്കാം / Listen Aloud</span>
           </button>
         </div>
 
         <div class="landmarks-scroll-row">
-          <div class="landmark-pill-card" onclick="selectLandmarkCity('തിരുവനന്തപുരം')">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('തിരുവനന്തപുരം / Trivandrum')">
             <span class="landmark-badge-icon">🏛️</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityTvm">തിരുവനന്തപുരം</div>
-              <div class="landmark-text-sub">പദ്മനാഭസ്വാമി ക്ഷേത്രം</div>
+              <div class="landmark-text-title">തിരുവനന്തപുരം <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Trivandrum</span></div>
+              <div class="landmark-text-sub">Padmanabhaswamy Temple • പദ്മനാഭസ്വാമി</div>
             </div>
           </div>
-          <div class="landmark-pill-card selected" onclick="selectLandmarkCity('കൊച്ചി')">
+          <div class="landmark-pill-card selected" onclick="selectLandmarkCity('കൊച്ചി / Kochi')">
             <span class="landmark-badge-icon">🏙️</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityKochi">കൊച്ചി</div>
-              <div class="landmark-text-sub">വൈറ്റില ഹബ്ബ്, മെട്രോ</div>
+              <div class="landmark-text-title">കൊച്ചി <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Kochi</span></div>
+              <div class="landmark-text-sub">Vytilla Mobility Hub • വൈറ്റില മെട്രോ</div>
             </div>
           </div>
-          <div class="landmark-pill-card" onclick="selectLandmarkCity('കോഴിക്കോട്')">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('കോഴിക്കോട് / Kozhikode')">
             <span class="landmark-badge-icon">🌴</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityCalicut">കോഴിക്കോട്</div>
-              <div class="landmark-text-sub">മിഠായിത്തെരുവ്, ബീച്ച്</div>
+              <div class="landmark-text-title">കോഴിക്കോട് <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Kozhikode</span></div>
+              <div class="landmark-text-sub">Calicut Beach • മിഠായിത്തെരുവ്</div>
             </div>
           </div>
-          <div class="landmark-pill-card" onclick="selectLandmarkCity('തൃശ്ശൂർ')">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('തൃശ്ശൂർ / Thrissur')">
             <span class="landmark-badge-icon">🐘</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityThrissur">തൃശ്ശൂർ</div>
-              <div class="landmark-text-sub">വടക്കുംനാഥൻ, പൂര നഗരി</div>
+              <div class="landmark-text-title">തൃശ്ശൂർ <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Thrissur</span></div>
+              <div class="landmark-text-sub">Cultural Capital • വടക്കുംനാഥൻ പൂര നഗരി</div>
             </div>
           </div>
-          <div class="landmark-pill-card" onclick="selectLandmarkCity('ആലപ്പുഴ')">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('ആലപ്പുഴ / Alappuzha')">
             <span class="landmark-badge-icon">🛶</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityAlleppey">ആലപ്പുഴ</div>
-              <div class="landmark-text-sub">വള്ളംകളി, കായലുകൾ</div>
+              <div class="landmark-text-title">ആലപ്പുഴ <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Alappuzha</span></div>
+              <div class="landmark-text-sub">Backwaters & Boat Race • വള്ളംകളി</div>
             </div>
           </div>
-          <div class="landmark-pill-card" onclick="selectLandmarkCity('മൂന്നാർ')">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('മൂന്നാർ / Munnar')">
             <span class="landmark-badge-icon">⛰️</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityMunnar">മൂന്നാർ</div>
-              <div class="landmark-text-sub">തേയിലത്തോട്ടങ്ങൾ</div>
+              <div class="landmark-text-title">മൂന്നാർ <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Munnar</span></div>
+              <div class="landmark-text-sub">Tea Highlands • തേയിലത്തോട്ടങ്ങൾ</div>
             </div>
           </div>
-          <div class="landmark-pill-card" onclick="selectLandmarkCity('ബെംഗളൂരു')">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('ബെംഗളൂരു / Bengaluru')">
             <span class="landmark-badge-icon">🏢</span>
             <div>
-              <div class="landmark-text-title" data-i18n="cityBlr">ബെംഗളൂരു</div>
-              <div class="landmark-text-sub">മഡിവാള, മജെസ്റ്റിക്</div>
+              <div class="landmark-text-title">ബെംഗളൂരു <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Bengaluru</span></div>
+              <div class="landmark-text-sub">Madiwala / Majestic Hub • മഡിവാള</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('ചെന്നൈ / Chennai')">
+            <span class="landmark-badge-icon">🌊</span>
+            <div>
+              <div class="landmark-text-title">ചെന്നൈ <span style="font-size: 11px; opacity: 0.8; font-weight: 600;">/ Chennai</span></div>
+              <div class="landmark-text-sub">Koyambedu Inter-State Stand • കോയമ്പേട്</div>
             </div>
           </div>
         </div>
-
-        <!-- Quick Relative Date Selection Chips -->
+      </div>
+      <!-- Quick Relative Date Selection Chips -->
         <div class="quick-dates-row">
-          <span style="font-size: 11px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-muted);" data-i18n="quickDateLabel">തീയതി:</span>
-          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(0, this)" data-i18n="dateToday">ഇന്ന്</button>
-          <button type="button" class="date-chip-btn active" onclick="selectRelativeDate(1, this)" data-i18n="dateTomorrow">നാളെ</button>
-          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(2, this)" data-i18n="dateDayAfter">മറ്റന്നാൾ</button>
-          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(3, this)" data-i18n="dateUthradam">ഉത്രാടം</button>
-          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(4, this)" data-i18n="dateThiruvonam">തിരുവോണം 🌸</button>
+          <span style="font-size: 11px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-muted);">തീയതി / Date:</span>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(0, this)">ഇന്ന് (Today)</button>
+          <button type="button" class="date-chip-btn active" onclick="selectRelativeDate(1, this)">നാളെ (Tomorrow)</button>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(2, this)">മറ്റന്നാൾ (Day After)</button>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(3, this)">ഉത്രാടം (Uthradam)</button>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(4, this)">തിരുവോണം (Thiruvonam 🌸)</button>
         </div>
       </div>
 
@@ -2395,10 +2402,10 @@
         <div class="input-field-group">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg>
-            <span>Leaving From</span>
+            <span>പുറപ്പെടുന്ന സ്ഥലം / Leaving From</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchFromCity" value="ബെംഗളൂരു" placeholder="പുറപ്പെടുന്ന സ്ഥലം..." autocomplete="off" oninput="handleCityInput('searchFromCity', 'fromCityDropdown', event)" onfocus="handleCityInput('searchFromCity', 'fromCityDropdown', event)" required>
+            <input type="text" class="custom-input" id="searchFromCity" value="Bengaluru (ബെംഗളൂരു)" placeholder="പുറപ്പെടുന്ന സ്ഥലം..." autocomplete="off" oninput="handleCityInput('searchFromCity', 'fromCityDropdown', event)" onfocus="handleCityInput('searchFromCity', 'fromCityDropdown', event)" required>
             <button type="button" class="btn-voice-mic" onclick="startVoiceSearch('searchFromCity')" title="മൈക്കിലൂടെ സ്ഥലം പറയൂ / Speak City" aria-label="Voice search">
               <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
             </button>
@@ -2417,10 +2424,10 @@
         <div class="input-field-group">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            <span>Going To (Kerala)</span>
+            <span>എത്തിച്ചേരേണ്ട സ്ഥലം / Going To</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchToCity" value="കൊച്ചി" placeholder="എത്തിച്ചേരേണ്ട സ്ഥലം..." autocomplete="off" oninput="handleCityInput('searchToCity', 'toCityDropdown', event)" onfocus="handleCityInput('searchToCity', 'toCityDropdown', event)" required>
+            <input type="text" class="custom-input" id="searchToCity" value="Kochi (കൊച്ചി)" placeholder="എത്തിച്ചേരേണ്ട സ്ഥലം..." autocomplete="off" oninput="handleCityInput('searchToCity', 'toCityDropdown', event)" onfocus="handleCityInput('searchToCity', 'toCityDropdown', event)" required>
             <button type="button" class="btn-voice-mic" onclick="startVoiceSearch('searchToCity')" title="മൈക്കിലൂടെ സ്ഥലം പറയൂ / Speak City" aria-label="Voice search">
               <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
             </button>
@@ -2436,7 +2443,7 @@
         <div class="input-field-group">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            <span>Journey Date</span>
+            <span>യാത്രാ തീയതി / Journey Date</span>
           </label>
           <input type="date" class="custom-input" id="departDateInput" required>
         </div>
@@ -2454,7 +2461,7 @@
         <div class="input-field-group">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            <span>Passengers (Family)</span>
+            <span>യാത്രികർ / Passengers (Family)</span>
           </label>
           <div style="display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); height: 52px; padding: 0 12px; justify-content: space-between;">
             <button type="button" class="tab-btn" style="padding: 0 8px; font-size: 18px;" onclick="adjustPassenger(-1)">−</button>
@@ -2467,11 +2474,11 @@
         <div style="display: flex; gap: 8px;">
           <button type="submit" class="btn-find-bus">
             <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <span>Search Buses</span>
+            <span>ബസ് തിരയുക / Search Buses</span>
           </button>
           <button type="button" class="btn-focus-map" onclick="focusRouteOnMap()" title="Pan to route on map">
             <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-            <span>Map</span>
+            <span>മാപ്പ് / Map</span>
           </button>
         </div>
       </form>
@@ -4039,26 +4046,26 @@
     // KERALA PLACES AUTOCOMPLETE ENGINE
     // ===================================================================
     const KERALA_PLACES = [
-      { en: 'Bengaluru', ml: 'ബെംഗളൂരു', hub: 'Inter-State Hub (Majestic / Madiwala)' },
-      { en: 'Chennai', ml: 'ചെന്നൈ', hub: 'Inter-State Hub (Koyambedu)' },
-      { en: 'Coimbatore', ml: 'കോയമ്പത്തൂർ', hub: 'Inter-State Hub (Gandhipuram)' },
-      { en: 'Mysuru', ml: 'മൈസൂരു', hub: 'Inter-State Stand' },
-      { en: 'Thiruvananthapuram', ml: 'തിരുവനന്തപുരം', hub: 'Central Depot (Thampanoor)' },
-      { en: 'Kochi', ml: 'കൊച്ചി', hub: 'Vytilla Mobility Hub Depot' },
-      { en: 'Kozhikode', ml: 'കോഴിക്കോട്', hub: 'KSRTC Terminal Stand' },
-      { en: 'Thrissur', ml: 'തൃശ്ശൂർ', hub: 'Swaraj Round Central Stand' },
-      { en: 'Kannur', ml: 'കണ്ണൂർ', hub: 'KSRTC Bus Terminal' },
-      { en: 'Kollam', ml: 'കൊല്ലം', hub: 'Main KSRTC Depot' },
-      { en: 'Alappuzha', ml: 'ആലപ്പുഴ', hub: 'Boat Jetty Stand' },
-      { en: 'Palakkad', ml: 'പാലക്കാട്', hub: 'KSRTC Stand Stadium Bypass' },
-      { en: 'Kottayam', ml: 'കോട്ടയം', hub: 'KSRTC Central Stand' },
-      { en: 'Malappuram', ml: 'മലപ്പുറം', hub: 'KSRTC Stand' },
-      { en: 'Wayanad (Sulthan Bathery)', ml: 'വയനാട് (സുൽത്താൻ ബത്തേരി)', hub: 'Bathery Terminal Depot' },
-      { en: 'Munnar', ml: 'മൂന്നാർ', hub: 'Highland Bus Terminal' },
-      { en: 'Kasaragod', ml: 'കാസർഗോഡ്', hub: 'New KSRTC Bus Stand' },
-      { en: 'Pathanamthitta', ml: 'പത്തനംതിട്ട', hub: 'Ring Road Stand' },
-      { en: 'Aranmula', ml: 'ആറന്മുള', hub: 'Boat Race Cultural Stop' },
-      { en: 'Guruvayur', ml: 'ഗുരുവായൂർ', hub: 'Temple Stand' }
+      { en: 'Bengaluru (Bangalore)', ml: 'ബെംഗളൂരു', display: 'Bengaluru • ബെംഗളൂരു', hub: 'Inter-State Hub (Majestic / Madiwala)' },
+      { en: 'Chennai (Madras)', ml: 'ചെന്നൈ', display: 'Chennai • ചെന്നൈ', hub: 'Inter-State Hub (Koyambedu Stand)' },
+      { en: 'Coimbatore', ml: 'കോയമ്പത്തൂർ', display: 'Coimbatore • കോയമ്പത്തൂർ', hub: 'Gandhipuram Terminal Stand' },
+      { en: 'Mysuru (Mysore)', ml: 'മൈസൂരു', display: 'Mysuru • മൈസൂരു', hub: 'Suburban KSRTC Stand' },
+      { en: 'Thiruvananthapuram (Trivandrum)', ml: 'തിരുവനന്തപുരം', display: 'Trivandrum • തിരുവനന്തപുരം', hub: 'Central Depot (Thampanoor)' },
+      { en: 'Kochi (Ernakulam)', ml: 'കൊച്ചി', display: 'Kochi • കൊച്ചി', hub: 'Vytilla Mobility Hub Depot' },
+      { en: 'Kozhikode (Calicut)', ml: 'കോഴിക്കോട്', display: 'Kozhikode • കോഴിക്കോട്', hub: 'KSRTC Terminal Stand (Mavoor Rd)' },
+      { en: 'Thrissur (Trichur)', ml: 'തൃശ്ശൂർ', display: 'Thrissur • തൃശ്ശൂർ', hub: 'Swaraj Round Central Stand' },
+      { en: 'Kannur (Cannanore)', ml: 'കണ്ണൂർ', display: 'Kannur • കണ്ണൂർ', hub: 'KSRTC Bus Terminal' },
+      { en: 'Kollam (Quilon)', ml: 'കൊല്ലം', display: 'Kollam • കൊല്ലം', hub: 'Main KSRTC Depot' },
+      { en: 'Alappuzha (Alleppey)', ml: 'ആലപ്പുഴ', display: 'Alappuzha • ആലപ്പുഴ', hub: 'Boat Jetty Stand' },
+      { en: 'Palakkad (Palghat)', ml: 'പാലക്കാട്', display: 'Palakkad • പാലക്കാട്', hub: 'KSRTC Stand Stadium Bypass' },
+      { en: 'Kottayam', ml: 'കോട്ടയം', display: 'Kottayam • കോട്ടയം', hub: 'KSRTC Central Stand' },
+      { en: 'Malappuram', ml: 'മലപ്പുറം', display: 'Malappuram • മലപ്പുറം', hub: 'KSRTC Stand' },
+      { en: 'Wayanad (Sulthan Bathery)', ml: 'വയനാട്', display: 'Wayanad • വയനാട് (സുൽത്താൻ ബത്തേരി)', hub: 'Bathery Terminal Depot' },
+      { en: 'Munnar', ml: 'മൂന്നാർ', display: 'Munnar • മൂന്നാർ', hub: 'Highland Bus Terminal' },
+      { en: 'Kasaragod', ml: 'കാസർഗോഡ്', display: 'Kasaragod • കാസർഗോഡ്', hub: 'New KSRTC Bus Stand' },
+      { en: 'Pathanamthitta', ml: 'പത്തനംതിട്ട', display: 'Pathanamthitta • പത്തനംതിട്ട', hub: 'Ring Road Stand' },
+      { en: 'Aranmula', ml: 'ആറന്മുള', display: 'Aranmula • ആറന്മുള', hub: 'Boat Race Cultural Stop' },
+      { en: 'Guruvayur', ml: 'ഗുരുവായൂർ', display: 'Guruvayur • ഗുരുവായൂർ', hub: 'Temple Stand' }
     ];
 
     function handleCityInput(inputId, dropdownId, event) {
@@ -4083,14 +4090,11 @@
       }
 
       dropdown.innerHTML = matches.slice(0, 6).map(p => {
-        const displayName = currentLang === 'ml' ? p.ml : p.en;
-        const altName = currentLang === 'ml' ? p.en : p.ml;
         return `
-          <div class="autocomplete-item" onclick="selectAutocompleteCity('${inputId}', '${dropdownId}', '${displayName}')">
+          <div class="autocomplete-item" onclick="selectAutocompleteCity('${inputId}', '${dropdownId}', '${p.display}')">
             <div class="ac-main-name">
               <span>📍</span>
-              <span>${displayName}</span>
-              <span style="font-size: 11px; opacity: 0.6;">(${altName})</span>
+              <span>${p.display}</span>
             </div>
             <div class="ac-hub-sub">${p.hub}</div>
           </div>
@@ -4786,29 +4790,16 @@
       document.documentElement.lang = lang;
       const dict = TRANSLATIONS[lang];
 
-      document.title = dict.pageTitle;
-      document.getElementById('langSwitchLabel').textContent = dict.langBtnLabel;
-      const largeTxtEl = document.getElementById('largeTextLabel');
-      if (largeTxtEl) largeTxtEl.textContent = dict.navLargeText;
+      document.title = lang === 'ml' 
+        ? 'കെ.എസ്.ആർ.ടി.സി സ്വിഫ്റ്റ് — ഔദ്യോഗിക ഓണം സ്പെഷ്യൽ & ബസ് റിസർവേഷൻ | KSRTC-SWIFT'
+        : 'KSRTC-SWIFT — Official Onam Homecoming & Online Bus Journey Planner';
+      
+      const switchLabel = document.getElementById('langSwitchLabel');
+      if (switchLabel) switchLabel.textContent = lang === 'ml' ? 'English' : 'മലയാളം';
 
-      // Update elements with data-i18n
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) {
-          el.textContent = dict[key];
-        }
-      });
-
-      // Update City inputs if default
-      if (lang === 'ml') {
-        if (searchFromCity.value === 'Bengaluru') searchFromCity.value = 'ബെംഗളൂരു';
-        if (searchToCity.value === 'Kochi') searchToCity.value = 'കൊച്ചി';
-      } else {
-        if (searchFromCity.value === 'ബെംഗളൂരു') searchFromCity.value = 'Bengaluru';
-        if (searchToCity.value === 'കൊച്ചി') searchToCity.value = 'Kochi';
-      }
-
-      showToast(lang === 'ml' ? 'മലയാളം ഭാഷ സജ്ജമാക്കി' : 'English language enabled', '🌐');
+      // Re-generate bus schedules to match current search inputs
+      generateBusSchedules(searchFromCity.value, searchToCity.value);
+      showToast(lang === 'ml' ? 'മലയാളം & English Bilingual Active' : 'English & Malayalam Bilingual Active', '🌐');
     }
 
     function toggleLanguage() {
