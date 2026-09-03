@@ -1291,7 +1291,353 @@
       .hero-carousel-card { height: 340px; }
       .carousel-slide { padding: 24px; }
     }
-  </style>
+  
+    /* ===================================================================
+       MOBILE-FIRST EXCELLENCE & FOOD ORDERING ENGINE STYLES
+       =================================================================== */
+
+    /* Touch Friendly Tap Target Minimums & Font Zoom Prevention */
+    input, select, textarea, button {
+      font-size: 16px; /* Prevents auto-zoom on iOS Safari */
+    }
+
+    /* Floating Cart Bar */
+    .floating-cart-strip {
+      position: fixed;
+      bottom: 74px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      width: calc(100% - 32px);
+      max-width: 640px;
+      background: #041616;
+      border: 1.5px solid var(--secondary);
+      border-radius: 30px;
+      padding: 12px 20px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1400;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .floating-cart-strip.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Food Section Interactive Cards */
+    .food-section-container {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 44px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .food-category-tabs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin: 18px 0 24px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .food-cat-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .food-cat-btn.active, .food-cat-btn:hover {
+      background: var(--primary);
+      color: #FFF;
+      border-color: var(--primary);
+    }
+
+    .food-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .food-item-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .food-item-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--secondary);
+    }
+
+    .food-thumb-box {
+      height: 140px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .food-diet-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 20px;
+      height: 20px;
+      background: #FFF;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .food-diet-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-veg { background: #2A8A5A; }
+    .dot-nonveg { background: #D9381E; }
+
+    .food-content-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .food-item-title { font-size: 15px; font-weight: 800; line-height: 1.25; }
+    .food-item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
+    
+    .food-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .food-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* Quantity Stepper Button */
+    .qty-stepper-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 8px;
+    }
+
+    .btn-qty-step {
+      background: transparent;
+      border: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .btn-qty-step:hover { background: rgba(10, 74, 74, 0.1); color: var(--primary); }
+
+    .qty-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 14px;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .btn-add-food {
+      background: var(--primary);
+      color: #FFF;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 18px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-add-food:hover { background: var(--primary-light); }
+
+    /* MOBILE BOTTOM NAVIGATION BAR (FIXED ON SMARTPHONES) */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      z-index: 1500;
+      box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.08);
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mob-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.15s ease;
+      background: transparent;
+      border: none;
+    }
+
+    .mob-nav-item:active, .mob-nav-item.active {
+      color: var(--primary);
+    }
+
+    .mob-nav-item svg { width: 20px; height: 20px; }
+
+    .mob-badge-counter {
+      position: absolute;
+      top: 0;
+      right: 4px;
+      background: var(--onam-saffron);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobile Sheet Handle */
+    .mobile-sheet-handle {
+      display: none;
+      width: 44px;
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      margin: 8px auto 14px;
+    }
+
+    /* RESPONSIVE BREAKPOINTS FOR BEST MOBILE QUALITY */
+    @media (max-width: 1024px) {
+      .food-menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .journey-display-grid { grid-template-columns: 1fr; }
+      .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+      .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+      .app-download-showcase { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      body { padding-bottom: 74px; /* Space for mobile bottom bar */ }
+      .mobile-bottom-nav { display: flex; }
+      .mobile-sheet-handle { display: block; }
+      .site-header { padding: 12px 16px; }
+      .page-container { padding: 0 16px 40px; }
+      .hero-carousel-card { height: 260px; margin: 12px 0 20px; }
+      .carousel-slide { padding: 24px 20px; }
+      .carousel-text h2 { font-size: 26px; }
+      .carousel-text p { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .carousel-ctrl-btn { width: 34px; height: 34px; font-size: 14px; }
+      .search-widget-card { padding: 18px 16px; }
+      .search-grid { grid-template-columns: 1fr; gap: 12px; }
+      .btn-find-bus { width: 100%; justify-content: center; }
+      .destinations-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .destination-tile { min-width: 250px; scroll-snap-align: start; }
+      .fleet-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .fleet-card { min-width: 240px; scroll-snap-align: start; }
+      .food-menu-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .food-item-card { min-width: 240px; scroll-snap-align: start; }
+      .food-section-container { padding: 20px 16px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+      
+      /* Mobile Bottom Sheet Transform */
+      .modal-backdrop {
+        align-items: flex-end;
+        padding: 0;
+      }
+      .modal-box {
+        border-radius: 24px 24px 0 0;
+        max-height: 88vh;
+        width: 100%;
+        max-width: 100%;
+        transform: translateY(100%);
+      }
+      .modal-backdrop.open .modal-box {
+        transform: translateY(0);
+      }
+    }
+
+</style>
 </head>
 <body data-theme="light">
 
@@ -1599,23 +1945,43 @@
       </form>
     </section>
 
-    <!-- ONAM SADYA IN-JOURNEY DINING HIGHLIGHT BANNER -->
-    <section class="onam-sadya-highlight-banner" aria-label="Grand Onam Sadya In-Journey Dining">
-      <div>
-        <span class="onam-badge-pill">RAIL ROLLS & KSRTC EXCLUSIVE</span>
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; margin-top: 8px;">
-          Grand Onam Sadya Onboard Your Bus
-        </h3>
-        <p style="font-size: 14px; color: var(--text-muted); margin: 8px 0 18px;">
-          Pre-order an authentic 24-item traditional Kerala Sadya served on a fresh plantain leaf, complete with Palada Payasam, Parippu, Ghee, and Sharkara Varatti, delivered hot to your seat at scheduled highway depot halts.
-        </p>
-        <button class="btn-find-bus" style="height: 42px; padding: 0 20px; font-size: 13px;" onclick="openRailRollsModal()">
-          <span>Pre-Order Onam Sadya (₹220)</span>
-          <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    
+    <!-- RAIL ROLLS: FOOD DELIVERED TO YOUR SEAT SECTION -->
+    <section class="food-section-container" id="foodToSeatSection" aria-label="Rail Rolls In-Journey Food Ordering">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="onam-badge-pill">RAIL ROLLS & KSRTC EXCLUSIVE</span>
+            <span style="font-size: 12px; font-weight: 700; color: var(--success);">🌱 Pure Hygiene Certified</span>
+          </div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; margin-top: 6px;">
+            Food Delivered Right to Your Seat
+          </h3>
+          <p style="font-size: 13px; color: var(--text-muted); max-width: 680px; margin-top: 4px;">
+            No rushing during brief halts! Pre-order authentic Kerala Sadya feasts, Thalassery dum biryani, piping-hot snacks and filter coffee delivered warm to your seat at scheduled highway depot stops.
+          </p>
+        </div>
+        <button class="btn-find-bus" style="height: 40px; padding: 0 18px; font-size: 13px;" onclick="openFoodOrderModal()">
+          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span>Open Full Menu & Cart</span>
         </button>
       </div>
-      <div class="sadya-photo-box"></div>
+
+      <!-- Food Category Filters -->
+      <div class="food-category-tabs">
+        <button class="food-cat-btn active" onclick="filterFoodCategory('all', this)">All Items (8)</button>
+        <button class="food-cat-btn" onclick="filterFoodCategory('onam', this)">🌸 Onam Feast</button>
+        <button class="food-cat-btn" onclick="filterFoodCategory('meals', this)">🍱 Meals & Biryani</button>
+        <button class="food-cat-btn" onclick="filterFoodCategory('snacks', this)">🥟 Snacks & Desserts</button>
+        <button class="food-cat-btn" onclick="filterFoodCategory('beverages', this)">☕ Beverages</button>
+      </div>
+
+      <!-- Food Menu Grid -->
+      <div class="food-menu-grid" id="foodItemsContainer">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
     </section>
+
 
     <!-- SPATIAL ENGINE: INTERACTIVE KERALA SVG MAP + TOP ONAM ROUTES -->
     <div class="journey-display-grid" id="onamSpecials">
@@ -2432,41 +2798,90 @@
     </div>
   </div>
 
-  <!-- 12. RAIL ROLLS GRAND ONAM SADYA MODAL -->
+  
+  <!-- 12. RAIL ROLLS MULTI-ITEM FOOD ORDER TO SEAT MODAL SHEET -->
   <div class="modal-backdrop" id="railRollsModal" role="dialog" aria-modal="true">
     <div class="modal-box">
+      <div class="mobile-sheet-handle"></div>
       <div class="modal-header">
-        <h3>🍽️ Grand Onam Sadya In-Journey Feast</h3>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg class="icon-svg" style="color: var(--secondary);" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <h3 style="font-size: 18px; margin: 0;">Order Food to Your Bus Seat</h3>
+        </div>
         <button class="modal-close-btn" onclick="closeModal('railRollsModal')">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
-      <div class="modal-body">
-        <div style="display: flex; gap: 14px; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px;">
-          <div style="width: 70px; height: 70px; border-radius: 8px; background-image: url('https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=300&q=80'); background-size: cover;"></div>
+
+      <div class="modal-body" style="padding: 20px; max-height: 75vh; overflow-y: auto;">
+        
+        <!-- Journey Seat Delivery Details -->
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+          <div style="font-size: 11px; font-family: 'JetBrains Mono'; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 8px;">
+            📍 Delivery Target in Transit
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label style="font-size: 11px; font-weight: 700; color: var(--text-muted);">PNR Number</label>
+              <input type="text" class="custom-input" id="foodPnrInput" value="KSRTC12345678" style="height: 40px; font-size: 13px;">
+            </div>
+            <div>
+              <label style="font-size: 11px; font-weight: 700; color: var(--text-muted);">Seat / Berth No</label>
+              <input type="text" class="custom-input" id="foodSeatInput" value="Seat A12 (Window)" style="height: 40px; font-size: 13px;">
+            </div>
+          </div>
           <div>
-            <strong>Maha Onam Sadya Feast (24 Items)</strong>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Served on fresh plantain leaf with Ada Pradhaman & Palada Payasam.</p>
+            <label style="font-size: 11px; font-weight: 700; color: var(--text-muted);">Scheduled Halt Station (Delivered Hot)</label>
+            <select class="custom-input" id="foodHaltSelect" style="height: 40px; font-size: 13px;">
+              <option value="alappuzha">Alappuzha Bypass Depot Halt (Lunch 13:15 PM)</option>
+              <option value="vytilla" selected>Vytilla Mobility Hub Depot (Dinner 20:00 PM)</option>
+              <option value="kozhikode">Kozhikode Central Terminal Stand (Late Dinner 21:45 PM)</option>
+              <option value="thrissur">Thrissur Central Stand (Breakfast 08:30 AM)</option>
+            </select>
           </div>
         </div>
-        <div class="input-field-group">
-          <label class="field-label">Select Delivery Halt Station</label>
-          <select class="custom-input">
-            <option>Alappuzha Bypass Halt (Lunch 13:00 PM)</option>
-            <option>Vytilla Mobility Hub (Dinner 20:00 PM)</option>
-            <option>Thrissur Swaraj Round Halt (14:30 PM)</option>
-          </select>
+
+        <!-- Menu Items List with Quantity Controls -->
+        <div style="font-size: 12px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;">
+          Select Items for Seat Delivery
         </div>
-        <div class="input-field-group">
-          <label class="field-label">Seat Number for Hot Delivery</label>
-          <input type="text" class="custom-input" value="Seat A14, A15">
+
+        <div id="modalFoodItemsList" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px;">
+          <!-- Dynamically populated -->
         </div>
+
+        <!-- Order Breakdown -->
+        <div style="border-top: 1.5px dashed var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Items Total (<span id="cartTotalItemsCount">0</span> items)</span>
+            <span style="font-weight: 700; font-family: 'JetBrains Mono';" id="cartSubtotalDisplay">₹0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Onboard Seat Delivery Fee</span>
+            <span style="color: var(--success); font-weight: 700;">FREE</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">GST (5%)</span>
+            <span style="font-family: 'JetBrains Mono';" id="cartGstDisplay">₹0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 800; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px;">
+            <span>Total Payable</span>
+            <span style="color: var(--primary); font-family: 'JetBrains Mono';" id="cartGrandTotalDisplay">₹0</span>
+          </div>
+        </div>
+
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-find-bus" onclick="closeModal('railRollsModal'); showToast('Grand Onam Sadya pre-ordered for Seat A14! Delivered hot at halt.', '🍱')">Confirm Feast (₹220 / Meal)</button>
+
+      <div class="modal-footer" style="padding: 16px 20px;">
+        <button type="button" class="nav-item-btn" onclick="closeModal('railRollsModal')">Cancel</button>
+        <button type="button" class="btn-find-bus" id="btnConfirmFoodOrder" onclick="submitFoodOrderToSeat()">
+          <span>Confirm & Order to Seat</span>
+          <span style="font-family: 'JetBrains Mono'; font-weight: 800;" id="modalBtnTotalAmount">₹0</span>
+        </button>
       </div>
     </div>
   </div>
+
 
   <!-- TOAST NOTIFICATION -->
   <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
@@ -2926,8 +3341,304 @@
       }
     });
 
+    
+    // ===================================================================
+    // RAIL ROLLS FOOD ORDER TO SEAT DATA & CART ENGINE
+    // ===================================================================
+    const FOOD_MENU = [
+      {
+        id: 'sadya',
+        name: 'Grand Onam Sadya Feast',
+        category: 'onam',
+        price: 220,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80',
+        desc: 'Authentic 24-item feast on fresh plantain leaf with Ada Pradhaman & Palada Payasam.'
+      },
+      {
+        id: 'biryani',
+        name: 'Thalassery Chicken Dum Biryani',
+        category: 'meals',
+        price: 190,
+        isVeg: false,
+        photo: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80',
+        desc: 'Kaima rice biryani with succulent chicken, boiled egg, date pickle and coconut raitha.'
+      },
+      {
+        id: 'breakfast',
+        name: 'Kerala Morning Breakfast Combo',
+        category: 'meals',
+        price: 95,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80',
+        desc: '4 steamed fluffy idlis, 2 crispy medu vadas, hot drumstick sambar and coconut chutney.'
+      },
+      {
+        id: 'kappa',
+        name: 'Kottayam Kappa & Fish Curry',
+        category: 'meals',
+        price: 160,
+        isVeg: false,
+        photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+        desc: 'Boiled mashed tapioca with crushed bird eye chillies and spicy red Kingfish curry.'
+      },
+      {
+        id: 'payasam',
+        name: 'Chilled Palada Payasam Cup',
+        category: 'snacks',
+        price: 65,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
+        desc: 'Slow-cooked milk dessert with rice ada flakes, cardamom, and ghee roasted cashews.'
+      },
+      {
+        id: 'elaada',
+        name: 'Ela Ada & Parippuvada Combo',
+        category: 'snacks',
+        price: 55,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+        desc: 'Steamed rice parcel with jaggery-coconut filling plus 2 hot crunchy dal vadas.'
+      },
+      {
+        id: 'sulaimani',
+        name: 'Malabar Spiced Sulaimani Tea',
+        category: 'beverages',
+        price: 30,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80',
+        desc: 'Traditional fragrant black tea infused with cardamom, mint, lemon, and cloves.'
+      },
+      {
+        id: 'coffee',
+        name: 'Kerala Filter Coffee Tumbler',
+        category: 'beverages',
+        price: 35,
+        isVeg: true,
+        photo: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
+        desc: 'Freshly brewed chicory blend with frothy boiled milk in a stainless steel tumbler.'
+      }
+    ];
+
+    let foodCart = {}; // { 'sadya': 1, 'biryani': 2 }
+
+    function renderFoodMenu(categoryFilter = 'all') {
+      const container = document.getElementById('foodItemsContainer');
+      if (!container) return;
+
+      const items = categoryFilter === 'all' 
+        ? FOOD_MENU 
+        : FOOD_MENU.filter(f => f.category === categoryFilter);
+
+      container.innerHTML = items.map(item => {
+        const qty = foodCart[item.id] || 0;
+        return `
+          <div class="food-item-card" data-cat="${item.category}">
+            <div class="food-thumb-box" style="background-image: url('${item.photo}');">
+              <div class="food-diet-tag" title="${item.isVeg ? 'Vegetarian' : 'Non-Vegetarian'}">
+                <div class="food-diet-dot ${item.isVeg ? 'dot-veg' : 'dot-nonveg'}"></div>
+              </div>
+            </div>
+            <div class="food-content-body">
+              <div>
+                <div class="food-item-title">${item.name}</div>
+                <div class="food-item-desc">${item.desc}</div>
+              </div>
+              <div class="food-price-row">
+                <span class="food-price">₹${item.price}</span>
+                ${qty > 0 ? `
+                  <div class="qty-stepper-box">
+                    <button class="btn-qty-step" onclick="changeFoodItemQty('${item.id}', -1)">−</button>
+                    <span class="qty-number">${qty}</span>
+                    <button class="btn-qty-step" onclick="changeFoodItemQty('${item.id}', 1)">+</button>
+                  </div>
+                ` : `
+                  <button class="btn-add-food" onclick="changeFoodItemQty('${item.id}', 1)">+ Add to Seat</button>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      renderModalFoodList();
+      updateCartDisplay();
+    }
+
+    function filterFoodCategory(cat, btn) {
+      document.querySelectorAll('.food-cat-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderFoodMenu(cat);
+    }
+
+    function changeFoodItemQty(itemId, delta) {
+      const current = foodCart[itemId] || 0;
+      const next = current + delta;
+      if (next <= 0) {
+        delete foodCart[itemId];
+      } else {
+        foodCart[itemId] = next;
+      }
+      renderFoodMenu();
+      const item = FOOD_MENU.find(f => f.id === itemId);
+      if (delta > 0) {
+        showToast(`Added ${item ? item.name : 'item'} to seat delivery`, '🍱');
+      }
+    }
+
+    function renderModalFoodList() {
+      const container = document.getElementById('modalFoodItemsList');
+      if (!container) return;
+
+      container.innerHTML = FOOD_MENU.map(item => {
+        const qty = foodCart[item.id] || 0;
+        return `
+          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="food-diet-tag" style="position: static;">
+                <div class="food-diet-dot ${item.isVeg ? 'dot-veg' : 'dot-nonveg'}"></div>
+              </div>
+              <div>
+                <strong style="font-size: 13px;">${item.name}</strong>
+                <div style="font-size: 12px; color: var(--primary); font-weight: 700; font-family: 'JetBrains Mono';">₹${item.price}</div>
+              </div>
+            </div>
+            ${qty > 0 ? `
+              <div class="qty-stepper-box">
+                <button class="btn-qty-step" onclick="changeFoodItemQty('${item.id}', -1)">−</button>
+                <span class="qty-number">${qty}</span>
+                <button class="btn-qty-step" onclick="changeFoodItemQty('${item.id}', 1)">+</button>
+              </div>
+            ` : `
+              <button class="btn-add-food" onclick="changeFoodItemQty('${item.id}', 1)">+ Add</button>
+            `}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateCartDisplay() {
+      let totalQty = 0;
+      let subtotal = 0;
+
+      for (const [id, qty] of Object.entries(foodCart)) {
+        const item = FOOD_MENU.find(f => f.id === id);
+        if (item) {
+          totalQty += qty;
+          subtotal += item.price * qty;
+        }
+      }
+
+      const gst = Math.round(subtotal * 0.05);
+      const grandTotal = subtotal + gst;
+
+      // Update in modal
+      const totalItemsCountEl = document.getElementById('cartTotalItemsCount');
+      if (totalItemsCountEl) totalItemsCountEl.textContent = totalQty;
+      const subtotalEl = document.getElementById('cartSubtotalDisplay');
+      if (subtotalEl) subtotalEl.textContent = '₹' + subtotal;
+      const gstEl = document.getElementById('cartGstDisplay');
+      if (gstEl) gstEl.textContent = '₹' + gst;
+      const grandTotalEl = document.getElementById('cartGrandTotalDisplay');
+      if (grandTotalEl) grandTotalEl.textContent = '₹' + grandTotal;
+      const btnTotalAmountEl = document.getElementById('modalBtnTotalAmount');
+      if (btnTotalAmountEl) btnTotalAmountEl.textContent = '₹' + grandTotal;
+
+      // Update Floating Bar
+      const floatingBar = document.getElementById('floatingCartBar');
+      const floatingBadge = document.getElementById('floatingCartBadge');
+      const floatingTotal = document.getElementById('floatingCartTotalDisplay');
+      const mobBadge = document.getElementById('mobFoodBadge');
+
+      if (totalQty > 0) {
+        if (floatingBar) floatingBar.classList.add('show');
+        if (floatingBadge) floatingBadge.textContent = totalQty;
+        if (floatingTotal) floatingTotal.textContent = `₹${grandTotal} (${totalQty} items)`;
+        if (mobBadge) {
+          mobBadge.textContent = totalQty;
+          mobBadge.style.display = 'flex';
+        }
+      } else {
+        if (floatingBar) floatingBar.classList.remove('show');
+        if (mobBadge) mobBadge.style.display = 'none';
+      }
+    }
+
+    function openFoodOrderModal() {
+      renderModalFoodList();
+      updateCartDisplay();
+      openModal('railRollsModal');
+    }
+
+    function submitFoodOrderToSeat() {
+      let totalQty = 0;
+      for (const q of Object.values(foodCart)) totalQty += q;
+
+      if (totalQty === 0) {
+        showToast('Please add at least 1 food item to your seat order', '⚠️');
+        return;
+      }
+
+      const pnr = document.getElementById('foodPnrInput').value.trim() || 'KSRTC12345678';
+      const seat = document.getElementById('foodSeatInput').value.trim() || 'Seat A12';
+      const haltSelect = document.getElementById('foodHaltSelect');
+      const haltName = haltSelect.options[haltSelect.selectedIndex].text;
+
+      closeModal('railRollsModal');
+      showToast(`Order confirmed for ${seat}! Meals will be delivered warm at ${haltName.split('(')[0]}.`, '🍱');
+      
+      // Auto-reset cart after order
+      foodCart = {};
+      renderFoodMenu();
+    }
+
+    function mobileScrollToSearch() {
+      document.getElementById('searchWidget').scrollIntoView({ behavior: 'smooth' });
+    }
+
     initTheme();
+    renderFoodMenu();
     updateMapRoute('Calicut', 'Kochi');
   </script>
+
+  <!-- FLOATING CART BAR FOR ONBOARD SEAT MEALS -->
+  <div class="floating-cart-strip" id="floatingCartBar">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--secondary); color: #041616; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;" id="floatingCartBadge">0</div>
+      <div>
+        <div style="font-size: 14px; font-weight: 800;" id="floatingCartTotalDisplay">₹0</div>
+        <div style="font-size: 11px; opacity: 0.8;">Seat Delivery at Scheduled Halt</div>
+      </div>
+    </div>
+    <button class="btn-find-bus" style="height: 38px; padding: 0 16px; font-size: 12px; background: var(--secondary); color: #041616;" onclick="openFoodOrderModal()">
+      <span>Review & Order ➔</span>
+    </button>
+  </div>
+
+  <!-- NATIVE MOBILE BOTTOM NAVIGATION BAR (FIXED ON MOBILES) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
+    <button class="mob-nav-item active" onclick="mobileScrollToSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Search</span>
+    </button>
+    <button class="mob-nav-item" onclick="openFoodOrderModal()">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      <span>Food to Seat</span>
+      <span class="mob-badge-counter" id="mobFoodBadge">0</span>
+    </button>
+    <button class="mob-nav-item" onclick="openStatusCheckModal()">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      <span>Live PNR</span>
+    </button>
+    <button class="mob-nav-item" onclick="openDepotModal()">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <span>90 Depots</span>
+    </button>
+    <button class="mob-nav-item" onclick="openAuthModal()">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Account</span>
+    </button>
+  </nav>
+
 </body>
 </html>
