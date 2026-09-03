@@ -1,8 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": null,
-  "outputDirectory": ".",
   "cleanUrls": true,
+  "functions": {
+    "server.js": {
+      "includeFiles": "concepts/**"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
