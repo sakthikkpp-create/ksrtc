@@ -7,7 +7,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -52,11 +52,7 @@
       --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -167,19 +163,17 @@
       transition: var(--transition);
     }
 
-    .theme-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* MAIN HEADER */
+    /* SITE HEADER */
     .site-header {
       max-width: 1320px;
       width: 100%;
       margin: 0 auto;
-      padding: 20px 24px;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .brand-group {
@@ -232,7 +226,8 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .charter-pill-btn {
@@ -256,19 +251,23 @@
       transform: translateY(-2px);
     }
 
-    .btn-login {
-      background: transparent;
+    .header-sub-btn {
+      background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text);
       font-weight: 600;
-      font-size: 13px;
-      padding: 8px 18px;
+      font-size: 12px;
+      padding: 7px 14px;
       border-radius: var(--radius-sm);
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       transition: var(--transition);
+      text-decoration: none;
     }
 
-    .btn-login:hover {
+    .header-sub-btn:hover {
       border-color: var(--primary);
       color: var(--primary);
     }
@@ -282,7 +281,7 @@
       flex: 1;
     }
 
-    /* HERO TITLE & METRICS */
+    /* HERO BANNER */
     .hero-banner {
       display: flex;
       align-items: flex-end;
@@ -309,7 +308,7 @@
     .metrics-row {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -333,7 +332,7 @@
       color: var(--secondary);
     }
 
-    /* SEARCH WIDGET */
+    /* SEARCH WIDGET CARD */
     .search-widget-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -349,6 +348,7 @@
       align-items: center;
       gap: 20px;
       margin-bottom: 18px;
+      flex-wrap: wrap;
     }
 
     .radio-pill {
@@ -356,7 +356,7 @@
       align-items: center;
       gap: 8px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text);
       cursor: pointer;
     }
@@ -368,9 +368,37 @@
       cursor: pointer;
     }
 
+    .link-ticket-tag {
+      font-size: 10px;
+      background: rgba(200, 148, 62, 0.15);
+      color: var(--secondary);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    /* Multi-leg Link-Ticket Bar (Conditional) */
+    .link-ticket-config-box {
+      display: none;
+      background: rgba(10, 74, 74, 0.05);
+      border: 1px dashed var(--secondary);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .link-ticket-config-box.show {
+      display: flex;
+    }
+
     .search-grid {
       display: grid;
-      grid-template-columns: 1.5fr 1.5fr 1.2fr 1fr auto;
+      grid-template-columns: 1.4fr 1.4fr 1.2fr 1fr auto;
       gap: 16px;
       align-items: end;
     }
@@ -430,9 +458,7 @@
       display: none;
     }
 
-    .autocomplete-list.show {
-      display: block;
-    }
+    .autocomplete-list.show { display: block; }
 
     .autocomplete-item {
       padding: 10px 14px;
@@ -444,7 +470,7 @@
       transition: background 0.15s ease;
     }
 
-    .autocomplete-item:hover, .autocomplete-item.active {
+    .autocomplete-item:hover {
       background: rgba(10, 74, 74, 0.08);
       color: var(--primary);
       font-weight: 600;
@@ -541,15 +567,10 @@
       color: #062828;
     }
 
-    .return-date-wrap {
-      display: none;
-    }
+    .return-date-wrap { display: none; }
+    .return-date-wrap.show { display: flex; }
 
-    .return-date-wrap.show {
-      display: flex;
-    }
-
-    /* MAIN INTERACTIVE SPLIT: MAP + POPULAR ROUTES */
+    /* SPLIT: MAP + POPULAR ROUTES */
     .journey-display-grid {
       display: grid;
       grid-template-columns: 1.35fr 1fr;
@@ -557,7 +578,6 @@
       margin-bottom: 32px;
     }
 
-    /* SVG MAP CONTAINER */
     .map-container-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -567,7 +587,6 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      overflow: hidden;
     }
 
     .map-header {
@@ -575,13 +594,14 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .map-title-group h3 {
       font-family: 'Playfair Display', serif;
       font-size: 18px;
       font-weight: 700;
-      color: var(--text);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -599,8 +619,8 @@
     }
 
     .map-tool-btn {
-      width: 32px;
       height: 32px;
+      padding: 0 10px;
       border: 1px solid var(--border);
       background: var(--bg);
       border-radius: 6px;
@@ -609,11 +629,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 600;
       transition: var(--transition);
+      gap: 4px;
     }
 
-    .map-tool-btn:hover {
+    .map-tool-btn:hover, .map-tool-btn.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
@@ -637,11 +659,6 @@
       transition: transform 0.3s ease;
     }
 
-    /* SVG Styling */
-    .map-water {
-      fill: none;
-    }
-
     .map-coastline {
       fill: var(--map-land);
       stroke: var(--primary);
@@ -658,11 +675,7 @@
       animation: dashMove 1.5s linear infinite;
     }
 
-    @keyframes dashMove {
-      to {
-        stroke-dashoffset: -24;
-      }
-    }
+    @keyframes dashMove { to { stroke-dashoffset: -24; } }
 
     .static-route-line {
       fill: none;
@@ -671,36 +684,12 @@
       stroke-dasharray: 4 4;
     }
 
-    .city-pin {
-      cursor: pointer;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .city-pin:hover {
-      transform: scale(1.35);
-    }
-
-    .city-circle {
-      fill: var(--primary);
-      stroke: white;
-      stroke-width: 2;
-      transition: fill 0.2s ease;
-    }
-
-    .city-pin:hover .city-circle, .city-pin.selected .city-circle {
-      fill: var(--accent);
-    }
-
-    .city-pulse {
-      fill: var(--accent);
-      opacity: 0.4;
-      animation: pulseMarker 2s infinite;
-    }
-
-    @keyframes pulseMarker {
-      0% { r: 6; opacity: 0.8; }
-      100% { r: 18; opacity: 0; }
-    }
+    .city-pin { cursor: pointer; transition: transform 0.2s ease; }
+    .city-pin:hover { transform: scale(1.35); }
+    .city-circle { fill: var(--primary); stroke: white; stroke-width: 2; }
+    .city-pin:hover .city-circle, .city-pin.selected .city-circle { fill: var(--accent); }
+    .city-pulse { fill: var(--accent); opacity: 0.4; animation: pulseMarker 2s infinite; }
+    @keyframes pulseMarker { 0% { r: 6; opacity: 0.8; } 100% { r: 18; opacity: 0; } }
 
     .city-text-label {
       font-family: 'JetBrains Mono', monospace;
@@ -708,12 +697,14 @@
       font-weight: 600;
       fill: var(--text);
       pointer-events: none;
-      user-select: none;
     }
 
-    .bus-marker-icon {
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    .depot-marker-node {
+      cursor: pointer;
+      display: none;
     }
+
+    .depot-marker-node.show { display: block; }
 
     /* Map Tooltip */
     .map-tooltip {
@@ -730,27 +721,13 @@
       transform: translateY(6px);
       transition: opacity 0.2s ease, transform 0.2s ease;
       z-index: 100;
-      min-width: 140px;
+      min-width: 150px;
     }
 
-    .map-tooltip.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .map-tooltip strong {
-      display: block;
-      color: var(--primary);
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
+    .map-tooltip.show { opacity: 1; transform: translateY(0); }
 
     /* POPULAR ROUTES COLUMN */
-    .routes-column {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    .routes-column { display: flex; flex-direction: column; gap: 16px; }
 
     .routes-col-header {
       display: flex;
@@ -762,25 +739,9 @@
       font-family: 'Playfair Display', serif;
       font-size: 18px;
       font-weight: 700;
-      color: var(--text);
     }
 
-    .badge-live-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      background: rgba(42, 122, 74, 0.12);
-      color: var(--success);
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    .popular-routes-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-    }
+    .popular-routes-list { display: flex; flex-direction: column; gap: 12px; flex: 1; }
 
     .route-card {
       background: var(--bg-card);
@@ -794,65 +755,17 @@
       align-items: center;
       justify-content: space-between;
       position: relative;
-      overflow: hidden;
-    }
-
-    .route-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--secondary);
-      opacity: 0;
-      transition: opacity 0.2s ease;
     }
 
     .route-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
       border-color: var(--secondary);
+      box-shadow: var(--shadow-md);
     }
 
-    .route-card:hover::before, .route-card.active::before {
-      opacity: 1;
-    }
-
-    .route-info-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .route-title-line {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .route-meta-line {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .route-meta-line span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .route-card-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
+    .route-card.active {
+      border-color: var(--secondary);
+      background: rgba(200, 148, 62, 0.05);
     }
 
     .route-fare {
@@ -862,68 +775,53 @@
       color: var(--primary);
     }
 
-    .btn-select-route {
-      background: rgba(10, 74, 74, 0.08);
-      border: 1px solid var(--primary);
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-select-route:hover, .route-card.active .btn-select-route {
-      background: var(--primary);
-      color: white;
-    }
-
-    /* QUICK LINKS BAR */
-    .quick-links-section {
+    /* ALL SERVICES & AUDIT UTILITY BAR */
+    .audit-services-grid {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 18px 24px;
+      padding: 22px;
       box-shadow: var(--shadow-sm);
       margin-bottom: 32px;
     }
 
-    .quick-links-title {
+    .audit-grid-title {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-muted);
-      margin-bottom: 12px;
-      font-weight: 600;
+      margin-bottom: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .quick-links-row {
+    .services-row-btns {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 12px;
     }
 
-    .quick-link-btn {
+    .service-btn-tile {
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 12px 10px;
+      padding: 14px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
       cursor: pointer;
       color: var(--text);
-      text-decoration: none;
       font-size: 12px;
       font-weight: 600;
       transition: var(--transition);
-      position: relative;
+      text-align: center;
     }
 
-    .quick-link-btn:hover {
+    .service-btn-tile:hover {
       border-color: var(--secondary);
       background: var(--bg-card);
       transform: translateY(-2px);
@@ -931,36 +829,40 @@
       color: var(--secondary);
     }
 
-    .quick-link-icon {
-      font-size: 20px;
-    }
+    .service-btn-tile span.icon { font-size: 22px; }
 
     /* FOOTER */
     .site-footer {
       border-top: 1px solid var(--border);
-      padding: 24px 0;
+      padding: 28px 0;
       text-align: center;
       margin-top: auto;
       font-size: 13px;
       color: var(--text-muted);
     }
 
-    .site-footer p.tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 4px;
+    .footer-links-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
+
+    .footer-links-row a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-links-row a:hover { color: var(--primary); }
 
     /* MODALS */
     .modal-backdrop {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(6, 40, 40, 0.6);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(6, 40, 40, 0.65);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -972,29 +874,27 @@
       padding: 20px;
     }
 
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
 
     .modal-box {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 520px;
+      max-width: 580px;
       box-shadow: var(--shadow-lg);
       transform: scale(0.95);
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       overflow: hidden;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .modal-backdrop.open .modal-box {
-      transform: scale(1);
-    }
+    .modal-backdrop.open .modal-box { transform: scale(1); }
 
     .modal-header {
-      padding: 20px 24px;
+      padding: 18px 24px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -1020,16 +920,11 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      transition: var(--transition);
-    }
-
-    .modal-close-btn:hover {
-      background: rgba(0, 0, 0, 0.08);
-      color: var(--text);
     }
 
     .modal-body {
       padding: 24px;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -1044,11 +939,10 @@
       background: var(--bg);
     }
 
-    /* TOAST NOTIFICATION */
+    /* TOAST */
     .toast-notice {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 24px; right: 24px;
       background: var(--primary);
       color: white;
       padding: 12px 20px;
@@ -1065,42 +959,20 @@
       z-index: 3000;
     }
 
-    .toast-notice.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    .toast-notice.show { transform: translateY(0); opacity: 1; }
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .search-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .journey-display-grid {
-        grid-template-columns: 1fr;
-      }
-      .quick-links-row {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .search-grid { grid-template-columns: 1fr 1fr; }
+      .journey-display-grid { grid-template-columns: 1fr; }
+      .services-row-btns { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 640px) {
-      .search-grid {
-        grid-template-columns: 1fr;
-      }
-      .quick-links-row {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .hero-banner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hero-headline h2 {
-        font-size: 26px;
-      }
-      .concept-nav-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
+      .search-grid { grid-template-columns: 1fr; }
+      .services-row-btns { grid-template-columns: repeat(2, 1fr); }
+      .hero-banner { flex-direction: column; align-items: flex-start; }
+      .concept-nav-bar { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
@@ -1152,10 +1024,22 @@
       </div>
     </div>
     <div class="header-actions">
-      <button class="charter-pill-btn" id="openCharterBtn" aria-haspopup="dialog">
-        <span>🚌 Need a private bus? Ask us</span>
+      <!-- Hidden / Discoverable bus hire route surfaced prominently -->
+      <button class="charter-pill-btn" onclick="openCharterModal()" aria-haspopup="dialog">
+        <span>🚌 Bus Hire / Charter (/bushire)</span>
       </button>
-      <button class="btn-login" id="loginHeaderBtn">Sign In</button>
+      <!-- Depot Directory -->
+      <button class="header-sub-btn" onclick="openDepotModal()">
+        <span>🏢 90+ Depots</span>
+      </button>
+      <!-- Agent CRS Portal link from audit -->
+      <button class="header-sub-btn" onclick="openAgentPortalModal()">
+        <span>🎟️ Agent CRS</span>
+      </button>
+      <!-- User Profile / OTP Login from audit -->
+      <button class="header-sub-btn" onclick="openProfileModal()">
+        <span>👤 Rajesh (Profile)</span>
+      </button>
     </div>
   </header>
 
@@ -1166,89 +1050,104 @@
     <div class="hero-banner">
       <div class="hero-headline">
         <h2>Where are you heading today?</h2>
-        <p>Explore Kerala's scenic routes with live spatial tracking and swift instant bookings.</p>
+        <p>Explore Kerala's routes with spatial tracking, link-ticket connections, and depot directory integration.</p>
       </div>
       <div class="metrics-row">
         <div class="metric-badge highlight">
           <span>⭐</span>
-          <span>78% faster search time</span>
+          <span>78% faster search</span>
         </div>
         <div class="metric-badge">
           <span>🚌</span>
           <span>2,500+ daily trips</span>
         </div>
         <div class="metric-badge">
-          <span>👥</span>
-          <span>4.8★ user rating</span>
+          <span>🏢</span>
+          <span>90+ Depots statewide</span>
+        </div>
+        <div class="metric-badge">
+          <span>📦</span>
+          <span>Swift Cargo active</span>
         </div>
       </div>
     </div>
 
-    <!-- SEARCH WIDGET CARD -->
+    <!-- SEARCH WIDGET CARD WITH LINK-TICKET SUPPORT -->
     <section class="search-widget-card" aria-label="Bus Journey Search Form">
       <div class="trip-type-selector">
         <label class="radio-pill">
-          <input type="radio" name="tripType" value="oneway" checked id="typeOneWay">
+          <input type="radio" name="tripType" value="oneway" checked id="typeOneWay" onchange="handleTripTypeChange('oneway')">
           <span>One Way</span>
         </label>
         <label class="radio-pill">
-          <input type="radio" name="tripType" value="roundtrip" id="typeRoundTrip">
-          <span>Round Trip</span>
+          <input type="radio" name="tripType" value="roundtrip" id="typeRoundTrip" onchange="handleTripTypeChange('roundtrip')">
+          <span>Round Trip (10% Off Return)</span>
         </label>
+        <label class="radio-pill">
+          <input type="radio" name="tripType" value="linkticket" id="typeLinkTicket" onchange="handleTripTypeChange('linkticket')">
+          <span>Link-Ticket Multi-Leg <span class="link-ticket-tag">MULTI-LEG</span></span>
+        </label>
+      </div>
+
+      <!-- LINK-TICKET CONFIG ROW (FROM AUDIT) -->
+      <div class="link-ticket-config-box" id="linkTicketConfigBox">
+        <div style="font-size: 13px;">
+          <strong>🔗 Multi-Leg Connecting Route:</strong> Intermediate transfer hub with layover protection.
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <label style="font-size: 12px; font-weight: 600;">Min Stopover Duration:</label>
+          <select class="custom-input" style="height: 36px; width: 150px;" id="stopoverSelect">
+            <option>45 Minutes (Fast)</option>
+            <option selected>1.5 Hours (Optimal)</option>
+            <option>3 Hours (Sightseeing)</option>
+          </select>
+        </div>
       </div>
 
       <form id="searchForm" class="search-grid" onsubmit="handleSearchSubmit(event)">
         <!-- FROM CITY -->
         <div class="input-field-group">
-          <label for="fromCityInput" class="field-label">
-            <span>📍</span> From
-          </label>
-          <input type="text" id="fromCityInput" class="custom-input" placeholder="Select origin city" autocomplete="off" value="Kochi" required>
+          <label for="fromCityInput" class="field-label"><span>📍</span> From</label>
+          <input type="text" id="fromCityInput" class="custom-input" placeholder="Select origin" autocomplete="off" value="Kochi" required>
           <div class="autocomplete-list" id="fromAutoList"></div>
         </div>
 
-        <!-- TO CITY -->
-        <div class="input-field-group">
-          <label for="toCityInput" class="field-label">
-            <span>🎯</span> To
-          </label>
+        <!-- VIA / TRANSFER (LINK TICKET) OR DESTINATION -->
+        <div class="input-field-group" id="toCityGroup">
+          <label for="toCityInput" class="field-label"><span>🎯</span> To</label>
           <input type="text" id="toCityInput" class="custom-input" placeholder="Select destination" autocomplete="off" value="Trivandrum" required>
           <div class="autocomplete-list" id="toAutoList"></div>
         </div>
 
         <!-- DATE -->
         <div class="input-field-group">
-          <label for="journeyDateInput" class="field-label">
-            <span>📅</span> Date of Journey
-          </label>
+          <label for="journeyDateInput" class="field-label"><span>📅</span> Date</label>
           <input type="date" id="journeyDateInput" class="custom-input" required>
         </div>
 
         <!-- RETURN DATE (conditional) -->
         <div class="input-field-group return-date-wrap" id="returnDateWrap">
-          <label for="returnDateInput" class="field-label">
-            <span>🔄</span> Return Date
-          </label>
+          <label for="returnDateInput" class="field-label"><span>🔄</span> Return Date</label>
           <input type="date" id="returnDateInput" class="custom-input">
         </div>
 
-        <!-- PASSENGERS -->
+        <!-- PASSENGERS (MAX 6 FROM AUDIT) -->
         <div class="input-field-group">
-          <span class="field-label"><span>👥</span> Passengers</span>
+          <span class="field-label"><span>👥</span> Passengers (Max 6)</span>
           <div class="passenger-counter-box">
-            <button type="button" class="cnt-btn" id="decPassBtn" aria-label="Decrease passenger count">−</button>
+            <button type="button" class="cnt-btn" id="decPassBtn">−</button>
             <span class="cnt-value" id="passCountVal">2</span>
-            <button type="button" class="cnt-btn" id="incPassBtn" aria-label="Increase passenger count">+</button>
+            <button type="button" class="cnt-btn" id="incPassBtn">+</button>
           </div>
         </div>
 
         <!-- CTA BUTTONS -->
         <div class="search-cta-btns">
           <button type="submit" class="btn-find-bus" id="findBusBtn">
-            <span>🚌</span> Find My Bus
+            <span>🚌</span> Search Buses
           </button>
-          <button type="button" class="btn-explore-map" id="exploreRouteBtn" title="Focus and explore selected route on the map">
-            <span>🗺️</span> Explore
+          <button type="button" class="btn-explore-map" id="exploreRouteBtn" title="Map visualizer">
+            <span>🗺️</span> Focus Map
           </button>
         </div>
       </form>
@@ -1257,16 +1156,19 @@
     <!-- INTERACTIVE SPLIT: KERALA SVG MAP + POPULAR ROUTES -->
     <div class="journey-display-grid">
       <!-- MAP CARD -->
-      <section class="map-container-card" aria-label="Interactive Kerala Bus Route Map">
+      <section class="map-container-card" aria-label="Interactive Kerala Bus Route & Depot Map">
         <div class="map-header">
           <div class="map-title-group">
-            <h3><span>🗺️</span> Interactive Route Map</h3>
-            <p>Click any city or route line to instantly plan your journey</p>
+            <h3><span>🗺️</span> Spatial Route & Depot Map</h3>
+            <p>Click any city or switch on Depots layer to inspect bay contacts</p>
           </div>
           <div class="map-toolbar">
+            <button class="map-tool-btn" id="toggleDepotPinsBtn" onclick="toggleDepotLayer()" title="Toggle Depot Hubs on Map">
+              <span>🏢 Depots</span>
+            </button>
             <button class="map-tool-btn" id="zoomInBtn" title="Zoom In">+</button>
             <button class="map-tool-btn" id="zoomOutBtn" title="Zoom Out">−</button>
-            <button class="map-tool-btn" id="resetMapBtn" title="Reset Map View">⟲</button>
+            <button class="map-tool-btn" id="resetMapBtn" title="Reset View">⟲</button>
           </div>
         </div>
 
@@ -1277,16 +1179,9 @@
                 <stop offset="0%" stop-color="#3A7E62" stop-opacity="0.22" />
                 <stop offset="100%" stop-color="#126363" stop-opacity="0.32" />
               </linearGradient>
-              <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="glow" />
-                <feMerge>
-                  <feMergeNode in="glow" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
 
-            <!-- Kerala Geographic Contour Outline -->
+            <!-- Kerala Coastline -->
             <path class="map-coastline" d="
               M 115 45 
               C 125 55, 140 75, 150 95
@@ -1305,74 +1200,60 @@
 
             <!-- Static Network Highway Lines -->
             <path class="static-route-line" d="M 125 75 L 148 135 L 175 200 L 195 260 L 218 315 L 235 375 L 260 430 L 280 475" />
-            <path class="static-route-line" d="M 195 260 L 255 255" /> <!-- Kochi to Munnar -->
-            <path class="static-route-line" d="M 148 135 L 190 120" /> <!-- Calicut to Wayanad -->
+            <path class="static-route-line" d="M 195 260 L 255 255" />
+            <path class="static-route-line" d="M 148 135 L 190 120" />
 
-            <!-- Active Animated Route Line (Dynamically altered in JS) -->
-            <path id="activeRoutePath" class="active-route-line" d="M 195 260 L 218 315 L 235 375 L 260 430 L 280 475" filter="url(#glowEffect)" />
+            <!-- Active Animated Route Line -->
+            <path id="activeRoutePath" class="active-route-line" d="M 195 260 L 218 315 L 235 375 L 260 430 L 280 475" />
 
-            <!-- Moving Bus Simulator on active route -->
+            <!-- Moving Bus Simulator -->
             <g id="animatedBusMarker" transform="translate(195, 260)">
               <circle r="10" fill="#E87A5A" opacity="0.3" />
               <circle r="6" fill="#E87A5A" />
               <text x="-4" y="3" font-size="8" fill="white">🚌</text>
             </g>
 
-            <!-- Interactive City Nodes -->
-            <!-- Kasaragod -->
-            <g class="city-pin" id="pin-Kasaragod" data-city="Kasaragod" data-x="125" data-y="75" transform="translate(125, 75)">
-              <circle class="city-circle" r="5" />
-              <text class="city-text-label" x="10" y="4">Kasaragod</text>
+            <!-- Interactive City Pins -->
+            <g class="city-pin" id="pin-Kasaragod" data-city="Kasaragod" transform="translate(125, 75)">
+              <circle class="city-circle" r="5" /><text class="city-text-label" x="10" y="4">Kasaragod</text>
+            </g>
+            <g class="city-pin" id="pin-Wayanad" data-city="Wayanad" transform="translate(190, 120)">
+              <circle class="city-circle" r="5" /><text class="city-text-label" x="10" y="4">Wayanad</text>
+            </g>
+            <g class="city-pin" id="pin-Calicut" data-city="Calicut" transform="translate(148, 135)">
+              <circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Calicut</text>
+            </g>
+            <g class="city-pin" id="pin-Thrissur" data-city="Thrissur" transform="translate(175, 200)">
+              <circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Thrissur</text>
+            </g>
+            <g class="city-pin" id="pin-Munnar" data-city="Munnar" transform="translate(255, 255)">
+              <circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Munnar</text>
+            </g>
+            <g class="city-pin selected" id="pin-Kochi" data-city="Kochi" transform="translate(195, 260)">
+              <circle class="city-pulse" r="6" /><circle class="city-circle" r="7" /><text class="city-text-label" x="12" y="4">Kochi</text>
+            </g>
+            <g class="city-pin" id="pin-Alleppey" data-city="Alleppey" transform="translate(218, 315)">
+              <circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Alleppey</text>
+            </g>
+            <g class="city-pin" id="pin-Kollam" data-city="Kollam" transform="translate(248, 395)">
+              <circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Kollam</text>
+            </g>
+            <g class="city-pin selected" id="pin-Trivandrum" data-city="Trivandrum" transform="translate(280, 475)">
+              <circle class="city-pulse" r="6" /><circle class="city-circle" r="8" /><text class="city-text-label" x="12" y="4">Trivandrum</text>
             </g>
 
-            <!-- Wayanad -->
-            <g class="city-pin" id="pin-Wayanad" data-city="Wayanad" data-x="190" data-y="120" transform="translate(190, 120)">
-              <circle class="city-circle" r="5" />
-              <text class="city-text-label" x="10" y="4">Wayanad</text>
+            <!-- Optional Depot Layer Nodes (from audit) -->
+            <g class="depot-marker-node" id="depot-node-thampanoor" transform="translate(295, 485)" onclick="showDepotDetails('Thampanoor Central Depot', 'Station Master: 0471-2323886 • 24 Bay Platforms • Cargo Office Bay 1')">
+              <rect width="14" height="14" rx="3" fill="#C8943E" stroke="#fff" stroke-width="1.5" />
+              <text x="18" y="11" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#C8943E">Thampanoor Depot</text>
             </g>
-
-            <!-- Calicut -->
-            <g class="city-pin" id="pin-Calicut" data-city="Calicut" data-x="148" data-y="135" transform="translate(148, 135)">
-              <circle class="city-circle" r="6" />
-              <text class="city-text-label" x="10" y="4">Calicut</text>
+            <g class="depot-marker-node" id="depot-node-vytilla" transform="translate(210, 275)" onclick="showDepotDetails('Vytilla Mobility Hub Depot', 'Officer: 0484-2372600 • Automated Transit Bays 1-8 • Rail Rolls Counter')">
+              <rect width="14" height="14" rx="3" fill="#C8943E" stroke="#fff" stroke-width="1.5" />
+              <text x="18" y="11" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#C8943E">Vytilla Depot</text>
             </g>
-
-            <!-- Thrissur -->
-            <g class="city-pin" id="pin-Thrissur" data-city="Thrissur" data-x="175" data-y="200" transform="translate(175, 200)">
-              <circle class="city-circle" r="6" />
-              <text class="city-text-label" x="10" y="4">Thrissur</text>
-            </g>
-
-            <!-- Munnar -->
-            <g class="city-pin" id="pin-Munnar" data-city="Munnar" data-x="255" data-y="255" transform="translate(255, 255)">
-              <circle class="city-circle" r="6" />
-              <text class="city-text-label" x="10" y="4">Munnar</text>
-            </g>
-
-            <!-- Kochi -->
-            <g class="city-pin selected" id="pin-Kochi" data-city="Kochi" data-x="195" data-y="260" transform="translate(195, 260)">
-              <circle class="city-pulse" r="6" />
-              <circle class="city-circle" r="7" />
-              <text class="city-text-label" x="12" y="4">Kochi</text>
-            </g>
-
-            <!-- Alleppey -->
-            <g class="city-pin" id="pin-Alleppey" data-city="Alleppey" data-x="218" data-y="315" transform="translate(218, 315)">
-              <circle class="city-circle" r="6" />
-              <text class="city-text-label" x="10" y="4">Alleppey</text>
-            </g>
-
-            <!-- Kollam -->
-            <g class="city-pin" id="pin-Kollam" data-city="Kollam" data-x="248" data-y="395" transform="translate(248, 395)">
-              <circle class="city-circle" r="6" />
-              <text class="city-text-label" x="10" y="4">Kollam</text>
-            </g>
-
-            <!-- Trivandrum -->
-            <g class="city-pin selected" id="pin-Trivandrum" data-city="Trivandrum" data-x="280" data-y="475" transform="translate(280, 475)">
-              <circle class="city-pulse" r="6" />
-              <circle class="city-circle" r="8" />
-              <text class="city-text-label" x="12" y="4">Trivandrum</text>
+            <g class="depot-marker-node" id="depot-node-kozhikode" transform="translate(160, 150)" onclick="showDepotDetails('Kozhikode KSRTC Terminal', 'Officer: 0495-2723796 • Interstate AC Bus Terminal • Cargo Desk')">
+              <rect width="14" height="14" rx="3" fill="#C8943E" stroke="#fff" stroke-width="1.5" />
+              <text x="18" y="11" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#C8943E">Calicut Depot</text>
             </g>
           </svg>
 
@@ -1385,128 +1266,94 @@
       </section>
 
       <!-- POPULAR ROUTES COLUMN -->
-      <section class="routes-column" aria-label="Popular Routes from your location">
+      <section class="routes-column" aria-label="Popular Routes and Link-Tickets">
         <div class="routes-col-header">
-          <h3>Popular Routes</h3>
-          <span class="badge-live-count">● Live Fares</span>
+          <h3>Popular Routes & Link-Tickets</h3>
+          <span style="font-size: 11px; font-family: 'JetBrains Mono'; color: var(--secondary); font-weight: 700;">● Live Fares</span>
         </div>
 
-        <div class="popular-routes-list" id="popularRoutesContainer">
-          <!-- Route 1 -->
-          <article class="route-card active" data-from="Kochi" data-to="Trivandrum" data-time="6:00 AM" data-fare="₹800" tabindex="0">
-            <div class="route-info-left">
-              <div class="route-title-line">
-                <span>Kochi</span>
-                <span>→</span>
-                <span>Trivandrum</span>
-              </div>
-              <div class="route-meta-line">
-                <span>⏰ 6:00 AM Departure</span>
-                <span>•</span>
-                <span>Swift AC Sleeper</span>
-              </div>
+        <div class="popular-routes-list">
+          <article class="route-card active" onclick="applyRoute('Kochi', 'Trivandrum', '₹800')">
+            <div>
+              <strong style="font-size: 15px;">Kochi ➔ Trivandrum</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">06:00 AM • Swift AC Sleeper</div>
             </div>
-            <div class="route-card-right">
+            <div style="text-align: right;">
               <span class="route-fare">₹800</span>
-              <button class="btn-select-route" type="button">Select</button>
+              <div style="font-size: 11px; color: var(--success);">Available</div>
             </div>
           </article>
 
-          <!-- Route 2 -->
-          <article class="route-card" data-from="Kochi" data-to="Calicut" data-time="8:30 AM" data-fare="₹950" tabindex="0">
-            <div class="route-info-left">
-              <div class="route-title-line">
-                <span>Kochi</span>
-                <span>→</span>
-                <span>Calicut</span>
-              </div>
-              <div class="route-meta-line">
-                <span>⏰ 8:30 AM Departure</span>
-                <span>•</span>
-                <span>Gajaraj Multi-Axle</span>
-              </div>
+          <article class="route-card" onclick="applyRoute('Kochi', 'Calicut', '₹950')">
+            <div>
+              <strong style="font-size: 15px;">Kochi ➔ Calicut</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">08:30 AM • Gajaraj B11R</div>
             </div>
-            <div class="route-card-right">
+            <div style="text-align: right;">
               <span class="route-fare">₹950</span>
-              <button class="btn-select-route" type="button">Select</button>
+              <div style="font-size: 11px; color: var(--success);">Available</div>
             </div>
           </article>
 
-          <!-- Route 3 -->
-          <article class="route-card" data-from="Kochi" data-to="Munnar" data-time="10:00 AM" data-fare="₹500" tabindex="0">
-            <div class="route-info-left">
-              <div class="route-title-line">
-                <span>Kochi</span>
-                <span>→</span>
-                <span>Munnar</span>
+          <!-- Link-ticket special route from audit -->
+          <article class="route-card" onclick="applyLinkTicketRoute('Trivandrum', 'Kochi', 'Calicut')">
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <strong style="font-size: 14px;">Tvm ➔ Kochi ➔ Calicut</strong>
+                <span class="link-ticket-tag">LINK-TICKET</span>
               </div>
-              <div class="route-meta-line">
-                <span>⏰ 10:00 AM Departure</span>
-                <span>•</span>
-                <span>Swift Deluxe Scenic</span>
-              </div>
+              <div style="font-size: 12px; color: var(--text-muted);">1h 15m Layover at Vytilla • Single ERS Ticket</div>
             </div>
-            <div class="route-card-right">
+            <div style="text-align: right;">
+              <span class="route-fare">₹1,480</span>
+              <div style="font-size: 11px; color: var(--secondary);">Combined Fare</div>
+            </div>
+          </article>
+
+          <article class="route-card" onclick="applyRoute('Kochi', 'Munnar', '₹500')">
+            <div>
+              <strong style="font-size: 15px;">Kochi ➔ Munnar Scenic</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">10:00 AM • Swift Deluxe Air-Bus</div>
+            </div>
+            <div style="text-align: right;">
               <span class="route-fare">₹500</span>
-              <button class="btn-select-route" type="button">Select</button>
-            </div>
-          </article>
-
-          <!-- Route 4 -->
-          <article class="route-card" data-from="Calicut" data-to="Wayanad" data-time="11:15 AM" data-fare="₹380" tabindex="0">
-            <div class="route-info-left">
-              <div class="route-title-line">
-                <span>Calicut</span>
-                <span>→</span>
-                <span>Wayanad</span>
-              </div>
-              <div class="route-meta-line">
-                <span>⏰ 11:15 AM Departure</span>
-                <span>•</span>
-                <span>Minibus Express</span>
-              </div>
-            </div>
-            <div class="route-card-right">
-              <span class="route-fare">₹380</span>
-              <button class="btn-select-route" type="button">Select</button>
+              <div style="font-size: 11px; color: var(--success);">Scenic Tour</div>
             </div>
           </article>
         </div>
       </section>
     </div>
 
-    <!-- QUICK LINKS BAR -->
-    <section class="quick-links-section" aria-label="Essential Services Quick Links">
-      <div class="quick-links-title">Quick Services & Utilities</div>
-      <div class="quick-links-row">
-        <button class="quick-link-btn" onclick="showFeatureModal('🎫 Book Ticket', 'Instant reservation engine for 200+ Kerala and interstate luxury bus routes.')">
-          <span class="quick-link-icon">🎫</span>
-          <span>Book Ticket</span>
+    <!-- ALL AUDIT SERVICES & INTEGRATION TILES -->
+    <section class="audit-services-grid" aria-label="Comprehensive KSRTC-SWIFT Service Inventory">
+      <div class="audit-grid-title">
+        <span>Complete Services & Utilities (From Official Audit)</span>
+        <span>Kerala State Road Transport Corporation</span>
+      </div>
+      <div class="services-row-btns">
+        <button class="service-btn-tile" onclick="openCharterModal()">
+          <span class="icon">🚌</span>
+          <span>Bus Hire (/bushire)</span>
         </button>
-
-        <button class="quick-link-btn" onclick="showFeatureModal('📊 Live Bus Status', 'Track your coach with GPS precision, estimated delay calculation, and conductor info.')">
-          <span class="quick-link-icon">📊</span>
-          <span>Bus Status</span>
+        <button class="service-btn-tile" onclick="openDepotModal()">
+          <span class="icon">🏢</span>
+          <span>Depot Directory</span>
         </button>
-
-        <button class="quick-link-btn" onclick="showFeatureModal('🔄 Easy Cancellation', 'Instant refunds directly to your source UPI/card with zero hidden penalties.')">
-          <span class="quick-link-icon">🔄</span>
-          <span>Cancellation</span>
+        <button class="service-btn-tile" onclick="openFeedbackModal()">
+          <span class="icon">📝</span>
+          <span>Segmented Feedback</span>
         </button>
-
-        <button class="quick-link-btn" onclick="openCharterModal()">
-          <span class="quick-link-icon">🚌</span>
-          <span>Charter Swift</span>
+        <button class="service-btn-tile" onclick="openCargoModal()">
+          <span class="icon">📦</span>
+          <span>Swift Cargo Courier</span>
         </button>
-
-        <button class="quick-link-btn" onclick="showFeatureModal('📸 Fleet Gallery', 'Explore 360° interior panoramic previews of our Scania, Volvo B11R, and sleeper coaches.')">
-          <span class="quick-link-icon">📸</span>
-          <span>Fleet Gallery</span>
+        <button class="service-btn-tile" onclick="openCancellationSlabsModal()">
+          <span class="icon">🔄</span>
+          <span>Cancellation Slabs</span>
         </button>
-
-        <button class="quick-link-btn" onclick="showFeatureModal('📱 Mobile App', 'Download the KSRTC-SWIFT app on iOS and Android for offline boarding passes.')">
-          <span class="quick-link-icon">📱</span>
-          <span>App Download</span>
+        <button class="service-btn-tile" onclick="openRailRollsModal()">
+          <span class="icon">🍽️</span>
+          <span>Rail Rolls Meals</span>
         </button>
       </div>
     </section>
@@ -1515,44 +1362,53 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <p class="tagline">"Your journey, beautifully visualized."</p>
-    <p>© 2026 KSRTC-SWIFT • Concept 1 Prototype: The Journey Planner</p>
+    <div class="footer-links-row">
+      <a href="#" onclick="openDepotModal(); return false;">Statewide Depots (~90)</a>
+      <a href="#" onclick="openCancellationSlabsModal(); return false;">Terms & Cancellation Slabs</a>
+      <a href="#" onclick="openCharterModal(); return false;">Bus Hire (/bushire)</a>
+      <a href="#" onclick="openCargoModal(); return false;">Cargo & Parcel Service</a>
+      <a href="#" onclick="openFeedbackModal(); return false;">Grievance & Feedback</a>
+      <a href="#" onclick="openAppModal(); return false;">Ente KSRTC Mobile App</a>
+      <a href="#" onclick="openAgentPortalModal(); return false;">CRS Agent Login</a>
+    </div>
+    <p>© 2026 KSRTC-SWIFT • Concept 1 Prototype: The Journey Planner (Full Audit Coverage)</p>
   </footer>
 
-  <!-- CHARTER MODAL -->
-  <div class="modal-backdrop" id="charterModal" role="dialog" aria-modal="true" aria-labelledby="charterModalTitle">
+  <!-- MODAL: CHARTER / BUS HIRE (/bushire) -->
+  <div class="modal-backdrop" id="charterModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 id="charterModalTitle">🚌 Charter a KSRTC-SWIFT Bus</h3>
-        <button class="modal-close-btn" onclick="closeCharterModal()" aria-label="Close modal">✕</button>
+        <h3>🚌 Charter a KSRTC-SWIFT Bus (/bushire)</h3>
+        <button class="modal-close-btn" onclick="closeModal('charterModal')">✕</button>
       </div>
-      <form id="charterForm" onsubmit="handleCharterSubmit(event)">
+      <form onsubmit="handleCharterSubmit(event)">
         <div class="modal-body">
           <p style="font-size: 13px; color: var(--text-muted);">
-            Book exclusive full-coach charters for weddings, corporate offsites, college tours, and pilgrim groups across South India.
+            Official Bus Hire portal surfaced from hidden site route <code>/bushire</code>. Book verified full coaches for weddings, corporate offsites, and group tours with conductor coordination.
           </p>
           <div class="input-field-group">
-            <label class="field-label">Pickup & Drop Cities</label>
-            <input type="text" class="custom-input" placeholder="e.g. Kochi Infopark to Munnar" required>
+            <label class="field-label">Pickup & Return Destination</label>
+            <input type="text" class="custom-input" placeholder="e.g. Trivandrum Technopark to Munnar" required>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div class="input-field-group">
-              <label class="field-label">Charter Date</label>
+              <label class="field-label">Journey Date & Time</label>
               <input type="date" class="custom-input" required>
             </div>
             <div class="input-field-group">
-              <label class="field-label">Departure Time</label>
-              <input type="time" class="custom-input" required value="08:00">
+              <label class="field-label">Return Date (Optional)</label>
+              <input type="date" class="custom-input">
             </div>
           </div>
           <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px;">
             <div class="input-field-group">
-              <label class="field-label">Vehicle Type</label>
-              <select class="custom-input" style="height: 48px;">
+              <label class="field-label">Fleet Category</label>
+              <select class="custom-input">
                 <option>Scania Multi-Axle AC Sleeper (40 Seats)</option>
-                <option>Volvo B11R AC Seater (49 Seats)</option>
+                <option>Volvo B11R Luxury Seater (49 Seats)</option>
                 <option>Swift Super Deluxe Air-Bus (36 Seats)</option>
                 <option>Swift Electric AC Minibus (24 Seats)</option>
+                <option>Budget Tourism Double Decker</option>
               </select>
             </div>
             <div class="input-field-group">
@@ -1562,25 +1418,264 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn-login" onclick="closeCharterModal()">Cancel</button>
-          <button type="submit" class="btn-find-bus">Request Instant Quote</button>
+          <button type="button" class="header-sub-btn" onclick="closeModal('charterModal')">Cancel</button>
+          <button type="submit" class="btn-find-bus">Request Official Quote</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- GENERIC FEATURE MODAL -->
-  <div class="modal-backdrop" id="genericFeatureModal" role="dialog" aria-modal="true">
+  <!-- MODAL: DEPOT DIRECTORY (~90 DEPOTS STATEWIDE) -->
+  <div class="modal-backdrop" id="depotModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 id="featureModalTitle">Service Info</h3>
-        <button class="modal-close-btn" onclick="closeFeatureModal()">✕</button>
+        <h3>🏢 KSRTC Statewide Depot Directory (~90 Locations)</h3>
+        <button class="modal-close-btn" onclick="closeModal('depotModal')">✕</button>
       </div>
       <div class="modal-body">
-        <p id="featureModalBody" style="font-size: 14px; color: var(--text); line-height: 1.6;"></p>
+        <input type="text" class="custom-input" id="depotSearchInput" placeholder="Filter by depot name or district..." oninput="filterDepots(this.value)">
+        <div id="depotListContainer" style="display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto;">
+          <!-- Depots populated via JS -->
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-find-bus" onclick="closeFeatureModal()">Close</button>
+        <button type="button" class="btn-find-bus" onclick="closeModal('depotModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SEGMENTED FEEDBACK (BUS / CARGO / CORPORATE) -->
+  <div class="modal-backdrop" id="feedbackModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📝 Official Grievance & Rating Portal</h3>
+        <button class="modal-close-btn" onclick="closeModal('feedbackModal')">✕</button>
+      </div>
+      <form onsubmit="handleFeedbackSubmit(event)">
+        <div class="modal-body">
+          <div class="input-field-group">
+            <label class="field-label">Service Department (From Audit)</label>
+            <select class="custom-input" id="feedbackDeptSelect" onchange="updateFeedbackCriteria(this.value)">
+              <option value="bus">Bus Service (Punctuality, Bus Condition, Staff Behavior, Halts)</option>
+              <option value="cargo">Swift Cargo Service (Parcel Handling, Timely Delivery, Station Staff)</option>
+              <option value="corporate">Corporate Service (GST Billing, Contract SLA, Account Manager)</option>
+            </select>
+          </div>
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px;">
+            <div class="input-field-group">
+              <label class="field-label">PNR / Waybill No</label>
+              <input type="text" class="custom-input" placeholder="e.g. KSRTC12345678" required>
+            </div>
+            <div class="input-field-group">
+              <label class="field-label">Mobile OTP</label>
+              <input type="text" class="custom-input" placeholder="Enter 4-digit OTP" value="9281" required>
+            </div>
+          </div>
+          <div class="input-field-group">
+            <label class="field-label" id="ratingAspectLabel">Rating & Sub-Categories</label>
+            <div style="display: flex; gap: 14px; font-size: 20px;" id="starRatingRow">
+              <span style="cursor: pointer; color: #C8943E;">★</span>
+              <span style="cursor: pointer; color: #C8943E;">★</span>
+              <span style="cursor: pointer; color: #C8943E;">★</span>
+              <span style="cursor: pointer; color: #C8943E;">★</span>
+              <span style="cursor: pointer; color: #C8943E;">☆</span>
+            </div>
+          </div>
+          <div class="input-field-group">
+            <label class="field-label">Detailed Comments</label>
+            <textarea class="custom-input" style="height: 60px; padding: 8px;" placeholder="Tell us about your experience..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn-find-bus">Submit Verified Feedback</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: SWIFT CARGO / COURIER -->
+  <div class="modal-backdrop" id="cargoModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📦 KSRTC Swift Cargo & Courier Logistics</h3>
+        <button class="modal-close-btn" onclick="closeModal('cargoModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Statewide same-day parcel delivery across all 90 KSRTC depots. Track consignments or estimate freight tariff.
+        </p>
+        <div class="input-field-group">
+          <label class="field-label">Consignment / Tracking Number</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" class="custom-input" placeholder="e.g. CRG-KL-8921" value="CRG-KL-8921">
+            <button type="button" class="btn-find-bus" onclick="trackCargoSample()">Track</button>
+          </div>
+        </div>
+        <div id="cargoStatusBox" style="background: rgba(10, 74, 74, 0.08); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px;">
+          <strong>Status: In Transit • Kochi Vytilla Hub ➔ Thampanoor Depot</strong><br>
+          Loaded on Coach #KL-15-A-8902 • Expected delivery today at 4:30 PM.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="closeModal('cargoModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CANCELLATION SLABS & T&C -->
+  <div class="modal-backdrop" id="cancellationSlabsModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🔄 Official Cancellation Slabs & Refund Rules</h3>
+        <button class="modal-close-btn" onclick="closeModal('cancellationSlabsModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border); font-family: 'JetBrains Mono'; font-size: 11px;">
+              <th style="padding: 8px;">TIME BEFORE DEPARTURE</th>
+              <th style="padding: 8px;">REFUND %</th>
+              <th style="padding: 8px;">DEDUCTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;">More than 72 hours</td>
+              <td style="padding: 8px; font-weight: 700; color: var(--success);">90% Refund</td>
+              <td style="padding: 8px;">10% reservation fee</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;">Between 48h and 72h</td>
+              <td style="padding: 8px; font-weight: 700; color: var(--success);">75% Refund</td>
+              <td style="padding: 8px;">25% deduction</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;">Between 24h and 48h</td>
+              <td style="padding: 8px; font-weight: 700; color: var(--secondary);">50% Refund</td>
+              <td style="padding: 8px;">50% deduction</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;">Between 2h and 24h</td>
+              <td style="padding: 8px; font-weight: 700; color: var(--accent);">25% Refund</td>
+              <td style="padding: 8px;">75% deduction</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px;">Less than 2 hours</td>
+              <td style="padding: 8px; font-weight: 700; color: #C84A4A;">0% (No Refund)</td>
+              <td style="padding: 8px;">100% deduction</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 10px;">
+          Refunds auto-credited to original bank/UPI account within 7 banking days. Special services (Budget Tourism) non-refundable.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="closeModal('cancellationSlabsModal')">Understood</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RAIL ROLLS MEAL ORDERING -->
+  <div class="modal-backdrop" id="railRollsModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🍽️ Rail Rolls In-Journey Food Ordering</h3>
+        <button class="modal-close-btn" onclick="closeModal('railRollsModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Official integration with <code>railrolls.in/ksrtc</code>. Order hygienic meals delivered directly to your seat at highway restaurant halts.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+            <div><strong>🍱 Traditional Kerala Sadya Box</strong><div style="font-size: 11px; color: var(--text-muted);">Pure Veg • Banana leaf pack</div></div>
+            <button class="btn-find-bus" style="height: 32px; padding: 0 12px; font-size: 12px;" onclick="orderRailRolls('Kerala Sadya', 160)">Add ₹160</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+            <div><strong>🍗 Thalassery Dum Biryani</strong><div style="font-size: 11px; color: var(--text-muted);">With pickle, raita & boiled egg</div></div>
+            <button class="btn-find-bus" style="height: 32px; padding: 0 12px; font-size: 12px;" onclick="orderRailRolls('Thalassery Biryani', 210)">Add ₹210</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="closeModal('railRollsModal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PROFILE, OTP & LOYALTY -->
+  <div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>👤 User Profile & Loyalty Points</h3>
+        <button class="modal-close-btn" onclick="closeModal('profileModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="background: rgba(200, 148, 62, 0.1); border: 1px solid var(--secondary); border-radius: 8px; padding: 12px; display: flex; justify-content: space-between;">
+          <div><strong>Swift Loyalty Club: Gold Tier</strong><div style="font-size: 12px; color: var(--text-muted);">2,340 KM logged • Anniversary 10% coupon active</div></div>
+          <div style="font-family: 'JetBrains Mono'; font-size: 18px; font-weight: 800; color: var(--secondary);">2,340 pts</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div><label class="field-label">Name</label><input type="text" class="custom-input" value="Rajesh Nair" style="height: 40px;"></div>
+          <div><label class="field-label">Mobile (OTP Verified)</label><input type="text" class="custom-input" value="+91 98470 23114" style="height: 40px;"></div>
+          <div><label class="field-label">Email</label><input type="email" class="custom-input" value="rajesh.nair@abccorp.com" style="height: 40px;"></div>
+          <div><label class="field-label">GSTIN (Business Travel)</label><input type="text" class="custom-input" value="32AABCA1234F1Z5" style="height: 40px;"></div>
+          <div><label class="field-label">DOB / Anniversary</label><input type="date" class="custom-input" value="1988-08-15" style="height: 40px;"></div>
+          <div><label class="field-label">Referral Code</label><input type="text" class="custom-input" value="SWIFT-RAJESH99" style="height: 40px;"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="saveProfileChanges()">Save Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: AGENT CRS GATEWAY -->
+  <div class="modal-backdrop" id="agentPortalModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>🎟️ Counter / Agent CRS Portal (ksrtc.buscrs.com)</h3>
+        <button class="modal-close-btn" onclick="closeModal('agentPortalModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted);">
+          External CRS reservation gateway built by vendor <strong>MavenTech Labs</strong> for KSRTC depot booking counter staff and authorized travel agency concessionaires.
+        </p>
+        <div class="input-field-group">
+          <label class="field-label">Agent License Code</label>
+          <input type="text" class="custom-input" placeholder="e.g. AGT-TVM-8891" value="AGT-TVM-8891">
+        </div>
+        <div class="input-field-group">
+          <label class="field-label">Operator Terminal ID</label>
+          <input type="text" class="custom-input" placeholder="Terminal ID" value="TERM-THAMPANOOR-04">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-find-bus" onclick="simulateAgentLogin()">Launch CRS Terminal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: APP DOWNLOAD -->
+  <div class="modal-backdrop" id="appModal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="text-align: center;">
+      <div class="modal-header">
+        <h3>📱 Ente KSRTC Neo-OPRS Mobile App</h3>
+        <button class="modal-close-btn" onclick="closeModal('appModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 64px; margin: 10px 0;">📲</div>
+        <h4>Download Official KSRTC Mobile App</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">
+          Available on Google Play Store and Apple App Store. Offline digital boarding pass, live conductor telematics, and SOS emergency beacon.
+        </p>
+        <div style="margin: 16px 0; font-family: 'JetBrains Mono'; font-size: 14px; background: var(--bg); padding: 10px; border-radius: 8px;">
+          Scan QR or visit: <strong>ente.ksrtc.kerala.gov.in</strong>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button type="button" class="btn-find-bus" onclick="closeModal('appModal')">Close</button>
       </div>
     </div>
   </div>
@@ -1593,20 +1688,8 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Static cities list per PRD
-    const CITIES = [
-      'Trivandrum',
-      'Kollam',
-      'Alleppey',
-      'Kochi',
-      'Thrissur',
-      'Calicut',
-      'Wayanad',
-      'Munnar',
-      'Kasaragod'
-    ];
+    const CITIES = ['Trivandrum', 'Kollam', 'Alleppey', 'Kochi', 'Thrissur', 'Calicut', 'Wayanad', 'Munnar', 'Kasaragod'];
 
-    // City coordinates on SVG map
     const CITY_COORDS = {
       'Kasaragod': { x: 125, y: 75 },
       'Wayanad': { x: 190, y: 120 },
@@ -1619,9 +1702,21 @@
       'Trivandrum': { x: 280, y: 475 }
     };
 
-    // State
+    const DEPOTS = [
+      { name: 'Thampanoor Central Depot', district: 'Trivandrum', phone: '0471-2323886', bays: 'Bay 1-24' },
+      { name: 'Kollam Main Bus Station', district: 'Kollam', phone: '0474-2752008', bays: 'Bay 1-12' },
+      { name: 'Alappuzha KSRTC Depot', district: 'Alappuzha', phone: '0477-2252501', bays: 'Bay 1-10' },
+      { name: 'Vytilla Mobility Hub', district: 'Ernakulam', phone: '0484-2372600', bays: 'Bay 1-18' },
+      { name: 'Thrissur Central Stand', district: 'Thrissur', phone: '0487-2421150', bays: 'Bay 1-16' },
+      { name: 'Kozhikode Terminal Stand', district: 'Kozhikode', phone: '0495-2723796', bays: 'Bay 1-20' },
+      { name: 'Sulthan Bathery Depot', district: 'Wayanad', phone: '04936-220217', bays: 'Bay 1-8' },
+      { name: 'Munnar Depot Terminal', district: 'Idukki', phone: '04865-230201', bays: 'Bay 1-6' },
+      { name: 'Kasaragod New Bus Stand', district: 'Kasaragod', phone: '04994-230677', bays: 'Bay 1-10' }
+    ];
+
     let passengerCount = 2;
     let mapZoomScale = 1;
+    let isDepotLayerActive = false;
 
     // Elements
     const body = document.body;
@@ -1632,38 +1727,23 @@
     const toCityInput = document.getElementById('toCityInput');
     const fromAutoList = document.getElementById('fromAutoList');
     const toAutoList = document.getElementById('toAutoList');
-    const typeOneWay = document.getElementById('typeOneWay');
-    const typeRoundTrip = document.getElementById('typeRoundTrip');
     const returnDateWrap = document.getElementById('returnDateWrap');
     const journeyDateInput = document.getElementById('journeyDateInput');
     const returnDateInput = document.getElementById('returnDateInput');
+    const linkTicketConfigBox = document.getElementById('linkTicketConfigBox');
     const passCountVal = document.getElementById('passCountVal');
-    const decPassBtn = document.getElementById('decPassBtn');
-    const incPassBtn = document.getElementById('incPassBtn');
     const activeRoutePath = document.getElementById('activeRoutePath');
     const animatedBusMarker = document.getElementById('animatedBusMarker');
     const keralaSvgMap = document.getElementById('keralaSvgMap');
-    const mapHoverTooltip = document.getElementById('mapHoverTooltip');
-    const tooltipCityName = document.getElementById('tooltipCityName');
-    const tooltipBusCount = document.getElementById('tooltipBusCount');
-    const charterModal = document.getElementById('charterModal');
-    const openCharterBtn = document.getElementById('openCharterBtn');
-    const genericFeatureModal = document.getElementById('genericFeatureModal');
     const toastNotice = document.getElementById('toastNotice');
 
-    // Initialize Dates (Tomorrow as default)
+    // Default dates
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
     journeyDateInput.value = tomorrow.toISOString().split('T')[0];
-    journeyDateInput.min = today.toISOString().split('T')[0];
 
-    const nextWeek = new Date(today);
-    nextWeek.setDate(nextWeek.getDate() + 4);
-    returnDateInput.value = nextWeek.toISOString().split('T')[0];
-    returnDateInput.min = tomorrow.toISOString().split('T')[0];
-
-    // Theme toggle
+    // Theme logic
     function initTheme() {
       const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
       setTheme(savedTheme);
@@ -1688,26 +1768,40 @@
       setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
-    // Roundtrip toggle
-    typeOneWay.addEventListener('change', () => returnDateWrap.classList.remove('show'));
-    typeRoundTrip.addEventListener('change', () => returnDateWrap.classList.add('show'));
+    // Trip Type Switcher (One Way, Round Trip, Link-Ticket)
+    function handleTripTypeChange(type) {
+      if (type === 'roundtrip') {
+        returnDateWrap.classList.add('show');
+        linkTicketConfigBox.classList.remove('show');
+        showToast('Round trip selected: 10% discount applied to return leg!', '🏷️');
+      } else if (type === 'linkticket') {
+        returnDateWrap.classList.remove('show');
+        linkTicketConfigBox.classList.add('show');
+        showToast('Link-Ticket Multi-Leg active: Guaranteed transfer layover at connecting hub.', '🔗');
+      } else {
+        returnDateWrap.classList.remove('show');
+        linkTicketConfigBox.classList.remove('show');
+      }
+    }
 
-    // Passenger counter
-    decPassBtn.addEventListener('click', () => {
+    // Passenger counter (Max 6 from audit)
+    document.getElementById('decPassBtn').addEventListener('click', () => {
       if (passengerCount > 1) {
         passengerCount--;
         passCountVal.textContent = passengerCount;
       }
     });
 
-    incPassBtn.addEventListener('click', () => {
-      if (passengerCount < 10) {
+    document.getElementById('incPassBtn').addEventListener('click', () => {
+      if (passengerCount < 6) {
         passengerCount++;
         passCountVal.textContent = passengerCount;
+      } else {
+        showToast('Maximum 6 seats permitted per transaction (Official KSRTC Policy)', '⚠️');
       }
     });
 
-    // Autocomplete setup
+    // Autocomplete
     function setupAutocomplete(input, list) {
       function showList(query = '') {
         const filtered = CITIES.filter(c => c.toLowerCase().includes(query.toLowerCase()));
@@ -1742,183 +1836,152 @@
     setupAutocomplete(fromCityInput, fromAutoList);
     setupAutocomplete(toCityInput, toAutoList);
 
-    // Map Interactivity & Route Path drawing
+    // Map Path
     function updateMapRoute(from, to) {
-      // Highlight markers
       document.querySelectorAll('.city-pin').forEach(pin => {
         const city = pin.getAttribute('data-city');
-        if (city === from || city === to) {
-          pin.classList.add('selected');
-        } else {
-          pin.classList.remove('selected');
-        }
+        pin.classList.toggle('selected', city === from || city === to);
       });
 
       const p1 = CITY_COORDS[from];
       const p2 = CITY_COORDS[to];
-
       if (p1 && p2) {
-        // Draw curved/segmented SVG path between coordinates
         const midX = (p1.x + p2.x) / 2 + (p1.y > p2.y ? -10 : 10);
         const midY = (p1.y + p2.y) / 2;
         const d = `M ${p1.x} ${p1.y} Q ${midX} ${midY} ${p2.x} ${p2.y}`;
         activeRoutePath.setAttribute('d', d);
-
-        // Position animated bus marker at midpoint
         animatedBusMarker.setAttribute('transform', `translate(${midX}, ${midY})`);
         animatedBusMarker.style.display = 'block';
-      } else {
-        animatedBusMarker.style.display = 'none';
       }
     }
 
     function updateMapRouteFromInputs() {
-      const from = fromCityInput.value.trim();
-      const to = toCityInput.value.trim();
-      updateMapRoute(from, to);
+      updateMapRoute(fromCityInput.value.trim(), toCityInput.value.trim());
     }
 
-    // City pin click handler
-    document.querySelectorAll('.city-pin').forEach(pin => {
-      const city = pin.getAttribute('data-city');
-
-      pin.addEventListener('click', () => {
-        if (fromCityInput.value === city) {
-          toCityInput.value = (city === 'Trivandrum') ? 'Kochi' : 'Trivandrum';
-        } else {
-          toCityInput.value = city;
-        }
-        updateMapRouteFromInputs();
-        showToast(`Route destination updated to ${city}`);
+    // Depot Layer Toggle on Map
+    function toggleDepotLayer() {
+      isDepotLayerActive = !isDepotLayerActive;
+      document.getElementById('toggleDepotPinsBtn').classList.toggle('active', isDepotLayerActive);
+      document.querySelectorAll('.depot-marker-node').forEach(node => {
+        node.classList.toggle('show', isDepotLayerActive);
       });
+      showToast(isDepotLayerActive ? 'Depot Hubs layer enabled on map' : 'Depot Hubs layer hidden', '🏢');
+    }
 
-      // Hover tooltip
-      pin.addEventListener('mouseenter', (e) => {
-        const bbox = pin.getBoundingClientRect();
-        const containerBox = svgMapContainer.getBoundingClientRect();
-        tooltipCityName.textContent = city;
-        tooltipBusCount.textContent = `${Math.floor(Math.random() * 15 + 8)} coaches scheduled today`;
-        
-        mapHoverTooltip.style.left = `${bbox.left - containerBox.left + 20}px`;
-        mapHoverTooltip.style.top = `${bbox.top - containerBox.top - 10}px`;
-        mapHoverTooltip.classList.add('show');
-      });
+    function showDepotDetails(name, info) {
+      showToast(`${name}: ${info}`, '🏢');
+    }
 
-      pin.addEventListener('mouseleave', () => {
-        mapHoverTooltip.classList.remove('show');
-      });
-    });
+    // Modals
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-    // Popular Route Cards click
-    document.querySelectorAll('.route-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.route-card').forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
+    function openCharterModal() { openModal('charterModal'); }
+    function openDepotModal() { populateDepots(); openModal('depotModal'); }
+    function openFeedbackModal() { openModal('feedbackModal'); }
+    function openCargoModal() { openModal('cargoModal'); }
+    function openCancellationSlabsModal() { openModal('cancellationSlabsModal'); }
+    function openRailRollsModal() { openModal('railRollsModal'); }
+    function openProfileModal() { openModal('profileModal'); }
+    function openAgentPortalModal() { openModal('agentPortalModal'); }
+    function openAppModal() { openModal('appModal'); }
 
-        const from = card.getAttribute('data-from');
-        const to = card.getAttribute('data-to');
+    // Depots list
+    function populateDepots(query = '') {
+      const container = document.getElementById('depotListContainer');
+      const filtered = DEPOTS.filter(d => d.name.toLowerCase().includes(query.toLowerCase()) || d.district.toLowerCase().includes(query.toLowerCase()));
+      container.innerHTML = filtered.map(d => `
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <strong>${d.name} (${d.district})</strong>
+            <div style="font-size: 11px; color: var(--text-muted);">${d.bays} • Phone: ${d.phone}</div>
+          </div>
+          <button class="header-sub-btn" onclick="showToast('Calling ${d.phone}...', '📞')">Call</button>
+        </div>
+      `).join('');
+    }
 
-        fromCityInput.value = from;
-        toCityInput.value = to;
-        updateMapRoute(from, to);
-        showToast(`Selected route: ${from} → ${to}`);
-      });
-    });
+    function filterDepots(val) { populateDepots(val); }
 
-    // Map Zoom Controls
-    document.getElementById('zoomInBtn').addEventListener('click', () => {
-      if (mapZoomScale < 1.8) {
-        mapZoomScale += 0.2;
-        keralaSvgMap.style.transform = `scale(${mapZoomScale})`;
-      }
-    });
+    // Handlers
+    function handleCharterSubmit(e) {
+      e.preventDefault();
+      closeModal('charterModal');
+      showToast('Bus Hire quote submitted to KSRTC Charter Desk! Conductor hotline will call.', '🚌');
+    }
 
-    document.getElementById('zoomOutBtn').addEventListener('click', () => {
-      if (mapZoomScale > 0.8) {
-        mapZoomScale -= 0.2;
-        keralaSvgMap.style.transform = `scale(${mapZoomScale})`;
-      }
-    });
+    function handleFeedbackSubmit(e) {
+      e.preventDefault();
+      closeModal('feedbackModal');
+      showToast('Grievance ticket logged with PNR validation! SMS notification dispatched.', '✅');
+    }
 
-    document.getElementById('resetMapBtn').addEventListener('click', () => {
-      mapZoomScale = 1;
-      keralaSvgMap.style.transform = `scale(1)`;
-      updateMapRouteFromInputs();
-    });
+    function saveProfileChanges() {
+      closeModal('profileModal');
+      showToast('Profile updated! GST & anniversary perks synchronized.', '👤');
+    }
 
-    // Search Submit
+    function simulateAgentLogin() {
+      closeModal('agentPortalModal');
+      showToast('Connected to MavenTech Labs CRS Terminal (ksrtc.buscrs.com)', '🎟️');
+    }
+
+    function trackCargoSample() {
+      showToast('Consignment verified with telematics: Approving destination bay.', '📦');
+    }
+
+    function orderRailRolls(dish, price) {
+      showToast(`Added ${dish} (₹${price}) to seat delivery at Alappuzha Halt!`, '🍽️');
+    }
+
+    function applyRoute(from, to, fare) {
+      fromCityInput.value = from;
+      toCityInput.value = to;
+      updateMapRoute(from, to);
+      showToast(`Selected route: ${from} ➔ ${to} (${fare})`, '🚌');
+    }
+
+    function applyLinkTicketRoute(from, via, to) {
+      document.getElementById('typeLinkTicket').checked = true;
+      handleTripTypeChange('linkticket');
+      fromCityInput.value = from;
+      toCityInput.value = to;
+      updateMapRoute(from, to);
+      showToast(`Link-Ticket: ${from} ➔ (Transfer at ${via}) ➔ ${to}`, '🔗');
+    }
+
     function handleSearchSubmit(e) {
       e.preventDefault();
       const from = fromCityInput.value;
       const to = toCityInput.value;
-      const date = journeyDateInput.value;
-      const findBtn = document.getElementById('findBusBtn');
-
-      findBtn.innerHTML = '<span>⏳</span> Searching...';
-      findBtn.disabled = true;
-
-      setTimeout(() => {
-        findBtn.innerHTML = '<span>🚌</span> Find My Bus';
-        findBtn.disabled = false;
-        showFeatureModal(`Buses for ${from} → ${to}`, `Found 14 available KSRTC-SWIFT services on ${date} for ${passengerCount} passenger(s).<br><br>• <strong>06:00 AM</strong> — AC Sleeper Multi-Axle (₹800, 18 seats)<br>• <strong>08:30 AM</strong> — Gajaraj B11R (₹950, 12 seats)<br>• <strong>02:15 PM</strong> — Swift Deluxe Air-Bus (₹620, 24 seats)<br>• <strong>09:00 PM</strong> — Super Fast Non-AC (₹450, 31 seats)`);
-      }, 700);
+      showToast(`Found 16 KSRTC-SWIFT services for ${from} ➔ ${to}`, '🚌');
     }
 
-    // Charter modal
-    function openCharterModal() {
-      charterModal.classList.add('open');
-    }
-
-    function closeCharterModal() {
-      charterModal.classList.remove('open');
-    }
-
-    openCharterBtn.addEventListener('click', openCharterModal);
-
-    function handleCharterSubmit(e) {
-      e.preventDefault();
-      closeCharterModal();
-      showToast('Charter quote request sent! Conductor hotline will call within 15 min.');
-    }
-
-    // Feature Modal
-    function showFeatureModal(title, text) {
-      document.getElementById('featureModalTitle').innerHTML = title;
-      document.getElementById('featureModalBody').innerHTML = text;
-      genericFeatureModal.classList.add('open');
-    }
-
-    function closeFeatureModal() {
-      genericFeatureModal.classList.remove('open');
-    }
-
-    // Toast
-    function showToast(msg) {
-      const toastText = document.getElementById('toastText');
-      toastText.textContent = msg;
+    function showToast(msg, icon = '✅') {
+      document.getElementById('toastText').textContent = msg;
+      document.getElementById('toastIcon').textContent = icon;
       toastNotice.classList.add('show');
-      setTimeout(() => toastNotice.classList.remove('show'), 3500);
+      setTimeout(() => toastNotice.classList.remove('show'), 3800);
     }
 
-    // Sign in demo
-    document.getElementById('loginHeaderBtn').addEventListener('click', () => {
-      showToast('Logged in as Guest Explorer. Ready to book!');
-    });
-
-    document.getElementById('exploreRouteBtn').addEventListener('click', () => {
-      updateMapRouteFromInputs();
-      showToast(`Map route highlighted: ${fromCityInput.value} ➔ ${toCityInput.value}`);
-    });
-
-    // Close modals on escape key
+    // Escape listener
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeCharterModal();
-        closeFeatureModal();
+        document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('open'));
       }
     });
 
-    // Init
+    // City pin click
+    document.querySelectorAll('.city-pin').forEach(pin => {
+      pin.addEventListener('click', () => {
+        const city = pin.getAttribute('data-city');
+        toCityInput.value = city;
+        updateMapRouteFromInputs();
+        showToast(`Destination updated to: ${city}`);
+      });
+    });
+
     initTheme();
     updateMapRoute('Kochi', 'Trivandrum');
   </script>

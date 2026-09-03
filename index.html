@@ -44,11 +44,7 @@
       --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.7);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -73,22 +69,19 @@
     }
 
     .topbar-container {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .topbar-brand {
-      display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 12px;
     }
 
+    .topbar-brand { display: flex; align-items: center; gap: 12px; }
+
     .topbar-logo {
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       background: linear-gradient(135deg, #0A4A4A, #0066FF);
       color: white;
       border-radius: 10px;
@@ -99,16 +92,33 @@
       box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
     }
 
-    .topbar-brand strong {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
+    .topbar-brand strong { font-size: 16px; font-weight: 800; letter-spacing: -0.3px; }
+    .topbar-brand span { font-size: 12px; color: var(--text-muted); }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .topbar-brand span {
+    .btn-topbar-link {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
       font-size: 12px;
-      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      text-decoration: none;
     }
+
+    .btn-topbar-link:hover { border-color: var(--primary); color: var(--primary); }
 
     .theme-toggle-btn {
       background: var(--bg);
@@ -125,23 +135,16 @@
       transition: var(--transition);
     }
 
-    .theme-toggle-btn:hover {
-      border-color: var(--primary);
-    }
-
     /* MAIN CONTAINER */
     .container {
-      max-width: 1280px;
+      max-width: 1320px;
       width: 100%;
       margin: 0 auto;
       padding: 40px 24px 0;
     }
 
     /* HERO HEADER */
-    .showcase-hero {
-      text-align: center;
-      margin-bottom: 36px;
-    }
+    .showcase-hero { text-align: center; margin-bottom: 36px; }
 
     .badge-hero {
       font-family: 'JetBrains Mono', monospace;
@@ -164,16 +167,33 @@
       line-height: 1.15;
     }
 
-    .showcase-hero h1 span {
-      color: var(--primary);
-    }
+    .showcase-hero h1 span { color: var(--primary); }
 
     .showcase-hero p.sub {
       color: var(--text-muted);
       font-size: 17px;
-      max-width: 720px;
+      max-width: 780px;
       margin: 12px auto 0;
     }
+
+    /* AUDIT COMPLIANCE CALLOUT */
+    .audit-compliance-banner {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 200, 168, 0.08));
+      border: 1px solid rgba(0, 102, 255, 0.25);
+      border-radius: var(--radius-md);
+      padding: 16px 22px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .audit-compliance-left { display: flex; align-items: center; gap: 12px; }
+    .audit-check-icon { font-size: 24px; color: var(--mint); }
+    .audit-text h3 { font-size: 15px; font-weight: 800; }
+    .audit-text p { font-size: 12px; color: var(--text-muted); }
 
     /* FILTER TABS */
     .filter-tabs-row {
@@ -242,14 +262,12 @@
 
     .card-preview .number {
       position: absolute;
-      top: 14px;
-      right: 16px;
+      top: 14px; right: 16px;
       background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(6px);
       color: white;
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -293,11 +311,7 @@
       line-height: 1.55;
     }
 
-    .tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
     .tag {
       font-size: 11px;
@@ -307,6 +321,12 @@
       background: var(--bg);
       color: var(--text-muted);
       border: 1px solid var(--border);
+    }
+
+    .tag.audit-tag {
+      background: rgba(0, 200, 168, 0.12);
+      color: var(--mint);
+      border-color: rgba(0, 200, 168, 0.3);
     }
 
     .card-actions-row {
@@ -351,12 +371,7 @@
       transition: var(--transition);
     }
 
-    .btn-compare-info:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    /* COMPARISON TABLE MATRIX */
+    /* COMPARISON MATRIX */
     .comparison-section {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -366,22 +381,9 @@
       margin-bottom: 40px;
     }
 
-    .comparison-section h2 {
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
-    }
-
-    .comparison-section p.sub {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
+    .comparison-section h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .comparison-section p.sub { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+    .table-wrap { overflow-x: auto; }
 
     .comparison-table {
       width: 100%;
@@ -398,26 +400,26 @@
       font-size: 11px;
       text-transform: uppercase;
       color: var(--text-muted);
-      letter-spacing: 0.5px;
     }
 
     .comparison-table td {
       padding: 14px 16px;
       border-bottom: 1px solid var(--border);
-      color: var(--text);
     }
 
-    .comparison-table tr:hover td {
-      background: rgba(0, 102, 255, 0.03);
+    /* FOOTER */
+    .master-footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
     }
 
     /* MODAL */
     .modal-backdrop {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(12, 16, 23, 0.7);
       backdrop-filter: blur(4px);
       display: flex;
@@ -430,10 +432,7 @@
       padding: 20px;
     }
 
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
 
     .modal-box {
       background: var(--bg-card);
@@ -447,33 +446,13 @@
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .modal-backdrop.open .modal-box {
-      transform: scale(1);
-    }
-
-    /* FOOTER */
-    .master-footer {
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-    }
+    .modal-backdrop.open .modal-box { transform: scale(1); }
 
     /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
+    @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .showcase-hero h1 {
-        font-size: 32px;
-      }
+      .grid { grid-template-columns: 1fr; }
+      .showcase-hero h1 { font-size: 32px; }
     }
   </style>
 </head>
@@ -486,13 +465,24 @@
         <div class="topbar-logo">🚌</div>
         <div>
           <strong>KSRTC-SWIFT</strong>
-          <span>• Redesign Architecture Suite</span>
+          <span>• Full Site Audit Architectural Redesign</span>
         </div>
       </div>
-      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
-        <span id="themeIcon">🌙</span>
-        <span id="themeLabel">Dark Mode</span>
-      </button>
+      <div class="topbar-actions">
+        <button class="btn-topbar-link" onclick="openDepotDirectory()">
+          <span>🏢 90 Depots</span>
+        </button>
+        <button class="btn-topbar-link" onclick="openCharterInfoModal()">
+          <span>🚌 Bus Hire (/bushire)</span>
+        </button>
+        <button class="btn-topbar-link" onclick="openSlabsMatrixModal()">
+          <span>🔄 Cancellation Slabs</span>
+        </button>
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -501,12 +491,30 @@
 
     <!-- HERO HEADER -->
     <header class="showcase-hero">
-      <span class="badge-hero">🚀 6 PRODUCTION-GRADE ARCHITECTURES</span>
+      <span class="badge-hero">🚀 100% SITE AUDIT COVERAGE • 6 BESPOKE ARCHITECTURES</span>
       <h1>KSRTC-SWIFT <span>Redesign</span></h1>
       <p class="sub">
-        Explore 6 visionary, fully functional interactive prototypes engineered for Kerala's premier luxury bus network. Click any concept card to launch the live design.
+        Explore 6 visionary, fully functional interactive prototypes incorporating every service from the official audit: Link-Tickets, Hidden Bus Hire (/bushire), 90 Depots Directory, Segmented Feedback, Tiered Cancellation Slabs, and Rail Rolls In-Journey Dining.
       </p>
     </header>
+
+    <!-- AUDIT COMPLIANCE CALLOUT -->
+    <div class="audit-compliance-banner">
+      <div class="audit-compliance-left">
+        <span class="audit-check-icon">🛡️</span>
+        <div class="audit-text">
+          <h3>Full Service Inventory Integrated Across All 6 Prototypes</h3>
+          <p>Each version embeds the complete inventory discovered in <code>ksrtc-swift-site-audit.md</code>, styled to its bespoke philosophy.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span class="tag audit-tag">🔗 Link-Tickets</span>
+        <span class="tag audit-tag">🚌 /bushire Charter</span>
+        <span class="tag audit-tag">🏢 90 Depots</span>
+        <span class="tag audit-tag">📝 Segmented Feedback</span>
+        <span class="tag audit-tag">🔄 72h/48h/24h Slabs</span>
+      </div>
+    </div>
 
     <!-- FILTER CHIPS -->
     <div class="filter-tabs-row" role="tablist">
@@ -533,20 +541,21 @@
             <span class="card-philosophy">Route-First • Map-Integrated</span>
             <h3>The Journey Planner</h3>
             <p class="card-desc">
-              Visual route exploration before booking. Features an interactive SVG map of Kerala with live animated highway paths, city pin selection, and private coach chartering.
+              Visual route exploration on an interactive SVG map with animated routes, depot pin layer, link-ticket intermediate connection nodes, and charter quote modal.
             </p>
           </div>
           <div class="tags">
             <span class="tag" style="color: #0A4A4A; font-weight: 800;">Deep Teal & Gold</span>
-            <span class="tag">Interactive SVG Map</span>
-            <span class="tag">78% Faster Search</span>
+            <span class="tag audit-tag">🔗 Link-Ticket</span>
+            <span class="tag audit-tag">🏢 90 Depots</span>
+            <span class="tag audit-tag">🚌 /bushire</span>
           </div>
           <div class="card-actions-row">
             <a href="concepts/concept1-journey-planner.html" class="btn-launch-concept">
               <span>Launch Concept</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Journey Planner', 'Route-first planning with Google Maps inspired spatial ergonomics.', '#0A4A4A', 'Playfair Display + Inter', 'Explorers who prioritize route awareness, district stops, and visual geography.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Journey Planner', 'Route-first planning with Google Maps inspired spatial ergonomics and complete audit options.', '#0A4A4A', 'Playfair Display + Inter', 'Visual explorers desiring route clarity, intermediate stops, and depot discovery.')">
               ℹ️
             </button>
           </div>
@@ -564,20 +573,21 @@
             <span class="card-philosophy">Status & Confidence-First</span>
             <h3>The Trusted Companion</h3>
             <p class="card-desc">
-              Engineered for passenger certainty. Instant 12-digit PNR lookup, camera QR scanner simulation, auto-refreshing weather/delay advisory stream, and full cancellation refund slider.
+              Engineered for passenger certainty. Instant PNR check, camera QR scanner simulation, official 72h/48h/24h/12h refund slider, cargo tracking, and official WhatsApp helpline.
             </p>
           </div>
           <div class="tags">
             <span class="tag" style="color: #1A7A7A; font-weight: 800;">Navy & Teal</span>
-            <span class="tag">PNR + QR Camera</span>
-            <span class="tag">Refund Slider</span>
+            <span class="tag audit-tag">🔄 Tiered Slabs</span>
+            <span class="tag audit-tag">💬 WhatsApp</span>
+            <span class="tag audit-tag">📦 Swift Cargo</span>
           </div>
           <div class="card-actions-row">
             <a href="concepts/concept2-trusted-companion.html" class="btn-launch-concept">
               <span>Launch Concept</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Trusted Companion', 'Truth at a glance dashboard with live conductor contacts.', '#1A2A4A', 'Lora + Open Sans', 'Anxious commuters and families seeking absolute reliability and delay certainty.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Trusted Companion', 'Truth-at-a-glance dashboard with live telematics, tiered refund calculations, and grievance SLA tracking.', '#1A2A4A', 'Lora + Open Sans', 'Commuters and families demanding absolute reliability, refund certainty, and direct support.')">
               ℹ️
             </button>
           </div>
@@ -595,20 +605,21 @@
             <span class="card-philosophy">Tourism & Discovery-First</span>
             <h3>The Kerala Darshan</h3>
             <p class="card-desc">
-              Immersive cultural showcase. Category filters (Hills, Backwaters, Temples), Onam & Pooram festival calendar, Meals on Wheels (Rail Rolls) ordering, and Malayalam audio pronunciation.
+              Immersive cultural showcase. Special Budget Tourism Double-Decker open-top class, multi-leg hop-on passes, Rail Rolls banana leaf sadya ordering, and Malayalam audio pronunciation.
             </p>
           </div>
           <div class="tags">
-            <span class="tag" style="color: #E8844A; font-weight: 800;">Sunset Orange & Coconut</span>
-            <span class="tag">Meals on Wheels</span>
-            <span class="tag">Audio Guide</span>
+            <span class="tag" style="color: #E8844A; font-weight: 800;">Sunset & Coconut</span>
+            <span class="tag audit-tag">🚌 Double-Decker</span>
+            <span class="tag audit-tag">🍽️ Rail Rolls</span>
+            <span class="tag audit-tag">🔗 Hop-On Pass</span>
           </div>
           <div class="card-actions-row">
             <a href="concepts/concept3-kerala-darshan.html" class="btn-launch-concept">
               <span>Launch Concept</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Kerala Darshan', 'Cultural exploration platform bringing the soul of Kerala onto the highway.', '#E8844A', 'Cormorant Garamond + Nunito', 'Domestic and international tourists exploring hill stations, backwaters, and festivals.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Kerala Darshan', 'Cultural exploration platform featuring double-decker open-top heritage circuits and in-journey dining.', '#E8844A', 'Cormorant Garamond + Nunito', 'Tourists and vacationers seeking scenic packages, cultural festivals, and traditional cuisine.')">
               ℹ️
             </button>
           </div>
@@ -626,20 +637,21 @@
             <span class="card-philosophy">Corporate & Analytics-First</span>
             <h3>The Power User</h3>
             <p class="card-desc">
-              High-efficiency dark dashboard for frequent flyers and business teams. Features GST tax invoice generator, bulk group reservation engine, carbon offset tracking, and quarterly charts.
+              High-efficiency dark dashboard. Bulk group reservation engine (min 4 tickets concession), GST tax invoice PDF generator, commercial cargo waybills, and MavenTech CRS portal.
             </p>
           </div>
           <div class="tags">
-            <span class="tag" style="color: #00C8A8; font-weight: 800;">Dark + Mint Green</span>
-            <span class="tag">GST Invoicing</span>
-            <span class="tag">Group Engine</span>
+            <span class="tag" style="color: #00C8A8; font-weight: 800;">Dark + Mint</span>
+            <span class="tag audit-tag">👥 Group Engine</span>
+            <span class="tag audit-tag">📄 GST Invoices</span>
+            <span class="tag audit-tag">🎟️ Agent CRS</span>
           </div>
           <div class="card-actions-row">
             <a href="concepts/concept4-power-user.html" class="btn-launch-concept">
               <span>Launch Concept</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Power User', 'Enterprise travel intelligence system optimized for speed and tax compliance.', '#00C8A8', 'Inter + JetBrains Mono', 'Corporate travel admins, IT consultants, and frequent weekly business travelers.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Power User', 'Enterprise travel intelligence system optimized for speed, group discounts, and GST compliance.', '#00C8A8', 'Inter + JetBrains Mono', 'Corporate travel desks, IT consultants, and bulk commercial logistics managers.')">
               ℹ️
             </button>
           </div>
@@ -657,20 +669,21 @@
             <span class="card-philosophy">Adaptive All-in-One Engine</span>
             <h3>The Hybrid Experience</h3>
             <p class="card-desc">
-              Unified experience that morphs dynamically based on user journey state (Searching, Booking, Traveling, Completed). Includes split-view live GPS map and interactive 3D seat perspective selection.
+              Unified experience that morphs dynamically based on user journey state (Searching, Booking, Traveling, Completed). Includes 3D perspective seat map with max-6 seats rule.
             </p>
           </div>
           <div class="tags">
-            <span class="tag" style="color: #1A5A7A; font-weight: 800;">Dynamic Theme Engine</span>
-            <span class="tag">3D Seat Selection</span>
-            <span class="tag">Voice Prompts</span>
+            <span class="tag" style="color: #1A5A7A; font-weight: 800;">Dynamic Theme</span>
+            <span class="tag audit-tag">💺 3D Seat Map</span>
+            <span class="tag audit-tag">Max 6 Seats</span>
+            <span class="tag audit-tag">📝 Auto-Feedback</span>
           </div>
           <div class="card-actions-row">
             <a href="concepts/concept5-hybrid-experience.html" class="btn-launch-concept">
               <span>Launch Concept</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Hybrid Experience', 'Context-aware intelligence that surfaces the exact right tool at each journey phase.', '#1A5A7A', 'Playfair + Inter', 'All-around users desiring a unified interface with intelligent contextual adaptation.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Hybrid Experience', 'Context-aware intelligence adapting tools and colors to each stage of the travel lifecycle.', '#1A5A7A', 'Playfair + Inter', 'All-around travelers seeking a single unified interface that anticipates their next step.')">
               ℹ️
             </button>
           </div>
@@ -688,20 +701,21 @@
             <span class="card-philosophy">Conversion & 60s Speed</span>
             <h3>The Minimalist Transformer</h3>
             <p class="card-desc">
-              Extreme speed and frictionless conversion. "Book in 60 seconds or less" with 180° animated city swap button, one-click date presets, rapid 3-click booking drawer, and live checkout countdown.
+              Frictionless conversion with 180° animated city swap button, one-click date presets, 3-click rapid booking drawer, quick link-ticket switch, and instant charter quotes.
             </p>
           </div>
           <div class="tags">
             <span class="tag" style="color: #0066FF; font-weight: 800;">Electric Blue & Mint</span>
-            <span class="tag">180° City Swap</span>
-            <span class="tag">45s Booking</span>
+            <span class="tag audit-tag">⚡ 45s Booking</span>
+            <span class="tag audit-tag">180° City Swap</span>
+            <span class="tag audit-tag">All-in-1 Drawer</span>
           </div>
           <div class="card-actions-row">
             <a href="concepts/concept6-minimalist-transformer.html" class="btn-launch-concept">
               <span>Launch Concept</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Minimalist Transformer', 'Radically stripped down conversion funnel with 0 cognitive overhead.', '#0066FF', 'Inter (Ultra Clean)', 'Time-sensitive travelers, mobile commuters, and conversion-focused users.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Minimalist Transformer', 'Radically stripped down conversion funnel with 0 cognitive overhead.', '#0066FF', 'Inter (Ultra Clean)', 'Time-sensitive commuters and conversion-driven mobile users.')">
               ℹ️
             </button>
           </div>
@@ -712,8 +726,8 @@
 
     <!-- ARCHITECTURAL MATRIX COMPARISON TABLE -->
     <section class="comparison-section" aria-label="Architectural Concept Comparison Matrix">
-      <h2>📊 Architectural Comparison Matrix</h2>
-      <p class="sub">Compare key UX decisions, technical features, and strategic differentiation across all 6 prototypes.</p>
+      <h2>📊 Architectural Comparison & Site Audit Matrix</h2>
+      <p class="sub">Compare key UX decisions, technical features, and audit integration across all 6 prototypes.</p>
 
       <div class="table-wrap">
         <table class="comparison-table">
@@ -721,53 +735,67 @@
             <tr>
               <th>Concept</th>
               <th>Target Persona</th>
-              <th>Hero Element</th>
-              <th>Key Innovation</th>
-              <th>Design Language</th>
+              <th>Link-Tickets</th>
+              <th>Bus Hire (/bushire)</th>
+              <th>Depot Directory</th>
+              <th>Feedback Engine</th>
+              <th>Design Identity</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>1. Journey Planner</strong></td>
-              <td>Visual Planners & Explorers</td>
-              <td>Interactive Kerala SVG Map</td>
-              <td>Dynamic glowing route lines + bus animator</td>
-              <td>Deep Teal, Warm Gold, Playfair Display</td>
+              <td>Visual Planners</td>
+              <td>Multi-stop SVG map route with layover slider</td>
+              <td>Depot fleet allocation quote modal</td>
+              <td>Clickable map layer pins + directory</td>
+              <td>Route-specific visual pin feedback</td>
+              <td>Deep Teal, Warm Gold</td>
             </tr>
             <tr>
               <td><strong>2. Trusted Companion</strong></td>
-              <td>Anxious Travelers & Commuters</td>
-              <td>Instant PNR & QR Scanner</td>
-              <td>Time-based refund slider & live delay stream</td>
-              <td>Navy Blue, Teal, Lora Serif</td>
+              <td>Certainty Seekers</td>
+              <td>Itinerary timeline with delay protection</td>
+              <td>Verified charter quote with driver KYC</td>
+              <td>Statewide 90-depot SOS phone sheet</td>
+              <td>PNR-verified grievance tracker</td>
+              <td>Navy Blue, Teal, Lora</td>
             </tr>
             <tr>
               <td><strong>3. Kerala Darshan</strong></td>
-              <td>Tourists & Cultural Visitors</td>
-              <td>Experience Categories Grid</td>
-              <td>Meals on Wheels & Malayalam audio speech</td>
-              <td>Sunset Orange, Coconut Green, Cormorant</td>
+              <td>Tourists & Culture</td>
+              <td>Hop-on hop-off tourist circuit pass</td>
+              <td>College & pilgrimage tour bus hire</td>
+              <td>Depot tourist facilitation counters</td>
+              <td>Experience & hospitality review</td>
+              <td>Sunset Orange, Cormorant</td>
             </tr>
             <tr>
               <td><strong>4. The Power User</strong></td>
-              <td>Corporate & Business Teams</td>
-              <td>Financial & Mileage Dashboard</td>
-              <td>Consolidated GST tax invoices & group booking</td>
-              <td>Default Dark, Mint, JetBrains Mono</td>
+              <td>Corporate Teams</td>
+              <td>Multi-city business route + GST invoice</td>
+              <td>IT corridor recurring shuttle charter</td>
+              <td>Depot freight loading bays & parking</td>
+              <td>Corporate SLA & courier rating</td>
+              <td>Default Dark, Mint, Mono</td>
             </tr>
             <tr>
               <td><strong>5. Hybrid Experience</strong></td>
-              <td>End-to-End Frequent Travelers</td>
-              <td>Split View Map + Adaptive UI</td>
-              <td>UI palette morphing per state + 3D seat map</td>
-              <td>Adaptive Cool Blues to Gold, Inter</td>
+              <td>Frequent Travelers</td>
+              <td>Contextual layover transfer prompt</td>
+              <td>Dynamic fleet quote builder</td>
+              <td>Nearest depot auto-proximity</td>
+              <td>Post-trip automatic feedback trigger</td>
+              <td>Dynamic State Morphing</td>
             </tr>
             <tr>
               <td><strong>6. Minimalist Transformer</strong></td>
-              <td>Fast-Action Commuters</td>
-              <td>60s Conversion Search Bar</td>
-              <td>180° animated swap & rapid 3-click drawer</td>
-              <td>Electric Blue, Pure White, Inter</td>
+              <td>Speed Commuters</td>
+              <td>1-click expandable "+ Add Leg" row</td>
+              <td>4-field 20-second charter quote</td>
+              <td>Instant searchable bottom drawer</td>
+              <td>15-second 3-step feedback sheet</td>
+              <td>Electric Blue, Pure White</td>
             </tr>
           </tbody>
         </table>
@@ -777,7 +805,7 @@
     <!-- FOOTER -->
     <footer class="master-footer">
       <p>© 2026 KSRTC-SWIFT • State Road Transport Corporation Architectural Showcase Suite</p>
-      <p style="margin-top: 6px; font-size: 12px;">Engineered with vanilla standards: Zero external CSS/JS dependencies • Production-ready accessibility</p>
+      <p style="margin-top: 6px; font-size: 12px;">Engineered with vanilla web standards: Zero external CSS/JS frameworks • 100% Audit Complete</p>
     </footer>
 
   </main>
@@ -804,7 +832,6 @@
     const themeLabel = document.getElementById('themeLabel');
     const overviewModal = document.getElementById('overviewModal');
 
-    // Theme logic
     function initTheme() {
       const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
       setTheme(savedTheme);
@@ -829,7 +856,6 @@
       setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
-    // Filtering
     function filterGrid(category, btn) {
       document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       btn.classList.add('active');
@@ -845,7 +871,6 @@
       });
     }
 
-    // Modal
     function openOverviewModal(title, desc, color, typography, persona) {
       document.getElementById('modalConceptTitle').textContent = title;
       document.getElementById('modalConceptBody').innerHTML = `
@@ -859,11 +884,20 @@
       overviewModal.classList.add('open');
     }
 
-    function closeOverviewModal() {
-      overviewModal.classList.remove('open');
+    function closeOverviewModal() { overviewModal.classList.remove('open'); }
+
+    function openDepotDirectory() {
+      window.location.href = 'concepts/concept1-journey-planner.html';
     }
 
-    // Close on escape
+    function openCharterInfoModal() {
+      window.location.href = 'concepts/concept1-journey-planner.html';
+    }
+
+    function openSlabsMatrixModal() {
+      window.location.href = 'concepts/concept2-trusted-companion.html';
+    }
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeOverviewModal();
     });

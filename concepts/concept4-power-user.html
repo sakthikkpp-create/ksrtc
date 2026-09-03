@@ -7,58 +7,53 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #0A0A0A;
-      --bg-card: #141416;
-      --bg-card-hover: #1C1C20;
+      --bg-card: #141414;
+      --bg-card-hover: #1A1A1A;
+      --border: #262626;
+      --border-focus: #00C8A8;
       --primary: #00C8A8;
-      --primary-light: #33e4c7;
-      --secondary: #4A2A6A;
-      --secondary-light: #6e3e9e;
-      --accent: #0088FF;
-      --text: #FFFFFF;
-      --text-muted: #8E8EA0;
-      --border: #26262E;
-      --success: #00E88A;
-      --warning: #E8B83A;
-      --danger: #FF4D4D;
-      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.5);
-      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.7);
-      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.9);
+      --primary-hover: #00A88D;
+      --purple: #4A2A6A;
+      --purple-light: #6A3A8A;
+      --blue: #0088FF;
+      --text: #F0F0F0;
+      --text-muted: #888888;
+      --danger: #FF4444;
+      --warning: #FFBB00;
+      --success: #00C8A8;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.8);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     [data-theme="light"] {
       --bg: #F4F6F9;
       --bg-card: #FFFFFF;
-      --bg-card-hover: #F8FAFC;
-      --primary: #009E84;
-      --primary-light: #00C8A8;
-      --secondary: #3B1E57;
-      --secondary-light: #58337F;
-      --accent: #0066CC;
-      --text: #12141A;
-      --text-muted: #606775;
-      --border: #E0E5EC;
-      --success: #00A865;
-      --warning: #C4951B;
-      --danger: #D63030;
-      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.16);
+      --bg-card-hover: #F0F4F8;
+      --border: #D8E0EA;
+      --border-focus: #00A88D;
+      --primary: #00A88D;
+      --primary-hover: #008870;
+      --purple: #6A3A8A;
+      --purple-light: #8A4AA8;
+      --blue: #0066CC;
+      --text: #1A222E;
+      --text-muted: #6A788A;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -68,32 +63,27 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.25s ease, color 0.25s ease;
       overflow-x: hidden;
     }
 
     /* CONCEPT TOP NAV BAR */
     .concept-nav-bar {
-      background: #050507;
+      background: #050505;
       color: #E2ECE9;
       padding: 10px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      border-bottom: 1px solid rgba(0, 200, 168, 0.3);
+      border-bottom: 1px solid rgba(0, 200, 168, 0.25);
       position: sticky;
       top: 0;
       z-index: 1000;
       font-size: 13px;
     }
 
-    .concept-nav-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
+    .concept-nav-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
     .home-link {
       display: inline-flex;
@@ -104,14 +94,11 @@
       font-weight: 700;
       padding: 6px 12px;
       border-radius: 6px;
-      background: rgba(0, 200, 168, 0.15);
+      background: rgba(0, 200, 168, 0.12);
       transition: var(--transition);
     }
 
-    .home-link:hover {
-      background: rgba(0, 200, 168, 0.3);
-      color: #FFF;
-    }
+    .home-link:hover { background: rgba(0, 200, 168, 0.25); color: #FFF; }
 
     .concept-links-scroll {
       display: flex;
@@ -123,7 +110,7 @@
     }
 
     .concept-tab {
-      color: #8E9BAE;
+      color: #777777;
       text-decoration: none;
       padding: 6px 12px;
       border-radius: 20px;
@@ -136,23 +123,8 @@
       gap: 6px;
     }
 
-    .concept-tab:hover {
-      color: #FFF;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .concept-tab.active {
-      background: var(--primary);
-      color: #050507;
-      font-weight: 800;
-    }
-
-    .concept-nav-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
+    .concept-tab:hover { color: #FFF; background: rgba(255, 255, 255, 0.08); }
+    .concept-tab.active { background: var(--primary); color: #050505; font-weight: 800; }
 
     .theme-toggle-btn {
       background: rgba(255, 255, 255, 0.08);
@@ -169,11 +141,7 @@
       transition: var(--transition);
     }
 
-    .theme-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    /* MAIN SITE HEADER */
+    /* HEADER */
     .site-header {
       max-width: 1320px;
       width: 100%;
@@ -182,26 +150,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .brand-group { display: flex; align-items: center; gap: 14px; }
 
-    .brand-icon-bolt {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, var(--secondary), #1A1A28);
+    .brand-icon-chip {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #0A0A0A, var(--purple));
       border: 1px solid var(--primary);
       color: var(--primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 12px;
-      font-size: 22px;
-      box-shadow: 0 0 16px rgba(0, 200, 168, 0.25);
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 800;
     }
 
     .brand-text h1 {
@@ -213,64 +180,45 @@
       gap: 8px;
     }
 
-    .brand-text .enterprise-badge {
+    .brand-text .corp-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      background: rgba(0, 200, 168, 0.18);
+      background: rgba(0, 200, 168, 0.15);
       color: var(--primary);
-      border: 1px solid var(--primary);
-      padding: 2px 6px;
+      padding: 2px 8px;
       border-radius: 4px;
       font-weight: 700;
-    }
-
-    .brand-text p {
-      font-size: 12px;
-      color: var(--text-muted);
     }
 
     .header-user-actions {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .user-profile-badge {
+    .btn-power-pill {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 6px 14px 6px 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 600;
       cursor: pointer;
-    }
-
-    .profile-avatar-box {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #050507;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 13px;
-      position: relative;
+      gap: 6px;
+      transition: var(--transition);
     }
 
-    .online-indicator {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      border: 1.5px solid var(--bg-card);
+    .btn-power-pill:hover { border-color: var(--primary); color: var(--primary); }
+
+    .btn-power-pill.highlight {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(0, 200, 168, 0.1);
     }
 
     /* CONTAINER */
@@ -278,86 +226,42 @@
       max-width: 1320px;
       width: 100%;
       margin: 0 auto;
-      padding: 0 24px 60px;
+      padding: 24px;
       flex: 1;
     }
 
-    /* WELCOME PERSONALIZED BANNER */
-    .corporate-welcome-strip {
-      background: linear-gradient(135deg, rgba(74, 42, 106, 0.4), rgba(0, 200, 168, 0.08));
+    /* PERSONALIZED USER GREETING BANNER */
+    .user-greeting-strip {
+      background: linear-gradient(135deg, rgba(74, 42, 106, 0.25), rgba(0, 200, 168, 0.1));
       border: 1px solid var(--border);
-      border-left: 4px solid var(--primary);
       border-radius: var(--radius-md);
-      padding: 20px 24px;
+      padding: 16px 20px;
       margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .welcome-text h2 {
-      font-size: 22px;
+    .user-greeting-left { display: flex; align-items: center; gap: 14px; }
+    .corp-logo-circle {
+      width: 40px; height: 40px;
+      background: var(--purple);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .welcome-text p {
       font-size: 14px;
-      color: var(--text-muted);
-      margin-top: 4px;
+      color: white;
     }
 
-    .welcome-text strong.savings-val {
-      color: var(--primary);
-      font-family: 'JetBrains Mono', monospace;
-    }
+    .user-greeting-text h2 { font-size: 17px; font-weight: 700; }
+    .user-greeting-text p { font-size: 12px; color: var(--text-muted); }
 
-    .welcome-meta-pill {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* METRICS STRIP */
-    .metrics-badges-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-
-    .metric-badge {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .metric-badge.highlight {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: rgba(0, 200, 168, 0.08);
-    }
-
-    /* QUICK STATS DASHBOARD (5 CARDS) */
-    .stats-dashboard-grid {
+    /* 5 QUICK STATS CARDS */
+    .quick-stats-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 16px;
@@ -368,24 +272,22 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 18px;
-      box-shadow: var(--shadow-sm);
+      padding: 18px 16px;
       transition: var(--transition);
       cursor: pointer;
     }
 
     .stat-card:hover {
-      transform: translateY(-3px);
       border-color: var(--primary);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
     }
 
-    .stat-label-line {
+    .stat-label {
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
       color: var(--text-muted);
+      text-transform: uppercase;
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -395,354 +297,224 @@
     .stat-value {
       font-family: 'JetBrains Mono', monospace;
       font-size: 26px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text);
-      line-height: 1.1;
-      margin-bottom: 6px;
+      line-height: 1;
     }
 
-    .trend-indicator {
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .stat-value.accent { color: var(--primary); }
 
-    .trend-up { color: var(--success); }
-    .trend-neutral { color: var(--primary); }
-
-    /* SPLIT SECTION: TRIPS + ANALYTICS */
+    /* SPLIT SECTION: TABLE + GROUP BOOKING */
     .power-split-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.6fr 1fr;
       gap: 24px;
       margin-bottom: 28px;
     }
 
-    /* UPCOMING TRIPS TABLE */
-    .section-card {
+    .card-panel {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
-      box-shadow: var(--shadow-sm);
     }
 
-    .section-header-line {
+    .panel-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 10px;
     }
 
-    .section-header-line h3 {
-      font-size: 18px;
+    .panel-header h3 {
+      font-size: 17px;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .trips-table-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    /* UPCOMING TRIPS TABLE */
+    .trips-table-wrapper { overflow-x: auto; }
+
+    .trips-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
     }
 
-    .trip-row-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      transition: var(--transition);
-    }
-
-    .trip-row-item:hover {
-      border-color: var(--primary);
-      background: var(--bg-card-hover);
-    }
-
-    .trip-date-pill {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 58px;
-      height: 58px;
-      border-radius: var(--radius-sm);
+    .trips-table th {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .pill-green { background: rgba(0, 232, 138, 0.15); color: var(--success); border: 1px solid var(--success); }
-    .pill-amber { background: rgba(232, 184, 58, 0.15); color: var(--warning); border: 1px solid var(--warning); }
-    .pill-red { background: rgba(255, 77, 77, 0.15); color: var(--danger); border: 1px solid var(--danger); }
-
-    .trip-main-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .trip-route-text {
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .trip-tags-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
-      flex-wrap: wrap;
+      text-transform: uppercase;
     }
+
+    .trips-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trips-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
 
     .gst-tag {
-      background: rgba(0, 200, 168, 0.12);
-      color: var(--primary);
-      border: 1px solid var(--primary);
-      padding: 2px 6px;
-      border-radius: 4px;
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
       font-size: 10px;
-    }
-
-    .personal-tag {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
+      background: rgba(0, 200, 168, 0.15);
+      color: var(--primary);
       padding: 2px 6px;
       border-radius: 4px;
-      font-size: 10px;
+      font-weight: 700;
     }
 
-    .trip-pricing-col {
+    .link-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      background: rgba(0, 136, 255, 0.15);
+      color: var(--blue);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* GROUP BOOKING CARD */
+    .group-booking-container {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      flex-shrink: 0;
+      gap: 16px;
     }
 
-    .trip-price-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .btn-trip-options {
-      background: transparent;
+    .custom-input-power {
+      width: 100%;
+      height: 42px;
+      background: var(--bg);
       border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 12px;
       color: var(--text);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      outline: none;
       transition: var(--transition);
     }
 
-    .btn-trip-options:hover {
+    .custom-input-power:focus {
       border-color: var(--primary);
-      color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 200, 168, 0.15);
     }
 
-    /* ANALYTICS CHARTS SECTION */
+    .btn-power-cta {
+      height: 44px;
+      background: var(--primary);
+      color: #050505;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-power-cta:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 14px rgba(0, 200, 168, 0.35);
+    }
+
+    /* ADVANCED ANALYTICS & CHARTS */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
     .analytics-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-    }
-
-    .chart-container-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-    }
-
-    .chart-title-line {
-      font-size: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
       justify-content: space-between;
     }
 
-    /* Monthly Trips Bar Chart */
-    .bar-chart-flex {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      height: 120px;
-      padding-top: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .bar-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-    }
-
-    .bar-fill {
-      width: 22px;
-      background: linear-gradient(180deg, var(--primary), rgba(0, 200, 168, 0.4));
-      border-radius: 4px 4px 0 0;
-      transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .bar-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    /* Donut Route Dist Chart */
-    .donut-chart-row {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .donut-legend {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    /* Carbon counter */
-    .carbon-pill {
-      background: rgba(0, 232, 138, 0.1);
-      border: 1px solid var(--success);
-      color: var(--success);
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    /* QUICK ACTIONS STRIP */
-    .quick-actions-bar {
+    /* AUDIT ALL SERVICES STRIP */
+    .audit-strip {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 20px 24px;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 28px;
-    }
-
-    .quick-actions-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-
-    .quick-actions-grid {
+      padding: 20px;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 12px;
+      margin-bottom: 28px;
     }
 
-    .btn-action-card {
+    .audit-tile {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
       padding: 14px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
-      transition: var(--transition);
-      color: var(--text);
       font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 600;
+      transition: var(--transition);
       text-align: center;
+      color: var(--text);
     }
 
-    .btn-action-card:hover {
+    .audit-tile:hover {
       border-color: var(--primary);
-      background: var(--bg-card-hover);
       color: var(--primary);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 200, 168, 0.2);
-    }
-
-    .btn-action-card span.icon {
-      font-size: 22px;
     }
 
     /* FOOTER */
     .site-footer {
       border-top: 1px solid var(--border);
-      padding: 24px 0;
+      padding: 28px 0;
       text-align: center;
       margin-top: auto;
       font-size: 13px;
       color: var(--text-muted);
     }
 
-    .site-footer p.tagline {
-      font-size: 14px;
-      color: var(--text);
-      margin-bottom: 4px;
+    .footer-links-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
+
+    .footer-links-row a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    .footer-links-row a:hover { color: var(--primary); }
 
     /* MODALS */
     .modal-backdrop {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(5px);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(5, 5, 5, 0.75);
+      backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -753,10 +525,7 @@
       padding: 20px;
     }
 
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
 
     .modal-box {
       background: var(--bg-card);
@@ -768,11 +537,12 @@
       transform: scale(0.95);
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       overflow: hidden;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .modal-backdrop.open .modal-box {
-      transform: scale(1);
-    }
+    .modal-backdrop.open .modal-box { transform: scale(1); }
 
     .modal-header {
       padding: 18px 24px;
@@ -780,13 +550,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .modal-header h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 17px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .modal-close-btn {
@@ -795,21 +565,11 @@
       font-size: 20px;
       color: var(--text-muted);
       cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-
-    .modal-close-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text);
     }
 
     .modal-body {
       padding: 24px;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -821,89 +581,20 @@
       display: flex;
       justify-content: flex-end;
       gap: 10px;
-      background: var(--bg);
-    }
-
-    .custom-input-field {
-      width: 100%;
-      height: 44px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      outline: none;
-    }
-
-    .custom-input-field:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(0, 200, 168, 0.2);
-    }
-
-    .btn-primary-cta {
-      background: var(--primary);
-      color: #050507;
-      border: none;
-      padding: 10px 22px;
-      border-radius: var(--radius-sm);
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-primary-cta:hover {
-      background: var(--primary-light);
-      transform: translateY(-2px);
-    }
-
-    /* MINI SEAT GRID IN GROUP BOOKING */
-    .bus-seat-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 6px;
-      background: var(--bg);
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      max-height: 160px;
-      overflow-y: auto;
-    }
-
-    .mini-seat {
-      height: 28px;
-      border-radius: 4px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .mini-seat.selected {
-      background: var(--primary);
-      color: #050507;
-      font-weight: 700;
-      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     /* TOAST */
     .toast-notice {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 24px; right: 24px;
       background: var(--primary);
-      color: #050507;
+      color: #050505;
       padding: 14px 22px;
       border-radius: var(--radius-sm);
       box-shadow: var(--shadow-lg);
-      font-size: 14px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -914,39 +605,20 @@
       z-index: 3000;
     }
 
-    .toast-notice.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    .toast-notice.show { transform: translateY(0); opacity: 1; }
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .stats-dashboard-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .power-split-grid {
-        grid-template-columns: 1fr;
-      }
-      .quick-actions-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .quick-stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .power-split-grid { grid-template-columns: 1fr; }
+      .analytics-grid { grid-template-columns: 1fr; }
+      .audit-strip { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 640px) {
-      .stats-dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-      .quick-actions-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .corporate-welcome-strip {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .concept-nav-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
+      .quick-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .audit-strip { grid-template-columns: repeat(2, 1fr); }
+      .concept-nav-bar { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
@@ -988,316 +660,247 @@
     </div>
   </nav>
 
-  <!-- MAIN SITE HEADER -->
+  <!-- SITE HEADER -->
   <header class="site-header">
     <div class="brand-group">
-      <div class="brand-icon-bolt">⚡</div>
+      <div class="brand-icon-chip">⚡</div>
       <div class="brand-text">
-        <h1>KSRTC SWIFT <span class="enterprise-badge">PRO ENTERPRISE</span></h1>
-        <p>Corporate Travel Management & High-Velocity Fleet Desk</p>
+        <h1>KSRTC SWIFT <span class="corp-tag">CORP TRAVEL DESK</span></h1>
       </div>
     </div>
     <div class="header-user-actions">
-      <div class="user-profile-badge" id="profileBadge" onclick="showFeatureModal('Corporate Account: Rajesh Nair', 'Company: ABC Corp (GSTIN: 32AABCA1234F1Z5)<br>Role: VP Engineering<br>Corporate Travel Policy: Tier 1 Auto-Approve Enabled')">
-        <div class="profile-avatar-box">
-          R
-          <span class="online-indicator"></span>
-        </div>
-        <span>Rajesh • ABC Corp</span>
-      </div>
+      <!-- Surfacing bus hire from audit -->
+      <button class="btn-power-pill highlight" onclick="openCharterModal()">
+        <span>🚌 Bus Hire (/bushire)</span>
+      </button>
+      <button class="btn-power-pill" onclick="openDepotModal()">
+        <span>🏢 90 Depots</span>
+      </button>
+      <!-- Agent CRS Portal link from audit -->
+      <button class="btn-power-pill" onclick="openAgentCRSModal()">
+        <span>🎟️ Agent CRS</span>
+      </button>
+      <button class="btn-power-pill" onclick="openGstInvoiceModal()">
+        <span>📄 GST Invoices</span>
+      </button>
+      <button class="btn-power-pill" onclick="openProfileModal()">
+        <span>👤 Rajesh (ABC Corp)</span>
+      </button>
     </div>
   </header>
 
   <!-- MAIN PAGE CONTAINER -->
   <main class="page-container">
 
-    <!-- WELCOME PERSONALIZED STRIP -->
-    <div class="corporate-welcome-strip">
-      <div class="welcome-text">
-        <h2>Welcome back, Rajesh! You've saved <strong class="savings-val">₹1,200</strong> this month.</h2>
-        <p>3 scheduled corporate journeys this week • GSTIN registered: <strong>32AABCA1234F1Z5</strong></p>
-      </div>
-      <div class="welcome-meta-pill">
-        <span>🏆</span>
-        <span>Top 10% Frequent Traveler (Tier: Gold)</span>
-      </div>
-    </div>
-
-    <!-- METRICS ROW -->
-    <div class="metrics-badges-row">
-      <div class="metric-badge highlight">
-        <span>📈</span>
-        <span>45% more bookings per user</span>
-      </div>
-      <div class="metric-badge">
-        <span>💼</span>
-        <span>80% corporate user satisfaction</span>
-      </div>
-      <div class="metric-badge">
-        <span>⏱️</span>
-        <span>2-minute average booking time</span>
-      </div>
-      <div class="metric-badge">
-        <span>🌿</span>
-        <span>120kg CO2 saved vs solo driving</span>
-      </div>
-    </div>
-
-    <!-- QUICK STATS DASHBOARD (5 CARDS) -->
-    <section class="stats-dashboard-grid" aria-label="Corporate Travel Performance Dashboard">
-      <!-- Stat 1 -->
-      <article class="stat-card" onclick="showFeatureModal('Monthly Trips Breakdown', '12 trips completed across 4 major South Indian business routes this month.')">
-        <div class="stat-label-line">
-          <span>Trips This Month</span>
-          <span>📅</span>
+    <!-- USER GREETING BANNER -->
+    <div class="user-greeting-strip">
+      <div class="user-greeting-left">
+        <div class="corp-logo-circle">ABC</div>
+        <div class="user-greeting-text">
+          <h2>Welcome back, Rajesh! (ABC Technologies Corp)</h2>
+          <p>GSTIN: <strong>32AABCA1234F1Z5</strong> • Monthly Corporate Savings: <span style="color: var(--primary); font-weight: 700;">₹1,200</span></p>
         </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn-power-pill" onclick="openCargoModal()">
+          <span>📦 Swift Cargo Waybill</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 5 QUICK STATS CARDS -->
+    <section class="quick-stats-grid" aria-label="Corporate Travel Performance Metrics">
+      <article class="stat-card">
+        <div class="stat-label"><span>Trips (This Month)</span><span>🚌</span></div>
         <div class="stat-value">12</div>
-        <div class="trend-indicator trend-up">
-          <span>↑ 15%</span>
-          <span style="color: var(--text-muted); font-weight: normal;">vs last month</span>
-        </div>
       </article>
 
-      <!-- Stat 2 -->
-      <article class="stat-card" onclick="showFeatureModal('Mileage Tracker', '2,340 km logged on Swift Volvo and Scania coaches.')">
-        <div class="stat-label-line">
-          <span>KM Traveled</span>
-          <span>🛣️</span>
-        </div>
+      <article class="stat-card">
+        <div class="stat-label"><span>KM Traveled</span><span>📍</span></div>
         <div class="stat-value">2,340</div>
-        <div class="trend-indicator trend-up">
-          <span>↑ 8%</span>
-          <span style="color: var(--text-muted); font-weight: normal;">on schedule</span>
-        </div>
       </article>
 
-      <!-- Stat 3 -->
-      <article class="stat-card" onclick="showFeatureModal('Corporate Savings', 'Saved ₹1,200 using KSRTC-SWIFT corporate corporate volume discount tier.')">
-        <div class="stat-label-line">
-          <span>Total Savings</span>
-          <span>💰</span>
-        </div>
-        <div class="stat-value">₹1,200</div>
-        <div class="trend-indicator trend-up">
-          <span>↑ 22%</span>
-          <span style="color: var(--text-muted); font-weight: normal;">cost reduction</span>
-        </div>
+      <article class="stat-card">
+        <div class="stat-label"><span>Corporate Savings</span><span>💰</span></div>
+        <div class="stat-value accent">₹1,200</div>
       </article>
 
-      <!-- Stat 4 -->
-      <article class="stat-card" onclick="showFeatureModal('Swift Reward Points', 'Earn 1 point per kilometer. Redeemable for free sleeper upgrade vouchers.')">
-        <div class="stat-label-line">
-          <span>Swift Points</span>
-          <span>⭐</span>
-        </div>
+      <article class="stat-card">
+        <div class="stat-label"><span>Swift Points</span><span>⭐</span></div>
         <div class="stat-value">2,340</div>
-        <div class="trend-indicator trend-neutral">
-          <span>● Gold Tier</span>
-          <span style="color: var(--text-muted); font-weight: normal;">(Redeem)</span>
-        </div>
       </article>
 
-      <!-- Stat 5 -->
-      <article class="stat-card" onclick="showFeatureModal('Passenger Rating', '4.8★ based on punctuality, feedback submissions, and verified on-time check-ins.')">
-        <div class="stat-label-line">
-          <span>Passenger Rating</span>
-          <span>🎖️</span>
-        </div>
-        <div class="stat-value">4.8★</div>
-        <div class="trend-indicator trend-up">
-          <span>↑ High Punctuality</span>
-        </div>
+      <article class="stat-card">
+        <div class="stat-label"><span>Depots Logged</span><span>🏢</span></div>
+        <div class="stat-value">14 / 90</div>
       </article>
     </section>
 
-    <!-- SPLIT: UPCOMING TRIPS & ADVANCED ANALYTICS -->
+    <!-- SPLIT: UPCOMING TRIPS TABLE & GROUP BOOKING -->
     <div class="power-split-grid">
+
       <!-- UPCOMING TRIPS TABLE -->
-      <section class="section-card" aria-label="Upcoming Trips Itinerary">
-        <div class="section-header-line">
-          <h3><span>⚡</span> Upcoming Trips (Next 7 Days)</h3>
-          <button class="btn-trip-options" onclick="openGroupBookingModal()">+ Book Group</button>
+      <section class="card-panel" aria-label="Corporate Trips Table">
+        <div class="panel-header">
+          <h3><span>📅</span> Upcoming Trips & Link-Tickets</h3>
+          <span style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--text-muted);">Active Bookings</span>
         </div>
 
-        <div class="trips-table-container">
-          <!-- Trip 1 -->
-          <article class="trip-row-item">
-            <div class="trip-date-pill pill-green">
-              <span style="font-size: 11px;">TODAY</span>
-              <span style="font-size: 14px;">18:00</span>
-            </div>
-            <div class="trip-main-info">
-              <div class="trip-route-text">Trivandrum Central ➔ Kochi Vytilla</div>
-              <div class="trip-tags-row">
-                <span class="gst-tag">GST: ABC Corp</span>
-                <span>•</span>
-                <span>2 Seats (A12, A14 Window)</span>
-                <span>•</span>
-                <span>AC Sleeper</span>
-              </div>
-            </div>
-            <div class="trip-pricing-col">
-              <span class="trip-price-val">₹1,200</span>
-              <button class="btn-trip-options" onclick="showFeatureModal('Trip Details: Tvm ➔ Kochi', 'PNR: KSRTC881029<br>GSTIN: 32AABCA1234F1Z5<br>Voucher generated for ABC Corp Expense Portal.')">Manage ▾</button>
-            </div>
-          </article>
-
-          <!-- Trip 2 -->
-          <article class="trip-row-item">
-            <div class="trip-date-pill pill-amber">
-              <span style="font-size: 11px;">TUE 18</span>
-              <span style="font-size: 14px;">08:30</span>
-            </div>
-            <div class="trip-main-info">
-              <div class="trip-route-text">Kochi Vytilla ➔ Calicut Terminal</div>
-              <div class="trip-tags-row">
-                <span class="personal-tag">Personal Booking</span>
-                <span>•</span>
-                <span>1 Seat (B04 Aisle)</span>
-                <span>•</span>
-                <span>Gajaraj Multi-Axle</span>
-              </div>
-            </div>
-            <div class="trip-pricing-col">
-              <span class="trip-price-val">₹540</span>
-              <button class="btn-trip-options" onclick="showFeatureModal('Trip Details: Kochi ➔ Calicut', 'PNR: KSRTC992811<br>Personal trip card with contactless boarding pass.')">Manage ▾</button>
-            </div>
-          </article>
-
-          <!-- Trip 3 -->
-          <article class="trip-row-item">
-            <div class="trip-date-pill pill-red">
-              <span style="font-size: 11px;">FRI 22</span>
-              <span style="font-size: 14px;">06:00</span>
-            </div>
-            <div class="trip-main-info">
-              <div class="trip-route-text">Calicut KSRTC ➔ Bangalore Shantinagar</div>
-              <div class="trip-tags-row">
-                <span class="gst-tag">GST: XYZ Ltd (Client)</span>
-                <span>•</span>
-                <span>6 Seats (Dev Team Offsite)</span>
-                <span>•</span>
-                <span>Volvo B11R</span>
-              </div>
-            </div>
-            <div class="trip-pricing-col">
-              <span class="trip-price-val">₹3,400</span>
-              <button class="btn-trip-options" onclick="showFeatureModal('Trip Details: Calicut ➔ Bangalore', 'Group booking for 6 engineers. Consolidated e-ticket sent to corporate dispatch.')">Manage ▾</button>
-            </div>
-          </article>
+        <div class="trips-table-wrapper">
+          <table class="trips-table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Route</th>
+                <th>Coach / Seat</th>
+                <th>Type</th>
+                <th>Fare</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Today, 18:00</strong></td>
+                <td>Trivandrum ➔ Kochi</td>
+                <td>AC Sleeper • A12</td>
+                <td><span class="gst-tag">CORP GST</span></td>
+                <td style="font-family: 'JetBrains Mono'; font-weight: 700;">₹800</td>
+                <td>
+                  <button class="btn-power-pill" style="padding: 4px 8px;" onclick="openCancellationModal('KSRTC12345678', 800)">Cancel</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Tue 18, 08:30</strong></td>
+                <td>Kochi ➔ Calicut</td>
+                <td>Gajaraj B11R • B04</td>
+                <td><span class="link-tag">LINK-TICKET</span></td>
+                <td style="font-family: 'JetBrains Mono'; font-weight: 700;">₹950</td>
+                <td>
+                  <button class="btn-power-pill" style="padding: 4px 8px;" onclick="openCancellationModal('KSRTC99482103', 950)">Cancel</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Fri 22, 21:00</strong></td>
+                <td>Calicut ➔ Bangalore</td>
+                <td>Multi-Axle • A08</td>
+                <td><span class="gst-tag">CORP GST</span></td>
+                <td style="font-family: 'JetBrains Mono'; font-weight: 700;">₹1,450</td>
+                <td>
+                  <button class="btn-power-pill" style="padding: 4px 8px;" onclick="openCancellationModal('KSRTC44120911', 1450)">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
-      <!-- ADVANCED ANALYTICS -->
-      <section class="analytics-card" aria-label="Quarterly Analytics and Corporate Travel Patterns">
-        <div class="section-header-line">
-          <h3><span>📈</span> Travel Patterns & Analytics</h3>
-          <span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--primary);">Q3 2026</span>
+      <!-- GROUP & SHUTTLE CHARTER CARD (FROM AUDIT) -->
+      <section class="card-panel" aria-label="Group Booking and Bulk Concession">
+        <div class="panel-header">
+          <h3><span>👥</span> Bulk Group Reservation</h3>
+          <span style="font-family: 'JetBrains Mono'; font-size: 11px; color: var(--primary);">Min. 4 Tickets Concession</span>
         </div>
 
-        <!-- Monthly Trips Bar Chart -->
-        <div class="chart-container-box">
-          <div class="chart-title-line">
-            <span>Monthly Trips Velocity</span>
-            <span>Trips / Mo</span>
-          </div>
-          <div class="bar-chart-flex">
-            <div class="bar-col">
-              <div class="bar-fill" style="height: 45px;"></div>
-              <span class="bar-label">Jun</span>
-            </div>
-            <div class="bar-col">
-              <div class="bar-fill" style="height: 70px;"></div>
-              <span class="bar-label">Jul</span>
-            </div>
-            <div class="bar-col">
-              <div class="bar-fill" style="height: 95px;"></div>
-              <span class="bar-label">Aug</span>
-            </div>
-            <div class="bar-col">
-              <div class="bar-fill" style="height: 110px; background: var(--primary);"></div>
-              <span class="bar-label">Sep</span>
-            </div>
-          </div>
-        </div>
+        <div class="group-booking-container">
+          <p style="font-size: 12px; color: var(--text-muted);">
+            Per official audit policy: Single reservation charge for 4+ passengers with corporate discount tier.
+          </p>
 
-        <!-- Route Distribution Donut Chart -->
-        <div class="chart-container-box">
-          <div class="chart-title-line">
-            <span>Route Distribution</span>
-            <span>% Volume</span>
-          </div>
-          <div class="donut-chart-row">
-            <svg width="84" height="84" viewBox="0 0 42 42">
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#26262E" stroke-width="6"></circle>
-              <!-- 45% Tvm-Kochi (Primary Mint) -->
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--primary)" stroke-width="6" stroke-dasharray="45 55" stroke-dashoffset="25"></circle>
-              <!-- 30% Kochi-Calicut (Electric Blue) -->
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--accent)" stroke-width="6" stroke-dasharray="30 70" stroke-dashoffset="80"></circle>
-              <!-- 25% Interstate (Deep Purple) -->
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--secondary-light)" stroke-width="6" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
-            </svg>
-            <div class="donut-legend">
-              <div class="legend-item">
-                <span class="legend-dot" style="background: var(--primary);"></span>
-                <span>45% Tvm ➔ Kochi</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot" style="background: var(--accent);"></span>
-                <span>30% Kochi ➔ Calicut</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot" style="background: var(--secondary-light);"></span>
-                <span>25% Bangalore Express</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Carbon Offset -->
-        <div class="carbon-pill">
-          <span style="font-size: 24px;">🌿</span>
           <div>
-            <strong>120 kg CO2 Prevented</strong>
-            <p style="font-size: 11px; font-weight: normal; opacity: 0.85;">Choosing KSRTC luxury buses instead of single-occupancy cabs.</p>
+            <label style="font-size: 11px; font-family: 'JetBrains Mono'; color: var(--text-muted);">ROUTE</label>
+            <input type="text" class="custom-input-power" value="Technopark Tvm ➔ Infopark Kochi">
           </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label style="font-size: 11px; font-family: 'JetBrains Mono'; color: var(--text-muted);">PASSENGERS</label>
+              <input type="number" class="custom-input-power" value="12" id="groupPaxCount" oninput="calculateGroupDiscount()">
+            </div>
+            <div>
+              <label style="font-size: 11px; font-family: 'JetBrains Mono'; color: var(--text-muted);">BILLING DEPT</label>
+              <select class="custom-input-power">
+                <option>Engineering (ENG-01)</option>
+                <option>Sales & BD (SBD-04)</option>
+                <option>Executive Staff</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; font-family: 'JetBrains Mono';">
+            <div>Tier Discount: <strong style="color: var(--primary);" id="groupDiscountTier">15% Bulk Corporate Off</strong></div>
+            <div>Estimated Total: <strong style="color: var(--text); font-size: 15px;" id="groupTotalFare">₹8,160 (Incl. CGST+SGST)</strong></div>
+          </div>
+
+          <button class="btn-power-cta" onclick="handleGroupBookingSubmit()">
+            <span>⚡ Generate Corporate Booking</span>
+          </button>
         </div>
       </section>
+
     </div>
 
-    <!-- QUICK ACTIONS BAR -->
-    <section class="quick-actions-bar" aria-label="Corporate Power Utilities">
-      <div class="quick-actions-title">High-Velocity Operations & Accounting Tools</div>
-      <div class="quick-actions-grid">
-        <button class="btn-action-card" onclick="rebookPreviousTrip()">
-          <span class="icon">🔄</span>
-          <span>1-Tap Rebook</span>
-        </button>
+    <!-- ADVANCED ANALYTICS (SVG CHARTS & CARBON TRACKER) -->
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <h4 style="font-size: 14px; font-family: 'JetBrains Mono'; margin-bottom: 12px;">📈 MONTHLY TRIPS VELOCITY</h4>
+        <svg viewBox="0 0 300 120" style="width: 100%; height: 120px;">
+          <rect x="20" y="50" width="30" height="60" fill="#4A2A6A" rx="4" />
+          <rect x="80" y="30" width="30" height="80" fill="#4A2A6A" rx="4" />
+          <rect x="140" y="20" width="30" height="90" fill="#4A2A6A" rx="4" />
+          <rect x="200" y="10" width="30" height="100" fill="#00C8A8" rx="4" />
+          <text x="35" y="118" font-size="10" font-family="'JetBrains Mono'" fill="#888" text-anchor="middle">May</text>
+          <text x="95" y="118" font-size="10" font-family="'JetBrains Mono'" fill="#888" text-anchor="middle">Jun</text>
+          <text x="155" y="118" font-size="10" font-family="'JetBrains Mono'" fill="#888" text-anchor="middle">Jul</text>
+          <text x="215" y="118" font-size="10" font-family="'JetBrains Mono'" fill="#00C8A8" text-anchor="middle">Aug</text>
+        </svg>
+      </div>
 
-        <button class="btn-action-card" onclick="openGroupBookingModal()">
-          <span class="icon">👥</span>
-          <span>Group Booking</span>
-        </button>
+      <div class="analytics-card">
+        <h4 style="font-size: 14px; font-family: 'JetBrains Mono'; margin-bottom: 12px;">🌱 CO2 CARBON OFFSET</h4>
+        <div style="font-family: 'JetBrains Mono'; font-size: 38px; font-weight: 800; color: var(--primary);">
+          120 kg
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+          Saved by choosing KSRTC-SWIFT multi-axle buses over individual private cars on NH-66 corridor.
+        </p>
+      </div>
 
-        <button class="btn-action-card" onclick="openGstInvoiceModal()">
-          <span class="icon">💳</span>
-          <span>GST Tax Invoices</span>
+      <div class="analytics-card">
+        <h4 style="font-size: 14px; font-family: 'JetBrains Mono'; margin-bottom: 12px;">🍱 RAIL ROLLS EXECUTIVE MEALS</h4>
+        <p style="font-size: 12px; color: var(--text-muted);">
+          Pre-book executive boxed meals for night journeys delivered directly to seats at transit halts.
+        </p>
+        <button class="btn-power-pill highlight" style="margin-top: 14px;" onclick="showToast('Rail Rolls Executive Catering portal launched!', '🍱')">
+          <span>Browse Executive Menu</span>
         </button>
+      </div>
+    </div>
 
-        <button class="btn-action-card" onclick="openBusinessCharterModal()">
-          <span class="icon">🚌</span>
-          <span>Corporate Charter</span>
-        </button>
-
-        <button class="btn-action-card" onclick="exportExpenseReport('CSV')">
-          <span class="icon">📋</span>
-          <span>Export CSV</span>
-        </button>
-
-        <button class="btn-action-card" onclick="exportExpenseReport('PDF')">
-          <span class="icon">📄</span>
-          <span>Export PDF Audit</span>
-        </button>
+    <!-- AUDIT ALL SERVICES STRIP -->
+    <section class="audit-strip" aria-label="Corporate Utilities">
+      <div class="audit-tile" onclick="openCharterModal()">
+        <span style="font-size: 22px;">🚌</span>
+        <span>Bus Hire (/bushire)</span>
+      </div>
+      <div class="audit-tile" onclick="openDepotModal()">
+        <span style="font-size: 22px;">🏢</span>
+        <span>90 Depots</span>
+      </div>
+      <div class="audit-tile" onclick="openFeedbackModal()">
+        <span style="font-size: 22px;">📝</span>
+        <span>Corp SLA Grievance</span>
+      </div>
+      <div class="audit-tile" onclick="openCargoModal()">
+        <span style="font-size: 22px;">📦</span>
+        <span>Corporate Freight</span>
+      </div>
+      <div class="audit-tile" onclick="openSlabsModal()">
+        <span style="font-size: 22px;">🔄</span>
+        <span>Refund Slabs Policy</span>
+      </div>
+      <div class="audit-tile" onclick="openAgentCRSModal()">
+        <span style="font-size: 22px;">🎟️</span>
+        <span>Agent CRS Portal</span>
       </div>
     </section>
 
@@ -1305,151 +908,202 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <p class="tagline">"Travel smarter, not harder."</p>
-    <p>© 2026 KSRTC-SWIFT • Concept 4 Prototype: The Power User</p>
+    <div class="footer-links-row">
+      <a href="#" onclick="openCharterModal(); return false;">Corporate Bus Hire (/bushire)</a>
+      <a href="#" onclick="openDepotModal(); return false;">Statewide Depots (~90)</a>
+      <a href="#" onclick="openCargoModal(); return false;">Commercial Cargo Logistics</a>
+      <a href="#" onclick="openSlabsModal(); return false;">Cancellation & Credit Notes</a>
+      <a href="#" onclick="openFeedbackModal(); return false;">Corporate SLA Grievance</a>
+      <a href="#" onclick="openAgentCRSModal(); return false;">MavenTech CRS Terminal</a>
+    </div>
+    <p>© 2026 KSRTC-SWIFT • Concept 4 Prototype: The Power User (Corporate High-Frequency Travel Suite)</p>
   </footer>
 
-  <!-- GROUP & CORPORATE BOOKING MODAL -->
-  <div class="modal-backdrop" id="groupBookingModal" role="dialog" aria-modal="true">
+  <!-- MODAL: CANCELLATION & GST CREDIT NOTE (OFFICIAL SLABS) -->
+  <div class="modal-backdrop" id="cancellationModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>👥 Bulk & Corporate Group Booking</h3>
-        <button class="modal-close-btn" onclick="closeGroupBookingModal()">✕</button>
+        <h3>✕ Ticket Cancellation & GST Credit Note</h3>
+        <button class="modal-close-btn" onclick="closeModal('cancellationModal')">✕</button>
       </div>
-      <form id="groupBookingForm" onsubmit="handleGroupBookingSubmit(event)">
-        <div class="modal-body">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div>
-              <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">PASSENGERS COUNT</label>
-              <input type="number" id="groupPassCount" class="custom-input-field" min="2" max="50" value="8" oninput="updateGroupDiscount()">
-            </div>
-            <div>
-              <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">TIER DISCOUNT</label>
-              <div style="height: 44px; display: flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--success);" id="groupDiscountBadge">
-                15% Corporate Discount
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">CORPORATE GSTIN</label>
-            <input type="text" class="custom-input-field" value="32AABCA1234F1Z5 (ABC Corp)" readonly>
-          </div>
-
-          <div>
-            <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">BILLING DEPARTMENT</label>
-            <select class="custom-input-field">
-              <option>Engineering & Product (Code: ENG-04)</option>
-              <option>Sales & Field Operations (Code: SLS-01)</option>
-              <option>Executive Leadership (Code: EXEC-09)</option>
-            </select>
-          </div>
-
-          <div>
-            <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">SELECT SEATS BATCH</label>
-            <div class="bus-seat-mini-grid" id="miniSeatGrid">
-              <!-- Dynamically populated mini seats -->
-            </div>
-          </div>
+      <div class="modal-body">
+        <p style="font-size: 12px; color: var(--text-muted);" id="cancelPnrLabel">PNR: KSRTC12345678</p>
+        <div style="background: rgba(0, 200, 168, 0.1); border: 1px solid var(--primary); padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 13px;">
+          <div>Official Slab: <strong>&gt; 72 Hours (90% Refund)</strong></div>
+          <div>Original Fare: ₹800.00</div>
+          <div>Deduction (10%): -₹80.00</div>
+          <div style="color: var(--primary); font-weight: 800; font-size: 16px; margin-top: 6px;">Refund Settlement: ₹720.00</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">GST Credit Note will be generated for ABC Technologies Corp.</div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-trip-options" onclick="closeGroupBookingModal()">Cancel</button>
-          <button type="submit" class="btn-primary-cta">Confirm Corporate Reservation</button>
-        </div>
-      </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-power-pill" onclick="closeModal('cancellationModal')">Keep Booking</button>
+        <button class="btn-power-cta" style="background: var(--danger); color: white;" onclick="confirmCorpCancellation()">Issue Credit Note & Cancel</button>
+      </div>
     </div>
   </div>
 
-  <!-- GST TAX INVOICE MODAL -->
-  <div class="modal-backdrop" id="gstInvoiceModal" role="dialog" aria-modal="true">
+  <!-- MODAL: BUS HIRE (/bushire) -->
+  <div class="modal-backdrop" id="charterModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>💳 GST Tax Invoices & Reimbursement Receipts</h3>
-        <button class="modal-close-btn" onclick="closeGstInvoiceModal()">✕</button>
+        <h3>🚌 Corporate Bus Hire Contract (/bushire)</h3>
+        <button class="modal-close-btn" onclick="closeModal('charterModal')">✕</button>
       </div>
       <div class="modal-body">
         <p style="font-size: 13px; color: var(--text-muted);">
-          Consolidated tax invoices generated with ITC claim eligibility under Kerala GST Act.
+          Contract recurring tech-park shuttles or employee offsites via <code>/bushire</code>.
         </p>
-
-        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px;">
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
-            <strong>Tax Period: August - September 2026</strong>
-            <span style="color: var(--primary); font-family: 'JetBrains Mono', monospace;">3 eligible trips</span>
-          </div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); line-height: 1.6;">
-            • Base Fare Total: ₹4,895.24<br>
-            • CGST (2.5%): ₹122.38<br>
-            • SGST (2.5%): ₹122.38<br>
-            • <strong>Grand Total: ₹5,140.00</strong>
-          </div>
+        <div>
+          <label style="font-size: 11px; font-family: 'JetBrains Mono';">OFFSITE / COMMUTE ROUTE</label>
+          <input type="text" class="custom-input-power" value="Technopark Trivandrum ➔ Munnar Resort">
         </div>
-
-        <div style="font-size: 12px; color: var(--text-muted);">
-          Company: <strong>ABC Technologies Kerala Pvt Ltd</strong><br>
-          GSTIN: <strong>32AABCA1234F1Z5</strong> • Registered Address: Infopark Phase 2, Kochi
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div><label style="font-size: 11px; font-family: 'JetBrains Mono';">PASSENGERS</label><input type="number" class="custom-input-power" value="45"></div>
+          <div><label style="font-size: 11px; font-family: 'JetBrains Mono';">VEHICLE CLASS</label>
+            <select class="custom-input-power">
+              <option>Volvo B11R Multi-Axle</option>
+              <option>Scania AC Sleeper</option>
+              <option>Swift Super Deluxe</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-trip-options" onclick="closeGstInvoiceModal()">Close</button>
-        <button type="button" class="btn-primary-cta" onclick="downloadSampleGstPdf()">Download Tax Invoice PDF</button>
+        <button class="btn-power-cta" onclick="closeModal('charterModal'); showToast('Corporate Bus Hire RFP logged!', '🚌')">Submit RFP</button>
       </div>
     </div>
   </div>
 
-  <!-- CORPORATE CHARTER MODAL -->
-  <div class="modal-backdrop" id="businessCharterModal" role="dialog" aria-modal="true">
+  <!-- MODAL: STATEWIDE DEPOTS (~90) -->
+  <div class="modal-backdrop" id="depotModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>🚌 Corporate Employee Shuttle Charter</h3>
-        <button class="modal-close-btn" onclick="closeBusinessCharterModal()">✕</button>
+        <h3>🏢 Statewide Depot Logistics Directory</h3>
+        <button class="modal-close-btn" onclick="closeModal('depotModal')">✕</button>
+      </div>
+      <div class="modal-body" style="font-size: 13px; font-family: 'JetBrains Mono'; display: flex; flex-direction: column; gap: 8px;">
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+          <strong>Vytilla Mobility Hub Depot (Ernakulam)</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">Freight Bay 1 • Corporate Logistics Officer: 0484-2372600</div>
+        </div>
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+          <strong>Thampanoor Central Depot (Trivandrum)</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">Freight Bay 3 • Station Master: 0471-2323886</div>
+        </div>
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+          <strong>Kozhikode Terminal Stand (Kozhikode)</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">Cargo Office • Phone: 0495-2723796</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-power-pill" onclick="closeModal('depotModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CARGO FREIGHT -->
+  <div class="modal-backdrop" id="cargoModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📦 Commercial Cargo & Courier Logistics</h3>
+        <button class="modal-close-btn" onclick="closeModal('cargoModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12px; color: var(--text-muted);">Corporate freight billing with consolidated tax invoice and GPS telematics.</p>
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 13px;">
+          <strong>Active Consignment: CRG-CORP-ABC-091</strong><br>
+          Tech Equipment Parcel • Loaded on Coach #KL-15-A-8902 • ETA Vytilla Depot Bay 2: 17:45.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-power-pill" onclick="closeModal('cargoModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SEGMENTED FEEDBACK -->
+  <div class="modal-backdrop" id="feedbackModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📝 Corporate Service SLA Grievance Form</h3>
+        <button class="modal-close-btn" onclick="closeModal('feedbackModal')">✕</button>
       </div>
       <div class="modal-body">
         <div>
-          <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">SAVED TECH HUBS</label>
-          <select class="custom-input-field">
-            <option>Technopark Phase 3 (Trivandrum) ➔ Infopark (Kochi)</option>
-            <option>Infopark Phase 1 (Kochi) ➔ Cyberpark (Calicut)</option>
-            <option>Trivandrum Airport ➔ Technopark Campus</option>
+          <label style="font-size: 11px; font-family: 'JetBrains Mono';">DEPARTMENT</label>
+          <select class="custom-input-power">
+            <option>Corporate Service (GST Billing, Contract SLA, Account Manager)</option>
+            <option>Cargo Service (Commercial Freight, Transit Delays)</option>
+            <option>Bus Service (Punctuality, Cleanliness, Driver Conduct)</option>
           </select>
         </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div>
-            <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">FREQUENCY</label>
-            <select class="custom-input-field">
-              <option>Every Friday (Weekend Shuttle)</option>
-              <option>Daily Morning & Evening</option>
-              <option>Monthly All-Hands Offsite</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">ESTIMATED FARE</label>
-            <div style="height: 44px; display: flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; color: var(--primary);">
-              ₹18,500 / trip
-            </div>
-          </div>
+        <div>
+          <label style="font-size: 11px; font-family: 'JetBrains Mono';">COMMENTS</label>
+          <textarea class="custom-input-power" style="height: 60px; padding: 8px;" placeholder="Report corporate SLA grievance..."></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-trip-options" onclick="closeBusinessCharterModal()">Cancel</button>
-        <button type="button" class="btn-primary-cta" onclick="scheduleCharterDispatch()">Schedule Dispatch</button>
+        <button class="btn-power-cta" onclick="closeModal('feedbackModal'); showToast('Corporate grievance logged with SLA priority!', '✅')">Submit Ticket</button>
       </div>
     </div>
   </div>
 
-  <!-- GENERIC DETAILS MODAL -->
-  <div class="modal-backdrop" id="featureModal" role="dialog" aria-modal="true">
+  <!-- MODAL: AGENT CRS -->
+  <div class="modal-backdrop" id="agentCrsModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 id="featureModalTitle">Information</h3>
-        <button class="modal-close-btn" onclick="closeFeatureModal()">✕</button>
+        <h3>🎟️ MavenTech Agent CRS Portal (ksrtc.buscrs.com)</h3>
+        <button class="modal-close-btn" onclick="closeModal('agentCrsModal')">✕</button>
       </div>
       <div class="modal-body">
-        <div id="featureModalBody" style="font-size: 14px; line-height: 1.6;"></div>
+        <p style="font-size: 12px; color: var(--text-muted);">External MavenTech CRS gateway for authorized travel desk agents.</p>
+        <input type="text" class="custom-input-power" value="CORP-DESK-ABC-911">
       </div>
       <div class="modal-footer">
-        <button class="btn-primary-cta" onclick="closeFeatureModal()">OK</button>
+        <button class="btn-power-cta" onclick="closeModal('agentCrsModal'); showToast('Launching MavenTech CRS terminal...', '🎟️')">Open Terminal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GST INVOICE DOWNLOAD -->
+  <div class="modal-backdrop" id="gstInvoiceModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📄 Consolidated GST Tax Invoice</h3>
+        <button class="modal-close-btn" onclick="closeModal('gstInvoiceModal')">✕</button>
+      </div>
+      <div class="modal-body" style="font-family: 'JetBrains Mono'; font-size: 13px;">
+        <p>Billed to: <strong>ABC Technologies Corp</strong></p>
+        <p>GSTIN: <strong>32AABCA1234F1Z5</strong></p>
+        <div style="background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: 8px; margin: 10px 0;">
+          <div>Taxable Turnover: ₹22,400.00</div>
+          <div>CGST (2.5%): ₹560.00</div>
+          <div>SGST (2.5%): ₹560.00</div>
+          <div style="color: var(--primary); font-weight: 800; margin-top: 6px;">Total Tax Invoice: ₹23,520.00</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-power-cta" onclick="closeModal('gstInvoiceModal'); showToast('Exported PDF Tax Invoice!', '📄')">Download Signed PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PROFILE & LOYALTY -->
+  <div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>👤 Corporate Travel Profile</h3>
+        <button class="modal-close-btn" onclick="closeModal('profileModal')">✕</button>
+      </div>
+      <div class="modal-body" style="font-family: 'JetBrains Mono'; font-size: 13px;">
+        <div>Traveler: Rajesh Nair</div>
+        <div>Company: ABC Technologies Corp</div>
+        <div>GSTIN: 32AABCA1234F1Z5</div>
+        <div>Anniversary / DOB Loyalty Perk: Active (10% Tier)</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-power-pill" onclick="closeModal('profileModal')">Close</button>
       </div>
     </div>
   </div>
@@ -1462,18 +1116,12 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // State
     const body = document.body;
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
-    const groupBookingModal = document.getElementById('groupBookingModal');
-    const gstInvoiceModal = document.getElementById('gstInvoiceModal');
-    const businessCharterModal = document.getElementById('businessCharterModal');
-    const featureModal = document.getElementById('featureModal');
     const toastNotice = document.getElementById('toastNotice');
 
-    // Theme logic - Default to Dark Mode as specified in PRD
     function initTheme() {
       const savedTheme = localStorage.getItem('ksrtc_theme') || 'dark';
       setTheme(savedTheme);
@@ -1494,124 +1142,54 @@
     }
 
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme') || 'dark';
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      const current = body.getAttribute('data-theme') || 'dark';
+      setTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    // Populate mini seats
-    function initSeatGrid() {
-      const grid = document.getElementById('miniSeatGrid');
-      grid.innerHTML = '';
-      for (let i = 1; i <= 32; i++) {
-        const seat = document.createElement('div');
-        seat.className = 'mini-seat' + (i <= 8 ? ' selected' : '');
-        seat.textContent = (i < 10 ? '0' : '') + i;
-        seat.addEventListener('click', () => {
-          seat.classList.toggle('selected');
-          const count = document.querySelectorAll('.mini-seat.selected').length;
-          document.getElementById('groupPassCount').value = count;
-          updateGroupDiscount();
-        });
-        grid.appendChild(seat);
-      }
-    }
-
-    function updateGroupDiscount() {
-      const count = parseInt(document.getElementById('groupPassCount').value || '1', 10);
-      const badge = document.getElementById('groupDiscountBadge');
-      if (count >= 20) {
-        badge.textContent = '25% Executive Tier Discount';
-      } else if (count >= 10) {
-        badge.textContent = '20% Corporate Volume Discount';
-      } else if (count >= 5) {
-        badge.textContent = '15% Group Discount';
-      } else {
-        badge.textContent = 'Standard Corporate Fare';
-      }
-    }
-
     // Modals
-    function openGroupBookingModal() {
-      initSeatGrid();
-      groupBookingModal.classList.add('open');
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    function openCharterModal() { openModal('charterModal'); }
+    function openDepotModal() { openModal('depotModal'); }
+    function openFeedbackModal() { openModal('feedbackModal'); }
+    function openCargoModal() { openModal('cargoModal'); }
+    function openAgentCRSModal() { openModal('agentCrsModal'); }
+    function openGstInvoiceModal() { openModal('gstInvoiceModal'); }
+    function openProfileModal() { openModal('profileModal'); }
+    function openSlabsModal() { openModal('cancellationModal'); }
+
+    function openCancellationModal(pnr, fare) {
+      document.getElementById('cancelPnrLabel').textContent = 'PNR: ' + pnr;
+      openModal('cancellationModal');
     }
 
-    function closeGroupBookingModal() {
-      groupBookingModal.classList.remove('open');
+    function confirmCorpCancellation() {
+      closeModal('cancellationModal');
+      showToast('GST Credit Note generated & refund settled in 7 banking days!', '📄');
     }
 
-    function handleGroupBookingSubmit(e) {
-      e.preventDefault();
-      closeGroupBookingModal();
-      const count = document.getElementById('groupPassCount').value;
-      showToast(`Group reservation for ${count} seats confirmed under GST: 32AABCA1234F1Z5!`, '👥');
+    function calculateGroupDiscount() {
+      const pax = parseInt(document.getElementById('groupPaxCount').value, 10) || 1;
+      let pct = 5;
+      if (pax >= 10) pct = 15;
+      else if (pax >= 4) pct = 10;
+      document.getElementById('groupDiscountTier').textContent = `${pct}% Bulk Corporate Off`;
+      const total = Math.round(pax * 800 * (1 - pct/100));
+      document.getElementById('groupTotalFare').textContent = `₹${total} (Incl. CGST+SGST)`;
     }
 
-    function openGstInvoiceModal() {
-      gstInvoiceModal.classList.add('open');
+    function handleGroupBookingSubmit() {
+      showToast('Group Booking confirmed with single reservation fee & GSTIN invoice!', '⚡');
     }
 
-    function closeGstInvoiceModal() {
-      gstInvoiceModal.classList.remove('open');
-    }
-
-    function downloadSampleGstPdf() {
-      closeGstInvoiceModal();
-      showToast('Downloading Tax_Invoice_Sep_2026_ABC_Corp.pdf...', '📄');
-    }
-
-    function openBusinessCharterModal() {
-      businessCharterModal.classList.add('open');
-    }
-
-    function closeBusinessCharterModal() {
-      businessCharterModal.classList.remove('open');
-    }
-
-    function scheduleCharterDispatch() {
-      closeBusinessCharterModal();
-      showToast('Corporate recurring shuttle reserved. Fleet dispatch notified!', '🚌');
-    }
-
-    function rebookPreviousTrip() {
-      showToast('Instant Rebook: Trivandrum ➔ Kochi for tomorrow 6:00 PM prefilled and auto-approved!', '🔄');
-    }
-
-    function exportExpenseReport(format) {
-      showToast(`Generating Q3 corporate travel audit (${format})... Sent to accounts@abccorp.com`, '📊');
-    }
-
-    function showFeatureModal(title, text) {
-      document.getElementById('featureModalTitle').innerHTML = title;
-      document.getElementById('featureModalBody').innerHTML = text;
-      featureModal.classList.add('open');
-    }
-
-    function closeFeatureModal() {
-      featureModal.classList.remove('open');
-    }
-
-    // Toast
     function showToast(msg, icon = '⚡') {
-      const toastText = document.getElementById('toastText');
-      const toastIcon = document.getElementById('toastIcon');
-      toastText.textContent = msg;
-      toastIcon.textContent = icon;
+      document.getElementById('toastText').textContent = msg;
+      document.getElementById('toastIcon').textContent = icon;
       toastNotice.classList.add('show');
       setTimeout(() => toastNotice.classList.remove('show'), 3800);
     }
 
-    // Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeGroupBookingModal();
-        closeGstInvoiceModal();
-        closeBusinessCharterModal();
-        closeFeatureModal();
-      }
-    });
-
-    // Init
     initTheme();
   </script>
 </body>
