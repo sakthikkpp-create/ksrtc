@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KSRTC-SWIFT — Official Online Bus Reservation & Journey Planner</title>
+  <title>KSRTC-SWIFT — Official Onam Homecoming & Online Bus Journey Planner</title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Manjari:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -15,8 +15,11 @@
       --primary-light: #136060;
       --primary-glow: rgba(10, 74, 74, 0.25);
       --secondary: #D4A84A;
+      --secondary-gold: #E5B84B;
       --secondary-hover: #BF9438;
-      --secondary-light: #FFF8EB;
+      --secondary-light: #FFF9EE;
+      --onam-saffron: #E86A3E;
+      --onam-marigold: #F4A261;
       --bg: #F8FAF9;
       --bg-card: #FFFFFF;
       --accent: #E86A3E;
@@ -24,6 +27,7 @@
       --text-muted: #566874;
       --border: #E0E7E5;
       --success: #1E8756;
+      --kasavu-gold: #D4AF37;
       --map-bg: #EAF2EE;
       --map-land: #D5E8DD;
       --shadow-sm: 0 4px 14px rgba(10, 74, 74, 0.05);
@@ -40,8 +44,11 @@
       --primary-light: #229999;
       --primary-glow: rgba(24, 119, 119, 0.35);
       --secondary: #E5BB5C;
+      --secondary-gold: #F0C96F;
       --secondary-hover: #D4A84A;
       --secondary-light: #252014;
+      --onam-saffron: #F27E55;
+      --onam-marigold: #F4A261;
       --bg: #0A1015;
       --bg-card: #131E26;
       --accent: #F27E55;
@@ -49,6 +56,7 @@
       --text-muted: #8FA2B0;
       --border: #20313E;
       --success: #2BB673;
+      --kasavu-gold: #E5BB5C;
       --map-bg: #0E1820;
       --map-land: #192A35;
       --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
@@ -68,6 +76,30 @@
       flex-direction: column;
       transition: background-color 0.25s ease, color 0.25s ease;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Kasavu Gold Decorative Top Bar */
+    .kasavu-top-border {
+      height: 4px;
+      background: linear-gradient(90deg, #D4AF37 0%, #F5E6BE 25%, #D4AF37 50%, #F5E6BE 75%, #D4AF37 100%);
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+    }
+
+    /* Floating Petals Canvas */
+    #onamCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.8;
+      display: block;
     }
 
     /* SVG Icon Helper */
@@ -88,14 +120,14 @@
     .concept-nav-bar {
       background: #041616;
       color: #E2ECE9;
-      padding: 10px 24px;
+      padding: 8px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      border-bottom: 1px solid rgba(212, 168, 74, 0.3);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
       position: sticky;
-      top: 0;
+      top: 4px;
       z-index: 1000;
       font-size: 13px;
     }
@@ -111,11 +143,11 @@
       font-weight: 700;
       padding: 6px 14px;
       border-radius: 6px;
-      background: rgba(212, 168, 74, 0.15);
+      background: rgba(212, 175, 55, 0.15);
       transition: var(--transition);
     }
 
-    .home-link:hover { background: rgba(212, 168, 74, 0.3); color: #FFF; }
+    .home-link:hover { background: rgba(212, 175, 55, 0.3); color: #FFF; }
 
     .concept-links-scroll {
       display: flex;
@@ -143,11 +175,34 @@
     .concept-tab:hover { color: #FFF; background: rgba(255, 255, 255, 0.08); }
     .concept-tab.active { background: var(--secondary); color: #041616; font-weight: 800; }
 
+    .concept-nav-right { display: flex; align-items: center; gap: 10px; }
+
+    .onam-toggle-btn {
+      background: rgba(232, 106, 62, 0.2);
+      border: 1px solid var(--onam-saffron);
+      color: #FFF;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .onam-toggle-btn:hover, .onam-toggle-btn.active {
+      background: var(--onam-saffron);
+      color: #FFF;
+      box-shadow: 0 0 10px rgba(232, 106, 62, 0.5);
+    }
+
     .theme-toggle-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #E2ECE9;
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 12px;
@@ -158,9 +213,9 @@
       transition: var(--transition);
     }
 
-    /* FLASH TICKER */
+    /* ONAM FESTIVE TICKER */
     .live-notice-ticker {
-      background: linear-gradient(90deg, #0A4A4A, #125555);
+      background: linear-gradient(90deg, #0A4A4A, #145555, #E86A3E);
       color: #FFF;
       padding: 8px 24px;
       font-size: 12px;
@@ -168,7 +223,7 @@
       align-items: center;
       justify-content: space-between;
       overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .ticker-content {
@@ -176,7 +231,7 @@
       align-items: center;
       gap: 16px;
       white-space: nowrap;
-      animation: marquee 32s linear infinite;
+      animation: marquee 34s linear infinite;
     }
 
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
@@ -202,18 +257,23 @@
       color: inherit;
     }
 
-    .brand-logo-frame {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, var(--primary), #1A7070);
-      border: 1.5px solid rgba(212, 168, 74, 0.5);
-      border-radius: 14px;
+    /* Pookkalam Animated Emblem */
+    .brand-pookkalam-frame {
+      width: 52px;
+      height: 52px;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--secondary);
-      box-shadow: 0 4px 16px rgba(10, 74, 74, 0.2);
     }
+
+    .pookkalam-svg {
+      width: 52px;
+      height: 52px;
+      animation: rotatePookkalam 30s linear infinite;
+    }
+
+    @keyframes rotatePookkalam { 100% { transform: rotate(360deg); } }
 
     .brand-text h1 {
       font-family: 'Playfair Display', serif;
@@ -226,15 +286,16 @@
       gap: 8px;
     }
 
-    .brand-text .neo-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      background: var(--secondary);
-      color: #051F1F;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.5px;
+    .brand-text .onam-badge-pill {
+      font-family: 'Manjari', sans-serif;
+      font-size: 11px;
+      background: linear-gradient(135deg, #E86A3E, #D4AF37);
+      color: #FFF;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(232, 106, 62, 0.3);
     }
 
     .brand-text p { font-size: 11px; color: var(--text-muted); }
@@ -340,13 +401,47 @@
       flex: 1;
     }
 
-    /* HERO HIGH-DEFINITION CAROUSEL WITH REAL SCENERY */
+    /* ONAM GREETING STRIP */
+    .onam-cultural-greeting-bar {
+      background: linear-gradient(135deg, rgba(232, 106, 62, 0.08), rgba(212, 175, 55, 0.12));
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: var(--radius-md);
+      padding: 12px 20px;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .onam-greeting-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .onam-malayalam-text {
+      font-family: 'Manjari', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #A34E1D;
+    }
+
+    [data-theme="dark"] .onam-malayalam-text { color: #F4A261; }
+
+    .onam-greeting-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* HERO CAROUSEL */
     .hero-carousel-card {
       position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      margin: 16px 0 28px;
-      height: 280px;
+      margin: 18px 0 28px;
+      height: 300px;
       box-shadow: var(--shadow-md);
       border: 1px solid var(--border);
     }
@@ -370,22 +465,22 @@
     .carousel-slide.active { opacity: 1; pointer-events: all; transform: scale(1); }
 
     /* REAL HD PHOTOGRAPHY BACKGROUNDS */
-    .slide-bg-1 {
-      background: linear-gradient(90deg, rgba(5, 31, 31, 0.92) 0%, rgba(10, 74, 74, 0.7) 60%, rgba(0, 0, 0, 0.3) 100%),
+    .slide-bg-onam {
+      background: linear-gradient(90deg, rgba(8, 30, 26, 0.94) 0%, rgba(10, 74, 74, 0.75) 55%, rgba(232, 106, 62, 0.35) 100%),
                   url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80');
       background-size: cover;
       background-position: center 60%;
     }
 
-    .slide-bg-2 {
-      background: linear-gradient(90deg, rgba(20, 30, 20, 0.92) 0%, rgba(10, 74, 74, 0.7) 60%, rgba(0, 0, 0, 0.3) 100%),
+    .slide-bg-scenic {
+      background: linear-gradient(90deg, rgba(15, 30, 20, 0.94) 0%, rgba(10, 74, 74, 0.7) 60%, rgba(0, 0, 0, 0.3) 100%),
                   url('https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1600&q=80');
       background-size: cover;
       background-position: center 40%;
     }
 
-    .slide-bg-3 {
-      background: linear-gradient(90deg, rgba(15, 25, 35, 0.92) 0%, rgba(10, 74, 74, 0.7) 60%, rgba(0, 0, 0, 0.3) 100%),
+    .slide-bg-waterways {
+      background: linear-gradient(90deg, rgba(15, 25, 35, 0.94) 0%, rgba(10, 74, 74, 0.7) 60%, rgba(212, 175, 55, 0.3) 100%),
                   url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1600&q=80');
       background-size: cover;
       background-position: center;
@@ -403,7 +498,7 @@
       font-size: 15px;
       opacity: 0.95;
       margin-top: 10px;
-      max-width: 620px;
+      max-width: 640px;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     }
 
@@ -411,9 +506,9 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 800;
-      background: var(--secondary);
-      color: #041616;
-      padding: 4px 12px;
+      background: linear-gradient(135deg, #E86A3E, #D4AF37);
+      color: #FFF;
+      padding: 4px 14px;
       border-radius: 20px;
       display: inline-block;
       margin-bottom: 12px;
@@ -443,7 +538,7 @@
     .carousel-prev { left: 20px; }
     .carousel-next { right: 20px; }
 
-    /* SEARCH WIDGET CARD */
+    /* SEARCH WIDGET */
     .search-widget-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -458,7 +553,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       border-bottom: 1px solid var(--border);
       padding-bottom: 14px;
       flex-wrap: wrap;
@@ -488,8 +583,16 @@
     .trip-options-strip {
       display: flex;
       align-items: center;
-      gap: 24px;
+      justify-content: space-between;
       margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .radio-pill-group {
+      display: flex;
+      align-items: center;
+      gap: 22px;
       flex-wrap: wrap;
     }
 
@@ -504,6 +607,22 @@
     }
 
     .radio-pill input[type="radio"] { accent-color: var(--primary); cursor: pointer; }
+
+    /* Onam Family Banner Callout */
+    .onam-family-concession-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(232, 106, 62, 0.15), rgba(212, 175, 55, 0.15));
+      border: 1px solid var(--secondary);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #A34E1D;
+    }
+
+    [data-theme="dark"] .onam-family-concession-badge { color: #F4A261; }
 
     /* SEARCH GRID */
     .search-grid {
@@ -616,7 +735,7 @@
     .btn-focus-map {
       height: 52px;
       padding: 0 18px;
-      background: rgba(212, 168, 74, 0.15);
+      background: rgba(212, 175, 55, 0.15);
       border: 1px solid var(--secondary);
       color: var(--secondary);
       border-radius: var(--radius-sm);
@@ -631,7 +750,7 @@
 
     .btn-focus-map:hover { background: var(--secondary); color: #041616; }
 
-    /* LINK-TICKET CONFIG BAR */
+    /* LINK TICKET BAR */
     .link-ticket-config-bar {
       display: none;
       background: rgba(10, 74, 74, 0.05);
@@ -647,7 +766,7 @@
 
     .link-ticket-config-bar.show { display: flex; }
 
-    /* SPATIAL DISPLAY: SVG MAP + TOP ROUTES */
+    /* SPATIAL ENGINE: SVG MAP + TOP ROUTES */
     .journey-display-grid {
       display: grid;
       grid-template-columns: 1.25fr 1.15fr;
@@ -736,10 +855,26 @@
     /* TOP ROUTES COLUMN */
     .routes-column { display: flex; flex-direction: column; gap: 14px; }
 
+    .routes-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .routes-col-header h3 {
       font-family: 'Playfair Display', serif;
       font-size: 20px;
       font-weight: 700;
+    }
+
+    .onam-special-badge-tag {
+      background: linear-gradient(135deg, #E86A3E, #D4AF37);
+      color: #FFF;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono';
     }
 
     .route-card {
@@ -773,7 +908,7 @@
       color: var(--primary);
     }
 
-    /* POPULAR DESTINATIONS GRID WITH HIGH DEFINITION PHOTOGRAPHY */
+    /* POPULAR ONAM FESTIVAL DESTINATIONS */
     .destinations-section { margin-bottom: 44px; }
 
     .section-header-title {
@@ -837,6 +972,18 @@
       gap: 4px;
     }
 
+    .dest-onam-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: linear-gradient(135deg, #E86A3E, #D4AF37);
+      color: #FFF;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+
     .dest-body {
       padding: 16px;
       display: flex;
@@ -849,7 +996,29 @@
     .dest-title { font-size: 17px; font-weight: 800; }
     .dest-sub { font-size: 12px; color: var(--text-muted); }
 
-    /* NEW LAUNCHED BUSES (FLEET SHOWCASE WITH REAL PHOTOGRAPHY) */
+    /* ONAM SADYA CALLOUT CARD */
+    .onam-sadya-highlight-banner {
+      background: linear-gradient(135deg, rgba(30, 135, 86, 0.1), rgba(212, 175, 55, 0.15));
+      border: 1.5px solid var(--secondary);
+      border-radius: var(--radius-lg);
+      padding: 24px 32px;
+      margin-bottom: 44px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .sadya-photo-box {
+      height: 150px;
+      border-radius: var(--radius-md);
+      background-image: url('https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=800&q=80');
+      background-size: cover;
+      background-position: center;
+      border: 2px solid var(--secondary);
+    }
+
+    /* FLEET GALLERY */
     .fleet-gallery-section {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -1107,6 +1276,7 @@
       .journey-display-grid { grid-template-columns: 1fr; }
       .destinations-grid { grid-template-columns: repeat(2, 1fr); }
       .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+      .onam-sadya-highlight-banner { grid-template-columns: 1fr; }
       .app-download-showcase { grid-template-columns: 1fr; }
       .app-qr-box { margin: 0 auto; }
       .footer-inner { grid-template-columns: repeat(2, 1fr); }
@@ -1118,12 +1288,18 @@
       .fleet-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; }
       .concept-nav-bar { flex-direction: column; align-items: stretch; }
-      .hero-carousel-card { height: 320px; }
+      .hero-carousel-card { height: 340px; }
       .carousel-slide { padding: 24px; }
     }
   </style>
 </head>
 <body data-theme="light">
+
+  <!-- Kasavu Gold Border Strip -->
+  <div class="kasavu-top-border"></div>
+
+  <!-- Onam Floating Petals Canvas -->
+  <canvas id="onamCanvas"></canvas>
 
   <!-- TOP CONCEPT SWITCHER NAVIGATION -->
   <nav class="concept-nav-bar" aria-label="Concept Navigation">
@@ -1134,7 +1310,7 @@
       </a>
       <div class="concept-links-scroll">
         <a href="concepts/concept1-journey-planner.html" class="concept-tab active">
-          <span>1. Journey Planner</span>
+          <span>1. Journey Planner (Onam Edition)</span>
         </a>
         <a href="concepts/concept2-trusted-companion.html" class="concept-tab">
           <span>2. Trusted Companion</span>
@@ -1154,6 +1330,10 @@
       </div>
     </div>
     <div class="concept-nav-right">
+      <button class="onam-toggle-btn active" id="onamPetalToggle" onclick="toggleOnamPetals()" title="Toggle Onam falling petal celebration">
+        <span>🌸</span>
+        <span id="onamPetalText">Onam Ambience: On</span>
+      </button>
       <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark mode">
         <svg class="icon-svg" id="themeSvgIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         <span id="themeLabel">Dark</span>
@@ -1161,39 +1341,51 @@
     </div>
   </nav>
 
-  <!-- LIVE OPERATIONAL FLASH TICKER -->
+  <!-- ONAM OPERATIONAL FLASH TICKER -->
   <div class="live-notice-ticker" aria-label="Live Announcements">
-    <div style="display: flex; align-items: center; gap: 6px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--secondary);">
-      <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-      <span>FLASH UPDATE:</span>
+    <div style="display: flex; align-items: center; gap: 6px; font-weight: 800; font-family: 'JetBrains Mono'; color: #FFF;">
+      <svg class="icon-svg" style="width: 14px; height: 14px; color: var(--secondary-gold);" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      <span>ONAM SPECIAL:</span>
     </div>
     <div class="ticker-content">
-      <span>150+ Festival Express coaches deployed for Sabarimala & Onam pilgrim circuits.</span>
+      <span>🌸 400+ Non-Stop Inter-State & Inter-District Homecoming Expresses now open! Zero Surge Pricing guaranteed.</span>
       <span>•</span>
-      <span>Monsoon Safety Protocol active across Thamarassery Churam & Wayanad Ghats.</span>
+      <span>🍽️ Rail Rolls Grand Onam Sadya pre-booking live across Alappuzha & Vytilla halts.</span>
       <span>•</span>
-      <span>Rail Rolls onboard meal service now live at Alappuzha & Vytilla halts.</span>
+      <span>🚌 Extra luggage allowance active for all Bangalore, Chennai & Hyderabad homecoming services.</span>
       <span>•</span>
-      <span>Ente KSRTC Neo-OPRS app updated with real-time GPS conductor beacon.</span>
+      <span>🎉 Happy Onam! തിരുവോണാശംസകൾ to all passengers from Kerala State Road Transport Corporation.</span>
     </div>
   </div>
 
-  <!-- MAIN SITE HEADER WITH PROFESSIONAL SVG ICONS -->
+  <!-- MAIN SITE HEADER WITH POOKKALAM EMBLEM -->
   <header class="site-header">
     <a href="#" class="brand-group">
-      <div class="brand-logo-frame">
-        <svg class="icon-svg" style="width: 26px; height: 26px;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+      <!-- Animated Geometric Pookkalam SVG -->
+      <div class="brand-pookkalam-frame">
+        <svg class="pookkalam-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#D4AF37" stroke-width="2.5" />
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#E86A3E" stroke-width="2" stroke-dasharray="6,4" />
+          <!-- Lotus Petals Pattern -->
+          <path d="M50 8 C55 25 65 25 50 35 C35 25 45 25 50 8 Z" fill="#D4AF37" opacity="0.9" />
+          <path d="M50 92 C55 75 65 75 50 65 C35 75 45 75 50 92 Z" fill="#D4AF37" opacity="0.9" />
+          <path d="M8 50 C25 55 25 65 35 50 C25 35 25 45 8 50 Z" fill="#E86A3E" opacity="0.9" />
+          <path d="M92 50 C75 55 75 65 65 50 C75 35 75 45 92 50 Z" fill="#E86A3E" opacity="0.9" />
+          <!-- Inner Ring -->
+          <circle cx="50" cy="50" r="16" fill="#0A4A4A" stroke="#D4AF37" stroke-width="2" />
+          <circle cx="50" cy="50" r="6" fill="#D4AF37" />
+        </svg>
       </div>
       <div class="brand-text">
-        <h1>KSRTC SWIFT <span class="neo-tag">ENTE KSRTC</span></h1>
-        <p>Kerala State Road Transport Corporation • Online Bus Booking</p>
+        <h1>KSRTC SWIFT <span class="onam-badge-pill">തിരുവോണം 2026</span></h1>
+        <p>Kerala State Road Transport Corporation • The Great Onam Homecoming</p>
       </div>
     </a>
 
     <nav class="header-nav-menu" aria-label="Main Navigation">
       <a href="#searchWidget" class="nav-item-btn">Home</a>
-      <a href="#destinations" class="nav-item-btn">Destinations</a>
-      <a href="#fleet" class="nav-item-btn">Fleet Gallery</a>
+      <a href="#onamSpecials" class="nav-item-btn">Onam Specials</a>
+      <a href="#destinations" class="nav-item-btn">Festive Circuits</a>
       
       <!-- MANAGE BOOKING DROPDOWN -->
       <div class="dropdown-parent">
@@ -1203,7 +1395,7 @@
         </button>
         <div class="dropdown-menu" id="manageBookingDropdown">
           <div class="dropdown-link" onclick="openViewBookingModal()">
-            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
             <span>View My Booking</span>
           </div>
           <div class="dropdown-link" onclick="openEditBoardingModal()">
@@ -1238,7 +1430,7 @@
         <span>Feedback</span>
       </a>
 
-      <!-- LOGIN / SIGNUP BUTTON -->
+      <!-- LOGIN BUTTON -->
       <button class="btn-login-header" onclick="openAuthModal()">
         <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         <span id="authHeaderLabel">Login / Signup</span>
@@ -1249,36 +1441,50 @@
   <!-- MAIN PAGE CONTAINER -->
   <main class="page-container">
 
-    <!-- HERO PROMOTIONAL CAROUSEL (WITH REAL HD PHOTOGRAPHY) -->
+    <!-- ONAM FESTIVE CULTURAL GREETING STRIP -->
+    <div class="onam-cultural-greeting-bar">
+      <div class="onam-greeting-left">
+        <span style="font-size: 24px;">🌸</span>
+        <div>
+          <div class="onam-malayalam-text">ഹൃദ്യമായ ഓണാശംസകൾ • Celebrate Onam with KSRTC SWIFT</div>
+          <div class="onam-greeting-sub">Reconnecting families across all 14 districts and neighboring states with guaranteed zero surge pricing.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span class="onam-family-concession-badge">🌾 Official State Festival Service</span>
+      </div>
+    </div>
+
+    <!-- HERO PROMOTIONAL CAROUSEL (ONAM HOMECOMING EDITION) -->
     <section class="hero-carousel-card" id="heroCarousel" aria-label="Promotional Showcase">
-      <!-- Slide 1: Highway Luxury Fleet -->
-      <div class="carousel-slide slide-bg-1 active">
+      <!-- Slide 1: The Great Onam Homecoming -->
+      <div class="carousel-slide slide-bg-onam active">
         <div class="carousel-text">
-          <span class="carousel-badge">PREMIUM HIGHWAY FLEET</span>
-          <h2>Gajaraj Multi-Axle Volvo & Scania</h2>
-          <p>Luxurious AC Sleeper & Seater coaches connecting Trivandrum, Kochi, Kozhikode, Bangalore & Chennai with ergonomic calf-rests and WiFi.</p>
+          <span class="carousel-badge">തിരുവോണം വരവായി • ONAM SPECIAL FLEET</span>
+          <h2>The Great Onam Homecoming</h2>
+          <p>Over 400 special Gajaraj Volvo & Scania coaches connecting Bengaluru, Chennai, Coimbatore & 14 Kerala districts. Zero surge pricing, extra baggage allowance, and guaranteed family seats.</p>
         </div>
       </div>
 
       <!-- Slide 2: Munnar Scenic Highlands -->
-      <div class="carousel-slide slide-bg-2">
+      <div class="carousel-slide slide-bg-scenic">
         <div class="carousel-text">
-          <span class="carousel-badge">SCENIC HIGHLANDS</span>
-          <h2>Munnar & Wayanad Monsoon Tours</h2>
-          <p>Roll through mist-clad tea gardens with wide panoramic windows, air suspension, and scheduled hygiene halts.</p>
+          <span class="carousel-badge">ONAM HOLIDAY PACKAGES</span>
+          <h2>Munnar & Wayanad Festive Circuits</h2>
+          <p>Celebrate the harvest festival amidst rolling tea gardens and mist-kissed waterfalls with hygienic scheduled dining halts.</p>
         </div>
       </div>
 
-      <!-- Slide 3: Alleppey Backwater Network -->
-      <div class="carousel-slide slide-bg-3">
+      <!-- Slide 3: Waterways & Boat Race Circuit -->
+      <div class="carousel-slide slide-bg-waterways">
         <div class="carousel-text">
-          <span class="carousel-badge">LINK-TICKET NETWORK</span>
-          <h2>Connect Across 90 Statewide Depots</h2>
-          <p>Single ticket, guaranteed transfer protection, and seamless connections throughout God's Own Country.</p>
+          <span class="carousel-badge">VALLAM KALI SPECIALS</span>
+          <h2>Aranmula & Alleppey Boat Race Passes</h2>
+          <p>Direct stadium buses to the legendary snake boat races and grand Onasadya temple feasts with single-ticket link connections.</p>
         </div>
       </div>
 
-      <!-- Carousel Navigation Buttons -->
+      <!-- Controls -->
       <button class="carousel-ctrl-btn carousel-prev" onclick="prevSlide()" aria-label="Previous Slide">
         <svg class="icon-svg" style="width: 20px; height: 20px;" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
@@ -1299,18 +1505,30 @@
           <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
           <span>Link-Ticket (Connecting Bus)</span>
         </button>
+        <button class="tab-btn" id="tabOnamFilter" onclick="filterOnamServices()" style="color: var(--onam-saffron); font-weight: 800;">
+          <span>🌸</span>
+          <span>Onam Special Expresses Only</span>
+        </button>
       </div>
 
-      <!-- TRIP OPTIONS (ONE-WAY / ROUND-TRIP) -->
+      <!-- TRIP OPTIONS -->
       <div class="trip-options-strip" id="tripOptionsStrip">
-        <label class="radio-pill">
-          <input type="radio" name="bookingTripMode" value="oneway" checked onchange="handleTripModeChange('oneway')">
-          <span>One Way</span>
-        </label>
-        <label class="radio-pill">
-          <input type="radio" name="bookingTripMode" value="roundtrip" onchange="handleTripModeChange('roundtrip')">
-          <span>Round Trip <strong style="color: var(--secondary);">(10% Off Return Leg)</strong></span>
-        </label>
+        <div class="radio-pill-group">
+          <label class="radio-pill">
+            <input type="radio" name="bookingTripMode" value="oneway" checked onchange="handleTripModeChange('oneway')">
+            <span>One Way</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="bookingTripMode" value="roundtrip" onchange="handleTripModeChange('roundtrip')">
+            <span>Round Trip <strong style="color: var(--secondary);">(10% Off Return Leg)</strong></span>
+          </label>
+        </div>
+
+        <!-- Dynamic Family Concession Callout -->
+        <div class="onam-family-concession-badge" id="familyConcessionBadge" style="display: none;">
+          <span>🎉</span>
+          <span>Onam Kudumbashree Reunion: 15% Family Discount Auto-Applied!</span>
+        </div>
       </div>
 
       <!-- LINK-TICKET CONFIG ROW -->
@@ -1338,7 +1556,7 @@
             <span>Leaving From</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchFromCity" value="Kochi" placeholder="Type origin city..." required>
+            <input type="text" class="custom-input" id="searchFromCity" value="Bengaluru" placeholder="Type origin city..." required>
             <button type="button" class="clear-input-btn" onclick="clearInput('searchFromCity')" aria-label="Clear city">
               <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
@@ -1352,10 +1570,10 @@
         <div class="input-field-group">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            <span>Going To</span>
+            <span>Going To (Kerala)</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchToCity" value="Trivandrum" placeholder="Type destination..." required>
+            <input type="text" class="custom-input" id="searchToCity" value="Kochi" placeholder="Type destination..." required>
             <button type="button" class="clear-input-btn" onclick="clearInput('searchToCity')" aria-label="Clear city">
               <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
@@ -1371,7 +1589,7 @@
           <input type="date" class="custom-input" id="departDateInput" required>
         </div>
 
-        <!-- RETURN DATE (OPTIONAL) -->
+        <!-- RETURN DATE -->
         <div class="input-field-group" id="returnDateFieldBox" style="display: none;">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
@@ -1380,15 +1598,15 @@
           <input type="date" class="custom-input" id="returnDateInput">
         </div>
 
-        <!-- PASSENGERS (MAX 6 RULE) -->
+        <!-- PASSENGERS (MAX 6 RULE + ONAM FAMILY REUNION CHECK) -->
         <div class="input-field-group">
           <label class="field-label">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            <span>Passengers (Max 6)</span>
+            <span>Passengers (Family)</span>
           </label>
           <div style="display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); height: 52px; padding: 0 12px; justify-content: space-between;">
             <button type="button" class="tab-btn" style="padding: 0 8px; font-size: 18px;" onclick="adjustPassenger(-1)">−</button>
-            <span style="font-family: 'JetBrains Mono'; font-weight: 800; font-size: 16px;" id="passengerDisplay">2</span>
+            <span style="font-family: 'JetBrains Mono'; font-weight: 800; font-size: 16px;" id="passengerDisplay">3</span>
             <button type="button" class="tab-btn" style="padding: 0 8px; font-size: 18px;" onclick="adjustPassenger(1)">+</button>
           </div>
         </div>
@@ -1407,8 +1625,26 @@
       </form>
     </section>
 
-    <!-- SPATIAL ENGINE: INTERACTIVE KERALA SVG MAP + TOP ROUTES -->
-    <div class="journey-display-grid">
+    <!-- ONAM SADYA IN-JOURNEY DINING HIGHLIGHT BANNER -->
+    <section class="onam-sadya-highlight-banner" aria-label="Grand Onam Sadya In-Journey Dining">
+      <div>
+        <span class="onam-badge-pill">RAIL ROLLS & KSRTC EXCLUSIVE</span>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; margin-top: 8px;">
+          Grand Onam Sadya Onboard Your Bus
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted); margin: 8px 0 18px;">
+          Pre-order an authentic 24-item traditional Kerala Sadya served on a fresh plantain leaf, complete with Palada Payasam, Parippu, Ghee, and Sharkara Varatti, delivered hot to your seat at scheduled highway depot halts.
+        </p>
+        <button class="btn-find-bus" style="height: 42px; padding: 0 20px; font-size: 13px;" onclick="openRailRollsModal()">
+          <span>Pre-Order Onam Sadya (₹220)</span>
+          <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="sadya-photo-box"></div>
+    </section>
+
+    <!-- SPATIAL ENGINE: INTERACTIVE KERALA SVG MAP + TOP ONAM ROUTES -->
+    <div class="journey-display-grid" id="onamSpecials">
 
       <!-- LEFT: SVG ROUTE & DEPOT MAP -->
       <section class="map-container-card" aria-label="Interactive Route Map">
@@ -1460,10 +1696,10 @@
             <path class="static-route-line" d="M 148 135 L 190 120" />
 
             <!-- Dynamic Active Route Line -->
-            <path id="activeRoutePath" class="active-route-line" d="M 195 260 L 218 315 L 235 375 L 260 430 L 280 475" />
+            <path id="activeRoutePath" class="active-route-line" d="M 148 135 L 175 200 L 195 260" />
 
-            <!-- Moving Bus Simulator (Vector SVG Pin) -->
-            <g id="animatedBusMarker" transform="translate(235, 375)">
+            <!-- Moving Bus Simulator -->
+            <g id="animatedBusMarker" transform="translate(175, 200)">
               <circle r="12" fill="#E86A3E" opacity="0.25" />
               <circle r="7" fill="#E86A3E" />
               <circle r="3" fill="#FFFFFF" />
@@ -1472,83 +1708,96 @@
             <!-- City Pins -->
             <g class="city-pin" id="pin-Kasaragod" onclick="selectCityPin('Kasaragod')" transform="translate(125, 75)"><circle class="city-circle" r="5" /><text class="city-text-label" x="10" y="4">Kasaragod</text></g>
             <g class="city-pin" id="pin-Wayanad" onclick="selectCityPin('Wayanad')" transform="translate(190, 120)"><circle class="city-circle" r="5" /><text class="city-text-label" x="10" y="4">Wayanad</text></g>
-            <g class="city-pin" id="pin-Calicut" onclick="selectCityPin('Calicut')" transform="translate(148, 135)"><circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Calicut</text></g>
+            <g class="city-pin selected" id="pin-Calicut" onclick="selectCityPin('Calicut')" transform="translate(148, 135)"><circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Calicut</text></g>
             <g class="city-pin" id="pin-Thrissur" onclick="selectCityPin('Thrissur')" transform="translate(175, 200)"><circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Thrissur</text></g>
             <g class="city-pin" id="pin-Munnar" onclick="selectCityPin('Munnar')" transform="translate(255, 255)"><circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Munnar</text></g>
             <g class="city-pin selected" id="pin-Kochi" onclick="selectCityPin('Kochi')" transform="translate(195, 260)"><circle class="city-pulse" r="6" /><circle class="city-circle" r="7" /><text class="city-text-label" x="12" y="4">Kochi</text></g>
             <g class="city-pin" id="pin-Alleppey" onclick="selectCityPin('Alleppey')" transform="translate(218, 315)"><circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Alleppey</text></g>
             <g class="city-pin" id="pin-Kollam" onclick="selectCityPin('Kollam')" transform="translate(248, 395)"><circle class="city-circle" r="6" /><text class="city-text-label" x="10" y="4">Kollam</text></g>
-            <g class="city-pin selected" id="pin-Trivandrum" onclick="selectCityPin('Trivandrum')" transform="translate(280, 475)"><circle class="city-pulse" r="6" /><circle class="city-circle" r="8" /><text class="city-text-label" x="12" y="4">Trivandrum</text></g>
+            <g class="city-pin" id="pin-Trivandrum" onclick="selectCityPin('Trivandrum')" transform="translate(280, 475)"><circle class="city-pulse" r="6" /><circle class="city-circle" r="8" /><text class="city-text-label" x="12" y="4">Trivandrum</text></g>
 
             <!-- Depot Layer Pins -->
             <g id="depotLayerGroup" style="display: none;">
               <g transform="translate(295, 485)" onclick="showToast('Thampanoor Central Depot • Master: 0471-2323886', '🏢')">
-                <rect width="12" height="12" rx="3" fill="#D4A84A" stroke="#FFF" stroke-width="1.5" />
-                <text x="16" y="10" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#D4A84A">Thampanoor Depot</text>
+                <rect width="12" height="12" rx="3" fill="#D4AF37" stroke="#FFF" stroke-width="1.5" />
+                <text x="16" y="10" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#D4AF37">Thampanoor Depot</text>
               </g>
               <g transform="translate(210, 275)" onclick="showToast('Vytilla Mobility Hub Depot • Phone: 0484-2372600', '🏢')">
-                <rect width="12" height="12" rx="3" fill="#D4A84A" stroke="#FFF" stroke-width="1.5" />
-                <text x="16" y="10" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#D4A84A">Vytilla Depot</text>
+                <rect width="12" height="12" rx="3" fill="#D4AF37" stroke="#FFF" stroke-width="1.5" />
+                <text x="16" y="10" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#D4AF37">Vytilla Depot</text>
               </g>
               <g transform="translate(160, 150)" onclick="showToast('Kozhikode Terminal Stand • Phone: 0495-2723796', '🏢')">
-                <rect width="12" height="12" rx="3" fill="#D4A84A" stroke="#FFF" stroke-width="1.5" />
-                <text x="16" y="10" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#D4A84A">Kozhikode Depot</text>
+                <rect width="12" height="12" rx="3" fill="#D4AF37" stroke="#FFF" stroke-width="1.5" />
+                <text x="16" y="10" font-size="9" font-family="'JetBrains Mono'" font-weight="700" fill="#D4AF37">Kozhikode Depot</text>
               </g>
             </g>
           </svg>
         </div>
       </section>
 
-      <!-- RIGHT: TOP ROUTES LIST -->
+      <!-- RIGHT: TOP ONAM HOMECOMING ROUTES -->
       <section class="routes-column" aria-label="Top Kerala Routes">
         <div class="routes-col-header">
-          <h3>Top Routes from Central Hubs</h3>
+          <h3>Onam Homecoming & Inter-State Expresses</h3>
+          <span class="onam-special-badge-tag">ZERO SURGE PRICING</span>
         </div>
 
-        <article class="route-card active" onclick="applyRoute('Kochi', 'Trivandrum', '₹800')">
-          <div>
-            <strong style="font-size: 15px;">Kochi ➔ Trivandrum</strong>
-            <div style="font-size: 12px; color: var(--text-muted);">06:00 AM • Swift AC Sleeper • 4h 15m</div>
-          </div>
-          <div style="text-align: right;">
-            <span class="route-fare">₹800</span>
-            <div style="font-size: 11px; color: var(--success); font-weight: 700;">14 Seats Left</div>
-          </div>
-        </article>
-
-        <article class="route-card" onclick="applyRoute('Kochi', 'Calicut', '₹950')">
-          <div>
-            <strong style="font-size: 15px;">Kochi ➔ Calicut</strong>
-            <div style="font-size: 12px; color: var(--text-muted);">08:30 AM • Gajaraj B11R Volvo • 4h 30m</div>
-          </div>
-          <div style="text-align: right;">
-            <span class="route-fare">₹950</span>
-            <div style="font-size: 11px; color: var(--success); font-weight: 700;">22 Seats Left</div>
-          </div>
-        </article>
-
-        <article class="route-card" onclick="applyRoute('Calicut', 'Bangalore', '₹1,450')">
-          <div>
-            <strong style="font-size: 15px;">Calicut ➔ Bangalore</strong>
-            <div style="font-size: 12px; color: var(--text-muted);">21:00 PM • Multi-Axle AC Sleeper • 7h 45m</div>
-          </div>
-          <div style="text-align: right;">
-            <span class="route-fare">₹1,450</span>
-            <div style="font-size: 11px; color: var(--success); font-weight: 700;">8 Seats Left</div>
-          </div>
-        </article>
-
-        <!-- LINK TICKET FROM LIVE SITE -->
-        <article class="route-card" onclick="applyLinkRoute('Trivandrum', 'Kochi', 'Calicut')">
+        <!-- Bangalore to Kerala Homecoming -->
+        <article class="route-card active" onclick="applyRoute('Bengaluru', 'Kochi', '₹1,250')">
           <div>
             <div style="display: flex; align-items: center; gap: 6px;">
-              <strong style="font-size: 14px;">Tvm ➔ Kochi ➔ Calicut</strong>
-              <span class="neo-tag">LINK-TICKET</span>
+              <strong style="font-size: 15px;">Bengaluru ➔ Kochi</strong>
+              <span class="onam-special-badge-tag">🌸 ONAM SPECIAL</span>
             </div>
-            <div style="font-size: 12px; color: var(--text-muted);">Transfer at Vytilla (1h 15m Layover) • Single Ticket</div>
+            <div style="font-size: 12px; color: var(--text-muted);">20:30 PM • Gajaraj Volvo Multi-Axle • Extra Baggage Free</div>
           </div>
           <div style="text-align: right;">
-            <span class="route-fare">₹1,480</span>
+            <span class="route-fare">₹1,250</span>
+            <div style="font-size: 11px; color: var(--success); font-weight: 700;">32 Seats Left</div>
+          </div>
+        </article>
+
+        <!-- Chennai to Trivandrum Homecoming -->
+        <article class="route-card" onclick="applyRoute('Chennai', 'Trivandrum', '₹1,380')">
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <strong style="font-size: 15px;">Chennai ➔ Trivandrum</strong>
+              <span class="onam-special-badge-tag">🌸 ONAM SLEEPER</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted);">19:00 PM • Scania AC Sleeper • Onasadya Halt</div>
+          </div>
+          <div style="text-align: right;">
+            <span class="route-fare">₹1,380</span>
+            <div style="font-size: 11px; color: var(--success); font-weight: 700;">18 Seats Left</div>
+          </div>
+        </article>
+
+        <!-- Inter-District Aranmula Boat Race Express -->
+        <article class="route-card" onclick="applyRoute('Kochi', 'Aranmula', '₹360')">
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <strong style="font-size: 15px;">Kochi ➔ Aranmula (Boat Race)</strong>
+              <span class="onam-badge-pill" style="font-size: 9px;">VALLAM KALI</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted);">07:00 AM • Swift Deluxe Air-Bus • Direct Stadium Drop</div>
+          </div>
+          <div style="text-align: right;">
+            <span class="route-fare">₹360</span>
+            <div style="font-size: 11px; color: var(--success); font-weight: 700;">26 Seats Left</div>
+          </div>
+        </article>
+
+        <!-- Link Ticket Connecting Route -->
+        <article class="route-card" onclick="applyLinkRoute('Bengaluru', 'Kozhikode', 'Trivandrum')">
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <strong style="font-size: 14px;">Bengaluru ➔ Calicut ➔ Tvm</strong>
+              <span class="onam-special-badge-tag">LINK-TICKET</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted);">Single PNR • Protected 1h 30m Connection in Kozhikode</div>
+          </div>
+          <div style="text-align: right;">
+            <span class="route-fare">₹1,850</span>
             <div style="font-size: 11px; color: var(--secondary); font-weight: 700;">Connecting</div>
           </div>
         </article>
@@ -1556,22 +1805,62 @@
 
     </div>
 
-    <!-- POPULAR DESTINATIONS (HIGH DEFINITION PHOTOGRAPHY) -->
-    <section class="destinations-section" id="destinations" aria-label="Popular Destinations from Hubs">
+    <!-- POPULAR ONAM FESTIVE CIRCUITS & DESTINATIONS -->
+    <section class="destinations-section" id="destinations" aria-label="Popular Onam Festive Circuits">
       <div class="section-header-title">
-        <h3>Popular Destinations Across Kerala</h3>
-        <span style="font-size: 13px; color: var(--secondary); font-weight: 700;">Curated Scenic Hubs</span>
+        <div>
+          <h3>Onam Cultural Festivals & Holiday Circuits</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">Exclusive special services running to Kerala's grandest harvest festivals</p>
+        </div>
+        <span style="font-size: 13px; color: var(--secondary); font-weight: 700;">Harvest Festival Passes</span>
       </div>
 
       <div class="destinations-grid">
-        <!-- Munnar Tea Hills -->
-        <div class="destination-tile" onclick="applyDestination('Munnar', 500)">
-          <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80');">
-            <span class="dest-rating-tag">★ 4.9 (1.2k)</span>
+        <!-- Aranmula Boat Race -->
+        <div class="destination-tile" onclick="applyDestination('Aranmula', 360)">
+          <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80');">
+            <span class="dest-rating-tag">★ 4.9 (4.2k)</span>
+            <span class="dest-onam-tag">VALLAM KALI SPECIAL</span>
           </div>
           <div class="dest-body">
             <div>
-              <div class="dest-title">Munnar Tea Hills</div>
+              <div class="dest-title">Aranmula Snake Boat Race</div>
+              <div class="dest-sub">Chundan Vallam spectacle & Vallasadya feast</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px;">
+              <span class="route-fare" style="font-size: 16px;">₹360</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--primary);">View Buses ➔</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tripunithura Athachamayam -->
+        <div class="destination-tile" onclick="applyDestination('Kochi', 220)">
+          <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80');">
+            <span class="dest-rating-tag">★ 4.9 (2.8k)</span>
+            <span class="dest-onam-tag">ATHACHAMAYAM CARNIVAL</span>
+          </div>
+          <div class="dest-body">
+            <div>
+              <div class="dest-title">Tripunithura Athachamayam</div>
+              <div class="dest-sub">Royal Onam parade with Kathakali & folk dancers</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px;">
+              <span class="route-fare" style="font-size: 16px;">₹220</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--primary);">View Buses ➔</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Munnar Tea Hills Onam Retreat -->
+        <div class="destination-tile" onclick="applyDestination('Munnar', 500)">
+          <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80');">
+            <span class="dest-rating-tag">★ 4.9 (1.2k)</span>
+            <span class="dest-onam-tag">HIGHLAND ONAM</span>
+          </div>
+          <div class="dest-body">
+            <div>
+              <div class="dest-title">Munnar Tea Hills Retreat</div>
               <div class="dest-sub">Mist-draped plantations, waterfalls & spice halts</div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px;">
@@ -1581,48 +1870,15 @@
           </div>
         </div>
 
-        <!-- Alleppey Backwaters -->
-        <div class="destination-tile" onclick="applyDestination('Alleppey', 650)">
-          <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80');">
-            <span class="dest-rating-tag">★ 4.8 (980)</span>
-          </div>
-          <div class="dest-body">
-            <div>
-              <div class="dest-title">Alleppey Backwaters</div>
-              <div class="dest-sub">Canal cruises, jetty promenade & houseboat walkway</div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px;">
-              <span class="route-fare" style="font-size: 16px;">₹650</span>
-              <span style="font-size: 12px; font-weight: 700; color: var(--primary);">View Buses ➔</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Kovalam Beach -->
-        <div class="destination-tile" onclick="applyDestination('Kovalam', 180)">
-          <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80');">
-            <span class="dest-rating-tag">★ 4.9 (2.1k)</span>
-          </div>
-          <div class="dest-body">
-            <div>
-              <div class="dest-title">Kovalam Beach</div>
-              <div class="dest-sub">Red cliffs, sunset lighthouse & Arabian sea breeze</div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px;">
-              <span class="route-fare" style="font-size: 16px;">₹180</span>
-              <span style="font-size: 12px; font-weight: 700; color: var(--primary);">View Buses ➔</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Wayanad Rainforest -->
+        <!-- Wayanad Rainforest Sanctuary -->
         <div class="destination-tile" onclick="applyDestination('Wayanad', 680)">
           <div class="dest-photo-box" style="background-image: url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80');">
-            <span class="dest-rating-tag">★ 4.9 (850)</span>
+            <span class="dest-rating-tag">★ 4.8 (850)</span>
+            <span class="dest-onam-tag">FOREST SAFARI PASS</span>
           </div>
           <div class="dest-body">
             <div>
-              <div class="dest-title">Wayanad Rainforest</div>
+              <div class="dest-title">Wayanad Rainforest Ghats</div>
               <div class="dest-sub">Thamarassery Churam pass & spice sanctuaries</div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px;">
@@ -1634,11 +1890,11 @@
       </div>
     </section>
 
-    <!-- NEW LAUNCHED BUSES (FLEET SHOWCASE WITH REAL BUS PHOTOGRAPHY) -->
+    <!-- FLEET GALLERY -->
     <section class="fleet-gallery-section" id="fleet" aria-label="KSRTC-SWIFT Modern Fleet">
       <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
         <div>
-          <h3 style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;">New Launched Fleet & Heritage</h3>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;">Our Modern Fleet & Public Service Heritage</h3>
           <p style="font-size: 13px; color: var(--text-muted); max-width: 700px; margin-top: 4px;">
             "We have inherited a proud tradition of public service dating back to the foundation of the State. We continue to build on transport expertise to give Kerala a world-class coach system." — Transport Bhavan
           </p>
@@ -1647,7 +1903,6 @@
       </div>
 
       <div class="fleet-grid">
-        <!-- Scania Multi-Axle AC Sleeper -->
         <div class="fleet-card">
           <div class="fleet-photo-box" style="background-image: url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=600&q=80');"></div>
           <div class="fleet-card-body">
@@ -1656,7 +1911,6 @@
           </div>
         </div>
 
-        <!-- Volvo B11R Luxury Seater -->
         <div class="fleet-card">
           <div class="fleet-photo-box" style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80');"></div>
           <div class="fleet-card-body">
@@ -1665,7 +1919,6 @@
           </div>
         </div>
 
-        <!-- Swift Super Deluxe Air-Bus -->
         <div class="fleet-card">
           <div class="fleet-photo-box" style="background-image: url('https://images.unsplash.com/photo-1557223562-6c77ef16210f?auto=format&fit=crop&w=600&q=80');"></div>
           <div class="fleet-card-body">
@@ -1674,7 +1927,6 @@
           </div>
         </div>
 
-        <!-- Swift Electric AC Coach -->
         <div class="fleet-card">
           <div class="fleet-photo-box" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80');"></div>
           <div class="fleet-card-body">
@@ -1688,12 +1940,11 @@
     <!-- ENTE KSRTC NEO-OPRS APP DOWNLOAD SHOWCASE -->
     <section class="app-download-showcase" aria-label="Download Official Mobile App">
       <div class="app-download-left">
-        <span class="neo-tag">OFFICIAL MOBILE APP</span>
+        <span class="onam-badge-pill">OFFICIAL MOBILE APP</span>
         <h3 style="margin-top: 8px;">Ente KSRTC Neo-OPRS</h3>
-        <p>Book tickets in 3 taps, track live coach GPS coordinates, store offline M-Tickets, and activate emergency SOS beacon during highway journeys.</p>
+        <p>Book Onam tickets in 3 taps, track live coach GPS coordinates, store offline M-Tickets, and activate emergency SOS beacon during highway journeys.</p>
 
         <div class="app-store-badges">
-          <!-- iOS App Store from live audit (id6449036466) -->
           <a href="https://apps.apple.com/in/app/ente-ksrtc-neo-oprs/id6449036466" target="_blank" class="store-badge-btn">
             <svg class="icon-svg" style="width: 22px; height: 22px;" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.86c.62-.77 1.05-1.84.93-2.92-1 .04-2.18.67-2.88 1.48-.56.65-1.05 1.73-.92 2.79 1.11.09 2.25-.58 2.87-1.35z"></path></svg>
             <div style="text-align: left;">
@@ -1702,7 +1953,6 @@
             </div>
           </a>
 
-          <!-- Google Play Store -->
           <a href="https://play.google.com/store/apps/details?id=com.ksrtc.oprs" target="_blank" class="store-badge-btn">
             <svg class="icon-svg" style="width: 20px; height: 20px;" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
             <div style="text-align: left;">
@@ -1744,31 +1994,28 @@
   <!-- OFFICIAL CORPORATE FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <!-- Col 1: Corporate HQ -->
       <div class="footer-col">
         <h4>Corporate Office</h4>
         <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 14px;">
           Office of Managing Director, <strong>TRANSPORT BHAVAN</strong>, Fort, Trivandrum, Kerala, India, Pin 695023.
         </p>
         <p style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--primary); font-weight: 700; line-height: 1.8;">
-          📞 24/7 Helpline: 0471-2463799 / 2462677<br>
-          💬 WhatsApp Helpline: +91 85939 51515
+          📞 24/7 Onam Control Room: 0471-2463799 / 2462677<br>
+          💬 WhatsApp Homecoming Desk: +91 85939 51515
         </p>
       </div>
 
-      <!-- Col 2: Quick Links -->
       <div class="footer-col">
-        <h4>Quick Links</h4>
+        <h4>Onam Homecoming Links</h4>
         <ul class="footer-links-list">
-          <li><a href="#searchWidget">Home & Booking</a></li>
+          <li><a href="#searchWidget">Book Onam Expresses</a></li>
           <li><a href="#" onclick="openDepotModal(); return false;">~90 Branch Offices & Depots</a></li>
           <li><a href="#" onclick="openCancellationModal(); return false;">Cancellation & Refund Slabs</a></li>
           <li><a href="#" onclick="openFeedbackModal(); return false;">Customer Feedback Portal</a></li>
-          <li><a href="#" onclick="openCharterModal(); return false;">Bus Hire (/bushire)</a></li>
+          <li><a href="#" onclick="openCharterModal(); return false;">Family Group Bus Hire (/bushire)</a></li>
         </ul>
       </div>
 
-      <!-- Col 3: Passenger Services -->
       <div class="footer-col">
         <h4>Passenger Services</h4>
         <ul class="footer-links-list">
@@ -1776,16 +2023,15 @@
           <li><a href="#" onclick="openEditBoardingModal(); return false;">Edit Boarding Point</a></li>
           <li><a href="#" onclick="openPhoneBookingModal(); return false;">Phone Booking Assistance</a></li>
           <li><a href="#" onclick="openStatusCheckModal(); return false;">Live Status & GPS Telematics</a></li>
-          <li><a href="#" onclick="openCargoModal(); return false;">Swift Cargo & Parcel Desk</a></li>
+          <li><a href="#" onclick="openCargoModal(); return false;">Onam Gift Courier Logistics</a></li>
         </ul>
       </div>
 
-      <!-- Col 4: Legal & Portals -->
       <div class="footer-col">
         <h4>Portals & Legal</h4>
         <ul class="footer-links-list">
           <li><a href="#" onclick="openAgentCRSModal(); return false;">MavenTech Counter CRS Portal</a></li>
-          <li><a href="#" onclick="openRailRollsModal(); return false;">Rail Rolls Dining (railrolls.in)</a></li>
+          <li><a href="#" onclick="openRailRollsModal(); return false;">Grand Onam Sadya (railrolls.in)</a></li>
           <li><a href="#" onclick="openTermsModal(); return false;">Terms & Conditions</a></li>
           <li><a href="#" onclick="openPrivacyModal(); return false;">Privacy Policy</a></li>
           <li><a href="https://twitter.com/transport_state?s=08" target="_blank">Official KSRTC Twitter/X</a></li>
@@ -1794,8 +2040,8 @@
     </div>
 
     <div class="copyright-strip">
-      <p>© 2026 Kerala State Road Transport Corporation (KSRTC-SWIFT) • All Rights Reserved</p>
-      <p style="margin-top: 4px; opacity: 0.7;">Powered by Ente KSRTC Neo-OPRS • Engineered with Native Web Standards</p>
+      <p>© 2026 Kerala State Road Transport Corporation (KSRTC-SWIFT) • Happy Onam to All Travellers</p>
+      <p style="margin-top: 4px; opacity: 0.7;">Powered by Ente KSRTC Neo-OPRS • Official State Onam Homecoming Gateway</p>
     </div>
   </footer>
 
@@ -1811,10 +2057,9 @@
         </button>
       </div>
       
-      <!-- Step 1: Mobile + Referral -->
       <div class="modal-body" id="authStep1">
         <p style="font-size: 13px; color: var(--text-muted);">
-          Connect with Kerala State Road Transport Corporation (KSRTC) to earn loyalty points and auto-fill passenger tickets.
+          Connect with Kerala State Road Transport Corporation (KSRTC) to earn Onam festival rewards and auto-fill passenger tickets.
         </p>
         <div class="input-field-group">
           <label class="field-label">Mobile Number</label>
@@ -1824,12 +2069,11 @@
           </div>
         </div>
         <div class="input-field-group">
-          <label class="field-label">Referral Code (Optional)</label>
-          <input type="text" class="custom-input" id="authReferralCode" placeholder="Enter referral code (e.g. SWIFT99)">
+          <label class="field-label">Onam Referral / Promo Code (Optional)</label>
+          <input type="text" class="custom-input" id="authReferralCode" placeholder="e.g. ONAM2026">
         </div>
       </div>
 
-      <!-- Step 2: Validate OTP -->
       <div class="modal-body" id="authStep2" style="display: none;">
         <p style="font-size: 13px; color: var(--text-muted);" id="otpSentNoticeText">
           OTP sent to registered mobile number +91 98470 23114.
@@ -1844,14 +2088,12 @@
         </div>
       </div>
 
-      <!-- Step 3: Complete Profile -->
       <div class="modal-body" id="authStep3" style="display: none;">
         <div style="display: flex; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
           <button type="button" class="tab-btn active" id="btnTabMandatory" onclick="switchProfileTab('mandatory')">Mandatory Info</button>
           <button type="button" class="tab-btn" id="btnTabOptional" onclick="switchProfileTab('optional')">Optional Info (GST/DOB)</button>
         </div>
 
-        <!-- Mandatory Info -->
         <div id="profileMandatoryTab">
           <div class="input-field-group" style="margin-bottom: 10px;">
             <label class="field-label">Full Name</label>
@@ -1877,7 +2119,6 @@
           </div>
         </div>
 
-        <!-- Optional Info -->
         <div id="profileOptionalTab" style="display: none;">
           <div class="input-field-group" style="margin-bottom: 10px;">
             <label class="field-label">GST Company Name</label>
@@ -1928,8 +2169,8 @@
           <input type="tel" class="custom-input" value="9847023114">
         </div>
         <div id="bookingResultBox" style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-size: 13px;">
-          <strong>Booking Found: Kochi ➔ Trivandrum</strong><br>
-          Swift AC Sleeper • Seat A12 • Departure: Today at 18:00 • Status: <span style="color: var(--success); font-weight: 700;">Confirmed</span>
+          <strong>Booking Found: Bengaluru ➔ Kochi</strong><br>
+          Gajaraj Volvo Multi-Axle • 🌸 Onam Special • Seat 14, 15, 16 • Status: <span style="color: var(--success); font-weight: 700;">Confirmed (Onam Kudumbashree Pass)</span>
         </div>
       </div>
       <div class="modal-footer">
@@ -1956,15 +2197,15 @@
         <div class="input-field-group">
           <label class="field-label">New Boarding Stop</label>
           <select class="custom-input">
-            <option>Vytilla Mobility Hub (Platform 4)</option>
-            <option>Edappally Toll Junction (Pickup Point)</option>
-            <option>Aluva KSRTC Bus Stand</option>
-            <option>Angamaly Depot Stand</option>
+            <option>Bengaluru Madiwala (Direct Stop)</option>
+            <option>Bengaluru Electronic City Toll (Pickup Point)</option>
+            <option>Bengaluru Majestic Bus Terminal</option>
+            <option>Vytilla Mobility Hub (Kochi)</option>
           </select>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-find-bus" onclick="closeModal('editBoardingModal'); showToast('Boarding Point updated to Vytilla Mobility Hub! Crew notified.', '✅')">Save Change</button>
+        <button type="button" class="btn-find-bus" onclick="closeModal('editBoardingModal'); showToast('Boarding Point updated to Madiwala! Crew notified.', '✅')">Save Change</button>
       </div>
     </div>
   </div>
@@ -1973,7 +2214,7 @@
   <div class="modal-backdrop" id="phoneBookingModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Phone Booking Assistance</h3>
+        <h3>Onam Phone Booking Assistance</h3>
         <button class="modal-close-btn" onclick="closeModal('phoneBookingModal')">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -1982,9 +2223,9 @@
         <p style="font-size: 13px; color: var(--text-muted);">Book over phone via authorized KSRTC reservation operators:</p>
         <div style="background: var(--bg); border: 1px solid var(--border); padding: 14px; border-radius: 8px; font-size: 13px; line-height: 1.8;">
           <div>• Central Tele-Booking: <strong>0471-2463799</strong></div>
+          <div>• Bengaluru KSRTC Counter: <strong>080-22876150</strong></div>
           <div>• Ernakulam Operator: <strong>0484-2372600</strong></div>
-          <div>• Kozhikode Desk: <strong>0495-2723796</strong></div>
-          <div>• WhatsApp Concierge: <strong>+91 85939 51515</strong></div>
+          <div>• WhatsApp Homecoming Concierge: <strong>+91 85939 51515</strong></div>
         </div>
       </div>
       <div class="modal-footer">
@@ -2008,8 +2249,8 @@
           <input type="text" class="custom-input" value="KSRTC12345678">
         </div>
         <div style="background: rgba(10, 74, 74, 0.08); border: 1px solid var(--primary); padding: 14px; border-radius: 8px; font-size: 13px;">
-          <strong>Live Status: On Time • Running at 68 km/h</strong><br>
-          Near Alappuzha Bypass • Driver: M. Suresh • ETA Thampanoor Bay 3: 22:15.
+          <strong>Live Status: On Time • Running at 72 km/h</strong><br>
+          Bengaluru ➔ Kochi Onam Express • Near Salem Bypass • ETA Palakkad: 04:30 AM • ETA Vytilla: 07:15 AM.
         </div>
       </div>
       <div class="modal-footer">
@@ -2018,7 +2259,7 @@
     </div>
   </div>
 
-  <!-- 6. CANCELLATION MODAL WITH OFFICIAL SLABS -->
+  <!-- 6. CANCELLATION MODAL -->
   <div class="modal-backdrop" id="cancellationModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
@@ -2075,20 +2316,20 @@
     </div>
   </div>
 
-  <!-- 7. BUS HIRE (/bushire) MODAL -->
+  <!-- 7. BUS HIRE MODAL -->
   <div class="modal-backdrop" id="charterModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Charter a Bus / Bus Hire (/bushire)</h3>
+        <h3>Charter a Bus / Family Onam Bus Hire (/bushire)</h3>
         <button class="modal-close-btn" onclick="closeModal('charterModal')">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <div class="modal-body">
-        <p style="font-size: 13px; color: var(--text-muted);">Surfaced from hidden official route <code>/bushire</code>. Book exclusive luxury coaches for weddings, corporate tours, and pilgrimages.</p>
+        <p style="font-size: 13px; color: var(--text-muted);">Surfaced from hidden official route <code>/bushire</code>. Book exclusive luxury coaches for family reunions, temple tours, and Onam festivities.</p>
         <div class="input-field-group">
           <label class="field-label">Circuit / Route</label>
-          <input type="text" class="custom-input" value="Kochi Vytilla to Munnar Resort">
+          <input type="text" class="custom-input" value="Kochi Vytilla to Aranmula Boat Race & Return">
         </div>
         <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px;">
           <div class="input-field-group">
@@ -2111,11 +2352,11 @@
     </div>
   </div>
 
-  <!-- 8. DEPOT DIRECTORY (~90 DEPOTS) -->
+  <!-- 8. DEPOT DIRECTORY -->
   <div class="modal-backdrop" id="depotModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Statewide Depot & Branch Directory (~90)</h3>
+        <h3>Statewide Depot Directory (~90)</h3>
         <button class="modal-close-btn" onclick="closeModal('depotModal')">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -2130,7 +2371,7 @@
     </div>
   </div>
 
-  <!-- 9. SEGMENTED FEEDBACK MODAL -->
+  <!-- 9. FEEDBACK MODAL -->
   <div class="modal-backdrop" id="feedbackModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
@@ -2141,7 +2382,7 @@
       </div>
       <div class="modal-body">
         <div class="input-field-group">
-          <label class="field-label">Department Subject (From Audit)</label>
+          <label class="field-label">Department Subject</label>
           <select class="custom-input">
             <option>Bus Service (Punctuality, Cleanliness, Staff Conduct, Halts)</option>
             <option>Cargo Service (Swift Courier Safety, Transit Speed)</option>
@@ -2173,20 +2414,20 @@
   <div class="modal-backdrop" id="cargoModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Swift Cargo Courier Logistics</h3>
+        <h3>Swift Cargo Onam Gift Parcel Logistics</h3>
         <button class="modal-close-btn" onclick="closeModal('cargoModal')">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <div class="modal-body">
-        <p style="font-size: 13px; color: var(--text-muted);">Same-day express parcel transit across 90 KSRTC depot counters.</p>
+        <p style="font-size: 13px; color: var(--text-muted);">Send harvest sweets, Kasavu sarees, and Onam gift parcels across 90 KSRTC depot counters with guaranteed same-day delivery.</p>
         <div class="input-field-group">
           <label class="field-label">Waybill Tracking Number</label>
-          <input type="text" class="custom-input" value="CRG-KL-9921">
+          <input type="text" class="custom-input" value="ONAM-CRG-8821">
         </div>
         <div style="background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: 8px; font-size: 13px;">
-          <strong>Consignment Status: Dispatched</strong><br>
-          En route to Thampanoor Depot Bay 1 • ETA: 17:30 PM today.
+          <strong>Consignment Status: Dispatched via Onam Express</strong><br>
+          En route to Ernakulam Hub Depot Bay 2 • Guaranteed festival delivery.
         </div>
       </div>
       <div class="modal-footer">
@@ -2217,24 +2458,38 @@
     </div>
   </div>
 
-  <!-- 12. RAIL ROLLS MODAL -->
+  <!-- 12. RAIL ROLLS GRAND ONAM SADYA MODAL -->
   <div class="modal-backdrop" id="railRollsModal" role="dialog" aria-modal="true">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Rail Rolls Onboard Dining (railrolls.in/ksrtc)</h3>
+        <h3>🍽️ Grand Onam Sadya In-Journey Feast</h3>
         <button class="modal-close-btn" onclick="closeModal('railRollsModal')">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <div class="modal-body">
-        <p style="font-size: 13px; color: var(--text-muted);">Pre-order traditional meals delivered warm to your seat during scheduled highway halts.</p>
-        <div style="background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-          <div><strong>Traditional Kerala Sadya Box</strong><div style="font-size: 11px; color: var(--text-muted);">Banana leaf meal box • Pure Veg</div></div>
-          <button class="btn-find-bus" style="height: 34px; padding: 0 14px; font-size: 12px;" onclick="showToast('Added Kerala Sadya (₹160) to seat delivery!', '🍽️')">Add ₹160</button>
+        <div style="display: flex; gap: 14px; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <div style="width: 70px; height: 70px; border-radius: 8px; background-image: url('https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=300&q=80'); background-size: cover;"></div>
+          <div>
+            <strong>Maha Onam Sadya Feast (24 Items)</strong>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Served on fresh plantain leaf with Ada Pradhaman & Palada Payasam.</p>
+          </div>
+        </div>
+        <div class="input-field-group">
+          <label class="field-label">Select Delivery Halt Station</label>
+          <select class="custom-input">
+            <option>Alappuzha Bypass Halt (Lunch 13:00 PM)</option>
+            <option>Vytilla Mobility Hub (Dinner 20:00 PM)</option>
+            <option>Thrissur Swaraj Round Halt (14:30 PM)</option>
+          </select>
+        </div>
+        <div class="input-field-group">
+          <label class="field-label">Seat Number for Hot Delivery</label>
+          <input type="text" class="custom-input" value="Seat A14, A15">
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-find-bus" onclick="closeModal('railRollsModal')">Close</button>
+        <button type="button" class="btn-find-bus" onclick="closeModal('railRollsModal'); showToast('Grand Onam Sadya pre-ordered for Seat A14! Delivered hot at halt.', '🍱')">Confirm Feast (₹220 / Meal)</button>
       </div>
     </div>
   </div>
@@ -2275,12 +2530,13 @@
       { name: 'Kasaragod New Bus Stand', district: 'Kasaragod', phone: '04994-230677', bays: 'Bay 1-10' }
     ];
 
-    let passengerCount = 2;
+    let passengerCount = 3;
     let currentSlide = 0;
     let isDepotLayerActive = false;
     let authStep = 1;
     let otpCountdownVal = 168;
     let otpInterval = null;
+    let onamPetalsActive = true;
 
     // Elements
     const body = document.body;
@@ -2296,6 +2552,7 @@
     const activeRoutePath = document.getElementById('activeRoutePath');
     const animatedBusMarker = document.getElementById('animatedBusMarker');
     const toastNotice = document.getElementById('toastNotice');
+    const familyConcessionBadge = document.getElementById('familyConcessionBadge');
 
     // Default dates
     const today = new Date();
@@ -2307,6 +2564,7 @@
     function initTheme() {
       const savedTheme = localStorage.getItem('ksrtc_theme') || 'light';
       setTheme(savedTheme);
+      checkFamilyConcession();
     }
 
     function setTheme(theme) {
@@ -2351,7 +2609,7 @@
 
     setInterval(nextSlide, 7500);
 
-    // SEARCH TABS (BUS VS LINK-TICKET)
+    // SEARCH TABS
     function switchSearchTab(tab) {
       document.getElementById('tabBusBooking').classList.toggle('active', tab === 'bus');
       document.getElementById('tabLinkBus').classList.toggle('active', tab === 'link');
@@ -2368,6 +2626,13 @@
       }
     }
 
+    function filterOnamServices() {
+      searchFromCity.value = 'Bengaluru';
+      searchToCity.value = 'Kochi';
+      updateMapRoute('Calicut', 'Kochi');
+      showToast('Showing 400+ Onam Special Homecoming Expresses (Zero Surge Pricing)', '🌸');
+    }
+
     function handleTripModeChange(mode) {
       if (mode === 'roundtrip') {
         returnDateFieldBox.style.display = 'flex';
@@ -2381,8 +2646,17 @@
       if (passengerCount + delta >= 1 && passengerCount + delta <= 6) {
         passengerCount += delta;
         passengerDisplay.textContent = passengerCount;
+        checkFamilyConcession();
       } else if (passengerCount + delta > 6) {
         showToast('Maximum 6 seats permitted per transaction (Official KSRTC Policy)', '⚠️');
+      }
+    }
+
+    function checkFamilyConcession() {
+      if (passengerCount >= 3) {
+        familyConcessionBadge.style.display = 'inline-flex';
+      } else {
+        familyConcessionBadge.style.display = 'none';
       }
     }
 
@@ -2407,8 +2681,8 @@
         pin.classList.toggle('selected', c === from || c === to);
       });
 
-      const p1 = CITY_COORDS[from];
-      const p2 = CITY_COORDS[to];
+      const p1 = CITY_COORDS[from] || CITY_COORDS['Calicut'];
+      const p2 = CITY_COORDS[to] || CITY_COORDS['Kochi'];
       if (p1 && p2) {
         const midX = (p1.x + p2.x) / 2 + (p1.y > p2.y ? -10 : 10);
         const midY = (p1.y + p2.y) / 2;
@@ -2439,7 +2713,7 @@
     }
 
     function resetMapView() {
-      updateMapRoute('Kochi', 'Trivandrum');
+      updateMapRoute('Calicut', 'Kochi');
       showToast('Map view reset to central network.', '⟲');
     }
 
@@ -2454,21 +2728,100 @@
       switchSearchTab('link');
       searchFromCity.value = from;
       searchToCity.value = to;
-      updateMapRoute(from, to);
-      showToast(`Link-Ticket Route: ${from} ➔ (${via}) ➔ ${to}`, '🔗');
+      updateMapRoute(via, to);
+      showToast(`Onam Link-Ticket Route: ${from} ➔ (${via}) ➔ ${to}`, '🔗');
     }
 
     function applyDestination(city, fare) {
       searchToCity.value = city;
       updateMapRoute(searchFromCity.value, city);
-      showToast(`Destination selected: ${city} (Starting ₹${fare})`, '🌴');
+      showToast(`Festive destination selected: ${city} (Starting ₹${fare})`, '🌸');
     }
 
     function handleSearchSubmit(e) {
       e.preventDefault();
       const from = searchFromCity.value;
       const to = searchToCity.value;
-      showToast(`Found 16 verified KSRTC-SWIFT buses for ${from} ➔ ${to}`, '🚌');
+      showToast(`Found 24 verified Onam Expresses for ${from} ➔ ${to}`, '🌸');
+    }
+
+    // ONAM PETALS ANIMATION ENGINE (CANVAS)
+    const canvas = document.getElementById('onamCanvas');
+    const ctx = canvas.getContext('2d');
+    let petals = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = -20;
+        this.size = Math.random() * 8 + 6;
+        this.speedY = Math.random() * 1.5 + 0.8;
+        this.speedX = Math.random() * 1.2 - 0.6;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = Math.random() * 0.03 - 0.015;
+        this.color = Math.random() > 0.5 ? '#E86A3E' : (Math.random() > 0.5 ? '#F4A261' : '#D4AF37');
+        this.opacity = Math.random() * 0.5 + 0.35;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += this.rotSpeed;
+        if (this.y > canvas.height + 20) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 35; i++) {
+      petals.push(new Petal());
+    }
+
+    function animatePetals() {
+      if (onamPetalsActive) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        petals.forEach(p => {
+          p.update();
+          p.draw();
+        });
+      }
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    function toggleOnamPetals() {
+      onamPetalsActive = !onamPetalsActive;
+      const btn = document.getElementById('onamPetalToggle');
+      const txt = document.getElementById('onamPetalText');
+      btn.classList.toggle('active', onamPetalsActive);
+      if (onamPetalsActive) {
+        canvas.style.display = 'block';
+        txt.textContent = 'Onam Ambience: On';
+        showToast('Onam festive petal celebration active! Happy Onam!', '🌸');
+      } else {
+        canvas.style.display = 'none';
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        txt.textContent = 'Onam Ambience: Paused';
+        showToast('Onam ambient animation paused.', '🌸');
+      }
     }
 
     // MODALS ENGINE
@@ -2504,21 +2857,16 @@
 
     function filterDepotModal(v) { populateDepotModalList(v); }
 
-    function openTermsModal() {
-      openCancellationModal();
-    }
+    function openTermsModal() { openCancellationModal(); }
+    function openPrivacyModal() { showToast('KSRTC-SWIFT Privacy Policy: 100% Secure Passenger Data Compliance.', '🔒'); }
 
-    function openPrivacyModal() {
-      showToast('KSRTC-SWIFT Privacy Policy: 100% Secure Passenger Data Compliance.', '🔒');
-    }
-
-    // FULL 2-STEP OTP & PROFILE ENGINE
+    // AUTH ENGINE
     function openAuthModal() {
       authStep = 1;
       document.getElementById('authStep1').style.display = 'block';
       document.getElementById('authStep2').style.display = 'none';
       document.getElementById('authStep3').style.display = 'none';
-      document.getElementById('authModalTitle').textContent = 'Login / Signup with Loyalty Benefits';
+      document.getElementById('authModalTitle').textContent = 'Login / Signup with Onam Benefits';
       document.getElementById('btnAuthAction').textContent = 'Generate OTP';
       openModal('authModal');
     }
@@ -2547,7 +2895,7 @@
         authStep = 3;
         document.getElementById('authStep2').style.display = 'none';
         document.getElementById('authStep3').style.display = 'block';
-        document.getElementById('authModalTitle').textContent = 'Complete Profile & GST Details';
+        document.getElementById('authModalTitle').textContent = 'Complete Profile & Onam Benefits';
         document.getElementById('btnAuthAction').textContent = 'Save Profile';
         showToast('OTP verified! Please complete your passenger profile.', '✅');
       } else if (authStep === 3) {
@@ -2560,8 +2908,8 @@
           }
         }
         closeModal('authModal');
-        document.getElementById('authHeaderLabel').textContent = 'Rajesh (Gold)';
-        showToast('Profile and GST details saved! Loyalty rewards active.', '🎉');
+        document.getElementById('authHeaderLabel').textContent = 'Rajesh (Onam Pass)';
+        showToast('Profile saved! Onam homecoming rewards active.', '🎉');
       }
     }
 
@@ -2605,7 +2953,7 @@
     });
 
     initTheme();
-    updateMapRoute('Kochi', 'Trivandrum');
+    updateMapRoute('Calicut', 'Kochi');
   </script>
 </body>
 </html>

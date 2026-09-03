@@ -507,7 +507,8 @@
           <p>Each version embeds the complete inventory discovered in <code>ksrtc-swift-site-audit.md</code>, styled to its bespoke philosophy.</p>
         </div>
       </div>
-      <div style="display: flex; gap: 8px;">
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span class="tag" style="background: rgba(232, 106, 62, 0.15); color: #E86A3E; font-weight: 800; border-color: rgba(232, 106, 62, 0.3);">🌸 Onam Theme</span>
         <span class="tag audit-tag">🔗 Link-Tickets</span>
         <span class="tag audit-tag">🚌 /bushire Charter</span>
         <span class="tag audit-tag">🏢 90 Depots</span>
@@ -519,6 +520,7 @@
     <!-- FILTER CHIPS -->
     <div class="filter-tabs-row" role="tablist">
       <button class="filter-chip active" onclick="filterGrid('all', this)">All 6 Concepts</button>
+      <button class="filter-chip" onclick="filterGrid('onam', this)" style="border-color: #D4AF37; color: #E86A3E;">🌸 Onam Edition</button>
       <button class="filter-chip" onclick="filterGrid('map', this)">🗺️ Map-First</button>
       <button class="filter-chip" onclick="filterGrid('trust', this)">🛡️ Status & Trust</button>
       <button class="filter-chip" onclick="filterGrid('tourism', this)">🌴 Tourism & Discovery</button>
@@ -530,32 +532,33 @@
     <!-- 6 CONCEPTS GRID -->
     <section class="grid" id="conceptsGrid" aria-label="Interactive Concept Pages Gallery">
 
-      <!-- Concept 1: The Journey Planner -->
-      <article class="card" data-tags="map all">
-        <div class="card-preview" style="background: linear-gradient(135deg, #0A4A4A, #1A7A7A); color: white;">
-          🗺️
+      <!-- Concept 1: The Journey Planner (Onam Edition) -->
+      <article class="card" data-tags="map onam all" style="border-top: 3px solid #D4AF37;">
+        <div class="card-preview" style="background: linear-gradient(135deg, #0A4A4A, #E86A3E); color: white;">
+          🌸
           <span class="number">1</span>
         </div>
         <div class="card-content">
           <div class="card-title-group">
-            <span class="card-philosophy">Route-First • Map-Integrated</span>
+            <span class="card-philosophy" style="color: #D4AF37;">🌸 Onam Theme Edition • Route-First</span>
             <h3>The Journey Planner</h3>
             <p class="card-desc">
-              Visual route exploration on an interactive SVG map with animated routes, depot pin layer, link-ticket intermediate connection nodes, and charter quote modal.
+              The Great Onam Homecoming: Over 400 special interstate expresses, interactive SVG Kerala route map, Pookkalam visual theme, Rail Rolls Grand Onam Sadya dining, and Kudumbashree family discounts.
             </p>
           </div>
           <div class="tags">
-            <span class="tag" style="color: #0A4A4A; font-weight: 800;">Deep Teal & Gold</span>
+            <span class="tag" style="background: rgba(232, 106, 62, 0.15); color: #E86A3E; font-weight: 800; border-color: rgba(232, 106, 62, 0.3);">🌸 Onam Theme</span>
             <span class="tag audit-tag">🔗 Link-Ticket</span>
             <span class="tag audit-tag">🏢 90 Depots</span>
-            <span class="tag audit-tag">🚌 /bushire</span>
+            <span class="tag audit-tag">🍱 Grand Sadya</span>
+            <span class="tag audit-tag">🚌 Zero Surge</span>
           </div>
           <div class="card-actions-row">
-            <a href="concepts/concept1-journey-planner.html" class="btn-launch-concept">
-              <span>Launch Concept</span>
+            <a href="concepts/concept1-journey-planner.html" class="btn-launch-concept" style="background: linear-gradient(135deg, #0A4A4A, #187777);">
+              <span>Launch Onam Edition</span>
               <span>➔</span>
             </a>
-            <button class="btn-compare-info" onclick="openOverviewModal('The Journey Planner', 'Route-first planning with Google Maps inspired spatial ergonomics and complete audit options.', '#0A4A4A', 'Playfair Display + Inter', 'Visual explorers desiring route clarity, intermediate stops, and depot discovery.')">
+            <button class="btn-compare-info" onclick="openOverviewModal('The Journey Planner (Onam Edition)', 'Official Onam Homecoming celebration suite featuring 400+ festival expresses, plantain-leaf Sadya ordering, and interactive spatial route planning.', '#0A4A4A', 'Plus Jakarta Sans + Playfair', 'Homecoming Malayalis, families traveling across districts, and festival tourists.')">
               ℹ️
             </button>
           </div>
