@@ -1661,6 +1661,206 @@
     .social-icon-btn.ig:hover { color: #E1306C; border-color: #E1306C; }
     .social-icon-btn.yt:hover { color: #FF0000; border-color: #FF0000; }
 
+
+    /* ===================================================================
+       ACCESSIBILITY & ILLITERATE-FRIENDLY ASSISTIVE STYLES
+       =================================================================== */
+
+    /* Elder / High Contrast Large Text Mode */
+    body.large-text-mode {
+      font-size: 18px;
+    }
+    body.large-text-mode .custom-input,
+    body.large-text-mode .btn-find-bus,
+    body.large-text-mode .route-fare,
+    body.large-text-mode .nav-item-btn {
+      font-size: 18px !important;
+    }
+    body.large-text-mode .field-label {
+      font-size: 14px !important;
+    }
+    body.large-text-mode .dest-title,
+    body.large-text-mode .food-item-title {
+      font-size: 19px !important;
+    }
+
+    /* Voice / Speaker Action Buttons */
+    .btn-audio-guide {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 106, 62, 0.2));
+      border: 1px solid var(--secondary);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .btn-audio-guide:hover, .btn-audio-guide.speaking {
+      background: var(--secondary);
+      color: #041616;
+      transform: scale(1.04);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-voice-mic {
+      position: absolute;
+      right: 36px;
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    .btn-voice-mic:hover, .btn-voice-mic.listening {
+      background: rgba(232, 106, 62, 0.2);
+      color: var(--onam-saffron);
+      transform: scale(1.15);
+      animation: micPulse 1.2s infinite;
+    }
+    @keyframes micPulse {
+      0% { box-shadow: 0 0 0 0 rgba(232, 106, 62, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(232, 106, 62, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(232, 106, 62, 0); }
+    }
+
+    /* Landmark Visual Destination Pills for Illiterate / Non-Typing Users */
+    .visual-landmarks-strip {
+      margin: 14px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .landmarks-scroll-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 2px 10px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+    .landmark-pill-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .landmark-pill-card:hover, .landmark-pill-card.selected {
+      border-color: var(--primary);
+      background: rgba(10, 74, 74, 0.08);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .landmark-badge-icon {
+      font-size: 22px;
+    }
+    .landmark-text-title {
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+    .landmark-text-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Date Quick Chips */
+    .quick-dates-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      margin-top: 10px;
+      padding-bottom: 4px;
+    }
+    .date-chip-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .date-chip-btn:hover, .date-chip-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Direct Operator Phone Booking Banner */
+    .phone-operator-assist-banner {
+      background: linear-gradient(135deg, #07382F, #0E4F42);
+      border: 2px solid var(--secondary);
+      border-radius: var(--radius-lg);
+      padding: 18px 24px;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 18px 0 28px;
+      box-shadow: 0 8px 24px rgba(7, 56, 47, 0.25);
+      flex-wrap: wrap;
+    }
+    .operator-call-btn {
+      background: #25D366;
+      color: #032115;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+    }
+    .operator-call-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+      background: #1EBE5D;
+    }
+
+    /* Language Switcher Header Button */
+    .lang-switcher-btn {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1.5px solid var(--secondary);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .lang-switcher-btn:hover {
+      background: var(--secondary);
+      color: #041616;
+    }
+
 </style>
 </head>
 <body data-theme="light">
@@ -1762,6 +1962,18 @@
         <span>Feedback</span>
       </a>
 
+      <!-- LANGUAGE SWITCHER (MALAYALAM BY DEFAULT) -->
+      <button class="lang-switcher-btn" id="langSwitchBtn" onclick="toggleLanguage()" title="Switch between Malayalam and English" aria-label="Toggle language">
+        <span>🌐</span>
+        <span id="langSwitchLabel">English</span>
+      </button>
+
+      <!-- LARGE TEXT / SENIOR ACCESSIBILITY MODE -->
+      <button class="nav-item-btn" id="btnLargeText" onclick="toggleLargeTextMode()" title="Toggle large text for senior citizens" style="border: 1px solid var(--border); padding: 7px 12px; border-radius: 20px;" aria-label="Toggle large text">
+        <span>👁️</span>
+        <span id="largeTextLabel" data-i18n="navLargeText">വലിയ അക്ഷരം</span>
+      </button>
+
       <!-- ONAM AMBIENCE TOGGLE -->
       <button class="onam-toggle-btn active" id="onamPetalToggle" onclick="toggleOnamPetals()" title="Toggle Onam falling petal celebration" style="background: rgba(232, 106, 62, 0.18); border: 1px solid var(--onam-saffron); color: var(--text); padding: 7px 14px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
         <span>🌸</span>
@@ -1798,6 +2010,33 @@
         <span class="onam-family-concession-badge">🌾 Official State Festival Service</span>
       </div>
     </div>
+
+    <!-- 1-TAP PHONE OPERATOR BOOKING (DESIGNED FOR ILLITERATE / ELDER PASSENGERS) -->
+    <section class="phone-operator-assist-banner" aria-label="Direct Phone Booking Assistance">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 26px;">
+          📞
+        </div>
+        <div>
+          <div style="font-size: 18px; font-weight: 800; line-height: 1.3;" data-i18n="phoneBannerTitle">
+            എഴുത്തും വായനയും അറിയില്ലെങ്കിലും വിഷമിക്കേണ്ട! നേരിട്ട് വിളിച്ചു ബുക്ക് ചെയ്യാം
+          </div>
+          <div style="font-size: 13px; opacity: 0.9; margin-top: 2px;" data-i18n="phoneBannerSub">
+            24 മണിക്കൂറും പ്രവർത്തിക്കുന്ന കെ.എസ്.ആർ.ടി.സി കൺട്രോൾ റൂമിലേക്ക് വിളിക്കൂ, ഓപ്പറേറ്റർ സീറ്റ് ബുക്ക് ചെയ്തു തരും.
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <button type="button" class="btn-audio-guide" onclick="speakText('എഴുത്തും വായനയും അറിയില്ലെങ്കിലും വിഷമിക്കേണ്ട. 0471 2463799 എന്ന നമ്പറിലേക്ക് വിളിച്ചാൽ ഓപ്പറേറ്റർ നിങ്ങൾക്ക് ടിക്കറ്റ് ബുക്ക് ചെയ്തു നൽകും.')">
+          <span>🔊</span>
+          <span data-i18n="btnListen">കേൾക്കാം</span>
+        </button>
+        <a href="tel:04712463799" class="operator-call-btn">
+          <span>📞</span>
+          <span>0471-2463799 (വിളിക്കൂ)</span>
+        </a>
+      </div>
+    </section>
 
     <!-- HERO PROMOTIONAL CAROUSEL (ONAM HOMECOMING EDITION) -->
     <section class="hero-carousel-card" id="heroCarousel" aria-label="Promotional Showcase">
@@ -1892,6 +2131,82 @@
       </div>
 
       <!-- SEARCH INPUTS GRID -->
+      <!-- AUDIO READ-OUT BAR & VISUAL LANDMARKS FOR ILLITERATE / FAST BOOKING -->
+      <div class="visual-landmarks-strip">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">🏛️</span>
+            <span style="font-size: 13px; font-weight: 800;" data-i18n="landmarkTitle">ചിത്രങ്ങളിൽ തൊട്ട് സ്ഥലം തിരഞ്ഞെടുക്കൂ (എഴുതേണ്ടതില്ല):</span>
+          </div>
+          <button type="button" class="btn-audio-guide" onclick="readSearchOutLoud()">
+            <span>🔊</span>
+            <span data-i18n="btnReadSearch">യാത്രാ വിവരങ്ങൾ കേൾക്കാം</span>
+          </button>
+        </div>
+
+        <div class="landmarks-scroll-row">
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('തിരുവനന്തപുരം')">
+            <span class="landmark-badge-icon">🏛️</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityTvm">തിരുവനന്തപുരം</div>
+              <div class="landmark-text-sub">പദ്മനാഭസ്വാമി ക്ഷേത്രം</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card selected" onclick="selectLandmarkCity('കൊച്ചി')">
+            <span class="landmark-badge-icon">🏙️</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityKochi">കൊച്ചി</div>
+              <div class="landmark-text-sub">വൈറ്റില ഹബ്ബ്, മെട്രോ</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('കോഴിക്കോട്')">
+            <span class="landmark-badge-icon">🌴</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityCalicut">കോഴിക്കോട്</div>
+              <div class="landmark-text-sub">മിഠായിത്തെരുവ്, ബീച്ച്</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('തൃശ്ശൂർ')">
+            <span class="landmark-badge-icon">🐘</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityThrissur">തൃശ്ശൂർ</div>
+              <div class="landmark-text-sub">വടക്കുംനാഥൻ, പൂര നഗരി</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('ആലപ്പുഴ')">
+            <span class="landmark-badge-icon">🛶</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityAlleppey">ആലപ്പുഴ</div>
+              <div class="landmark-text-sub">വള്ളംകളി, കായലുകൾ</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('മൂന്നാർ')">
+            <span class="landmark-badge-icon">⛰️</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityMunnar">മൂന്നാർ</div>
+              <div class="landmark-text-sub">തേയിലത്തോട്ടങ്ങൾ</div>
+            </div>
+          </div>
+          <div class="landmark-pill-card" onclick="selectLandmarkCity('ബെംഗളൂരു')">
+            <span class="landmark-badge-icon">🏢</span>
+            <div>
+              <div class="landmark-text-title" data-i18n="cityBlr">ബെംഗളൂരു</div>
+              <div class="landmark-text-sub">മഡിവാള, മജെസ്റ്റിക്</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Relative Date Selection Chips -->
+        <div class="quick-dates-row">
+          <span style="font-size: 11px; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--text-muted);" data-i18n="quickDateLabel">തീയതി:</span>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(0, this)" data-i18n="dateToday">ഇന്ന്</button>
+          <button type="button" class="date-chip-btn active" onclick="selectRelativeDate(1, this)" data-i18n="dateTomorrow">നാളെ</button>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(2, this)" data-i18n="dateDayAfter">മറ്റന്നാൾ</button>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(3, this)" data-i18n="dateUthradam">ഉത്രാടം</button>
+          <button type="button" class="date-chip-btn" onclick="selectRelativeDate(4, this)" data-i18n="dateThiruvonam">തിരുവോണം 🌸</button>
+        </div>
+      </div>
+
       <form id="busSearchForm" class="search-grid" onsubmit="handleSearchSubmit(event)">
         <!-- FROM CITY -->
         <div class="input-field-group">
@@ -1900,7 +2215,10 @@
             <span>Leaving From</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchFromCity" value="Bengaluru" placeholder="Type origin city..." required>
+            <input type="text" class="custom-input" id="searchFromCity" value="ബെംഗളൂരു" placeholder="പുറപ്പെടുന്ന സ്ഥലം..." required>
+            <button type="button" class="btn-voice-mic" onclick="startVoiceSearch('searchFromCity')" title="മൈക്കിലൂടെ സ്ഥലം പറയൂ / Speak City" aria-label="Voice search">
+              <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
             <button type="button" class="clear-input-btn" onclick="clearInput('searchFromCity')" aria-label="Clear city">
               <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
@@ -1917,7 +2235,10 @@
             <span>Going To (Kerala)</span>
           </label>
           <div class="input-with-tools">
-            <input type="text" class="custom-input" id="searchToCity" value="Kochi" placeholder="Type destination..." required>
+            <input type="text" class="custom-input" id="searchToCity" value="കൊച്ചി" placeholder="എത്തിച്ചേരേണ്ട സ്ഥലം..." required>
+            <button type="button" class="btn-voice-mic" onclick="startVoiceSearch('searchToCity')" title="മൈക്കിലൂടെ സ്ഥലം പറയൂ / Speak City" aria-label="Voice search">
+              <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
             <button type="button" class="clear-input-btn" onclick="clearInput('searchToCity')" aria-label="Clear city">
               <svg class="icon-svg" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
@@ -3635,6 +3956,283 @@
       document.getElementById('searchWidget').scrollIntoView({ behavior: 'smooth' });
     }
 
+    
+    // ===================================================================
+    // BILINGUAL LOCALIZATION & ACCESSIBILITY ENGINE (MALAYALAM DEFAULT)
+    // ===================================================================
+
+    let currentLang = localStorage.getItem('ksrtc_lang') || 'ml'; // Defaults to Malayalam!
+
+    const TRANSLATIONS = {
+      ml: {
+        pageTitle: 'കെ.എസ്.ആർ.ടി.സി സ്വിഫ്റ്റ് — ഔദ്യോഗിക ഓണം സ്പെഷ്യൽ & ബസ് റിസർവേഷൻ',
+        brandTitle: 'KSRTC സ്വിഫ്റ്റ്',
+        brandSub: 'കേരള സ്റ്റേറ്റ് റോഡ് ട്രാൻസ്പോർട്ട് കോർപ്പറേഷൻ • തിരുവോണം വരവായി',
+        navHome: 'ഹോം',
+        navOnam: 'ഓണം സ്പെഷ്യൽ',
+        navCircuits: 'ഉത്സവ യാത്രകൾ',
+        navManage: 'ബുക്കിംഗ് വിവരങ്ങൾ',
+        navCharter: 'ബസ് വാടകയ്ക്ക് (/bushire)',
+        navDepots: '90 ഡിപ്പോകൾ',
+        navFeedback: 'അഭിപ്രായങ്ങൾ',
+        navLogin: 'ലോഗിൻ / രജിസ്റ്റർ',
+        navLargeText: 'വലിയ അക്ഷരം',
+        langBtnLabel: 'English',
+        onamTicker: '🌸 ഓണം സ്പെഷ്യൽ: 400-ലധികം പ്രത്യേക സർവീസുകൾ ബുക്കിംഗ് ആരംഭിച്ചു! അമിത നിരക്കില്ലാത്ത സർക്കാർ നിരക്ക്.',
+        greetingTitle: 'ഹൃദ്യമായ ഓണാശംസകൾ • Celebrate Onam with KSRTC SWIFT',
+        greetingSub: 'കേരളത്തിലെ 14 ജില്ലകളിലേക്കും അയൽ സംസ്ഥാനങ്ങളിലേക്കും അമിത നിരക്കുകളില്ലാത്ത സുരക്ഷിത യാത്ര.',
+        phoneBannerTitle: 'എഴുത്തും വായനയും അറിയില്ലെങ്കിലും വിഷമിക്കേണ്ട! നേരിട്ട് വിളിച്ചു ബുക്ക് ചെയ്യാം',
+        phoneBannerSub: '24 മണിക്കൂറും പ്രവർത്തിക്കുന്ന കെ.എസ്.ആർ.ടി.സി കൺട്രോൾ റൂമിലേക്ക് വിളിക്കൂ, ഓപ്പറേറ്റർ സീറ്റ് ബുക്ക് ചെയ്തു തരും.',
+        btnListen: 'കേൾക്കാം',
+        tabBusBooking: 'സാധാരണ ബസ് ബുക്കിംഗ്',
+        tabLinkBus: 'ലിങ്ക്-ടിക്കറ്റ് (കണക്റ്റിംഗ് ബസ്)',
+        tabOnamFilter: '🌸 ഓണം സ്പെഷ്യൽ ബസുകൾ മാത്രം',
+        tripOneway: 'ഒരു വശത്തേക്ക്',
+        tripRoundtrip: 'പോയി വരാൻ (മടക്കയാത്രയ്ക്ക് 10% കിഴിവ്)',
+        landmarkTitle: 'ചിത്രങ്ങളിൽ തൊട്ട് സ്ഥലം തിരഞ്ഞെടുക്കൂ (എഴുതേണ്ടതില്ല):',
+        btnReadSearch: 'യാത്രാ വിവരങ്ങൾ കേൾക്കാം',
+        cityTvm: 'തിരുവനന്തപുരം',
+        cityKochi: 'കൊച്ചി',
+        cityCalicut: 'കോഴിക്കോട്',
+        cityThrissur: 'തൃശ്ശൂർ',
+        cityAlleppey: 'ആലപ്പുഴ',
+        cityMunnar: 'മൂന്നാർ',
+        cityBlr: 'ബെംഗളൂരു',
+        quickDateLabel: 'തീയതി:',
+        dateToday: 'ഇന്ന്',
+        dateTomorrow: 'നാളെ',
+        dateDayAfter: 'മറ്റന്നാൾ',
+        dateUthradam: 'ഉത്രാടം',
+        dateThiruvonam: 'തിരുവോണം 🌸',
+        labelFrom: 'പുറപ്പെടുന്ന സ്ഥലം',
+        labelTo: 'എത്തിച്ചേരേണ്ട സ്ഥലം',
+        labelDate: 'യാത്രാ തീയതി',
+        labelReturnDate: 'മടക്ക തീയതി',
+        labelPassengers: 'യാത്രികർ (കുടുംബം)',
+        btnSearchBuses: 'ബസ് തിരയുക',
+        btnFocusMap: 'മാപ്പ്',
+        foodSectionTitle: 'സീറ്റിലിരുന്ന് ഭക്ഷണം ഓർഡർ ചെയ്യാം',
+        foodSectionSub: 'ഹൈവേ ഹാള്ട്ടുകളിൽ തിരക്കില്ലാതെ ബസ് സീറ്റിൽ ചൂടോടെ എത്തിക്കുന്ന വിഭവങ്ങൾ.',
+        foodCatAll: 'എല്ലാം (8)',
+        foodCatOnam: '🌸 ഓണസദ്യ',
+        foodCatMeals: '🍱 ഊണും ബിരിയാണിയും',
+        foodCatSnacks: '🥟 പലഹാരങ്ങൾ',
+        foodCatBeverages: '☕ ചായ & കാപ്പി',
+        btnAddToCart: '+ സീറ്റിലേക്ക് ചേർക്കൂ',
+        mobSearch: 'തിരയൂ',
+        mobFood: 'ഭക്ഷണം',
+        mobStatus: 'സ്റ്റാറ്റസ്',
+        mobDepots: 'ഡിപ്പോകൾ',
+        mobAccount: 'അക്കൗണ്ട്'
+      },
+      en: {
+        pageTitle: 'KSRTC-SWIFT — Official Onam Homecoming & Online Bus Journey Planner',
+        brandTitle: 'KSRTC SWIFT',
+        brandSub: 'Kerala State Road Transport Corporation • The Great Onam Homecoming',
+        navHome: 'Home',
+        navOnam: 'Onam Specials',
+        navCircuits: 'Festive Circuits',
+        navManage: 'Manage Booking',
+        navCharter: 'Bus Hire (/bushire)',
+        navDepots: '90 Depots',
+        navFeedback: 'Feedback',
+        navLogin: 'Login / Signup',
+        navLargeText: 'Large Text',
+        langBtnLabel: 'മലയാളം',
+        onamTicker: '🌸 ONAM SPECIAL: 400+ Non-Stop Inter-State & Inter-District Expresses open! Zero Surge Pricing guaranteed.',
+        greetingTitle: 'ഹൃദ്യമായ ഓണാശംസകൾ • Celebrate Onam with KSRTC SWIFT',
+        greetingSub: 'Reconnecting families across all 14 districts and neighboring states with guaranteed zero surge pricing.',
+        phoneBannerTitle: 'Easy phone booking for everyone! Direct assistance from reservation desk',
+        phoneBannerSub: 'Call our 24/7 Transport Bhavan control room hotline and our agent will book your seat over the phone.',
+        btnListen: 'Listen',
+        tabBusBooking: 'Standard Bus Booking',
+        tabLinkBus: 'Link-Ticket (Connecting Bus)',
+        tabOnamFilter: '🌸 Onam Special Expresses Only',
+        tripOneway: 'One Way',
+        tripRoundtrip: 'Round Trip (10% Off Return)',
+        landmarkTitle: 'Tap landmark icons to pick cities visually (No typing required):',
+        btnReadSearch: 'Read Journey Aloud',
+        cityTvm: 'Trivandrum',
+        cityKochi: 'Kochi',
+        cityCalicut: 'Calicut',
+        cityThrissur: 'Thrissur',
+        cityAlleppey: 'Alleppey',
+        cityMunnar: 'Munnar',
+        cityBlr: 'Bengaluru',
+        quickDateLabel: 'Date:',
+        dateToday: 'Today',
+        dateTomorrow: 'Tomorrow',
+        dateDayAfter: 'Day After',
+        dateUthradam: 'Uthradam',
+        dateThiruvonam: 'Thiruvonam 🌸',
+        labelFrom: 'Leaving From',
+        labelTo: 'Going To',
+        labelDate: 'Journey Date',
+        labelReturnDate: 'Return Date',
+        labelPassengers: 'Passengers (Family)',
+        btnSearchBuses: 'Search Buses',
+        btnFocusMap: 'Map',
+        foodSectionTitle: 'Food Delivered Right to Your Seat',
+        foodSectionSub: 'No rushing during brief halts! Authentic Kerala feasts delivered warm to your seat at scheduled halts.',
+        foodCatAll: 'All Items (8)',
+        foodCatOnam: '🌸 Onam Feast',
+        foodCatMeals: '🍱 Meals & Biryani',
+        foodCatSnacks: '🥟 Snacks & Desserts',
+        foodCatBeverages: '☕ Beverages',
+        btnAddToCart: '+ Add to Seat',
+        mobSearch: 'Search',
+        mobFood: 'Food to Seat',
+        mobStatus: 'Live PNR',
+        mobDepots: '90 Depots',
+        mobAccount: 'Account'
+      }
+    };
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('ksrtc_lang', lang);
+      document.documentElement.lang = lang;
+      const dict = TRANSLATIONS[lang];
+
+      document.title = dict.pageTitle;
+      document.getElementById('langSwitchLabel').textContent = dict.langBtnLabel;
+      const largeTxtEl = document.getElementById('largeTextLabel');
+      if (largeTxtEl) largeTxtEl.textContent = dict.navLargeText;
+
+      // Update elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      // Update City inputs if default
+      if (lang === 'ml') {
+        if (searchFromCity.value === 'Bengaluru') searchFromCity.value = 'ബെംഗളൂരു';
+        if (searchToCity.value === 'Kochi') searchToCity.value = 'കൊച്ചി';
+      } else {
+        if (searchFromCity.value === 'ബെംഗളൂരു') searchFromCity.value = 'Bengaluru';
+        if (searchToCity.value === 'കൊച്ചി') searchToCity.value = 'Kochi';
+      }
+
+      showToast(lang === 'ml' ? 'മലയാളം ഭാഷ സജ്ജമാക്കി' : 'English language enabled', '🌐');
+    }
+
+    function toggleLanguage() {
+      applyLanguage(currentLang === 'ml' ? 'en' : 'ml');
+    }
+
+    // ELDER LARGE TEXT MODE
+    function toggleLargeTextMode() {
+      document.body.classList.toggle('large-text-mode');
+      const isLarge = document.body.classList.contains('large-text-mode');
+      showToast(isLarge 
+        ? (currentLang === 'ml' ? 'വലിയ അക്ഷരങ്ങൾ സജ്ജമാക്കി 👁️' : 'Large text mode enabled 👁️') 
+        : (currentLang === 'ml' ? 'സാധാരണ അക്ഷരങ്ങൾ 👁️' : 'Normal text mode 👁️'), '👁️');
+    }
+
+    // AUDIO SPEECH SYNTHESIS ENGINE (SPEAKS IN MALAYALAM OR ENGLISH)
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Speech synthesis not supported in this browser', '⚠️');
+        return;
+      }
+      window.speechSynthesis.cancel(); // Stop any ongoing speech
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.92; // Clear and gently paced for elderly
+      utterance.pitch = 1.0;
+
+      // Try finding Malayalam voice if lang is ml
+      const voices = window.speechSynthesis.getVoices();
+      if (currentLang === 'ml') {
+        const mlVoice = voices.find(v => v.lang.includes('ml') || v.lang.includes('hi') || v.lang.includes('IN'));
+        if (mlVoice) utterance.voice = mlVoice;
+        utterance.lang = 'ml-IN';
+      } else {
+        utterance.lang = 'en-IN';
+      }
+
+      window.speechSynthesis.speak(utterance);
+      showToast('🔊 ' + (currentLang === 'ml' ? 'വായിച്ചു കേൾപ്പിക്കുന്നു...' : 'Reading aloud...'), '🔊');
+    }
+
+    function readSearchOutLoud() {
+      const from = searchFromCity.value;
+      const to = searchToCity.value;
+      const date = departDateInput.value;
+      const pass = passengerCount;
+
+      let msg = '';
+      if (currentLang === 'ml') {
+        msg = `നിങ്ങൾ തിരഞ്ഞെടുത്തത്: പുറപ്പെടുന്നത് ${from}. എത്തിച്ചേരുന്നത് ${to}. യാത്രാ തീയതി ${date}. യാത്രികർ ${pass} പേർ. ബസ് തിരയാൻ ബട്ടൺ അമർത്തുകയോ, ഓപ്പറേറ്ററെ വിളിക്കുകയോ ചെയ്യാം.`;
+      } else {
+        msg = `Your journey from ${from} to ${to}. Departure date ${date}. For ${pass} passengers. Tap Search Buses to see available coaches.`;
+      }
+      speakText(msg);
+    }
+
+    // VOICE SEARCH (SPEECH-TO-TEXT WITH MIC)
+    function startVoiceSearch(targetInputId) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Voice recognition not supported in this browser. Please use Chrome.', '⚠️');
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = currentLang === 'ml' ? 'ml-IN' : 'en-IN';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      showToast(currentLang === 'ml' ? '🎤 ഇപ്പോൾ സ്ഥലത്തിന്റെ പേര് പറയൂ...' : '🎤 Speak city name now...', '🎤');
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript.trim();
+        document.getElementById(targetInputId).value = transcript;
+        showToast((currentLang === 'ml' ? 'തിരിച്ചറിഞ്ഞു: ' : 'Recognized: ') + transcript, '✅');
+        updateMapRoute(searchFromCity.value, searchToCity.value);
+      };
+
+      recognition.onerror = function(event) {
+        showToast('Voice error: ' + event.error, '⚠️');
+      };
+
+      recognition.start();
+    }
+
+    // ONE-TAP VISUAL LANDMARK CITY SELECTION
+    function selectLandmarkCity(cityName) {
+      searchToCity.value = cityName;
+      document.querySelectorAll('.landmark-pill-card').forEach(p => {
+        p.classList.toggle('selected', p.textContent.includes(cityName));
+      });
+
+      updateMapRoute(searchFromCity.value, cityName);
+      
+      const speech = currentLang === 'ml' 
+        ? `എത്തിച്ചേരേണ്ട സ്ഥലം ${cityName} തിരഞ്ഞെടുത്തു.`
+        : `Destination set to ${cityName}.`;
+      speakText(speech);
+    }
+
+    // ONE-TAP RELATIVE DATE SELECTION
+    function selectRelativeDate(daysOffset, btn) {
+      document.querySelectorAll('.date-chip-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const d = new Date();
+      d.setDate(d.getDate() + daysOffset);
+      departDateInput.value = d.toISOString().split('T')[0];
+
+      const speech = currentLang === 'ml' 
+        ? `തീയതി ${btn.textContent} തിരഞ്ഞെടുത്തു.`
+        : `Date selected: ${btn.textContent}.`;
+      showToast(speech, '📅');
+    }
+
+    applyLanguage(currentLang);
     initTheme();
     renderFoodMenu();
     updateMapRoute('Calicut', 'Kochi');
